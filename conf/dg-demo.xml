@@ -1,0 +1,311 @@
+<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<xml2tex:set xmlns:xml2tex="http://transpect.io/xml2tex">
+
+  <!-- tex document header, set declarations such as documentclass and usepackage -->
+  <xml2tex:preamble>
+    \documentclass{scrbook}
+    \usepackage{graphicx}
+    \usepackage{hyperref}
+    \usepackage{multirow}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{ngerman}
+  </xml2tex:preamble>
+  
+  <!-- xml namespace declaration -->
+  
+  <xml2tex:ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
+  <xml2tex:ns prefix="css" uri="http://www.w3.org/1996/css"/>
+  
+  <!-- drop metadata -->
+  
+  <xml2tex:template context="/dbk:hub/dbk:info"/>
+    
+  <!-- regular paras -->
+  
+  <xml2tex:template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]">
+    <xml2tex:rule break-after="2">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:subscript">
+    <xml2tex:rule>
+      <xml2tex:text select="concat('$_', ., '$')"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:superscript">
+    <xml2tex:rule>
+      <xml2tex:text select="concat('$^', ., '$')"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:tab">
+    <xml2tex:rule>
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:para[@role eq 'Zitat']">
+    <xml2tex:rule type="env" name="quote">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- tables and figure captions  -->
+  
+  <xml2tex:template context="dbk:table|dbk:informaltable">
+    <xml2tex:rule type="env" name="table">
+    	<xml2tex:option select="'h'"/>
+    	<xml2tex:text>\centering</xml2tex:text>
+    	<xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:figure/dbk:title|dbk:table/dbk:title">
+    <xml2tex:rule type="cmd" name="caption" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- figures -->
+  <xml2tex:template context="dbk:figure">
+    <xml2tex:rule type="env" name="figure">
+    	<xml2tex:option select="'h'"/>
+    	<xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:alt"/>
+  
+  <xml2tex:template context="dbk:imagedata">
+    <xml2tex:rule type="cmd" name="includegraphics">
+      <xml2tex:option select="'width=1\textwidth'"/>
+      <xml2tex:param select="@fileref"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- headlines -->
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 0]/dbk:title">
+    <xml2tex:rule type="cmd" name="chapter" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 1]/dbk:title">
+    <xml2tex:rule type="cmd" name="section" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 2]/dbk:title">
+    <xml2tex:rule type="cmd" name="subsection" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 3]/dbk:title">
+    <xml2tex:rule type="cmd" name="subsubsection" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 4]/dbk:title">
+    <xml2tex:rule type="cmd" name="subsubsubsection" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) eq 5]/dbk:title">
+    <xml2tex:rule type="cmd" name="paragraph" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:section[count(ancestor::dbk:section) = (6,7,8)]/dbk:title">
+    <xml2tex:rule type="cmd" name="subparagraph" break-after="1">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- links -->
+  
+  <xml2tex:template context="dbk:link">
+    <xml2tex:rule type="cmd" name="href">
+      <xml2tex:param select="@xlink:href"/>
+      <xml2tex:param select="dbk:phrase"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- breaks -->
+  
+  <xml2tex:template context="dbk:br">
+    <xml2tex:rule break-after="1"/>
+  </xml2tex:template>
+  
+  <!-- quotes -->
+  
+  <xml2tex:template context="dbk:blockquote">
+    <xml2tex:rule type="env" name="quote">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- lists -->
+  
+  <xml2tex:template context="dbk:itemizedlist">
+    <xml2tex:rule type="env" name="itemize">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:orderedlist">
+    <xml2tex:rule type="env" name="enumerate">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:listitem">
+  	<xml2tex:rule type="cmd" name="item">
+  		<xml2tex:param/>
+  	</xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- text styles -->
+  
+  <xml2tex:template context="dbk:phrase[@css:font-style eq 'italic']">
+    <xml2tex:rule type="cmd" name="textit">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+    
+  <xml2tex:template context="dbk:phrase[@css:font-weight eq 'bold']">
+    <xml2tex:rule type="cmd" name="textbf">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:phrase[@css:text-decoration eq 'underline']">
+    <xml2tex:rule type="cmd" name="uuline">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:phrase[@css:text-transform eq 'uppercase']">
+    <xml2tex:rule type="cmd" name="uppercase">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:phrase[@css:font-variant eq 'small-caps']">
+    <xml2tex:rule type="cmd" name="textsc">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- footnotes -->
+  
+  <xml2tex:template context="dbk:footnote">
+    <xml2tex:rule type="cmd" name="footnote">
+      <xml2tex:param/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:footnote/dbk:para">
+    <xml2tex:rule break-after="1">
+      <xml2tex:text/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- equations -->
+  
+  <xml2tex:template context="dbk:inlineequation">
+    <xml2tex:rule>
+      <xml2tex:text select="'$'"/>
+      <xml2tex:text/>
+      <xml2tex:text select="'$'"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:template context="dbk:equation">
+    <xml2tex:rule>
+      <xml2tex:text select="'$$'"/>
+      <xml2tex:text/>
+      <xml2tex:text select="'$$'"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <!-- drop leading numbers, tex will do this for us -->
+  <xml2tex:template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']"/>
+  
+  <!-- indexterms -->
+  
+  <xml2tex:template context="dbk:indexterm">
+    <xml2tex:rule type="cmd" name="index">
+      <xml2tex:param select="(for $i in .//*[local-name() = ('primary','secondary','tertiary','see','seealso')][position() ne last()] return ($i, '!'),
+        .//*[local-name() = ('primary','secondary','tertiary','see','seealso')][position() eq last()])"/>
+    </xml2tex:rule>
+  </xml2tex:template>
+  
+  <xml2tex:regex regex="(\d{2})\.(\d{2})\.(\d{4})">
+    <xml2tex:rule type="cmd" name="date">
+      <xml2tex:param regex-group="1"/>
+      <xml2tex:param regex-group="2"/>
+      <xml2tex:param regex-group="3"/>
+    </xml2tex:rule>
+  </xml2tex:regex>
+  
+  <xml2tex:charmap>
+  	<xml2tex:char character="&#xad;" string="&quot;-"/>
+    <xml2tex:char character="Ä" string="\&#34;A" context="dbk:phrase, dbk:section|dbk:para, dbk:entry"/>
+    <xml2tex:char character="ä" string="\&#34;a"/>
+    <xml2tex:char character="Ö" string="\&#34;O"/>
+    <xml2tex:char character="ö" string="\&#34;o" />
+    <xml2tex:char character="Ü" string="\&#34;U" />
+    <xml2tex:char character="ü" string="\&#34;u" />
+    <xml2tex:char character="ß" string="\ss{}" />
+    <xml2tex:char character="…" string="..." />
+    <xml2tex:char character="‑" string="\hbox{-}" />
+    <xml2tex:char character="–" string="--" />
+    <xml2tex:char character="—" string="---" />
+    <xml2tex:char character="€" string="\texteuro{}" />
+    <xml2tex:char character="#" string="\#" />
+    <xml2tex:char character=" " string="\," />
+    <xml2tex:char character=" " string="\," />
+    <xml2tex:char character="≤" string="$\leq$" />
+    <xml2tex:char character="©" string="\textcopyright"/>
+    <xml2tex:char character="•" string="{\textbullet}" />
+    <xml2tex:char character="▪" string="$\blacksquare$"/>
+    <xml2tex:char character="∙" string="$\cdot$" />
+    <xml2tex:char character="¥" string="$¥$"/>
+    <xml2tex:char character="α" string="$\alpha$"/>
+    <xml2tex:char character="β" string="$\beta$"/>
+    <xml2tex:char character="γ" string="$\gamma$"/>
+    <xml2tex:char character="δ" string="$\delta$"/>
+    <xml2tex:char character="ε" string="$\varepsilon$"/>
+    <xml2tex:char character="ζ" string="$\zeta$"/>
+    <xml2tex:char character="η" string="$\eta$"/>
+    <xml2tex:char character="θ" string="$\vartheta$"/>
+    <xml2tex:char character="ι" string="$\iota$"/>
+    <xml2tex:char character="κ" string="$\kappa$"/>
+    <xml2tex:char character="λ" string="$\lambda$"/>
+    <xml2tex:char character="μ" string="$\mu$"/>
+    <xml2tex:char character="ν" string="$\nu$"/>
+    <xml2tex:char character="ξ" string="$\xi$"/>
+    <xml2tex:char character="ο" string="$\omicron$"/>
+    <xml2tex:char character="π" string="$\pi$"/>
+    <xml2tex:char character="ρ" string="$\varrho$"/>
+    <xml2tex:char character="ς" string="$\varsigma$"/>
+    <xml2tex:char character="σ" string="$\sigma$"/>
+    <xml2tex:char character="τ" string="$\tau$"/>
+    <xml2tex:char character="υ" string="$\upsilon$"/>
+    <xml2tex:char character="φ" string="$\varphi$"/>
+    <xml2tex:char character="χ" string="$\chi$"/>
+    <xml2tex:char character="ψ" string="$\psi$"/>
+    <xml2tex:char character="ω" string="$\omega$"/>
+  </xml2tex:charmap>
+
+</xml2tex:set>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  
+  <rewriteURI uriStartString="http://customers.le-tex.de/generic/book-conversion/" rewritePrefix="../"/>
+
+  <nextCatalog catalog="../docx2hub/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xproc-util/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xslt-util/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../evolve-hub/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../mml2tex/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xml2tex/xmlcatalog/catalog.xml"/>
+  
+</catalog>

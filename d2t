@@ -1,0 +1,137 @@
+#!/bin/bash
+
+usage() {
+    echo ""
+    echo "docx2tex"
+    echo ""
+    echo "Usage: d2t [options ...] <docx file>"
+    echo ""
+    echo "Options:"
+    echo "   -o    path to custom output directory"
+    echo "   -c    path to custom word2tex configuration file"
+    echo "   -p    generate PDF with pdflatex"
+    echo "   -t    draw table grid lines"
+    echo "   -x    custom XSLT stylesheet for Hub processing"
+    echo "   -d    debug mode"
+    1>&2; exit 1;
+}
+
+# cygwin check
+cygwin=false;
+case "`uname`" in
+    CYGWIN*) cygwin=true;
+esac
+
+# script directory
+DIR="$( cd -P "$(dirname $( readlink -f "$0" ))" && pwd )"
+CALABASH=$DIR/calabash/calabash.sh
+PDFLATEX=pdflatex
+RUBY=/usr/local/ruby-1.9/bin/ruby # ruby-1.9 needed
+# word2tex configuration
+CONF=$DIR/xml2tex/example/conf-hubcssa.xml
+
+# specify options
+while getopts ":o:c:x:ptd" opt; do
+    case "${opt}" in
+	o)
+	    OUT_DIR=${OPTARG}
+	    ;;
+	c)
+	    CONF=${OPTARG}
+	    ;;
+	x)
+	    CUSTOMXSL=${OPTARG}
+	    ;;
+	p)
+	    PDF=yes
+	    ;;
+	t)
+	    GRID=yes
+	    ;;
+	d)
+	    DEBUG=yes
+	    ;;
+	\?)
+	    echo "Invalid option: -$OPTARG" >&2
+	    usage
+	    ;;
+	:)
+	    echo "Option -$OPTARG requires an argument." >&2
+	    usage
+	    ;;
+    esac
+done
+shift $((OPTIND-1))
+# check if argument for file is set
+if [ -z $1 ]; then
+    usage
+fi
+
+# file as 1st argument
+FILE=$(readlink -f $1)
+if [[ $FILE == *.doc ]]; then
+    cd $OUT_DIR;$RUBY $DIR/wordtools/bin/doc2docx.rb $FILE
+    FILE=`echo $FILE | sed 's/\(.*\.\)doc/\1docx/'`
+fi
+# basename
+BASENAME=$(basename $FILE .docx)
+# output directory
+if [ -z $OUT_DIR ]; then
+    OUT_DIR="$(dirname $(readlink -f "$FILE" ))"
+fi
+if [ ! -d $OUT_DIR ]; then
+    mkdir $OUT_DIR
+fi
+# debugging
+DEBUG_DIR=$OUT_DIR/debug
+# make absolute paths
+if $cygwin; then
+    FILE=$(cygpath -ma "$FILE")
+    DIR=$(cygpath -ma "$DIR")
+    OUT_DIR=$(cygpath -ma "$OUT_DIR")    
+    CONF=$(cygpath -ma "$CONF")
+    DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
+else
+    FILE_URI=file:$(readlink -f $FILE)
+    DEBUG_DIR_URI=file:$(readlink -f $DEBUG_DIR)
+fi
+
+# check if file exists
+if [ ! -f $FILE ]; then
+    echo "Error: input file not found: $FILE"
+    usage
+fi
+
+echo "starting word2tex"
+
+if [ "$DEBUG" = "yes" ]; then
+    echo "debug mode: $DEBUG"
+    echo "storing debug files to $DEBUG_DIR"
+fi
+
+# word2tex xproc pipeline
+$CALABASH \
+    -i conf=$CONF \
+    -o result=$OUT_DIR/$BASENAME.tex \
+    $DIR/xpl/docx2tex.xpl \
+    docx=$FILE \
+    custom-xsl=$CUSTOMXSL \
+    grid=$GRID \
+    debug=$DEBUG \
+    debug-dir-uri=$DEBUG_DIR_URI \
+    2>&1 \
+    2>>$OUT_DIR/$BASENAME.w2t.log
+echo "writing texfile => $OUT_DIR/$BASENAME.tex"
+
+# run pdflatex with "-p"
+if [ "$PDF" = "yes" ]; then
+$PDFLATEX \
+    -interaction=nonstopmode \
+    -output-directory=$OUT_DIR 
+    $OUT_DIR/$BASENAME.tex \
+    1>>$OUT_DIR/$BASENAME.w2t.log
+echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
+fi
+
+echo "word2tex finished, for details see $OUT_DIR/$BASENAME.w2t.log"
+echo ""
