@@ -127,7 +127,7 @@ echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 if [ "$PDF" = "yes" ]; then
 $PDFLATEX \
     -interaction=nonstopmode \
-    -output-directory=$OUT_DIR 
+    -output-directory=$OUT_DIR \
     $OUT_DIR/$BASENAME.tex \
     1>>$OUT_DIR/$BASENAME.w2t.log
 echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
