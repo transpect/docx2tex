@@ -133,5 +133,5 @@ $PDFLATEX \
 echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
 
-echo "word2tex finished, for details see $OUT_DIR/$BASENAME.w2t.log"
+echo "word2tex finished, for details see $OUT_DIR/$BASENAME.log"
 echo ""
