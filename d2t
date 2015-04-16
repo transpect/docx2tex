@@ -84,9 +84,14 @@ if [ ! -d $OUT_DIR ]; then
 fi
 # debugging
 DEBUG_DIR=$OUT_DIR/debug
+
+# pdflatex needs relative paths
+PDFLATEX_OUT=$OUT_DIR
+
 # make absolute paths
 if $cygwin; then
-    FILE_URI=file:/$(cygpath -ma "$FILE")
+    FILE=$(cygpath -ma "$FILE")
+    OUT_DIR=$(cygpath -ma "$OUT_DIR")
     DIR=$(cygpath -ma "$DIR")
     CONF=$(cygpath -ma "$CONF")
     DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
@@ -123,10 +128,11 @@ echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
 if [ "$PDF" = "yes" ]; then
+    echo $OUT_DIR
 $PDFLATEX \
     -interaction=nonstopmode \
     -output-directory=$OUT_DIR \
-    $OUT_DIR/$BASENAME.tex \
+    $PDFLATEX_OUT/$BASENAME.tex \
     1>>$OUT_DIR/$BASENAME.w2t.log
 echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
