@@ -1,0 +1,18 @@
+[submodule "xslt-util"]
+	path = xslt-util
+	url = https://github.com/transpect/xslt-util
+[submodule "xproc-util"]
+	path = xproc-util
+	url = https://github.com/transpect/xproc-util
+[submodule "mml2tex"]
+	path = mml2tex
+	url = https://github.com/transpect/mml2tex
+[submodule "docx2hub"]
+	path = docx2hub
+	url = https://github.com/transpect/docx2hub
+[submodule "xml2tex"]
+	path = xml2tex
+	url = https://github.com/transpect/xml2tex
+[submodule "calabash"]
+	path = calabash
+	url = https://github.com/transpect/calabash
