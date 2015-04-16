@@ -51,6 +51,7 @@
   <p:import href="http://transpect.io/xproc-util/xml-model/xpl/prepend-hub-xml-model.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
   <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
+  <p:import href="evolve-hub.xpl"/>
     
 	<tr:simple-progress-msg file="docx2tex-start.txt">
 		<p:input port="msgs">
@@ -72,6 +73,18 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </docx2hub:convert>
 	
+  <tr:evolve-hub name="evolve-hub">
+    <p:documentation>Use the evolve-hub function library to detect lists.</p:documentation>
+    <p:input port="stylesheet">
+      <p:document href="../xsl/evolve-hub-driver.xsl"/>
+    </p:input>
+    <p:input port="parameters">
+      <p:empty/>
+    </p:input>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+  </tr:evolve-hub>
+	
 	<tr:simple-progress-msg file="docx2tex-docx2hub.txt">
 		<p:input port="msgs">
 			<p:inline>
@@ -82,62 +95,7 @@
 			</p:inline>
 		</p:input>
 		<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-	</tr:simple-progress-msg>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.1" mode="hub:tabs-to-indent">
-    <p:input port="stylesheet">
-      <p:pipe port="evolve-hub" step="docx2tex"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="prefix" select="'evolve-hub/01'"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.1" mode="hub:handle-indent">
-    <p:input port="stylesheet">
-      <p:pipe port="evolve-hub" step="docx2tex"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="prefix" select="'evolve-hub/02'"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.1" mode="hub:prepare-lists">
-    <p:input port="stylesheet">
-      <p:pipe port="evolve-hub" step="docx2tex"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="prefix" select="'evolve-hub/03'"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.1" mode="hub:lists">
-    <p:input port="stylesheet">
-      <p:pipe port="evolve-hub" step="docx2tex"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="prefix" select="'evolve-hub/04'"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.1" mode="hub:postprocess-lists" name="postprocess-lists">
-    <p:input port="stylesheet">
-      <p:pipe port="evolve-hub" step="docx2tex"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="prefix" select="'evolve-hub/05'"/>
-  </tr:xslt-mode>
+	</tr:simple-progress-msg>  
   
   <p:choose>
     <p:when test="$custom-xsl ne ''">
@@ -152,7 +110,7 @@
           <p:pipe port="result" step="load-custom-xsl"/>
         </p:input>
         <p:input port="source">
-          <p:pipe port="result" step="postprocess-lists"/>
+          <p:pipe port="result" step="evolve-hub"/>
         </p:input>
       </p:xslt>
     </p:when>
