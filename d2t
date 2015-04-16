@@ -86,13 +86,11 @@ fi
 DEBUG_DIR=$OUT_DIR/debug
 # make absolute paths
 if $cygwin; then
-    FILE=$(cygpath -ma "$FILE")
+    FILE_URI=file:/$(cygpath -ma "$FILE")
     DIR=$(cygpath -ma "$DIR")
-    OUT_DIR=$(cygpath -ma "$OUT_DIR")    
     CONF=$(cygpath -ma "$CONF")
     DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
 else
-    FILE_URI=file:$(readlink -f $FILE)
     DEBUG_DIR_URI=file:$(readlink -f $DEBUG_DIR)
 fi
 
