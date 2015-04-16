@@ -16,3 +16,6 @@
 [submodule "calabash"]
 	path = calabash
 	url = https://github.com/transpect/calabash
+[submodule "evolve-hub"]
+	path = evolve-hub
+	url = https://github.com/transpect/evolve-hub
