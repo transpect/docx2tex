@@ -69,6 +69,8 @@
     <p:with-option name="docx" select="$docx"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </docx2hub:convert>
 	
 	<tr:simple-progress-msg file="docx2tex-docx2hub.txt">
