@@ -28,7 +28,7 @@ CALABASH=$DIR/calabash/calabash.sh
 PDFLATEX=pdflatex
 RUBY=/usr/local/ruby-1.9/bin/ruby # ruby-1.9 needed
 # word2tex configuration
-CONF=$DIR/xml2tex/example/conf-hubcssa.xml
+CONF=$DIR/conf/conf.xml
 
 # specify options
 while getopts ":o:c:x:ptd" opt; do
