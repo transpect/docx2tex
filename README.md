@@ -1,12 +1,15 @@
 # docx2tex
 Converts Microsoft docx to LaTeX
 
-## get latest release
+Author: Martin Kraetke
+
+## get docx2tex
+
+### download the latest release
 Download the latest docx2tex release [here](https://github.com/transpect/docx2tex/releases).
 
-## checkout via Git
+or get source via Git
 You have to add the `--recursive` option in order to clone docx2hub with submodules.
-
 ```
 git clone https://github.com/transpect/docx2tex --recursive
 ```
