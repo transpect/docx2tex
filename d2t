@@ -116,6 +116,7 @@ fi
 $CALABASH \
     -i conf=$CONF \
     -o result=$OUT_DIR/$BASENAME.tex \
+    -o hub=$OUT_DIR/$BASENAME.xml \
     $DIR/xpl/docx2tex.xpl \
     docx=$FILE \
     custom-xsl=$CUSTOMXSL \

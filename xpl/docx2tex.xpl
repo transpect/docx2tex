@@ -21,6 +21,11 @@
     <p:documentation>The TeX document is shipped at this port.</p:documentation>
   </p:output>
   
+  <p:output port="hub" primary="false">
+    <p:pipe port="result" step="duplicate"/>
+    <p:documentation>The intermediate Hub XML format.</p:documentation>
+  </p:output>
+  
   <p:serialization port="result" method="text" media-type="text/plain" encoding="utf8"/>
   
 	<p:option name="debug" select="'yes'">
@@ -95,9 +100,9 @@
 			</p:inline>
 		</p:input>
 		<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-	</tr:simple-progress-msg>  
+	</tr:simple-progress-msg>
   
-  <p:choose>
+  <p:choose name="custom-xsl">
     <p:when test="$custom-xsl ne ''">
       <p:load name="load-custom-xsl">
         <p:with-option name="href" select="$custom-xsl"/>
@@ -118,6 +123,8 @@
       <p:identity/>
     </p:otherwise>
   </p:choose>
+  
+  <p:identity name="duplicate"/>
   
   <xml2tex:convert name="xml2tex">
     <p:documentation>Converts the Hub XML to TeX according to the xml2tex config file.</p:documentation>
