@@ -15,6 +15,21 @@ usage() {
     echo "   -d    debug mode"
     1>&2; exit 1;
 }
+# print out error step and exit code
+function exitonerror {
+    echo "errors encountered while running $2. exited with code $1"
+    exit 1
+}
+# readlink -f is unavailable on Mac OS X
+function real_dir() {
+    SOURCE="$1"
+    while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+	SOURCE="$(readlink "$SOURCE")"
+	[[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    echo "$( cd -P "$( dirname "$SOURCE" )" && pwd  )"
+}
 
 # cygwin check
 cygwin=false;
@@ -23,10 +38,12 @@ case "`uname`" in
 esac
 
 # script directory
-DIR="$( cd -P "$(dirname $( readlink -f "$0" ))" && pwd )"
+DIR="$( real_dir "${BASH_SOURCE[0]}" )"
 CALABASH=$DIR/calabash/calabash.sh
+
+# invoke pdflatex
 PDFLATEX=pdflatex
-RUBY=/usr/local/ruby-1.9/bin/ruby # ruby-1.9 needed
+
 # word2tex configuration
 CONF=$DIR/conf/conf.xml
 
@@ -68,24 +85,30 @@ if [ -z $1 ]; then
 fi
 
 # file as 1st argument
-FILE=$(readlink -f $1)
-if [[ $FILE == *.doc ]]; then
-    cd $OUT_DIR;$RUBY $DIR/wordtools/bin/doc2docx.rb $FILE
-    FILE=`echo $FILE | sed 's/\(.*\.\)doc/\1docx/'`
-fi
-# basename
+FILE=$1
+
+# set basename
 BASENAME=$(basename $FILE .docx)
-# output directory
+
+# set and create output directory
 if [ -z $OUT_DIR ]; then
-    OUT_DIR="$(dirname $(readlink -f "$FILE" ))"
+    OUT_DIR="$(real_dir "$FILE")"
 fi
 if [ ! -d $OUT_DIR ]; then
     mkdir $OUT_DIR
 fi
+
+# set log
+LOG=$OUT_DIR/$BASENAME.log
+# remove log from previous runs
+if [ -e $LOG ]; then
+    rm $LOG
+fi
+
 # debugging
 DEBUG_DIR=$OUT_DIR/debug
 
-# pdflatex needs relative paths
+# pdflatex outdir path
 PDFLATEX_OUT=$OUT_DIR
 
 # make absolute paths
@@ -96,7 +119,7 @@ if $cygwin; then
     CONF=$(cygpath -ma "$CONF")
     DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
 else
-    DEBUG_DIR_URI=file:$(readlink -f $DEBUG_DIR)
+    DEBUG_DIR_URI=file:$DEBUG_DIR
 fi
 
 # check if file exists
@@ -105,7 +128,7 @@ if [ ! -f $FILE ]; then
     usage
 fi
 
-echo "starting word2tex"
+echo "starting docx2tex"
 
 if [ "$DEBUG" = "yes" ]; then
     echo "debug mode: $DEBUG"
@@ -123,8 +146,8 @@ $CALABASH \
     grid=$GRID \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
-    2>&1 \
-    2>>$OUT_DIR/$BASENAME.w2t.log
+    status-dir-uri=$DEBUG_DIR_URI/status \
+    2>&1 2>>$LOG || exitonerror $? docx2tex
 echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
@@ -134,9 +157,9 @@ $PDFLATEX \
     -interaction=nonstopmode \
     -output-directory=$OUT_DIR \
     $PDFLATEX_OUT/$BASENAME.tex \
-    1>>$OUT_DIR/$BASENAME.w2t.log
+    1>>$LOG || exitonerror $? pdflatex
 echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
 
-echo "word2tex finished, for details see $OUT_DIR/$BASENAME.log"
+echo "docx2tex finished, for details see $OUT_DIR/$BASENAME.log"
 echo ""

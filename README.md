@@ -6,7 +6,7 @@ Author: Martin Kraetke
 ## get docx2tex
 
 ### download the latest release
-Download the latest docx2tex release [here](https://github.com/transpect/docx2tex/releases)
+Download the latest [docx2tex release](https://github.com/transpect/docx2tex/releases)
 
 …or get source via Git. Please note that you have to add the `--recursive` option in order to clone docx2hub with submodules.
 ```
@@ -18,7 +18,7 @@ git clone https://github.com/transpect/docx2tex --recursive
 * works on Windows, Linux and Mac OS X
 
 ## run docx2tex
-You can run docx2tex either with a comfortable bash script or the calabash shell script
+You can run docx2tex with a bash script (Linux, Mac OSX, Cygwin) or the calabash shell (Windows) script
 
 ### via bash
 ```
@@ -33,9 +33,6 @@ Option  | Description
  -t     | draw table grid lines
  -x     | custom XSLT stylesheet for Hub processing
  -d     | debug mode
-
- * please note that the script works only on Linux or Windows with Cygwin. Mac OSX users have to wait, until I replace the readlink function with a Mac friendly equivalent.
-
  
 ### via XML Calabash
 
