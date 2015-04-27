@@ -51,5 +51,4 @@ exit 0
 REM Sample invocation:
 :usage
 echo docx2tex
-echo Usage: d2t.bat <docx file> <config file>
-exit 1
+echo Usage: d2t.bat DOCX CONFIG
