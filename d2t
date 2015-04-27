@@ -17,7 +17,7 @@ usage() {
 }
 # print out error step and exit code
 function exitonerror {
-    echo "errors encountered while running $2. exited with code $1"
+    echo "Errors encountered while running $2. Please see $LOG for details."
     exit 1
 }
 # readlink -f is unavailable on Mac OS X
@@ -44,7 +44,7 @@ CALABASH=$DIR/calabash/calabash.sh
 # invoke pdflatex
 PDFLATEX=pdflatex
 
-# word2tex configuration
+# docx2tex configuration
 CONF=$DIR/conf/conf.xml
 
 # specify options
@@ -100,10 +100,6 @@ fi
 
 # set log
 LOG=$OUT_DIR/$BASENAME.log
-# remove log from previous runs
-if [ -e $LOG ]; then
-    rm $LOG
-fi
 
 # debugging
 DEBUG_DIR=$OUT_DIR/debug
@@ -161,5 +157,5 @@ $PDFLATEX \
 echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
 
-echo "docx2tex finished, for details see $OUT_DIR/$BASENAME.log"
+echo "docx2tex finished. Output written to $OUT_DIR/$BASENAME.tex."
 echo ""
