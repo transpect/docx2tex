@@ -20,7 +20,7 @@ git clone https://github.com/transpect/docx2tex --recursive
 ## run docx2tex
 You can run docx2tex with a bash script (Linux, Mac OSX, Cygwin) or the calabash shell (Windows) script
 
-### via bash
+### Linux/MacOSX
 ```
 ./d2t [options ...] myfile.docx
 ```
@@ -33,7 +33,13 @@ Option  | Description
  -t     | draw table grid lines
  -x     | custom XSLT stylesheet for Hub processing
  -d     | debug mode
- 
+
+
+### Windows
+```
+d2t.bat myfile.docx
+```
+
 ### via XML Calabash
 
 #### Linux/Mac OSX
