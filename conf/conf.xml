@@ -257,8 +257,10 @@
     </xml2tex:rule>
   </xml2tex:regex>
   
+  <!-- character map only applies to LaTeX text mode. Math character replace can be configured in mml2tex/texmap/texmap.xml -->
+  
   <xml2tex:charmap>
-  	<xml2tex:char character="&#xad;" string="&quot;-"/>
+    <xml2tex:char character="&#xad;" string="&quot;-"/>
     <xml2tex:char character="Ä" string="\&#34;A" context="dbk:phrase, dbk:section|dbk:para, dbk:entry"/>
     <xml2tex:char character="ä" string="\&#34;a"/>
     <xml2tex:char character="Ö" string="\&#34;O"/>
@@ -271,7 +273,6 @@
     <xml2tex:char character="–" string="--" />
     <xml2tex:char character="—" string="---" />
     <xml2tex:char character="€" string="\texteuro{}" />
-    <xml2tex:char character="#" string="\#" />
     <xml2tex:char character=" " string="\," />
     <xml2tex:char character=" " string="\," />
     <xml2tex:char character="≤" string="$\leq$" />
@@ -280,6 +281,7 @@
     <xml2tex:char character="▪" string="$\blacksquare$"/>
     <xml2tex:char character="∙" string="$\cdot$" />
     <xml2tex:char character="¥" string="$¥$"/>
+    <!-- greek small letters -->
     <xml2tex:char character="α" string="$\alpha$"/>
     <xml2tex:char character="β" string="$\beta$"/>
     <xml2tex:char character="γ" string="$\gamma$"/>
@@ -305,6 +307,21 @@
     <xml2tex:char character="χ" string="$\chi$"/>
     <xml2tex:char character="ψ" string="$\psi$"/>
     <xml2tex:char character="ω" string="$\omega$"/>
+    <!-- greek capital letters -->
+    <xml2tex:char character="Α" string="$\Alpha$"/>
+    <xml2tex:char character="Β" string="$\Beta$"/>
+    <xml2tex:char character="Γ" string="$\Gamma$"/>
+    <xml2tex:char character="Δ" string="$\Delta$"/>
+    <xml2tex:char character="Ε" string="$\Epsilon$"/>
+    <xml2tex:char character="Θ" string="$\Theta$"/>
+    <xml2tex:char character="Λ" string="$\Lambda$"/>
+    <xml2tex:char character="Ξ" string="$\Xi$"/>
+    <xml2tex:char character="Π" string="$\Pi$"/>
+    <xml2tex:char character="Σ" string="$\Sigma$"/>
+    <xml2tex:char character="Φ" string="$\Phi$"/>
+    <xml2tex:char character="Ψ" string="$\Psi$"/>
+    <xml2tex:char character="Ω" string="$\Omega$"/>
+    <xml2tex:char character="Ζ" string="$\Zeta$"/>
   </xml2tex:charmap>
 
 </xml2tex:set>
