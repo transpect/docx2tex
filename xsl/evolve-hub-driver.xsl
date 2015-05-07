@@ -15,7 +15,7 @@
   
   <xsl:template match="@fileref" mode="hub:lists">
     <xsl:variable name="fileref" select="tr:uri-to-relative-path(
-      /dbk:hub/dbk:info/dbk:keywordset/dbk:keyword[@role eq 'archive-dir-uri'],
+      /dbk:hub/dbk:info/dbk:keywordset/dbk:keyword[@role eq 'source-dir-uri'],
       concat(/dbk:hub/dbk:info/dbk:keywordset/dbk:keyword[@role eq 'source-dir-uri'], replace(., 'container:', '/'))
       )"/>
     <xsl:attribute name="fileref" select="$fileref"/>
