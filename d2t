@@ -148,8 +148,8 @@ echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
 if [ "$PDF" = "yes" ]; then
-    echo $OUT_DIR
-$PDFLATEX \
+
+cd $OUT_DIR && $PDFLATEX \
     -interaction=nonstopmode \
     -output-directory=$OUT_DIR \
     $PDFLATEX_OUT/$BASENAME.tex \
