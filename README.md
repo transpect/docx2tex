@@ -1,7 +1,7 @@
 # docx2tex
 Converts Microsoft docx to LaTeX
 
-Author: Martin Kraetke
+Authors: Martin Kraetke, Lars Wittmar
 
 ## get docx2tex
 
