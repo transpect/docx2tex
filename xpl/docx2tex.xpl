@@ -9,10 +9,6 @@
   version="1.0"
   name="docx2tex">
   
-  <p:input port="conf" primary="false">
-    <p:documentation>The input port expects the xml2tex-mapping file.</p:documentation>
-  </p:input>
-  
   <p:input port="evolve-hub" primary="false">
     <p:document href="../xsl/evolve-hub-driver.xsl"/>
   </p:input>
@@ -22,11 +18,16 @@
   </p:output>
   
   <p:output port="hub" primary="false">
-    <p:pipe port="result" step="duplicate"/>
+    <p:pipe port="result" step="duplicate-input"/>
     <p:documentation>The intermediate Hub XML format.</p:documentation>
   </p:output>
   
   <p:serialization port="result" method="text" media-type="text/plain" encoding="utf8"/>
+  
+  <p:option name="conf" select="'../conf/conf.xml'">
+    <p:documentation>The input port expects either a xml2tex-mapping file 
+      or a csv configuration file.</p:documentation>
+  </p:option>
   
 	<p:option name="debug" select="'yes'">
 		<p:documentation>
@@ -45,18 +46,30 @@
 			Expects URI where the text files containing the progress information are stored.
 		</p:documentation>
 	</p:option>
+  
+  <p:option name="fail-on-error" select="'true'">
+    <p:documentation>
+      Whether the pipeline should on some errors.
+    </p:documentation>
+  </p:option>
 	
   <p:option name="custom-xsl" select="''" required="false"/>
   
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   
+  <p:import href="evolve-hub.xpl"/>
+  
+  <p:import href="http://transpect.io/docx2hub/xpl/docx2hub.xpl"/>
+  <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/load/xpl/load.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/load/xpl/load-data.xpl"/>
   <p:import href="http://transpect.io/xproc-util/simple-progress-msg/xpl/simple-progress-msg.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
-  <p:import href="http://transpect.io/docx2hub/xpl/docx2hub.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xml-model/xpl/prepend-hub-xml-model.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
-  <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
-  <p:import href="evolve-hub.xpl"/>
+    
+    
+  <p:import href="http://transpect.io/xproc-util/file-uri/xpl/file-uri.xpl"/>
     
 	<tr:simple-progress-msg file="docx2tex-start.txt">
 		<p:input port="msgs">
@@ -78,6 +91,9 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </docx2hub:convert>
 	
+	<!-- *
+	     * detect lists by indent and normalize image filerefs
+	     * -->
   <tr:evolve-hub name="evolve-hub">
     <p:documentation>Use the evolve-hub function library to detect lists.</p:documentation>
     <p:input port="stylesheet">
@@ -102,6 +118,9 @@
 		<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
 	</tr:simple-progress-msg>
   
+  <!--  *
+        * apply custom XSLT if exists
+        * -->
   <p:choose name="custom-xsl">
     <p:when test="$custom-xsl ne ''">
       <p:load name="load-custom-xsl">
@@ -124,16 +143,69 @@
     </p:otherwise>
   </p:choose>
   
-  <p:identity name="duplicate"/>
+  <p:identity name="duplicate-input"/>
   
+  <!--  *
+        * load xml2tex config or generate one from CSV plain text file
+        * -->
+  
+  <p:try>
+    <p:group>
+      
+      <tr:load>
+        <p:with-option name="href" select="$conf"/>
+        <p:with-option name="fail-on-error" select="$fail-on-error"/>
+      </tr:load>
+      
+    </p:group>
+    <p:catch>
+      
+      <tr:file-uri name="retrieve-absolute-file-uri-href">
+        <p:with-option name="filename" select="$conf"/>
+      </tr:file-uri>
+      
+      <tr:load-data name="load-data">
+        <p:with-option name="content-type-override" select="'text/plain'"/>
+        <p:with-option name="encoding" select="'UTF-8'"/>
+        <p:with-option name="href" select="$conf"/>
+        <p:with-option name="fail-on-error" select="$fail-on-error"/>
+      </tr:load-data>
+      
+      <p:xslt>
+        <p:input port="source">
+          <p:document href="../conf/conf.xml"/>
+          <p:pipe port="result" step="load-data"/>
+        </p:input>
+        <p:input port="stylesheet">
+          <p:document href="../xsl/convert-config.xsl"/>
+        </p:input>
+        <p:input port="parameters">
+          <p:empty/>
+        </p:input>
+      </p:xslt>
+      
+      <tr:store-debug pipeline-step="xml2tex/loaded-config">
+        <p:with-option name="active" select="$debug"/>
+        <p:with-option name="base-uri" select="$debug-dir-uri"/>
+      </tr:store-debug>
+      
+    </p:catch>
+  </p:try>
+  
+  <p:identity name="duplicate-config"/>
+
   <xml2tex:convert name="xml2tex">
     <p:documentation>Converts the Hub XML to TeX according to the xml2tex config file.</p:documentation>
+    <p:input port="source">
+      <p:pipe port="result" step="duplicate-input"/>
+    </p:input>
     <p:input port="conf">
-      <p:pipe port="conf" step="docx2tex"/>
+      <p:pipe port="result" step="duplicate-config"/>
     </p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
   	<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
   </xml2tex:convert>
 	
 	<tr:simple-progress-msg file="docx2tex-finished.txt">

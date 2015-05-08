@@ -102,7 +102,7 @@ fi
 LOG=$OUT_DIR/$BASENAME.log
 
 # debugging
-DEBUG_DIR=$OUT_DIR/debug
+DEBUG_DIR=$OUT_DIR/$BASENAME.debug
 
 # pdflatex outdir path
 PDFLATEX_OUT=$OUT_DIR
@@ -133,17 +133,17 @@ fi
 
 # word2tex xproc pipeline
 $CALABASH \
-    -i conf=$CONF \
     -o result=$OUT_DIR/$BASENAME.tex \
     -o hub=$OUT_DIR/$BASENAME.xml \
     $DIR/xpl/docx2tex.xpl \
     docx=$FILE \
+    conf=$CONF \
     custom-xsl=$CUSTOMXSL \
     grid=$GRID \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
     status-dir-uri=$DEBUG_DIR_URI/status \
-    2>&1 2>>$LOG || exitonerror $? docx2tex
+#    2>&1 2>>$LOG || exitonerror $? docx2tex
 echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
