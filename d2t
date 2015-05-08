@@ -143,7 +143,7 @@ $CALABASH \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
     status-dir-uri=$DEBUG_DIR_URI/status \
-#    2>&1 2>>$LOG || exitonerror $? docx2tex
+    2>&1 2>>$LOG || exitonerror $? docx2tex
 echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
