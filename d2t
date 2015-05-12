@@ -38,14 +38,14 @@ case "`uname`" in
 esac
 
 # script directory
+PWD="$( pwd)"
 DIR="$( real_dir "${BASH_SOURCE[0]}" )"
 CALABASH=$DIR/calabash-frontend/calabash.sh
 
 # invoke pdflatex
 PDFLATEX=pdflatex
 
-# docx2tex configuration
-CONF=$DIR/conf/conf.xml
+
 
 # specify options
 while getopts ":o:c:x:ptd" opt; do
@@ -90,15 +90,27 @@ FILE=$1
 # set basename
 BASENAME=$(basename $FILE .docx)
 
-# set and create output directory
-if [ -z $OUT_DIR ]; then
+# output directory path
+if [[ -z $OUT_DIR ]]; then
     OUT_DIR="$(real_dir "$FILE")"
-fi
-if [ ! -d $OUT_DIR ]; then
-    mkdir $OUT_DIR
+else
+    if [[ "$OUT_DIR" != /* ]]; then	
+	OUT_DIR=$PWD/$OUT_DIR
+    fi
 fi
 
-# set log
+mkdir -p $OUT_DIR
+
+# path to configuration file
+if [[ -z $CONF ]]; then
+    CONF=$DIR/conf/conf.csv
+else
+    if [[ "$CONF" != /* ]]; then	
+	CONF=$PWD/$CONF
+    fi
+fi
+
+# logging
 LOG=$OUT_DIR/$BASENAME.log
 
 # debugging
@@ -129,6 +141,13 @@ echo "starting docx2tex"
 if [ "$DEBUG" = "yes" ]; then
     echo "debug mode: $DEBUG"
     echo "storing debug files to $DEBUG_DIR"
+    echo ""
+    echo "file:   $FILE"
+    echo "conf:   $CONF"
+    echo "outdir: $OUT_DIR"
+    echo "pwd:    $PWD"
+    echo "script: $DIR"
+    echo ""
 fi
 
 # word2tex xproc pipeline
@@ -148,14 +167,14 @@ echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
 if [ "$PDF" = "yes" ]; then
-
-cd $OUT_DIR && $PDFLATEX \
+    cd $OUT_DIR && $PDFLATEX \
     -interaction=nonstopmode \
     -output-directory=$OUT_DIR \
     $PDFLATEX_OUT/$BASENAME.tex \
     1>>$LOG || exitonerror $? pdflatex
-echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
+    echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
-
-echo "docx2tex finished. Output written to $OUT_DIR/$BASENAME.tex."
 echo ""
+echo "docx2tex finished."
+
+
