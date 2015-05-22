@@ -1,5 +1,5 @@
-<?xml-model href="../xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="../xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <set xmlns="http://transpect.io/xml2tex">
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
@@ -124,10 +124,10 @@
   </template>
   
   <template context="dbk:listitem">
-  	<rule type="cmd" name="item">
-  		<text select="' '"/>
-  	  <text/>
-  	</rule>
+    <rule type="cmd" name="item">
+      <text select="' '"/>
+      <text/>
+    </rule>
   </template>
   
   <!-- text styles -->
@@ -245,8 +245,13 @@
   
   <template context="dbk:indexterm">
     <rule type="cmd" name="index">
-      <param select="(for $i in .//*[local-name() = ('primary','secondary','tertiary','see','seealso')][position() ne last()] return ($i, '!'),
-        .//*[local-name() = ('primary','secondary','tertiary','see','seealso')][position() eq last()])"/>
+      <param/>
+    </rule>
+  </template>
+  
+  <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
+    <rule>
+      <text select="concat('!', .)"></text>
     </rule>
   </template>
   
@@ -257,8 +262,6 @@
       <param regex-group="3"/>
     </rule>
   </regex>
-  
-  <!-- character map only applies to LaTeX text mode. Math character replace can be configured in mml2tex/texmap/texmap.xml -->
   
   <charmap>
     <char character="&#xad;" string="&quot;-"/>
