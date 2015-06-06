@@ -55,8 +55,8 @@ calabash/calabash.bat -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.x
 
 ## configure
 
-docx2tex can be configured with a xml2tex configuration file. docx2tex applies the configuration on the intermediate Hub XML file and generates the LaTeX output.
+docx2tex can be configured by means of an xml2tex configuration file. docx2tex will apply the configuration to the intermediate Hub XML file and generates the LaTeX output.
 
-The configuration in conf/conf.xml is used per default and works with the styles defined in Microsoft Word's normal.dot. If you want to configure docx2tex for other styles, you can edit this file or pass a custom configuration file with the `conf` option.
+The configuration in conf/conf.xml is used by default and works with the styles defined in Microsoft Word's normal.dot. If you want to configure docx2tex for other styles, you can edit this file or pass a custom configuration file with the `conf` option.
 
 Learn how to edit this file [here](https://github.com/transpect/xml2tex).
