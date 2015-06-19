@@ -55,7 +55,33 @@ calabash/calabash.bat -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.x
 
 ## configure
 
-docx2tex can be configured by means of an xml2tex configuration file. docx2tex will apply the configuration to the intermediate Hub XML file and generates the LaTeX output.
+You can specify a custom configuration file for docx2tex. There are two different formats to write a configuration.
+
+* The CSV-based configuration format permits a simple way to map from MS Word styles to LaTeX commands.
+* The xml2tex configuration format is recommended for a deeper level of configuration but requires basic knowledge of XML and XPath.
+
+### CSV
+
+For each MS Word style name, create a line with three semicolon separated values.
+
+* MS Word style name
+* LaTeX start statement 
+* LaTeX end statement
+
+Just follow this example:
+
+```
+Heading 1   ; \chapter{     ; }
+Heading 2   ; \section{     ; }
+Heading 3   ; \subsection{  ; }
+Quote       ; \begin{quote} ; end{quote}
+```
+
+You can edit CSV files either with a simple text editor or with a spreadsheet application.
+
+### xml2tex
+
+docx2tex can also be configured by means of an xml2tex configuration file. docx2tex will apply the configuration to the intermediate Hub XML file and generates the LaTeX output.
 
 The configuration in conf/conf.xml is used by default and works with the styles defined in Microsoft Word's normal.dot. If you want to configure docx2tex for other styles, you can edit this file or pass a custom configuration file with the `conf` option.
 
