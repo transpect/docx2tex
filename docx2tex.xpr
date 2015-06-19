@@ -4,7 +4,7 @@
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
             <serialized version="16.1" xml:space="preserve">
-                <map>
+                <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
                         <String-array>
@@ -19,15 +19,13 @@
                         <String>key.xml.catalog.option.pane</String>
                         <Boolean>true</Boolean>
                     </entry>
-                </map>
+                </serializableOrderedMap>
             </serialized>
         </options>
     </meta>
     <projectTree name="docx2tex.xpr">
         <folder masterFiles="true" name="Master Files">
             <file name="xpl/docx2tex.xpl"/>
-            <file name="xsl/evolve-hub-driver.xsl"/>
-            <file name="docx2hub/xsl/main.xsl"/>
         </folder>
     </projectTree>
 </project>
