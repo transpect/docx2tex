@@ -21,4 +21,12 @@
     <xsl:attribute name="fileref" select="$fileref"/>
   </xsl:template>
   
+  <!-- handle pseudo tables frequently used for numbered equations in MS Word, 
+    special table format necessary to avoid accidental use. -->
+  
+  <xsl:template match="dbk:informaltable[@role = ('docx2tex_equation-table', 'docx2tex_Gleichungstabelle')]
+    [exists(.//dbk:equation)][not(exists(.//dbk:mediaobject))]" mode="hub:lists">
+    <xsl:apply-templates select=".//dbk:equation" mode="#current"/>
+  </xsl:template>
+  
 </xsl:stylesheet>
