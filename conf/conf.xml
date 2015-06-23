@@ -129,7 +129,7 @@
       <text/>
     </rule>
   </template>
-  
+    
   <!-- text styles -->
   
   <template context="dbk:phrase[@css:font-style eq 'italic']">
@@ -222,7 +222,7 @@
   
   <!-- equations -->
   
-  <template context="dbk:inlineequation">
+  <template context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
     <rule>
       <text select="'$'"/>
       <text/>
@@ -230,7 +230,7 @@
     </rule>
   </template>
   
-  <template context="dbk:equation">
+  <template context="dbk:equation[not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule>
       <text select="'$$'"/>
       <text/>
@@ -255,6 +255,8 @@
     </rule>
   </template>
   
+  <!-- regexes -->
+  
   <regex regex="(\d{2})\.(\d{2})\.(\d{4})">
     <rule type="cmd" name="date">
       <param regex-group="1"/>
@@ -263,6 +265,11 @@
     </rule>
   </regex>
   
+  <!-- clean-up buggy word styling -->
+  
+  <!-- drop empty lists -->
+  <template context="dbk:orderedlist[every $i in .//dbk:para satisfies $i/string-length(.) eq 0]|dbk:itemizedlist[every $i in .//dbk:para satisfies $i/string-length(.) eq 0]"/>
+    
   <charmap>
     <char character="&#xad;" string="&quot;-"/>
     <char character="Ä" string="\&#34;A" context="dbk:phrase, dbk:section|dbk:para, dbk:entry"/>
