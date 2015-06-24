@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xml2tex="http://transpect.io/xml2tex"
+  xmlns:c="http://www.w3.org/ns/xproc-step"
+  xmlns:xso="tobereplaced" 
+  version="2.0">
+  
+  <xsl:namespace-alias stylesheet-prefix="xso" result-prefix="xsl"/>
+  
+  <xsl:output method="xml" media-type="text/xml" indent="yes" encoding="UTF-8"/>
+  
+  <xsl:param name="debug" select="'no'"/>
+  <xsl:param name="debug-dir-uri" select="'debug'"/>
+  
+  <xsl:include href="http://transpect.io/xml2tex/xsl/handle-namespace.xsl"/>
+  
+  <xsl:template match="/xml2tex:set">
+    
+    <xso:stylesheet
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:xso="tobereplaced">
+      
+      <!-- generate namespace nodes -->
+      <xsl:apply-templates select="xml2tex:ns"/>
+      
+      <xsl:attribute name="version">2.0</xsl:attribute>
+      
+      <xsl:apply-templates select="* except (xml2tex:ns, xml2tex:charmap, xml2tex:preamble)"/>
+      
+      <!-- identity template -->
+      <xso:template match="@*|*">
+        <xso:copy>
+          <xso:apply-templates select="@*|node()"/>
+        </xso:copy>
+      </xso:template>
+      
+    </xso:stylesheet>  
+      
+  </xsl:template>
+  
+  <!-- match on xml2tex templates that are used to generate latex headlines -->
+  
+  <xsl:template match="xml2tex:template[exists(xml2tex:rule[matches(@name, 'chapter|section')])  or 
+    xml2tex:rule[xml2tex:text[matches(@name, 'chapter|section')]]]">
+    
+    <xsl:comment>Remove margin-left and text-indent in order to avoid generation of list-styles</xsl:comment>
+    
+    <xso:template match="{concat(
+        @context, '/@css:margin-left',
+        '|',
+        @context, '/@css:text-indent'
+        )}"/>    
+    
+  </xsl:template>
+  
+  <xsl:template match="xml2tex:ns">
+    <!-- the code is taken from the schematron project. for information please visit this url
+         https://code.google.com/p/schematron/  -->
+    <xsl:call-template name="handle-namespace"/>
+  </xsl:template>
+  
+  <xsl:template match="xml2tex:template|xml2tex:charmap|xml2tex:preamble"/>
+  
+</xsl:stylesheet>

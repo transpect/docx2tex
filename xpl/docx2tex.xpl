@@ -7,7 +7,8 @@
   xmlns:xml2tex="http://transpect.io/xml2tex"
   xmlns:tr="http://transpect.io"
   version="1.0"
-  name="docx2tex">
+  name="docx2tex-main"
+  type="docx2tex:main">
   
   <p:input port="evolve-hub" primary="false">
     <p:document href="../xsl/evolve-hub-driver.xsl"/>
@@ -58,17 +59,14 @@
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   
   <p:import href="evolve-hub.xpl"/>
+  <p:import href="load-config.xpl"/>
   
   <p:import href="http://transpect.io/docx2hub/xpl/docx2hub.xpl"/>
   <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
-  <p:import href="http://transpect.io/xproc-util/load/xpl/load.xpl"/>
-  <p:import href="http://transpect.io/xproc-util/load/xpl/load-data.xpl"/>
   <p:import href="http://transpect.io/xproc-util/simple-progress-msg/xpl/simple-progress-msg.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xml-model/xpl/prepend-hub-xml-model.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
-    
-    
   <p:import href="http://transpect.io/xproc-util/file-uri/xpl/file-uri.xpl"/>
     
 	<tr:simple-progress-msg file="docx2tex-start.txt">
@@ -83,6 +81,19 @@
 		<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
 	</tr:simple-progress-msg>
   
+  <!--  *
+        * load xml2tex config or generate one from CSV plain text file
+        * -->
+  
+  <docx2tex:load-config name="load-config">
+    <p:with-option name="conf" select="$conf"/>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
+  </docx2tex:load-config>
+  
+  <p:sink/>
+  
   <docx2hub:convert name="docx2hub">
     <p:documentation>Converts DOCX to Hub XML.</p:documentation>
     <p:with-option name="docx" select="$docx"/>
@@ -94,17 +105,20 @@
 	<!-- *
 	     * detect lists by indent and normalize image filerefs
 	     * -->
-  <tr:evolve-hub name="evolve-hub">
+  <docx2tex:evolve-hub name="evolve-hub">
     <p:documentation>Use the evolve-hub function library to detect lists.</p:documentation>
     <p:input port="stylesheet">
       <p:document href="../xsl/evolve-hub-driver.xsl"/>
+    </p:input>
+    <p:input port="config">
+      <p:pipe port="result" step="load-config"/>
     </p:input>
     <p:input port="parameters">
       <p:empty/>
     </p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-  </tr:evolve-hub>
+  </docx2tex:evolve-hub>
 	
 	<tr:simple-progress-msg file="docx2tex-docx2hub.txt">
 		<p:input port="msgs">
@@ -144,63 +158,14 @@
   </p:choose>
   
   <p:identity name="duplicate-input"/>
-  
-  <!--  *
-        * load xml2tex config or generate one from CSV plain text file
-        * -->
-  
-  <p:try>
-    <p:group>
-      
-      <tr:load>
-        <p:with-option name="href" select="$conf"/>
-        <p:with-option name="fail-on-error" select="$fail-on-error"/>
-      </tr:load>
-      
-    </p:group>
-    <p:catch>
-      
-      <tr:file-uri name="retrieve-absolute-file-uri-href">
-        <p:with-option name="filename" select="$conf"/>
-      </tr:file-uri>
-      
-      <tr:load-data name="load-data">
-        <p:with-option name="content-type-override" select="'text/plain'"/>
-        <p:with-option name="encoding" select="'UTF-8'"/>
-        <p:with-option name="href" select="$conf"/>
-        <p:with-option name="fail-on-error" select="$fail-on-error"/>
-      </tr:load-data>
-      
-      <p:xslt>
-        <p:input port="source">
-          <p:document href="../conf/conf.xml"/>
-          <p:pipe port="result" step="load-data"/>
-        </p:input>
-        <p:input port="stylesheet">
-          <p:document href="../xsl/convert-config.xsl"/>
-        </p:input>
-        <p:input port="parameters">
-          <p:empty/>
-        </p:input>
-      </p:xslt>
-      
-      <tr:store-debug pipeline-step="xml2tex/loaded-config">
-        <p:with-option name="active" select="$debug"/>
-        <p:with-option name="base-uri" select="$debug-dir-uri"/>
-      </tr:store-debug>
-      
-    </p:catch>
-  </p:try>
-  
-  <p:identity name="duplicate-config"/>
-
+    
   <xml2tex:convert name="xml2tex">
     <p:documentation>Converts the Hub XML to TeX according to the xml2tex config file.</p:documentation>
     <p:input port="source">
       <p:pipe port="result" step="duplicate-input"/>
     </p:input>
     <p:input port="conf">
-      <p:pipe port="result" step="duplicate-config"/>
+      <p:pipe port="result" step="load-config"/>
     </p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
