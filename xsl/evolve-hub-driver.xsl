@@ -29,4 +29,8 @@
     <xsl:apply-templates select=".//dbk:equation" mode="#current"/>
   </xsl:template>
   
+  <xsl:template match="dbk:blockquote[@role = 'hub:lists']" mode="hub:postprocess-lists">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+      
 </xsl:stylesheet>
