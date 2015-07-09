@@ -15,6 +15,8 @@
   <xsl:param name="debug" select="'no'"/>
   <xsl:param name="debug-dir-uri" select="'debug'"/>
   
+  <xsl:param name="latex-section-regex" select="'chapter|section'" as="xs:string"/>
+  
   <xsl:include href="http://transpect.io/xml2tex/xsl/handle-namespace.xsl"/>
   
   <xsl:template match="/xml2tex:set">
@@ -43,17 +45,23 @@
   
   <!-- match on xml2tex templates that are used to generate latex headlines -->
   
-  <xsl:template match="xml2tex:template[exists(xml2tex:rule[matches(@name, 'chapter|section')])  or 
-    xml2tex:rule[xml2tex:text[matches(@name, 'chapter|section')]]]">
+  <xsl:template match="xml2tex:template[exists(xml2tex:rule[matches(@name, $latex-section-regex)])  or 
+    xml2tex:rule[xml2tex:text[matches(., $latex-section-regex)]]]">
     
     <xsl:comment>Remove margin-left and text-indent in order to avoid generation of list-styles</xsl:comment>
+    
     
     <xso:template match="{concat(
         @context, '/@css:margin-left',
         '|',
         @context, '/@css:text-indent'
-        )}"/>    
+        )}"/>
     
+    <xso:template match="{concat(
+      @context, '/dbk:tab'
+      )}">
+      <xso:text>&#x9;</xso:text>
+    </xso:template>
   </xsl:template>
   
   <xsl:template match="xml2tex:ns">
