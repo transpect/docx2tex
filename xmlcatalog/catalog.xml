@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   
+  <rewriteURI uriStartString="http://transpect.io/docx2tex/" rewritePrefix="../"/>
   <rewriteURI uriStartString="http://customers.le-tex.de/generic/book-conversion/" rewritePrefix="../"/>
 
   <nextCatalog catalog="../docx2hub/xmlcatalog/catalog.xml"/>
