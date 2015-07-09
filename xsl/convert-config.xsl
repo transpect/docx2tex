@@ -33,19 +33,26 @@
         <xsl:variable name="css-style-name" select="replace(docx2hub:normalize-to-css-name($style-name), '_', '')" as="xs:string"/>
         <xsl:variable name="tag-start" select="normalize-space(tokenize(., $delimiter)[2])" as="xs:string"/>
         <xsl:variable name="tag-end" select="normalize-space(tokenize(., $delimiter)[3])" as="xs:string*"/>
+        <xsl:variable name="target-inline-elements" select="('anchor', 'emphasis', 'footnote', 'link', 'olink', 'phrase', 'sup', 'sub', 'xref')" as="xs:string+"/>
         
-        <template context="{concat('*[@role eq ', '''', $css-style-name, ''']')}">
+        <xsl:if test="not(matches($tag-start, 'chapter|section') or matches($tag-end, 'chapter|section'))">
+          <template context="{string-join(
+                                          for $i 
+                                          in $target-inline-elements 
+                                          return concat('dbk:', $i, '[@role eq ', '''', $css-style-name, ''']'),
+                                        '|')}">
+            <rule>
+              <text><xsl:value-of select="$tag-start"/></text>
+              <text/>
+              <xsl:if test="string-length(normalize-space($tag-end)) gt 0">
+                <text><xsl:value-of select="$tag-end"/></text>
+              </xsl:if>
+            </rule>
+          </template>
+        </xsl:if>
+        
+        <template context="{concat('dbk:para[@role eq ', '''', $css-style-name, ''']')}">
           <rule break-after="2">
-            <text><xsl:value-of select="$tag-start"/></text>
-            <text/>
-            <xsl:if test="string-length(normalize-space($tag-end)) gt 0">
-              <text><xsl:value-of select="$tag-end"/></text>
-            </xsl:if>
-          </rule>
-        </template>
-        
-        <template context="{concat('*[matches(local-name(), (''anchor|emphasis|footnote|link|olink|phrase|sup|sub|xref''))][@role eq ', '''', $css-style-name, ''']')}">
-          <rule>
             <text><xsl:value-of select="$tag-start"/></text>
             <text/>
             <xsl:if test="string-length(normalize-space($tag-end)) gt 0">
