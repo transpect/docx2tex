@@ -7,7 +7,6 @@
   name="docx2tex-load-config" 
   type="docx2tex:load-config">
   
-  <p:input port="source"/>
   <p:output port="result"/>
 
   <p:option name="conf" required="true"/>
