@@ -131,7 +131,7 @@ else
 fi
 
 FILE_CP=$OUT_DIR/$BASENAME.docx
-cp $FILE $FILE_CP
+cp $FILE $FILE_CP 2>&1 2>>$LOG
 
 # check if file exists
 if [ ! -f $FILE ]; then
