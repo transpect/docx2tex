@@ -15,8 +15,8 @@
   
   <xsl:template match="@fileref" mode="hub:lists">
     <xsl:variable name="fileref" select="tr:uri-to-relative-path(
-      /dbk:hub/dbk:info/dbk:keywordset/dbk:keyword[@role eq 'source-dir-uri'],
-      concat(/dbk:hub/dbk:info/dbk:keywordset/dbk:keyword[@role eq 'source-dir-uri'], replace(., 'container:', '/'))
+      /hub/info/keywordset/keyword[@role eq 'source-dir-uri'],
+      concat(/hub/info/keywordset/keyword[@role eq 'source-dir-uri'], replace(., 'container:', '/'))
       )"/>
     <xsl:attribute name="fileref" select="$fileref"/>
   </xsl:template>
@@ -24,13 +24,13 @@
   <!-- handle pseudo tables frequently used for numbered equations in MS Word, 
     special table format necessary to avoid accidental use. -->
   
-  <xsl:template match="dbk:informaltable[@role = ('docx2tex_equation-table', 'docx2tex_Gleichungstabelle')]
-    [exists(.//dbk:equation)][not(exists(.//dbk:mediaobject))]" mode="hub:lists">
-    <xsl:apply-templates select=".//dbk:equation" mode="#current"/>
+  <xsl:template match="informaltable[@role = ('docx2tex_equation-table', 'docx2tex_Gleichungstabelle')]
+    [exists(.//equation)][not(exists(.//mediaobject))]" mode="hub:lists">
+    <xsl:apply-templates select=".//equation" mode="#current"/>
   </xsl:template>
   
-  <xsl:template match="dbk:blockquote[@role = 'hub:lists']" mode="hub:postprocess-lists">
+  <xsl:template match="blockquote[@role = 'hub:lists']" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
-      
+
 </xsl:stylesheet>
