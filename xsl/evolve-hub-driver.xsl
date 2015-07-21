@@ -6,6 +6,7 @@
   xmlns:hub="http://transpect.io/hub"
   xmlns:tr="http://transpect.io"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://docbook.org/ns/docbook"
   version="2.0" 
   exclude-result-prefixes="#all"
   xpath-default-namespace="http://docbook.org/ns/docbook">

@@ -60,7 +60,7 @@
     <xso:template match="{concat(
       @context, '/dbk:tab'
       )}">
-      <phrase role="tab"><xso:text>&#x9;</xso:text></phrase>
+      <phrase role="tab" xmlns="http://docbook.org/ns/docbook"><xso:text>&#x9;</xso:text></phrase>
     </xso:template>
   </xsl:template>
   
