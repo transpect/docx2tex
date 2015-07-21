@@ -43,7 +43,7 @@
   
   <template context="dbk:tab">
     <rule>
-      <text/>
+      <text>&#x9;</text>
     </rule>
   </template>
   
@@ -129,7 +129,7 @@
       <text/>
     </rule>
   </template>
-    
+  
   <!-- text styles -->
   
   <template context="dbk:phrase[@css:font-style eq 'italic']">
@@ -241,6 +241,14 @@
   <!-- drop leading numbers, tex will do this for us -->
   <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']"/>
   
+  <!-- comments -->
+  
+  <template context="dbk:annotation">
+    <rule type="env" name="comment">
+      <text/>
+    </rule>
+  </template>
+  
   <!-- indexterms -->
   
   <template context="dbk:indexterm">
@@ -251,26 +259,11 @@
   
   <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
     <rule>
-      <text select="concat('!', .)"></text>
+      <text select="concat('!', .)"/>
     </rule>
   </template>
-  
-  <!-- regexes -->
-  
-  <regex regex="(\d{2})\.(\d{2})\.(\d{4})">
-    <rule type="cmd" name="date">
-      <param regex-group="1"/>
-      <param regex-group="2"/>
-      <param regex-group="3"/>
-    </rule>
-  </regex>
-  
-  <!-- clean-up buggy word styling -->
-  
-  <!-- drop empty lists -->
-  <template context="dbk:orderedlist[every $i in .//dbk:para satisfies $i/string-length(.) eq 0]|dbk:itemizedlist[every $i in .//dbk:para satisfies $i/string-length(.) eq 0]"/>
-    
-  <charmap>
+   
+ <charmap>
     <char character="&#xad;" string="&quot;-"/>
     <char character="Ä" string="\&#34;A" context="dbk:phrase, dbk:section|dbk:para, dbk:entry"/>
     <char character="ä" string="\&#34;a"/>
