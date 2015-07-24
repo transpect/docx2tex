@@ -3,233 +3,234 @@
 <set xmlns="http://transpect.io/xml2tex">
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>
-    \documentclass{scrbook}
-    \usepackage{graphicx}
+  <preamble> 
+    \documentclass{scrbook} 
+    \usepackage{graphicx} 
     \usepackage{hyperref}
-    \usepackage{multirow}
-    \usepackage{amsmath}
-    \usepackage{amssymb}
+    \usepackage{multirow} 
+    \usepackage{amsmath} 
+    \usepackage{amssymb} 
   </preamble>
-  
+
   <!-- xml namespace declaration -->
-  
+
   <ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
   <ns prefix="css" uri="http://www.w3.org/1996/css"/>
-  
+
   <!-- drop metadata -->
-  
+
   <template context="/dbk:hub/dbk:info"/>
-    
+
   <!-- regular paras -->
-  
+
   <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]">
     <rule break-after="2">
       <text/>
     </rule>
   </template>
-  
+
   <template context="dbk:subscript">
     <rule>
       <text select="concat('$_', ., '$')"/>
     </rule>
   </template>
-  
+
   <template context="dbk:superscript">
     <rule>
       <text select="concat('$^', ., '$')"/>
     </rule>
   </template>
-  
+
   <template context="dbk:tab">
     <rule>
       <text>&#x9;</text>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role eq 'Zitat']">
-    <rule type="env" name="quote">
+    <rule name="quote" type="env">
       <text/>
     </rule>
   </template>
-  
+
   <!-- tables and figure captions  -->
-  
+
   <template context="dbk:table|dbk:informaltable">
-    <rule type="env" name="table">
-    	<option select="'h'"/>
-    	<text>\centering</text>
-    	<text/>
+    <rule name="table" type="env">
+      <option select="'h'"/>
+      <text>\centering</text>
+      <text/>
     </rule>
   </template>
-  
+
   <template context="dbk:figure/dbk:title|dbk:table/dbk:title">
-    <rule type="cmd" name="caption" break-after="1">
+    <rule break-after="1" name="caption" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <!-- figures -->
   <template context="dbk:figure">
-    <rule type="env" name="figure">
-    	<option select="'h'"/>
-    	<text/>
+    <rule name="figure" type="env">
+      <option select="'h'"/>
+      <text/>
     </rule>
   </template>
-  
+
   <template context="dbk:alt"/>
-  
+
   <template context="dbk:imagedata">
-    <rule type="cmd" name="includegraphics">
+    <rule name="includegraphics" type="cmd">
       <option select="'width=1\textwidth'"/>
       <param select="@fileref"/>
     </rule>
   </template>
-    
+
   <!-- links -->
-  
+
   <template context="dbk:link">
-    <rule type="cmd" name="href">
+    <rule name="href" type="cmd">
       <param select="@xlink:href"/>
       <param select="dbk:phrase"/>
     </rule>
   </template>
-  
+
   <!-- breaks -->
-  
+
   <template context="dbk:br">
     <rule break-after="1"/>
   </template>
-  
+
   <!-- quotes -->
-  
+
   <template context="dbk:blockquote">
-    <rule type="env" name="quote">
+    <rule name="quote" type="env">
       <text/>
     </rule>
   </template>
-  
+
   <!-- lists -->
-  
+
   <template context="dbk:itemizedlist">
-    <rule type="env" name="itemize">
+    <rule name="itemize" type="env">
       <text/>
     </rule>
   </template>
-  
+
   <template context="dbk:orderedlist">
-    <rule type="env" name="enumerate">
+    <rule name="enumerate" type="env">
       <text/>
     </rule>
   </template>
-  
+
   <template context="dbk:listitem">
-    <rule type="cmd" name="item">
+    <rule name="item" type="cmd">
       <text select="' '"/>
       <text/>
     </rule>
   </template>
-  
+
   <!-- text styles -->
-  
+
   <template context="dbk:phrase[@css:font-style eq 'italic']">
-    <rule type="cmd" name="textit">
+    <rule name="textit" type="cmd">
       <param/>
     </rule>
   </template>
-    
+
   <template context="dbk:phrase[@css:font-weight eq 'bold']">
-    <rule type="cmd" name="textbf">
+    <rule name="textbf" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:phrase[@css:text-decoration eq 'underline']">
-    <rule type="cmd" name="uuline">
+    <rule name="uuline" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:phrase[@css:text-transform eq 'uppercase']">
-    <rule type="cmd" name="uppercase">
+    <rule name="uppercase" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:phrase[@css:font-variant eq 'small-caps']">
-    <rule type="cmd" name="textsc">
+    <rule name="textsc" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <!-- headlines -->
-  
+
   <template context="dbk:para[@role = ('berschrift1', 'headline1', 'heading1')]">
-    <rule type="cmd" name="chapter" break-after="1">
+    <rule break-after="1" name="chapter" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role = ('berschrift2', 'headline2', 'heading2')]">
-    <rule type="cmd" name="section" break-after="1">
+    <rule break-after="1" name="section" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role = ('berschrift3', 'headline3', 'heading3')]">
-    <rule type="cmd" name="subsection" break-after="1">
+    <rule break-after="1" name="subsection" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role = ('berschrift4', 'headline4', 'heading4')]">
-    <rule type="cmd" name="subsubsection" break-after="1">
+    <rule break-after="1" name="subsubsection" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]">
-    <rule type="cmd" name="subsubsubsection" break-after="1">
+    <rule break-after="1" name="subsubsubsection" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[@role = ('berschrift6', 'headline6', 'heading6')]/dbk:title">
-    <rule type="cmd" name="paragraph" break-after="1">
+    <rule break-after="1" name="paragraph" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:para[matches(@role, '(berschrift|headline|heading)[7-9]')]">
-    <rule type="cmd" name="subparagraph" break-after="1">
+    <rule break-after="1" name="subparagraph" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <!-- footnotes -->
-  
+
   <template context="dbk:footnote">
-    <rule type="cmd" name="footnote">
+    <rule name="footnote" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
   <template context="dbk:footnote/dbk:para">
     <rule break-after="1">
       <text/>
     </rule>
   </template>
-  
+
   <!-- equations -->
-  
-  <template context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
+
+  <template
+    context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
     <rule>
       <text select="'$'"/>
       <text/>
       <text select="'$'"/>
     </rule>
   </template>
-  
+
   <template context="dbk:equation[not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule>
       <text select="'$$'"/>
@@ -237,54 +238,63 @@
       <text select="'$$'"/>
     </rule>
   </template>
-  
+
   <!-- drop leading numbers, tex will do this for us -->
   <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']"/>
   
-  <!-- comments -->
-  
-  <template context="dbk:annotation">
-    <rule type="env" name="comment">
-      <text/>
-    </rule>
-  </template>
-  
-  <!-- indexterms -->
-  
-  <template context="dbk:indexterm">
-    <rule type="cmd" name="index">
+  <!-- tagged private use area -->
+  <template context="dbk:phrase[@role eq 'unicode-private-use']">
+    <rule name="privateuse" type="cmd">
       <param/>
     </rule>
   </template>
-  
+
+  <!-- comments -->
+
+  <template context="dbk:annotation">
+    <rule name="comment" type="env">
+      <text/>
+    </rule>
+  </template>
+
+  <!-- indexterms -->
+
+  <template context="dbk:indexterm">
+    <rule name="index" type="cmd">
+      <param/>
+    </rule>
+  </template>
+
   <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
     <rule>
       <text select="concat('!', .)"/>
     </rule>
   </template>
-   
- <charmap>
+
+  <charmap>
     <char character="&#xad;" string="&quot;-"/>
-    <char character="Ä" string="\&#34;A" context="dbk:phrase, dbk:section|dbk:para, dbk:entry"/>
+    <char character="Ä" context="dbk:phrase, dbk:section|dbk:para, dbk:entry" string="\&#34;A"/>
     <char character="ä" string="\&#34;a"/>
     <char character="Ö" string="\&#34;O"/>
-    <char character="ö" string="\&#34;o" />
-    <char character="Ü" string="\&#34;U" />
-    <char character="ü" string="\&#34;u" />
-    <char character="ß" string="\ss{}" />
-    <char character="…" string="..." />
-    <char character="‑" string="\hbox{-}" />
-    <char character="–" string="--" />
-    <char character="—" string="---" />
-    <char character="€" string="\texteuro{}" />
-    <char character=" " string="\," />
-    <char character=" " string="\," />
-    <char character="≤" string="$\leq$" />
+    <char character="ö" string="\&#34;o"/>
+    <char character="Ü" string="\&#34;U"/>
+    <char character="ü" string="\&#34;u"/>
+    <char character="ß" string="\ss{}"/>
+    <char character="…" string="..."/>
+    <char character="‑" string="\hbox{-}"/>
+    <char character="–" string="--"/>
+    <char character="—" string="---"/>
+    <char character="€" string="\texteuro{}"/>
+    <char character=" " string="\,"/>
+    <char character=" " string="\,"/>
+    <char character="≤" string="$\leq$"/>
     <char character="©" string="\textcopyright"/>
-    <char character="•" string="{\textbullet}" />
+    <char character="•" string="{\textbullet}"/>
     <char character="▪" string="$\blacksquare$"/>
-    <char character="∙" string="$\cdot$" />
+    <char character="∙" string="$\cdot$"/>
     <char character="¥" string="$¥$"/>
+    <char character="~" string="\textasciitilde"/>
+    <char character="^" string="\textasciicircum"/>
     <!-- greek small letters -->
     <char character="α" string="$\alpha$"/>
     <char character="β" string="$\beta$"/>
