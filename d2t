@@ -113,6 +113,11 @@ fi
 # logging
 LOG=$OUT_DIR/$BASENAME.log
 
+# remove log from previous runs
+if [ -e $LOG ]; then
+    rm $LOG
+fi
+
 # debugging
 DEBUG_DIR=$OUT_DIR/$BASENAME.debug
 
