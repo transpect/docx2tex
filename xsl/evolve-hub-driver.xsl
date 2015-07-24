@@ -34,6 +34,16 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
+  <!-- remove each list which counts only one list item -->
+  
+  <xsl:template match="dbk:orderedlist[count(*) eq 1]|dbk:itemizedlist[count(*) eq 1]" mode="hub:postprocess-lists">
+    <xsl:apply-templates select="dbk:listitem/node()" mode="#current"/>
+  </xsl:template>
+  
+  <xsl:template match="dbk:variablelist[count(*) eq 1]" mode="hub:postprocess-lists">
+    <xsl:apply-templates select="dbk:varlistentry/dbk:term/node(), dbk:varlistentry/dbk:listitem/node()" mode="#current"/>
+  </xsl:template>
+  
   <!-- remove phrase tag if contains only whitespace -->
   <xsl:template match="phrase[. eq '&#x20;']" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
