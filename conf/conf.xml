@@ -31,16 +31,20 @@
 
   <template context="dbk:subscript">
     <rule>
-      <text select="concat('$_', ., '$')"/>
+      <text select="'$_{'"/>
+      <text/>
+      <text select="'}$'"/>
     </rule>
   </template>
-
+  
   <template context="dbk:superscript">
     <rule>
-      <text select="concat('$^', ., '$')"/>
+      <text select="'$^{'"/>
+      <text/>
+      <text select="'}$'"/>
     </rule>
   </template>
-
+  
   <template context="dbk:tab">
     <rule>
       <text>&#x9;</text>
