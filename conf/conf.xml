@@ -291,27 +291,35 @@
     <char character="Æ" string="\AE{}"/>
     <char character="œ" string="\oe{}"/>
     <char character="Œ" string="\OE{}"/>
+    <char character="ł" string="\l{}"/>
+    <char character="ø" string="\o{}"/>
     <char character="Ø" string="\O{}"/>
-    <char character="…" string="..."/>
+    <char character="…" string="\dots"/>
+    <char character="⋮" string="\vdots"/>
     <char character="‑" string="\hbox{-}"/>
     <char character="–" string="--"/>
     <char character="—" string="---"/>
+    <char character="_" string="\_"/>
     <char character="€" string="\texteuro{}"/>
+    <char character="£" string="\pounds"/>
     <char character=" " string="\,"/>
     <char character=" " string="\,"/>
     <char character="§" string="\S"/>
     <char character="#" string="\#"/>
     <char character="©" string="\textcopyright"/>
+    <char character="®" string="\textregistered"/>
     <char character="•" string="{\textbullet}"/>
     <char character="▪" string="$\blacksquare$"/>
     <char character="∙" string="$\cdot$"/>
     <char character="¥" string="$¥$"/>
+    <char character="¶" string="\P"/>
+    <char character="†" string="\dag"/>
+    <char character="‡" string="\ddag"/>
     <!-- math symbols used in text mode -->
     <char character="&lt;" string="\textless"/>
     <char character="&gt;" string="\textgreater"/>
     <char character="~" string="\textasciitilde"/>
     <char character="^" string="\textasciicircum"/>
-    <char character="≤" string="$\leq$"/>
     <!-- greek small letters -->
     <char character="α" string="$\alpha$"/>
     <char character="β" string="$\beta$"/>
