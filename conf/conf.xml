@@ -5,6 +5,7 @@
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble> 
     \documentclass{scrbook} 
+    \usepackage[utf8]{inputenc}
     \usepackage{graphicx} 
     \usepackage{hyperref}
     \usepackage{multirow}    
