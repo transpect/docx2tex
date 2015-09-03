@@ -7,8 +7,8 @@
     \documentclass{scrbook} 
     \usepackage{graphicx} 
     \usepackage{hyperref}
-    \usepackage{multirow} 
-    \usepackage{amsmath} 
+    \usepackage{multirow}    
+    \usepackage{amsmath}
     \usepackage{amssymb} 
   </preamble>
 
@@ -275,15 +275,23 @@
     </rule>
   </template>
 
+  <!-- applies only to text mode, MathML to LaTeX is performed with  -->
   <charmap>
     <char character="&#xad;" string="&quot;-"/>
-    <char character="Ä" context="dbk:phrase, dbk:section|dbk:para, dbk:entry" string="\&#34;A"/>
+    <char character="Ä" string="\&#34;A"/>
     <char character="ä" string="\&#34;a"/>
     <char character="Ö" string="\&#34;O"/>
     <char character="ö" string="\&#34;o"/>
     <char character="Ü" string="\&#34;U"/>
     <char character="ü" string="\&#34;u"/>
     <char character="ß" string="\ss{}"/>
+    <char character="å" string="\aa{}"/>
+    <char character="Å" string="\AA{}"/>
+    <char character="æ" string="\ae{}"/>
+    <char character="Æ" string="\AE{}"/>
+    <char character="œ" string="\oe{}"/>
+    <char character="Œ" string="\OE{}"/>
+    <char character="Ø" string="\O{}"/>
     <char character="…" string="..."/>
     <char character="‑" string="\hbox{-}"/>
     <char character="–" string="--"/>
@@ -291,55 +299,75 @@
     <char character="€" string="\texteuro{}"/>
     <char character=" " string="\,"/>
     <char character=" " string="\,"/>
-    <char character="≤" string="$\leq$"/>
+    <char character="§" string="\S"/>
+    <char character="#" string="\#"/>
     <char character="©" string="\textcopyright"/>
     <char character="•" string="{\textbullet}"/>
     <char character="▪" string="$\blacksquare$"/>
     <char character="∙" string="$\cdot$"/>
     <char character="¥" string="$¥$"/>
+    <!-- math symbols used in text mode -->
+    <char character="&lt;" string="\textless"/>
+    <char character="&gt;" string="\textgreater"/>
     <char character="~" string="\textasciitilde"/>
     <char character="^" string="\textasciicircum"/>
+    <char character="≤" string="$\leq$"/>
     <!-- greek small letters -->
-    <char character="α" string="\alpha"/>
-    <char character="β" string="\beta"/>
-    <char character="γ" string="\gamma"/>
-    <char character="δ" string="\delta"/>
-    <char character="ε" string="\varepsilon"/>
-    <char character="ζ" string="\zeta"/>
-    <char character="η" string="\eta"/>
-    <char character="θ" string="\vartheta"/>
-    <char character="ι" string="\iota"/>
-    <char character="κ" string="\kappa"/>
-    <char character="λ" string="\lambda"/>
-    <char character="μ" string="\mu"/>
-    <char character="ν" string="\nu"/>
-    <char character="ξ" string="\xi"/>
-    <char character="ο" string="\omicron"/>
-    <char character="π" string="\pi"/>
-    <char character="ρ" string="\varrho"/>
-    <char character="ς" string="\varsigma"/>
-    <char character="σ" string="\sigma"/>
-    <char character="τ" string="\tau"/>
-    <char character="υ" string="\upsilon"/>
-    <char character="φ" string="\varphi"/>
-    <char character="χ" string="\chi"/>
-    <char character="ψ" string="\psi"/>
-    <char character="ω" string="\omega"/>
+    <char character="α" string="$\alpha$"/>
+    <char character="β" string="$\beta$"/>
+    <char character="γ" string="$\gamma$"/>
+    <char character="δ" string="$\delta$"/>
+    <char character="ϵ" string="$\epsilon$"/>
+    <char character="ε" string="$\varepsilon$"/>
+    <char character="ζ" string="$\zeta$"/>
+    <char character="η" string="$\eta$"/>
+    <char character="θ" string="$\theta$"/>
+    <char character="ϑ" string="$\vartheta$"/>
+    <char character="ι" string="$\iota$"/>
+    <char character="κ" string="$\kappa$"/>
+    <char character="λ" string="$\lambda$"/>
+    <char character="μ" string="$\mu$"/>
+    <char character="ν" string="$\nu$"/>
+    <char character="ξ" string="$\xi$"/>
+    <char character="ο" string="$\omicron$"/>
+    <char character="π" string="$\pi$"/>
+    <char character="ϖ" string="$\varpi$"/>
+    <char character="ρ" string="$\rho$"/>
+    <char character="ϱ" string="$\varrho$"/>
+    <char character="σ" string="$\sigma$"/>
+    <char character="ς" string="$\varsigma$"/>
+    <char character="τ" string="$\tau$"/>
+    <char character="υ" string="$\upsilon$"/>
+    <char character="ϕ" string="$\phi$"/>
+    <char character="φ" string="$\varphi$"/>
+    <char character="χ" string="$\chi$"/>
+    <char character="ψ" string="$\psi$"/>
+    <char character="ω" string="$\omega$"/>
     <!-- greek capital letters -->
-    <char character="Α" string="\Alpha"/>
-    <char character="Β" string="\Beta"/>
-    <char character="Γ" string="\Gamma"/>
-    <char character="Δ" string="\Delta"/>
-    <char character="Ε" string="\Epsilon"/>
-    <char character="Θ" string="\Theta"/>
-    <char character="Λ" string="\Lambda"/>
-    <char character="Ξ" string="\Xi"/>
-    <char character="Π" string="\Pi"/>
-    <char character="Σ" string="\Sigma"/>
-    <char character="Φ" string="\Phi"/>
-    <char character="Ψ" string="\Psi"/>
-    <char character="Ω" string="\Omega"/>
-    <char character="Ζ" string="\Zeta"/>
+    <char character="Α" string="$\Alpha$"/>
+    <char character="Β" string="$\Beta$"/>
+    <char character="Γ" string="$\Gamma$"/>
+    <char character="Δ" string="$\Delta$"/>
+    <char character="Ε" string="$\Epsilon$"/>
+    <char character="Ζ" string="$\Zeta$"/>
+    <char character="Η" string="$\Eta$"/>
+    <char character="Θ" string="$\Theta$"/>
+    <char character="Ι" string="$\Iota$"/>
+    <char character="Κ" string="$\Kappa$"/>
+    <char character="Λ" string="$\Lambda$"/>
+    <char character="Μ" string="$\Mu$"/>
+    <char character="Ν" string="$\Nu$"/>
+    <char character="Ξ" string="$\Xi$"/>
+    <char character="Ο" string="$\Omikron$"/>
+    <char character="Π" string="$\Pi$"/>
+    <char character="Ρ" string="$\Rho$"/>
+    <char character="Σ" string="$\Sigma$"/>
+    <char character="Τ" string="$\Tau$"/>
+    <char character="Υ" string="$\Upsilon$"/>
+    <char character="Φ" string="$\Phi$"/>
+    <char character="Χ" string="$\Chi$"/>
+    <char character="Ψ" string="$\Psi$"/>
+    <char character="Ω" string="$\Omega$"/>
   </charmap>
 
 </set>
