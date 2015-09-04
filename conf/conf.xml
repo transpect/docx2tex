@@ -319,8 +319,6 @@
     <!-- math symbols used in text mode -->
     <char character="&lt;" string="\textless"/>
     <char character="&gt;" string="\textgreater"/>
-    <char character="~" string="\textasciitilde"/>
-    <char character="^" string="\textasciicircum"/>
     <!-- greek small letters -->
     <char character="α" string="$\alpha$"/>
     <char character="β" string="$\beta$"/>
