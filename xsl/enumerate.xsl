@@ -21,12 +21,14 @@
                                          @numeration
                                        ) - 1" as="xs:integer"/>    
     <xsl:variable name="level" select="count(ancestor::dbk:orderedlist) + 1" as="xs:integer"/>
-    <xsl:variable name="enum" select="concat('enum', string-join(for $i in ($level) return 'i', ''))" as="xs:string"/>
+    <xsl:variable name="level-roman" as="xs:string">
+      <xsl:number value="$level" format="i"/>
+    </xsl:variable>
     <xsl:processing-instruction name="latex" 
       select="concat('&#xa;&#xa;\begin{enumerate}[',
                      $list-type,']&#xa;',
                      if($start gt 0) 
-                     then concat('\setcounter{', $enum,  '}{', $start, '}&#xa;') 
+                     then concat('\setcounter{enum', $level-roman, '}{', $start, '}&#xa;') 
                      else ''
               )"/>
     <xsl:apply-templates/>
