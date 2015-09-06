@@ -19,7 +19,7 @@
   </p:output>
   
   <p:output port="hub" primary="false">
-    <p:pipe port="result" step="duplicate-input"/>
+    <p:pipe port="result" step="enumerate"/>
     <p:documentation>The intermediate Hub XML format.</p:documentation>
   </p:output>
   
@@ -156,14 +156,19 @@
       <p:identity/>
     </p:otherwise>
   </p:choose>
-  
-  <p:identity name="duplicate-input"/>
     
+  <p:xslt name="enumerate">
+    <p:documentation>convert numbered lists to enumerate environment</p:documentation>
+    <p:input port="stylesheet">
+      <p:document href="../xsl/enumerate.xsl"/>
+    </p:input>
+    <p:input port="parameters">
+      <p:empty/>
+    </p:input>
+  </p:xslt>
+  
   <xml2tex:convert name="xml2tex">
     <p:documentation>Converts the Hub XML to TeX according to the xml2tex config file.</p:documentation>
-    <p:input port="source">
-      <p:pipe port="result" step="duplicate-input"/>
-    </p:input>
     <p:input port="conf">
       <p:pipe port="result" step="load-config"/>
     </p:input>

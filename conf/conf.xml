@@ -1,5 +1,5 @@
-<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="../schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <set xmlns="http://transpect.io/xml2tex">
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
@@ -10,7 +10,8 @@
     \usepackage{hyperref}
     \usepackage{multirow}    
     \usepackage{amsmath}
-    \usepackage{amssymb} 
+    \usepackage{amssymb}
+    \usepackage{enumerate}
   </preamble>
 
   <!-- xml namespace declaration -->
@@ -121,12 +122,14 @@
       <text/>
     </rule>
   </template>
+  
+  <!-- orderedlists are handled in enum.xsl -->
 
-  <template context="dbk:orderedlist">
+  <!--<template context="dbk:orderedlist">
     <rule name="enumerate" type="env">
       <text/>
     </rule>
-  </template>
+  </template>-->
 
   <template context="dbk:listitem">
     <rule name="item" type="cmd">
