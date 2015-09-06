@@ -310,6 +310,8 @@
     <char character="¶" string="\P"/>
     <char character="†" string="\dag"/>
     <char character="‡" string="\ddag"/>
+    <char character="~" string="\textasciitilde{}"/>
+    <char character="^" string="\textasciicircum{}"/>
     <char character="&lt;" string="\textless"/>
     <char character="&gt;" string="\textgreater"/>
     <!-- greek small letters -->
