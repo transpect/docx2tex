@@ -10,9 +10,6 @@
 [submodule "docx2hub"]
 	path = docx2hub
 	url = https://github.com/transpect/docx2hub
-[submodule "xml2tex"]
-	path = xml2tex
-	url = https://github.com/transpect/xml2tex
 [submodule "evolve-hub"]
 	path = evolve-hub
 	url = https://github.com/transpect/evolve-hub
