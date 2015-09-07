@@ -295,6 +295,7 @@
     <char character="…" string="\dots"/>
     <char character="⋮" string="\vdots"/>
     <char character="‑" string="\hbox{-}"/>
+    <char character="−" string="-"/>
     <char character="–" string="--"/>
     <char character="—" string="---"/>
     <char character="_" string="\_"/>
