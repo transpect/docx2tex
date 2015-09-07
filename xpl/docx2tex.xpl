@@ -19,7 +19,7 @@
   </p:output>
   
   <p:output port="hub" primary="false">
-    <p:pipe port="result" step="enumerate"/>
+    <p:pipe port="result" step="identity-input"/>
     <p:documentation>The intermediate Hub XML format.</p:documentation>
   </p:output>
   
@@ -157,15 +157,7 @@
     </p:otherwise>
   </p:choose>
     
-  <p:xslt name="enumerate">
-    <p:documentation>convert numbered lists to enumerate environment</p:documentation>
-    <p:input port="stylesheet">
-      <p:document href="../xsl/enumerate.xsl"/>
-    </p:input>
-    <p:input port="parameters">
-      <p:empty/>
-    </p:input>
-  </p:xslt>
+  <p:identity name="identity-input"/>
   
   <xml2tex:convert name="xml2tex">
     <p:documentation>Converts the Hub XML to TeX according to the xml2tex config file.</p:documentation>
