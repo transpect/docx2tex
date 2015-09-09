@@ -31,19 +31,19 @@
     </rule>
   </template>
 
-  <template context="dbk:subscript">
+  <template context="dbk:subscript" mathmode="true">
     <rule>
-      <text select="'$_{'"/>
+      <text select="'_{'"/>
       <text/>
-      <text select="'}$'"/>
+      <text select="'}'"/>
     </rule>
   </template>
   
-  <template context="dbk:superscript">
+  <template context="dbk:superscript" mathmode="true">
     <rule>
-      <text select="'$^{'"/>
+      <text select="'^{'"/>
       <text/>
-      <text select="'}$'"/>
+      <text select="'}'"/>
     </rule>
   </template>
   
@@ -295,7 +295,7 @@
     <char character="…" string="\dots"/>
     <char character="⋮" string="\vdots"/>
     <char character="‑" string="\hbox{-}"/>
-    <char character="−" string="-"/>
+    <char character="−" string="$-$"/>
     <char character="–" string="--"/>
     <char character="—" string="---"/>
     <char character="_" string="\_"/>
