@@ -6,7 +6,8 @@
   <preamble> 
     \documentclass{scrbook} 
     \usepackage[utf8]{inputenc}
-    \usepackage{graphicx} 
+    \usepackage{graphicx}
+    \usepackage[english,ngerman,french]{babel} 
     \usepackage{hyperref}
     \usepackage{multirow}    
     \usepackage{amsmath}
@@ -299,6 +300,14 @@
     <char character="–" string="--"/>
     <char character="—" string="---"/>
     <char character="_" string="\_"/>
+    <char character="„" string="\glqq"/>
+    <char character="“" string="\grqq"/>
+    <char character="‚" string="\grq"/>
+    <char character="‘" string="\glq"/>
+    <char character="»" string="\frqq"/>
+    <char character="«" string="\flqq"/>
+    <char character="›" string="\frq"/>
+    <char character="‹" string="\flq"/>
     <char character="€" string="\texteuro{}"/>
     <char character="£" string="\pounds"/>
     <char character=" " string="\,"/>
