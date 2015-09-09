@@ -12,7 +12,6 @@
     \documentclass{scrbook} 
     \usepackage[utf8]{inputenc}
     \usepackage{graphicx}
-    \usepackage[english,ngerman,french]{babel} 
     \usepackage{hyperref}
     \usepackage{multirow}    
     \usepackage{amsmath}
