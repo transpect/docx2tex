@@ -4,6 +4,11 @@
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble> 
+    % Converted with docx2tex
+    % 
+    % docx2tex is Open Source and 
+    % you can download it on GitHub:
+    % https://github.com/transpect/docx2tex
     \documentclass{scrbook} 
     \usepackage[utf8]{inputenc}
     \usepackage{graphicx}
