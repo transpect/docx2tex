@@ -10,7 +10,6 @@
     % you can download it on GitHub:
     % https://github.com/transpect/docx2tex
     \documentclass{scrbook} 
-    \usepackage[utf8]{inputenc}
     \usepackage{graphicx}
     \usepackage{hyperref}
     \usepackage{multirow}    
