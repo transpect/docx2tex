@@ -15,5 +15,7 @@
   <nextCatalog catalog="../mml2tex/xmlcatalog/catalog.xml"/>
   
   <nextCatalog catalog="../xml2tex/xmlcatalog/catalog.xml"/>
-  
+
+  <nextCatalog catalog="../schema/hub/xmlcatalog/catalog.xml"/>
+
 </catalog>

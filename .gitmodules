@@ -19,3 +19,6 @@
 [submodule "xml2tex"]
 	path = xml2tex
 	url = https://github.com/transpect/xml2tex
+[submodule "schema/hub"]
+	path = schema/hub
+	url = git@github.com:le-tex/Hub.git

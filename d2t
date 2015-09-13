@@ -103,7 +103,7 @@ mkdir -p $OUT_DIR
 
 # path to configuration file
 if [[ -z $CONF ]]; then
-    CONF=$DIR/conf/conf.csv
+    CONF=$DIR/conf/conf.xml
 else
     if [[ "$CONF" != /* ]]; then	
 	CONF=$PWD/$CONF
@@ -111,7 +111,7 @@ else
 fi
 
 # logging
-LOG=$OUT_DIR/$BASENAME.log
+LOG=$OUT_DIR/$BASENAME.d2t.log
 
 # remove log from previous runs
 if [ -e $LOG ]; then
