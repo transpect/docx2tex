@@ -103,7 +103,7 @@ mkdir -p $OUT_DIR
 
 # path to configuration file
 if [[ -z $CONF ]]; then
-    CONF=$DIR/conf/conf.xml
+    CONF=$DIR/conf/conf.csv
 else
     if [[ "$CONF" != /* ]]; then	
 	CONF=$PWD/$CONF

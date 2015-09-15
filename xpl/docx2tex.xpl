@@ -25,7 +25,7 @@
   
   <p:serialization port="result" method="text" media-type="text/plain" encoding="utf8"/>
   
-  <p:option name="conf" select="'../conf/conf.xml'">
+  <p:option name="conf" select="'../conf/conf.csv'">
     <p:documentation>The input port expects either a xml2tex-mapping file 
       or a csv configuration file.</p:documentation>
   </p:option>
