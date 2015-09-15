@@ -37,7 +37,9 @@
           
           <xsl:template match="/">
             <c:data>
-              <xsl:apply-templates select="hub/info/css:rules/css:rule"/>
+              <xsl:apply-templates select="hub/info/css:rules/css:rule">
+                <xsl:sort select="lower-case(@name)"/>
+              </xsl:apply-templates>
             </c:data>  
           </xsl:template>
           
