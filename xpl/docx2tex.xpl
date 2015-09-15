@@ -9,10 +9,6 @@
   version="1.0"
   name="docx2tex-main"
   type="docx2tex:main">
-  
-  <p:input port="evolve-hub" primary="false">
-    <p:document href="../xsl/evolve-hub-driver.xsl"/>
-  </p:input>
 
   <p:output port="result" primary="true">
     <p:documentation>The TeX document is shipped at this port.</p:documentation>
@@ -50,11 +46,21 @@
   
   <p:option name="fail-on-error" select="'true'">
     <p:documentation>
-      Whether the pipeline should on some errors.
+      Whether the pipeline should fail on some errors.
+    </p:documentation>
+  </p:option>
+  
+  <p:option name="docx" required="true">
+    <p:documentation>
+      Path to the docx file.
     </p:documentation>
   </p:option>
 	
-  <p:option name="custom-xsl" select="''" required="false"/>
+  <p:option name="custom-xsl" select="''" required="false">
+    <p:documentation>
+      Path to an XSLT to be applied on the intermediate Hub document.
+    </p:documentation>
+  </p:option>
   
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   
