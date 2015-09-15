@@ -58,7 +58,13 @@
 	
   <p:option name="custom-xsl" select="''" required="false">
     <p:documentation>
-      Path to an XSLT to be applied on the intermediate Hub document.
+      Path to an XSLT to be applied on the intermediate Hub XML document.
+    </p:documentation>
+  </p:option>
+  
+  <p:option name="conf-template" select="''" required="false">
+    <p:documentation>
+      Path to the generated CSV-based configuration template.
     </p:documentation>
   </p:option>
   
@@ -66,6 +72,7 @@
   
   <p:import href="evolve-hub.xpl"/>
   <p:import href="load-config.xpl"/>
+  <p:import href="generate-conf-template.xpl"/>
   
   <p:import href="http://transpect.io/docx2hub/xpl/docx2hub.xpl"/>
   <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
@@ -107,6 +114,14 @@
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </docx2hub:convert>
+  
+  <docx2tex:generate-conf-template>
+    <p:documentation>Retrieves all styles from the Hub document and generates
+      a CSV-template to facilitate the writing of a custom configuration.</p:documentation>
+    <p:with-option name="conf-template" select="$conf-template"/>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>    
+  </docx2tex:generate-conf-template>
 	
 	<!-- *
 	     * detect lists by indent and normalize image filerefs

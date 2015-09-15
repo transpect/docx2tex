@@ -166,6 +166,7 @@ $CALABASH \
     docx=$FILE_CP \
     conf=$CONF \
     custom-xsl=$CUSTOMXSL \
+    conf-template=$OUT_DIR/$BASENAME.csv \
     grid=$GRID \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
