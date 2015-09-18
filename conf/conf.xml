@@ -303,22 +303,22 @@
     <char character="–" string="--"/>
     <char character="—" string="---"/>
     <char character="_" string="\_"/>
-    <char character="„" string="\glqq"/>
-    <char character="“" string="\grqq"/>
-    <char character="‚" string="\grq"/>
-    <char character="‘" string="\glq"/>
-    <char character="»" string="\frqq"/>
-    <char character="«" string="\flqq"/>
-    <char character="›" string="\frq"/>
-    <char character="‹" string="\flq"/>
+    <char character="„" string="{\glqq}"/>
+    <char character="“" string="{\grqq}"/>
+    <char character="‚" string="{\grq}"/>
+    <char character="‘" string="{\glq}"/>
+    <char character="»" string="{\frqq}"/>
+    <char character="«" string="{\flqq}"/>
+    <char character="›" string="{\frq}"/>
+    <char character="‹" string="{\flq}"/>
     <char character="€" string="\texteuro{}"/>
     <char character="£" string="\pounds"/>
     <char character=" " string="\,"/>
     <char character=" " string="\,"/>
     <char character="§" string="\S"/>
     <char character="#" string="\#"/>
-    <char character="©" string="\textcopyright"/>
-    <char character="®" string="\textregistered"/>
+    <char character="©" string="{\textcopyright}"/>
+    <char character="®" string="{\textregistered}"/>
     <char character="•" string="{\textbullet}"/>
     <char character="▪" string="$\blacksquare$"/>
     <char character="∙" string="$\cdot$"/>
