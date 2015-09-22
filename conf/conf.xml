@@ -34,6 +34,19 @@
       <text/>
     </rule>
   </template>
+  
+  <template context="dbk:para[@css:font-style eq 'italic'][not(parent::dbk:entry)][not(parent::dbk:footnote)]">
+    <rule name="textit" type="cmd" break-after="2">
+      <param/>
+    </rule>
+  </template>
+  
+  <template context="dbk:para[@css:font-weight eq 'bold'][not(parent::dbk:entry)][not(parent::dbk:footnote)]">
+    <rule name="textbf" type="cmd" break-after="2">
+      <param/>
+    </rule>
+  </template>
+  
 
   <template context="dbk:subscript" mathmode="true">
     <rule>
