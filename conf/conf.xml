@@ -16,6 +16,7 @@
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{enumerate}
+    \usepackage[ngerman]{babel}
   </preamble>
 
   <!-- xml namespace declaration -->
