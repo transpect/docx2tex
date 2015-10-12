@@ -133,7 +133,7 @@
     </rule>
   </template>
 
-  <!-- lists -->
+  <!-- itemized lists -->
 
   <template context="dbk:itemizedlist">
     <rule name="itemize" type="env">
@@ -141,18 +141,32 @@
     </rule>
   </template>
   
-  <!-- orderedlists are handled in enum.xsl -->
-
-  <!--<template context="dbk:orderedlist">
-    <rule name="enumerate" type="env">
-      <text/>
-    </rule>
-  </template>-->
-
-  <template context="dbk:listitem">
+  <template context="dbk:listitem[not(ancestor::dbk:variablelist)]">
     <rule name="item" type="cmd">
       <text select="' '"/>
       <text/>
+    </rule>
+  </template>
+  
+  <!-- orderedlists are handled in enum.xsl -->
+  
+  <!-- variable list -->
+  
+  <template context="dbk:variablelist">
+    <rule name="description" type="env">
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:listitem[ancestor::dbk:variablelist]">
+    <rule>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:term[ancestor::dbk:variablelist]">
+    <rule name="item" type="cmd">
+      <option/>
     </rule>
   </template>
 
@@ -197,37 +211,37 @@
   </template>
 
   <template context="dbk:para[@role = ('berschrift2', 'headline2', 'heading2')]">
-    <rule break-after="1" name="section" type="cmd">
+    <rule break-after="2" name="section" type="cmd">
       <param/>
     </rule>
   </template>
 
   <template context="dbk:para[@role = ('berschrift3', 'headline3', 'heading3')]">
-    <rule break-after="1" name="subsection" type="cmd">
+    <rule break-after="2" name="subsection" type="cmd">
       <param/>
     </rule>
   </template>
 
   <template context="dbk:para[@role = ('berschrift4', 'headline4', 'heading4')]">
-    <rule break-after="1" name="subsubsection" type="cmd">
+    <rule break-after="2" name="subsubsection" type="cmd">
       <param/>
     </rule>
   </template>
 
   <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]">
-    <rule break-after="1" name="subsubsubsection" type="cmd">
+    <rule break-after="2" name="subsubsubsection" type="cmd">
       <param/>
     </rule>
   </template>
 
   <template context="dbk:para[@role = ('berschrift6', 'headline6', 'heading6')]/dbk:title">
-    <rule break-after="1" name="paragraph" type="cmd">
+    <rule break-after="2" name="paragraph" type="cmd">
       <param/>
     </rule>
   </template>
 
   <template context="dbk:para[matches(@role, '(berschrift|headline|heading)[7-9]')]">
-    <rule break-after="1" name="subparagraph" type="cmd">
+    <rule break-after="2" name="subparagraph" type="cmd">
       <param/>
     </rule>
   </template>
