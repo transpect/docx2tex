@@ -414,6 +414,8 @@
     <char character="Χ" string="$\Chi$"/>
     <char character="Ψ" string="$\Psi$"/>
     <char character="Ω" string="$\Omega$"/>
+    <char character="²" string="\textsuperscript{2}"/>
+    <char character="³" string="\textsuperscript{3}"/>
   </charmap>
 
 </set>
