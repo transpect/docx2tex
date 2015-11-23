@@ -22,12 +22,34 @@
     <xsl:attribute name="fileref" select="$fileref"/>
   </xsl:template>
   
-  <!-- handle pseudo tables frequently used for numbered equations in MS Word, 
-    special table format necessary to avoid accidental use. -->
+  <!-- dissolve pseudo tables frequently used for numbered equations -->
   
-  <xsl:template match="informaltable[@role = ('docx2tex_equation-table', 'docx2tex_Gleichungstabelle')]
-    [exists(.//equation)][not(exists(.//mediaobject))]" mode="hub:lists">
-    <xsl:apply-templates select=".//equation" mode="#current"/>
+  <xsl:variable name="equation-label-regex" select="'^[\(\[](\d+)[\)\]]?$'" as="xs:string"/>
+  
+  <xsl:template match="informaltable[count(//row) eq 1][count(//entry) eq 2]
+    [//entry[1]/para/*/local-name() = 'equation']
+    [matches(normalize-space(//entry[2]/para/text()), $equation-label-regex)]
+    " mode="hub:lists">
+    <!-- process equation in first row and write label -->
+    <equation>
+      <xsl:processing-instruction name="latex">
+        <xsl:value-of select="concat('\tag{', replace(//entry[2]/para/text(), $equation-label-regex, '$1'), '}&#xa;')"/>
+      </xsl:processing-instruction>
+      <xsl:apply-templates select="//entry[1]/para/equation/*" mode="#current"/>
+    </equation>
+  </xsl:template>
+  
+  <!-- paragraph contains only inlineequation, tabs and an equation label -->
+  
+  <xsl:template match="para[*/local-name() = ('inlineequation', 'tab')]
+    [count(distinct-values(*/local-name())) eq 2]
+    [matches(normalize-space(text()), $equation-label-regex)]" mode="hub:postprocess-lists">
+    <equation>
+      <xsl:processing-instruction name="latex">
+        <xsl:value-of select="concat('\tag{', replace(text(), $equation-label-regex, '$1'), '}&#xa;')"/>
+      </xsl:processing-instruction>
+      <xsl:apply-templates select="inlineequation/*" mode="#current"/>
+    </equation>
   </xsl:template>
   
   <xsl:template match="blockquote[@role = 'hub:lists']" mode="hub:postprocess-lists">
