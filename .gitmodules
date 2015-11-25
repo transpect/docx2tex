@@ -21,4 +21,4 @@
 	url = https://github.com/transpect/xml2tex
 [submodule "schema/hub"]
 	path = schema/hub
-	url = git@github.com:le-tex/Hub.git
+	url = https://github.com/le-tex/Hub.git
