@@ -52,30 +52,6 @@
     </equation>
   </xsl:template>
   
-  <!-- group adjacent superscripts/subscripts -->
-  
-  <xsl:template match="*[superscript or subscript]" mode="hub:postprocess-lists">
-    <xsl:copy>
-      <xsl:apply-templates select="@*" mode="#current" />
-      <xsl:for-each-group select="*" group-by="local-name()">          
-        <xsl:choose>
-          <xsl:when test="current-grouping-key() = ('superscript', 'subscript')">
-            <xsl:copy>
-              <xsl:apply-templates select="current-group()/node()"/>
-            </xsl:copy>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:for-each select="current-group()">
-              <xsl:copy>
-                <xsl:apply-templates select="@*, node()"/>
-              </xsl:copy>
-            </xsl:for-each>
-          </xsl:otherwise>
-        </xsl:choose>        
-      </xsl:for-each-group>
-    </xsl:copy>
-  </xsl:template>
-  
   <xsl:template match="blockquote[@role = 'hub:lists']" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>

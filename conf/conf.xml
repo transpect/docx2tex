@@ -271,11 +271,9 @@
     </rule>
   </template>
 
-  <template context="dbk:equation[not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule>
-      <text select="'$$'"/>
+  <template context="dbk:equation">
+    <rule name="equation" type="env">
       <text/>
-      <text select="'$$'"/>
     </rule>
   </template>
 
@@ -348,8 +346,8 @@
     <char character="©" string="{\textcopyright}"/>
     <char character="®" string="{\textregistered}"/>
     <char character="•" string="{\textbullet}"/>
-    <char character="▪" string="$\blacksquare$"/>
-    <char character="∙" string="$\cdot$"/>
+    <char character="▪" string="${\blacksquare}$"/>
+    <char character="∙" string="${\cdot}$"/>
     <char character="¥" string="$¥$"/>
     <char character="¶" string="\P"/>
     <char character="†" string="\dag"/>
@@ -359,61 +357,61 @@
     <char character="&lt;" string="\textless"/>
     <char character="&gt;" string="\textgreater"/>
     <!-- greek small letters -->
-    <char character="α" string="$\alpha$"/>
-    <char character="β" string="$\beta$"/>
-    <char character="γ" string="$\gamma$"/>
-    <char character="δ" string="$\delta$"/>
-    <char character="ϵ" string="$\epsilon$"/>
-    <char character="ε" string="$\varepsilon$"/>
-    <char character="ζ" string="$\zeta$"/>
-    <char character="η" string="$\eta$"/>
-    <char character="θ" string="$\theta$"/>
-    <char character="ϑ" string="$\vartheta$"/>
-    <char character="ι" string="$\iota$"/>
-    <char character="κ" string="$\kappa$"/>
-    <char character="λ" string="$\lambda$"/>
-    <char character="μ" string="$\mu$"/>
-    <char character="ν" string="$\nu$"/>
-    <char character="ξ" string="$\xi$"/>
-    <char character="ο" string="$\omicron$"/>
-    <char character="π" string="$\pi$"/>
-    <char character="ϖ" string="$\varpi$"/>
-    <char character="ρ" string="$\rho$"/>
-    <char character="ϱ" string="$\varrho$"/>
-    <char character="σ" string="$\sigma$"/>
-    <char character="ς" string="$\varsigma$"/>
-    <char character="τ" string="$\tau$"/>
-    <char character="υ" string="$\upsilon$"/>
-    <char character="ϕ" string="$\phi$"/>
-    <char character="φ" string="$\varphi$"/>
-    <char character="χ" string="$\chi$"/>
-    <char character="ψ" string="$\psi$"/>
-    <char character="ω" string="$\omega$"/>
+    <char character="α" string="${\alpha}$"/>
+    <char character="β" string="${\beta}$"/>
+    <char character="γ" string="${\gamma}$"/>
+    <char character="δ" string="${\delta}$"/>
+    <char character="ϵ" string="${\epsilon}$"/>
+    <char character="ε" string="${\varepsilon}$"/>
+    <char character="ζ" string="${\zeta}$"/>
+    <char character="η" string="${\eta}$"/>
+    <char character="θ" string="${\theta}$"/>
+    <char character="ϑ" string="${\vartheta}$"/>
+    <char character="ι" string="${\iota}$"/>
+    <char character="κ" string="${\kappa}$"/>
+    <char character="λ" string="${\lambda}$"/>
+    <char character="μ" string="${\mu}$"/>
+    <char character="ν" string="${\nu}$"/>
+    <char character="ξ" string="${\xi}$"/>
+    <char character="ο" string="${\omicron}$"/>
+    <char character="π" string="${\pi}$"/>
+    <char character="ϖ" string="${\varpi}$"/>
+    <char character="ρ" string="${\rho}$"/>
+    <char character="ϱ" string="${\varrho}$"/>
+    <char character="σ" string="${\sigma}$"/>
+    <char character="ς" string="${\varsigma}$"/>
+    <char character="τ" string="${\tau}$"/>
+    <char character="υ" string="${\upsilon}$"/>
+    <char character="ϕ" string="${\phi}$"/>
+    <char character="φ" string="${\varphi}$"/>
+    <char character="χ" string="${\chi}$"/>
+    <char character="ψ" string="${\psi}$"/>
+    <char character="ω" string="${\omega}$"/>
     <!-- greek capital letters -->
-    <char character="Α" string="$\Alpha$"/>
-    <char character="Β" string="$\Beta$"/>
-    <char character="Γ" string="$\Gamma$"/>
-    <char character="Δ" string="$\Delta$"/>
-    <char character="Ε" string="$\Epsilon$"/>
-    <char character="Ζ" string="$\Zeta$"/>
-    <char character="Η" string="$\Eta$"/>
-    <char character="Θ" string="$\Theta$"/>
-    <char character="Ι" string="$\Iota$"/>
-    <char character="Κ" string="$\Kappa$"/>
-    <char character="Λ" string="$\Lambda$"/>
-    <char character="Μ" string="$\Mu$"/>
-    <char character="Ν" string="$\Nu$"/>
-    <char character="Ξ" string="$\Xi$"/>
-    <char character="Ο" string="$\Omikron$"/>
-    <char character="Π" string="$\Pi$"/>
-    <char character="Ρ" string="$\Rho$"/>
-    <char character="Σ" string="$\Sigma$"/>
-    <char character="Τ" string="$\Tau$"/>
-    <char character="Υ" string="$\Upsilon$"/>
-    <char character="Φ" string="$\Phi$"/>
-    <char character="Χ" string="$\Chi$"/>
-    <char character="Ψ" string="$\Psi$"/>
-    <char character="Ω" string="$\Omega$"/>
+    <char character="Α" string="${\Alpha}$"/>
+    <char character="Β" string="${\Beta}$"/>
+    <char character="Γ" string="${\Gamma}$"/>
+    <char character="Δ" string="${\Delta}$"/>
+    <char character="Ε" string="${\Epsilon}$"/>
+    <char character="Ζ" string="${\Zeta}$"/>
+    <char character="Η" string="${\Eta}$"/>
+    <char character="Θ" string="${\Theta}$"/>
+    <char character="Ι" string="${\Iota}$"/>
+    <char character="Κ" string="${\Kappa}$"/>
+    <char character="Λ" string="${\Lambda}$"/>
+    <char character="Μ" string="${\Mu}$"/>
+    <char character="Ν" string="${\Nu}$"/>
+    <char character="Ξ" string="${\Xi}$"/>
+    <char character="Ο" string="${\Omikron}$"/>
+    <char character="Π" string="${\Pi}$"/>
+    <char character="Ρ" string="${\Rho}$"/>
+    <char character="Σ" string="${\Sigma}$"/>
+    <char character="Τ" string="${\Tau}$"/>
+    <char character="Υ" string="${\Upsilon}$"/>
+    <char character="Φ" string="${\Phi}$"/>
+    <char character="Χ" string="${\Chi}$"/>
+    <char character="Ψ" string="${\Psi}$"/>
+    <char character="Ω" string="${\Omega}$"/>
     <char character="²" string="\textsuperscript{2}"/>
     <char character="³" string="\textsuperscript{3}"/>
   </charmap>
