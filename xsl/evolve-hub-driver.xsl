@@ -66,6 +66,28 @@
     <xsl:apply-templates select="dbk:varlistentry/dbk:term/node(), dbk:varlistentry/dbk:listitem/node()" mode="#current"/>
   </xsl:template>
   
+  <!-- join subscript and superscript -->
+  
+  <xsl:template match="*[superscript or subscript]" mode="hub:postprocess-lists">
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current" />
+      <xsl:for-each-group select="node()" group-adjacent="string-join((local-name(), @role, @css:*), '-')">
+        <xsl:choose>
+          <xsl:when test="self::superscript or self::subscript">
+            <xsl:copy>
+              <xsl:copy-of select="@*"/>
+              <xsl:apply-templates select="current-group()/node()" mode="#current" />
+            </xsl:copy>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" mode="#current" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
+  
+  
   <!-- remove phrase tag if contains only whitespace -->
   <xsl:template match="phrase[. eq '&#x20;']" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
