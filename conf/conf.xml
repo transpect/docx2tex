@@ -184,6 +184,14 @@
     </rule>
   </template>
 
+  <template context="dbk:phrase[@css:font-style eq 'italic' and @css:font-weight eq 'bold']">
+    <rule>
+      <text>\textit{\textbf{</text>
+      <text/>
+      <text>}}</text>      
+    </rule>
+  </template>
+
   <template context="dbk:phrase[@css:text-decoration eq 'underline']">
     <rule name="uuline" type="cmd">
       <param/>

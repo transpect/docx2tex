@@ -103,10 +103,9 @@
     <xsl:if test="matches(., '\s+$')">
       <xsl:value-of select="replace(., '.+(\s+)$', '$1')"/>
     </xsl:if>
-  </xsl:template>
+  </xsl:template>  
   
-  
-  <!-- remove phrase tag if contains only whitespace -->
+  <!-- remove phrase tag if it contains only whitespace -->
   <xsl:template match="phrase[matches(., '^\s+$')]" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
