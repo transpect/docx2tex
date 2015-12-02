@@ -66,7 +66,7 @@
     <xsl:apply-templates select="dbk:varlistentry/dbk:term/node(), dbk:varlistentry/dbk:listitem/node()" mode="#current"/>
   </xsl:template>
   
-  <!-- join subscript and superscript -->
+  <!-- join subscript and superscript, #13898 -->
   
   <xsl:template match="*[superscript or subscript]" mode="hub:postprocess-lists">
     <xsl:copy>
@@ -87,9 +87,27 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- move leading and trailing whitespace out of phrase #13913 -->
+  
+  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')]" mode="hub:postprocess-lists">
+    <xsl:value-of select="normalize-space(.)"/>
+  </xsl:template>
+  
+  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')]" mode="hub:postprocess-lists">
+    <xsl:if test="matches(., '^\s+')">
+      <xsl:value-of select="replace(., '^(\s+).+', '$1')"/>
+    </xsl:if>
+    <xsl:copy>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+    </xsl:copy>
+    <xsl:if test="matches(., '\s+$')">
+      <xsl:value-of select="replace(., '.+(\s+)$', '$1')"/>
+    </xsl:if>
+  </xsl:template>
+  
   
   <!-- remove phrase tag if contains only whitespace -->
-  <xsl:template match="phrase[. eq '&#x20;']" mode="hub:postprocess-lists">
+  <xsl:template match="phrase[matches(., '^\s+$')]" mode="hub:postprocess-lists">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
