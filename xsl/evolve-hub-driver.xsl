@@ -110,6 +110,9 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
+  <!-- remove empty paragraphs, #13946 -->
+  <xsl:template match="para[not(node())]" mode="hub:postprocess-lists"/>
+  
   <!-- wrap private use-content -->
   <xsl:template match="text()" mode="hub:postprocess-lists">
     <xsl:analyze-string select="." regex="[&#xE000;-&#xF8FF;]|[&#xF0000;-&#xFFFFF;]|[&#x100000;-&#x10FFFF;]">
