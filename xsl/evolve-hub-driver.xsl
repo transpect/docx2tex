@@ -111,7 +111,7 @@
   </xsl:template>
   
   <!-- remove empty paragraphs, #13946 -->
-  <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))]" mode="hub:postprocess-lists"/>
+  <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="hub:postprocess-lists"/>
   
   <!-- wrap private use-content -->
   <xsl:template match="text()" mode="hub:postprocess-lists">
