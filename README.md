@@ -70,7 +70,7 @@ For each MS Word style name, create a line with three semicolon separated values
 
 Just follow this example:
 
-```
+```latex
 Heading 1   ; \chapter{     ; }
 Heading 2   ; \section{     ; }
 Heading 3   ; \subsection{  ; }
