@@ -192,7 +192,7 @@
 
   <template context="dbk:phrase[@css:font-style eq 'italic' and @css:font-weight eq 'bold']">
     <rule>
-      <text>\textit{\textbf{</text>
+      <text>\textbf{\textit{</text>
       <text/>
       <text>}}</text>      
     </rule>
