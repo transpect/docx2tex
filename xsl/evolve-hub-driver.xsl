@@ -89,7 +89,7 @@
   
   <!-- move leading and trailing whitespace out of phrase #13913 -->
   
-  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')]" mode="hub:postprocess-lists">
+  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')][not(matches(., '^\s+$'))]" mode="hub:postprocess-lists">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   

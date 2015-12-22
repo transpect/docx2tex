@@ -339,6 +339,7 @@
     <char character="…" string="\dots"/>
     <char character="⋮" string="\vdots"/>
     <char character="‑" string="\hbox{-}"/>
+    <!-- dashes -->
     <char character="−" string="$-$"/>
     <char character="–" string="--"/>
     <char character="—" string="---"/>
@@ -359,6 +360,7 @@
     <char character="£" string="\pounds"/>
     <char character=" " string="\,"/>
     <char character=" " string="\,"/>
+    <!-- miscellaneous symbols -->
     <char character="§" string="\S"/>
     <char character="#" string="\#"/>
     <char character="©" string="{\textcopyright}"/>
