@@ -343,8 +343,12 @@
     <char character="–" string="--"/>
     <char character="—" string="---"/>
     <char character="_" string="\_"/>
-    <char character="„" string="{\glqq}"/>
-    <char character="“" string="{\grqq}"/>
+    <!-- quotation marks -->
+    <char character="‘" string="`"/>
+    <char character="’" string="''"/>
+    <char character="”" string="&quot;"/>
+    <char character="“" string="``"/>
+    <char character="„" string=",,"/>
     <char character="‚" string="{\grq}"/>
     <char character="‘" string="{\glq}"/>
     <char character="»" string="{\frqq}"/>
