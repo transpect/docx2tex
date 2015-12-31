@@ -43,7 +43,7 @@
   
   <xsl:template match="para[*/local-name() = ('inlineequation', 'tab')]
     [count(distinct-values(*/local-name())) eq 2]
-    [matches(normalize-space(text()), $equation-label-regex)]" mode="hub:postprocess-lists">
+    [matches(normalize-space(string-join(text(), '')), $equation-label-regex)]" mode="hub:postprocess-lists">
     <equation>
       <xsl:processing-instruction name="latex">
         <xsl:value-of select="concat('\tag{', replace(text(), $equation-label-regex, '$1'), '}&#xa;')"/>
