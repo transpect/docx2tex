@@ -917,11 +917,11 @@
     <!--BULLET OPERATOR-->
     <char character="&#x2219;" string="${\bullet}$"/>
     <!--radical-->
-    <char character="&#x221a;" string="${\sqrt}$"/>
+    <char character="&#x221a;" string="${\sqrt{}}$"/>
     <!--CUBE ROOT-->
-    <char character="&#x221b;" string="${\sqrt[3]}$"/>
+    <char character="&#x221b;" string="${\sqrt[3]{}}$"/>
     <!--FOURTH ROOT-->
-    <char character="&#x221c;" string="${\sqrt[4]}$"/>
+    <char character="&#x221c;" string="${\sqrt[4]{}}$"/>
     <!--# \varpropto (amssymb), is PROPORTIONAL TO-->
     <char character="&#x221d;" string="${\propto}$"/>
     <!--INFINITY-->
