@@ -4,6 +4,7 @@
   xmlns:dbk="http://docbook.org/ns/docbook"
   xmlns:css="http://www.w3.org/1996/css" 
   xmlns:hub="http://transpect.io/hub"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML" 
   xmlns:tr="http://transpect.io"
   xmlns:docx2tex="http://transpect.io/docx2tex"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
@@ -153,7 +154,7 @@
             <xsl:variable name="texname" select="if(@role eq 'numbered') then 'align' else 'align*'"/>
             <xsl:processing-instruction name="latex" select="concat('\begin{', $texname, '}&#xa;')"/>
             <xsl:for-each select="current-group()">
-              <xsl:apply-templates/><xsl:text>&#x20;</xsl:text><xsl:processing-instruction name="latex" select="if(position() ne last()) then '\\&#xa;' else '&#xa;'"/>
+              <xsl:apply-templates mode="docx2tex-alignment"/><xsl:text>&#x20;</xsl:text><xsl:processing-instruction name="latex" select="if(position() ne last()) then '\\&#xa;' else '&#xa;'"/>
             </xsl:for-each>
             <xsl:text>&#xa;</xsl:text>
             <xsl:processing-instruction name="latex" select="concat('\end{', $texname, '}&#xa;')"/>
@@ -163,6 +164,14 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="mml:math/mml:mo[. eq '='][1]" mode="docx2tex-alignment">
+    <xsl:copy>
+      <xsl:processing-instruction name="latex">&amp;</xsl:processing-instruction>
+      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
 
