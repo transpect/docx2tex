@@ -157,7 +157,7 @@
               <xsl:apply-templates mode="docx2tex-alignment"/><xsl:text>&#x20;</xsl:text><xsl:processing-instruction name="latex" select="if(position() ne last()) then '\\&#xa;' else '&#xa;'"/>
             </xsl:for-each>
             <xsl:text>&#xa;</xsl:text>
-            <xsl:processing-instruction name="latex" select="concat('\end{', $texname, '}&#xa;')"/>
+            <xsl:processing-instruction name="latex" select="concat('\end{', $texname, '}&#xa;&#xa;')"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="current-group()" mode="#current" />
@@ -166,6 +166,8 @@
       </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
+  
+  <!-- insert ampersand for alignment at equals sign -->
   
   <xsl:template match="mml:math/mml:mo[. eq '='][1]" mode="docx2tex-alignment">
     <xsl:copy>

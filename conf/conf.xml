@@ -288,13 +288,13 @@
   </template>
 
   <template context="dbk:equation[@role eq 'numbered']">
-    <rule name="equation" type="env">
+    <rule name="equation" type="env" break-after="1">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:equation[not(@role eq 'numbered')]">
-    <rule name="equation*" type="env">
+    <rule name="equation*" type="env" break-after="1">
       <text/>
     </rule>
   </template>
