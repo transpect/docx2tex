@@ -16,6 +16,7 @@
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
+    \usepackage{wasysym}
     \usepackage{enumerate}
     \usepackage[ngerman]{babel}
   </preamble>
@@ -328,6 +329,7 @@
     <!--  *
           * Unicode - LaTeX text mode
           * -->
+    <char character="\" string="\textbackslash"/>
     <char character="&#xad;" string="&quot;-"/>
     <char character="ß" string="\ss{}"/>
     <char character="å" string="\aa{}"/>
@@ -423,7 +425,7 @@
     <!--plus-or-minus sign-->
     <char character="&#xb1;" string="${\pm}$"/>
     <!--= \tcmu (mathcomp), t \textmu (textcomp), # \mathrm{\mu} (omlmathrm), # \muup (kpfonts mathdesign), MICRO SIGN-->
-    <char character="&#xb5;" string="${\Micro}$"/>
+    <char character="&#xb5;" string="${\mu}$"/>
     <!--MULTIPLICATION SIGN, z notation Cartesian product-->
     <char character="&#xd7;" string="${\times}$"/>
     <!--eth-->
