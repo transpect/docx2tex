@@ -371,7 +371,7 @@
     <char character="_" string="\_"/>
     <!-- quotation marks -->
     <char character="‘" string="`"/>
-    <char character="’" string="''"/>
+    <char character="’" string="'"/>
     <char character="”" string="&quot;"/>
     <char character="“" string="``"/>
     <char character="„" string=",,"/>
