@@ -287,8 +287,14 @@
     </rule>
   </template>
 
-  <template context="dbk:equation">
+  <template context="dbk:equation[@role eq 'numbered']">
     <rule name="equation" type="env">
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:equation[not(@role eq 'numbered')]">
+    <rule name="equation*" type="env">
       <text/>
     </rule>
   </template>
@@ -329,7 +335,7 @@
     <!--  *
           * Unicode - LaTeX text mode
           * -->
-    <char character="\" string="\textbackslash"/>
+    <!--<char character="\" string="\textbackslash"/>-->
     <char character="&#xad;" string="&quot;-"/>
     <char character="ß" string="\ss{}"/>
     <char character="å" string="\aa{}"/>
