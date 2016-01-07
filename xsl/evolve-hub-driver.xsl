@@ -77,7 +77,7 @@
   
   <!-- join subscript and superscript, #13898 -->
   
-  <xsl:template match="*[superscript or subscript]" mode="docx2tex-preprocess">
+  <xsl:template match="*[count(superscript) gt 1 or count(subscript) gt 1]" mode="docx2tex-preprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current" />
       <xsl:for-each-group select="node()" group-adjacent="string-join((local-name(), @role, @css:*), '-')">
@@ -145,7 +145,7 @@
   
   <!-- group adjacent equations and apply align environment -->
   
-  <xsl:template match="*[equation]" mode="docx2tex-postprocess">
+  <xsl:template match="*[count(equation) gt 1]" mode="docx2tex-postprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current" />
       <xsl:for-each-group select="node()" group-adjacent="local-name() eq 'equation'">       
