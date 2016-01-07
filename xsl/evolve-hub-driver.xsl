@@ -102,7 +102,7 @@
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
-  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')]" mode="docx2tex-preprocess">
+  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')]" mode="docx2tex-preprocess" priority="10">
     <xsl:if test="matches(., '^\s+')">
       <xsl:value-of select="replace(., '^(\s+).+', '$1')"/>
     </xsl:if>
