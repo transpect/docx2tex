@@ -457,6 +457,10 @@
          * Greek and Coptic
          * -->
     
+    <!-- GREEK CAPITAL LETTER ALPHA -->
+    <char character="&#x391;" string="A"/>
+    <!-- GREEK CAPITAL LETTER BETA -->
+    <char character="&#x392;" string="B"/>
     <!--= \Gamma (-slantedGreek), = \mathrm{\Gamma}, capital gamma, greek-->   
     <char character="&#x393;" string="${\Upgamma}$"/>
     <!--= \Delta (-slantedGreek), = \mathrm{\Delta}, capital delta, greek-->
