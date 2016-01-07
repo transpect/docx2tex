@@ -472,7 +472,7 @@
     <!--= \Sigma (-slantedGreek), = \mathrm{\Sigma}, capital sigma, greek-->
     <char character="&#x3a3;" string="${\Upsigma}$"/>
     <!--= \Upsilon (-slantedGreek), = \mathrm{\Upsilon}, capital upsilon, greek-->
-    <char character="&#x3a5;" string="${\Uuppsilon}$"/>
+    <char character="&#x3a5;" string="${\Upupsilon}$"/>
     <!--= \Phi (-slantedGreek), = \mathrm{\Phi}, capital phi, greek-->
     <char character="&#x3a6;" string="${\Upphi}$"/>
     <!--= \Psi (-slantedGreek), = \mathrm{\Psi}, capital psi, greek-->
