@@ -12,7 +12,7 @@
     \documentclass{scrbook} 
     \usepackage{graphicx}
     \usepackage{hyperref}
-    \usepackage{multirow}    
+    \usepackage{multirow}
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
@@ -461,20 +461,42 @@
     <char character="&#x393;" string="${\Upgamma}$"/>
     <!--= \Delta (-slantedGreek), = \mathrm{\Delta}, capital delta, greek-->
     <char character="&#x394;" string="${\Updelta}$"/>
+    <!-- GREEK CAPITAL LETTER EPSILON -->
+    <char character="&#x395;" string="E"/>
+    <!-- GREEK CAPITAL LETTER ZETA -->
+    <char character="&#x396;" string="Z"/>
+    <!-- GREEK CAPITAL LETTER ETA -->
+    <char character="&#x397;" string="H"/>
     <!--= \Theta (-slantedGreek), = \mathrm{\Theta}, capital theta, greek-->
     <char character="&#x398;" string="${\Uptheta}$"/>
+    <!-- GREEK CAPITAL LETTER IOTA -->
+    <char character="&#x399;" string="I"/>
+    <!-- GREEK CAPITAL LETTER KAPPA -->
+    <char character="&#x39a;" string="K"/>
     <!--= \Lambda (-slantedGreek), = \mathrm{\Lambda}, capital lambda, greek-->
     <char character="&#x39b;" string="${\Uplambda}$"/>
+    <!-- GREEK CAPITAL LETTER MU -->
+    <char character="&#x39c;" string="M"/>
+    <!-- GREEK CAPITAL LETTER NU -->
+    <char character="&#x39d;" string="N"/>
+    <!-- GREEK CAPITAL LETTER OMICRON -->
+    <char character="&#x39f;" string="O"/>
     <!--= \Xi (-slantedGreek), = \mathrm{\Xi}, capital xi, greek-->
     <char character="&#x39e;" string="${\Upxi}$"/>
     <!--= \Pi (-slantedGreek), = \mathrm{\Pi}, capital pi, greek-->
     <char character="&#x3a0;" string="${\Uppi}$"/>
+    <!-- GREEK CAPITAL LETTER RHO -->
+    <char character="&#x3a1;" string="P"/>
     <!--= \Sigma (-slantedGreek), = \mathrm{\Sigma}, capital sigma, greek-->
     <char character="&#x3a3;" string="${\Upsigma}$"/>
+    <!-- GREEK CAPITAL LETTER TAU -->
+    <char character="&#x3a4;" string="T"/>
     <!--= \Upsilon (-slantedGreek), = \mathrm{\Upsilon}, capital upsilon, greek-->
     <char character="&#x3a5;" string="${\Upupsilon}$"/>
     <!--= \Phi (-slantedGreek), = \mathrm{\Phi}, capital phi, greek-->
     <char character="&#x3a6;" string="${\Upphi}$"/>
+    <!-- GREEK CAPITAL LETTER CHI -->
+    <char character="&#x3a7;" string="X"/>
     <!--= \Psi (-slantedGreek), = \mathrm{\Psi}, capital psi, greek-->
     <char character="&#x3a8;" string="${\Uppsi}$"/>
     <!--= \Omega (-slantedGreek), = \mathrm{\Omega}, capital omega, greek-->
