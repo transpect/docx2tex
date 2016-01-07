@@ -49,7 +49,6 @@
       <param/>
     </rule>
   </template>
-  
 
   <template context="dbk:subscript" mathmode="true">
     <rule>
@@ -371,7 +370,6 @@
     <!-- brackets -->
     <char character="[" string="{[}"/>
     <char character="]" string="{]}"/>
-    
     <!-- dashes -->
     <char character="−" string="$-$"/>
     <char character="–" string="--"/>
@@ -397,6 +395,7 @@
     <!-- miscellaneous symbols -->
     <char character="§" string="\S"/>
     <char character="©" string="{\textcopyright}"/>
+    <char character="&#x2122;" string="{\texttrademark}"/>
     <char character="®" string="{\textregistered}"/>
     <char character="•" string="{\textbullet}"/>
     <char character="¶" string="\P"/>
