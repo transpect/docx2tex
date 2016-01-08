@@ -30,22 +30,39 @@
   
   <!-- dissolve pseudo tables frequently used for numbered equations -->
   
-  <xsl:variable name="equation-label-regex" select="'^[\(\[](\d+)[\)\]]?$'" as="xs:string"/>
+  <xsl:variable name="equation-label-regex" select="'^[\(\[](\d+)(\.\d+)*[\)\]]?$'" as="xs:string"/>
   
-  <xsl:template match="informaltable[count(//row) eq 1][count(//entry) eq 2]
-    [//entry[1]/para/*/local-name() = 'equation']
-    [matches(normalize-space(//entry[2]/para/text()), $equation-label-regex)]
-    " mode="docx2tex-preprocess">
+  <xsl:template match="informaltable[every $i 
+                                     in .//row 
+                                     satisfies count($i/entry) = (2,3)
+                                               and $i/entry[matches(normalize-space(.), $equation-label-regex)]
+                                               and ($i/entry/para/equation
+                                                    or ($i/entry/para/equation and $i/para[not(node())])
+                                                    )]                                                  
+                                                    "
+                mode="docx2tex-preprocess">
     <!-- process equation in first row and write label -->
-    <equation role="numbered">
-      <xsl:processing-instruction name="latex">
-        <xsl:value-of select="concat('\tag{', replace(//entry[2]/para/text(), $equation-label-regex, '$1'), '}&#xa;')"/>
-      </xsl:processing-instruction>
-      <xsl:apply-templates select="//entry[1]/para/equation/*" mode="#current"/>
-    </equation>
+    <xsl:for-each select=".//row">
+      <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
+      <xsl:apply-templates select=".//equation" mode="#current">
+        <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')"/>
+      </xsl:apply-templates>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template match="equation" mode="docx2tex-preprocess">
+    <xsl:param name="label"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:if test="string-length($label) gt 1">
+        <xsl:processing-instruction name="latex" select="$label"/>
+      </xsl:if>
+      <xsl:apply-templates mode="#current"/>
+    </xsl:copy>
   </xsl:template>
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
+  
   <xsl:template match="para[*/local-name() = ('inlineequation', 'tab')]
     [count(distinct-values(*/local-name())) eq 2]
     [matches(normalize-space(string-join(text(), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
@@ -67,12 +84,12 @@
   
   <!-- remove each list which counts only one list item -->
   
-  <xsl:template match="dbk:orderedlist[count(*) eq 1]|dbk:itemizedlist[count(*) eq 1]" mode="docx2tex-preprocess">
-    <xsl:apply-templates select="dbk:listitem/node()" mode="#current"/>
+  <xsl:template match="orderedlist[count(*) eq 1]|itemizedlist[count(*) eq 1]" mode="docx2tex-preprocess">
+    <xsl:apply-templates select="listitem/node()" mode="#current"/>
   </xsl:template>
   
-  <xsl:template match="dbk:variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
-    <xsl:apply-templates select="dbk:varlistentry/dbk:term/node(), dbk:varlistentry/dbk:listitem/node()" mode="#current"/>
+  <xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
+    <xsl:apply-templates select="varlistentry/term/node(), varlistentry/listitem/node()" mode="#current"/>
   </xsl:template>
   
   <!-- join subscript and superscript, #13898 -->
