@@ -30,7 +30,7 @@
   
   <!-- dissolve pseudo tables frequently used for numbered equations -->
   
-  <xsl:variable name="equation-label-regex" select="'^[\(\[](\d+)(\.\d+)*[\)\]]?$'" as="xs:string"/>
+  <xsl:variable name="equation-label-regex" select="'^[\(\[]((\d+)(\.\d+)*)[\)\]]?$'" as="xs:string"/>
   
   <xsl:template match="informaltable[every $i 
                                      in .//row 
