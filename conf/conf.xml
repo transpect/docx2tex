@@ -278,8 +278,7 @@
 
   <!-- equations -->
 
-  <template
-    context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
+  <template context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
     <rule>
       <text select="'$'"/>
       <text/>
@@ -287,13 +286,13 @@
     </rule>
   </template>
 
-  <template context="dbk:equation[@role eq 'numbered']">
+  <template context="dbk:equation[@role eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation" type="env" break-after="1">
       <text/>
     </rule>
   </template>
   
-  <template context="dbk:equation[not(@role eq 'numbered')]">
+  <template context="dbk:equation[not(@role eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation*" type="env" break-after="1">
       <text/>
     </rule>
@@ -911,7 +910,7 @@
     <!--COMPLEMENT sign-->
     <char character="&#x2201;" string="${\complement}$"/>
     <!--# \partial, PARTIAL DIFFERENTIAL-->
-    <char character="&#x2202;" string="${\partialup}$"/>
+    <char character="&#x2202;" string="${\partial}$"/>
     <!--= \exi (oz), at least one exists-->
     <char character="&#x2203;" string="${\exists}$"/>
     <!--= \nexi (oz), negated exists-->
