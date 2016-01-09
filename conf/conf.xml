@@ -221,7 +221,7 @@
   <!-- headlines -->
 
   <template context="dbk:para[@role = ('berschrift1', 'headline1', 'heading1')]">
-    <rule break-after="1" name="chapter" type="cmd">
+    <rule break-after="2" name="chapter" type="cmd">
       <param/>
     </rule>
   </template>

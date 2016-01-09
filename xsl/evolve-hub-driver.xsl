@@ -174,7 +174,8 @@
               <xsl:apply-templates mode="docx2tex-alignment"/><xsl:text>&#x20;</xsl:text><xsl:processing-instruction name="latex" select="if(position() ne last()) then '\\&#xa;' else '&#xa;'"/>
             </xsl:for-each>
             <xsl:text>&#xa;</xsl:text>
-            <xsl:processing-instruction name="latex" select="concat('\end{', $texname, '}&#xa;&#xa;')"/>
+            <xsl:processing-instruction name="latex" select="concat('\end{', $texname, '}')"/>
+            <xsl:text>&#xa;&#xa;</xsl:text>
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="current-group()" mode="#current" />
