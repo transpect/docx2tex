@@ -3,8 +3,7 @@
 <set xmlns="http://transpect.io/xml2tex">
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>
-    % Converted with docx2tex
+  <preamble>% Converted with docx2tex
     % 
     % docx2tex is Open Source and 
     % you can download it on GitHub:
