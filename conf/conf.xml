@@ -38,6 +38,15 @@
     </rule>
   </template>
   
+  <!-- paras in tables, use only 1 break -->
+  
+  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()]">
+    <rule>
+      <text/>
+      <text>\par </text>
+    </rule>
+  </template>
+  
   <template context="dbk:para[@css:font-style eq 'italic'][not(parent::dbk:entry)][not(parent::dbk:footnote)]">
     <rule name="textit" type="cmd" break-after="2">
       <param/>
