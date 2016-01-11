@@ -30,9 +30,9 @@
 
   <template context="/dbk:hub/dbk:info"/>
 
-  <!-- regular paras -->
+  <!-- regular paras or line breaks with cr -->
 
-  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]">
+  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]|dbk:phrase[@role eq 'cr']">
     <rule break-after="2">
       <text/>
     </rule>
@@ -90,7 +90,7 @@
   <!-- tables and figure captions  -->
 
   <template context="dbk:table|dbk:informaltable">
-    <rule name="table" type="env">
+    <rule name="table" type="env" break-after="1">
       <option select="'h'"/>
       <text>\centering</text>
       <text/>
