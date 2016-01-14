@@ -349,7 +349,6 @@
     <!--  *
           * Unicode - LaTeX text mode
           * -->
-    <!--<char character="\" string="\textbackslash"/>-->
     <char character="&#xad;" string="&quot;-"/>
     <char character="ß" string="\ss{}"/>
     <char character="å" string="\aa{}"/>
@@ -391,7 +390,6 @@
     <char character="–" string="-"/>
     <char character="—" string="--"/>
     <char character="―" string="---"/>
-    <char character="_" string="\_"/>
     <!-- quotation marks -->
     <char character="‘" string="`"/>
     <char character="’" string="'"/>
@@ -470,6 +468,8 @@
          * Latin Extended-B
          * -->
     
+    <!-- LATIN SMALL LETTER F WITH HOOK -->
+    <char character="&#x192;" string="${\mathit{f}}$"/>
     <!--jmath-->
     <char character="&#x237;" string="${\jmath}$"/>
         
@@ -553,6 +553,8 @@
     <char character="&#x3bd;" string="${\upnu}$"/>
     <!--= \mathrm{\xi} (omlmathrm), = \xiup (kpfonts mathdesign), = \upxi (upgreek),  xi, greek-->
     <char character="&#x3be;" string="${\upxi}$"/>
+    <!-- omicron, greek -->
+    <char character="&#x3bf;" string="o"/>
     <!--= \mathrm{\pi} (omlmathrm), = \piup (kpfonts mathdesign), = \uppi (upgreek),  pi, greek-->
     <char character="&#x3c0;" string="${\uppi}$"/>
     <!--= \mathrm{\rho} (omlmathrm), = \rhoup (kpfonts mathdesign), = \uprho (upgreek),  rho, greek-->
@@ -1407,8 +1409,14 @@
     <!-- *
          * Geometric Shapes
          * -->
+    <!-- BLACK SQUARE -->
+    <char character="&#x25a0;" string="${\blacksquare}$"/>
     <!-- WHITE SQUARE -->
-    <char character="&#x25a1;" string="${\Box}$"/>
+    <char character="&#x25a1;" string="${\square}$"/>
+    <!-- BLACK SMALL SQUARE -->
+    <char character="&#x25aa;" string="${\centerdot}"/>
+    
+    
     <!--= \triangle (amsfonts), # \vartriangle (amssymb), big up triangle, open-->   
     <char character="&#x25b3;" string="${\bigtriangleup}$"/>
     <!--up triangle, filled-->
@@ -1464,8 +1472,7 @@
     
     <!-- *
          * Miscellaneous Symbols
-         * -->
-    
+         * -->    
     <!--star, filled-->   
     <char character="&#x2605;" string="${\bigstar}$"/>
     <!--SUN-->
@@ -1555,7 +1562,7 @@
     <!--= \varheart (arevmath), filled heart (card suit)-->
     <char character="&#x2665;" string="${\varheartsuit}$"/>
     <!--= \vardiamond (arevmath), filled diamond (card suit)-->
-    <char character="&#x2666;" string="${\vardiamondsuit}$"/>
+    <char character="&#x2666;" string="${\blacklozenge}$"/>
     <!--= \varclub (arevmath), club, white (card suit)-->
     <char character="&#x2667;" string="${\varclubsuit}$"/>
     <!--music note (sung text sign)-->
@@ -1925,6 +1932,13 @@
     <char character="&#x2b1b;" string="${\blacksquare}$"/>
     <!--WHITE LARGE SQUARE-->
     <char character="&#x2b1c;" string="${\square}$"/>
+    <!-- BLACK VERY SMALL SQUARE -->
+    <char character="&#x2b1d;" string="${\centerdot}"/>
+    <!-- BLACK MEDIUM LOZENGE -->
+    <char character="&#x2b27;" string="${\blacklozenge}"/>
+    <!-- WHITE MEDIUM LOZENGE -->
+    <char character="&#x2b28;" string="${\lozenge}"/>
+    
     
     <!-- *
          * Mathematical Alphanumeric Symbols
