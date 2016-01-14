@@ -411,6 +411,7 @@
     <char character="‡" string="\ddag"/>
     <char character="~" string="\textasciitilde{}"/>
     <char character="^" string="\textasciicircum{}"/>
+    <char character="°" string="\textdegree"/>
     <char character="&lt;" string="\textless"/>
     <char character="&gt;" string="\textgreater"/>
     <char character="²" string="\textsuperscript{2}"/>
