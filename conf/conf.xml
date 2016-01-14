@@ -208,8 +208,8 @@
     </rule>
   </template>
 
-  <template context="dbk:phrase[@css:text-decoration eq 'underline']">
-    <rule name="uuline" type="cmd">
+  <template context="dbk:phrase[@css:text-decoration-line eq 'underline']">
+    <rule name="underline" type="cmd">
       <param/>
     </rule>
   </template>
