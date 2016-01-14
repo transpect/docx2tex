@@ -8,6 +8,7 @@
   xmlns:tr="http://transpect.io"
   xmlns:docx2tex="http://transpect.io/docx2tex"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:functx="http://www.functx.com"  
   xmlns="http://docbook.org/ns/docbook"
   version="2.0" 
   exclude-result-prefixes="#all"
@@ -15,6 +16,7 @@
 
   <xsl:import href="http://transpect.io/evolve-hub/xsl/evolve-hub.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/uri-to-relative-path/xsl/uri-to-relative-path.xsl"/>
+  <xsl:import href="http://transpect.io/xslt-util/functx/xsl/functx.xsl"/>
   
   <!--  *
         * MODE docx2tex-preprocess
@@ -137,9 +139,25 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
-  <!-- remove empty paragraphs, #13946 -->
+  <!-- remove empty paragraphs #13946 -->
   
   <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="docx2tex-preprocess"/>
+  
+  <!-- resolve empty phrases which don't include text -->
+  
+  <xsl:template match="phrase[string-length(normalize-space(.)) eq 0][not(@role eq 'cr')]" mode="docx2tex-preprocess">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
+  <!-- resolve carriage returns in empty paragraphs. the paragraph will cause a break as well #14306 -->
+  
+  <xsl:template match="para/phrase[position() eq last()]/phrase[@role eq 'cr'][position() eq last()][not(following-sibling::node())]" mode="docx2tex-preprocess"/>
+  
+  <xsl:template match="para/phrase[position() eq 1]/phrase[@role eq 'cr'][position() eq 1][not(preceding-sibling::node())]" mode="docx2tex-preprocess"/>
+  
+  <xsl:template match="para[not(.//text())]/phrase[position() eq 1 and position() eq last()]/phrase[@role eq 'cr']" mode="docx2tex-preprocess" priority="10"/>
+  
+  <xsl:template match="phrase[@role eq 'cr'][following-sibling::node()[1][self::phrase[@role eq 'cr']]]" mode="docx2tex-preprocess"/>
   
   <!-- wrap private use-content -->
   
