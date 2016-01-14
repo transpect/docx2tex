@@ -30,12 +30,18 @@
 
   <template context="/dbk:hub/dbk:info"/>
 
-  <!-- regular paras or line breaks with cr -->
+  <!-- regular paras -->
 
-  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]|dbk:phrase[@role eq 'cr']">
+  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]">
     <rule break-after="2">
       <text/>
     </rule>
+  </template>
+  
+  <!-- carriage returns -->
+  
+  <template context="dbk:phrase[@role eq 'cr']">
+    <rule name="newline" type="cmd" break-after="1"/>
   </template>
   
   <!-- paras in tables, use only 1 break -->
@@ -360,6 +366,7 @@
     <char character="&#x2003;" string="{\quad}"/>
     <char character="&#x2005;" string="\,"/>
     <char character="&#x2009;" string="\,"/>
+    <char character="&#x2423;" string="{\textvisiblespace}"/>
     <!-- punctuation -->
     <char character="…" string="{\dots}"/>
     <char character="&#x2035;" string="{\backprime}"/>
@@ -401,19 +408,23 @@
     <char character="¢" string="{\cent}"/>
     <char character="¥" string="{\yen}"/>
     <!-- miscellaneous symbols -->
-    <char character="§" string="\S"/>
+    <char character="§" string="{\S}"/>
+    <char character="¿" string="{\textquestiondown}"/>
+    <char character="¡" string="{\textexclamdown}"/>
     <char character="©" string="{\textcopyright}"/>
     <char character="&#x2122;" string="{\texttrademark}"/>
+    <char character="&#x25a1;" string="{\Box}"/>
     <char character="®" string="{\textregistered}"/>
     <char character="•" string="{\textbullet}"/>
     <char character="¶" string="\P"/>
-    <char character="†" string="\dag"/>
-    <char character="‡" string="\ddag"/>
+    <char character="†" string="{\dag}"/>
+    <char character="‡" string="{\ddag}"/>
     <char character="~" string="\textasciitilde{}"/>
     <char character="^" string="\textasciicircum{}"/>
-    <char character="°" string="\textdegree"/>
-    <char character="&lt;" string="\textless"/>
-    <char character="&gt;" string="\textgreater"/>
+    <!-- degree sign -->
+    <char character="°" string="${\circ}$"/>
+    <char character="&lt;" string="{\textless}"/>
+    <char character="&gt;" string="{\textgreater}"/>
     <char character="²" string="\textsuperscript{2}"/>
     <char character="³" string="\textsuperscript{3}"/>
     <!-- *
