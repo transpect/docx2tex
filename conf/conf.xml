@@ -17,7 +17,7 @@
     \usepackage{amssymb}
     \usepackage{amsfonts}
     \usepackage{wasysym}
-    \usepackage{fixmath}
+    \usepackage{isomath}
     \usepackage{upgreek}
     \usepackage{enumerate}
     \usepackage[ngerman]{babel}
@@ -2151,109 +2151,109 @@
     <!--= \mathit{z}, MATHEMATICAL ITALIC SMALL Z-->
     <char character="&#x1d467;" string="${z}$"/>
     <!--= \mathbold{A} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL A-->
-    <char character="&#x1d468;" string="${\mathbold{A}}$"/>
+    <char character="&#x1d468;" string="${\mathbfit{A}}$"/>
     <!--= \mathbold{B} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL B-->
-    <char character="&#x1d469;" string="${\mathbold{B}}$"/>
+    <char character="&#x1d469;" string="${\mathbfit{B}}$"/>
     <!--= \mathbold{C} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL C-->
-    <char character="&#x1d46a;" string="${\mathbold{C}}$"/>
+    <char character="&#x1d46a;" string="${\mathbfit{C}}$"/>
     <!--= \mathbold{D} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL D-->
-    <char character="&#x1d46b;" string="${\mathbold{D}}$"/>
+    <char character="&#x1d46b;" string="${\mathbfit{D}}$"/>
     <!--= \mathbold{E} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL E-->
-    <char character="&#x1d46c;" string="${\mathbold{E}}$"/>
+    <char character="&#x1d46c;" string="${\mathbfit{E}}$"/>
     <!--= \mathbold{F} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL F-->
-    <char character="&#x1d46d;" string="${\mathbold{F}}$"/>
+    <char character="&#x1d46d;" string="${\mathbfit{F}}$"/>
     <!--= \mathbold{G} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL G-->
-    <char character="&#x1d46e;" string="${\mathbold{G}}$"/>
+    <char character="&#x1d46e;" string="${\mathbfit{G}}$"/>
     <!--= \mathbold{H} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL H-->
-    <char character="&#x1d46f;" string="${\mathbold{H}}$"/>
+    <char character="&#x1d46f;" string="${\mathbfit{H}}$"/>
     <!--= \mathbold{I} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL I-->
-    <char character="&#x1d470;" string="${\mathbold{I}}$"/>
+    <char character="&#x1d470;" string="${\mathbfit{I}}$"/>
     <!--= \mathbold{J} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL J-->
-    <char character="&#x1d471;" string="${\mathbold{J}}$"/>
+    <char character="&#x1d471;" string="${\mathbfit{J}}$"/>
     <!--= \mathbold{K} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL K-->
-    <char character="&#x1d472;" string="${\mathbold{K}}$"/>
+    <char character="&#x1d472;" string="${\mathbfit{K}}$"/>
     <!--= \mathbold{L} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL L-->
-    <char character="&#x1d473;" string="${\mathbold{L}}$"/>
+    <char character="&#x1d473;" string="${\mathbfit{L}}$"/>
     <!--= \mathbold{M} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL M-->
-    <char character="&#x1d474;" string="${\mathbold{M}}$"/>
+    <char character="&#x1d474;" string="${\mathbfit{M}}$"/>
     <!--= \mathbold{N} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL N-->
-    <char character="&#x1d475;" string="${\mathbold{N}}$"/>
+    <char character="&#x1d475;" string="${\mathbfit{N}}$"/>
     <!--= \mathbold{O} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL O-->
-    <char character="&#x1d476;" string="${\mathbold{O}}$"/>
+    <char character="&#x1d476;" string="${\mathbfit{O}}$"/>
     <!--= \mathbold{P} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL P-->
-    <char character="&#x1d477;" string="${\mathbold{P}}$"/>
+    <char character="&#x1d477;" string="${\mathbfit{P}}$"/>
     <!--= \mathbold{Q} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL Q-->
-    <char character="&#x1d478;" string="${\mathbold{Q}}$"/>
+    <char character="&#x1d478;" string="${\mathbfit{Q}}$"/>
     <!--= \mathbold{R} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL R-->
-    <char character="&#x1d479;" string="${\mathbold{R}}$"/>
+    <char character="&#x1d479;" string="${\mathbfit{R}}$"/>
     <!--= \mathbold{S} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL S-->
-    <char character="&#x1d47a;" string="${\mathbold{S}}$"/>
+    <char character="&#x1d47a;" string="${\mathbfit{S}}$"/>
     <!--= \mathbold{T} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL T-->
-    <char character="&#x1d47b;" string="${\mathbold{T}}$"/>
+    <char character="&#x1d47b;" string="${\mathbfit{T}}$"/>
     <!--= \mathbold{U} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL U-->
-    <char character="&#x1d47c;" string="${\mathbold{U}}$"/>
+    <char character="&#x1d47c;" string="${\mathbfit{U}}$"/>
     <!--= \mathbold{V} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL V-->
-    <char character="&#x1d47d;" string="${\mathbold{V}}$"/>
+    <char character="&#x1d47d;" string="${\mathbfit{V}}$"/>
     <!--= \mathbold{W} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL W-->
-    <char character="&#x1d47e;" string="${\mathbold{W}}$"/>
+    <char character="&#x1d47e;" string="${\mathbfit{W}}$"/>
     <!--= \mathbold{X} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL X-->
-    <char character="&#x1d47f;" string="${\mathbold{X}}$"/>
+    <char character="&#x1d47f;" string="${\mathbfit{X}}$"/>
     <!--= \mathbold{Y} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL Y-->
-    <char character="&#x1d480;" string="${\mathbold{Y}}$"/>
+    <char character="&#x1d480;" string="${\mathbfit{Y}}$"/>
     <!--= \mathbold{Z} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL Z-->
-    <char character="&#x1d481;" string="${\mathbold{Z}}$"/>
+    <char character="&#x1d481;" string="${\mathbfit{Z}}$"/>
     <!--= \mathbold{a} (fixmath), MATHEMATICAL BOLD ITALIC SMALL A-->
-    <char character="&#x1d482;" string="${\mathbold{a}}$"/>
+    <char character="&#x1d482;" string="${\mathbfit{a}}$"/>
     <!--= \mathbold{b} (fixmath), MATHEMATICAL BOLD ITALIC SMALL B-->
-    <char character="&#x1d483;" string="${\mathbold{b}}$"/>
+    <char character="&#x1d483;" string="${\mathbfit{b}}$"/>
     <!--= \mathbold{c} (fixmath), MATHEMATICAL BOLD ITALIC SMALL C-->
-    <char character="&#x1d484;" string="${\mathbold{c}}$"/>
+    <char character="&#x1d484;" string="${\mathbfit{c}}$"/>
     <!--= \mathbold{d} (fixmath), MATHEMATICAL BOLD ITALIC SMALL D-->
-    <char character="&#x1d485;" string="${\mathbold{d}}$"/>
+    <char character="&#x1d485;" string="${\mathbfit{d}}$"/>
     <!--= \mathbold{e} (fixmath), MATHEMATICAL BOLD ITALIC SMALL E-->
-    <char character="&#x1d486;" string="${\mathbold{e}}$"/>
+    <char character="&#x1d486;" string="${\mathbfit{e}}$"/>
     <!--= \mathbold{f} (fixmath), MATHEMATICAL BOLD ITALIC SMALL F-->
-    <char character="&#x1d487;" string="${\mathbold{f}}$"/>
+    <char character="&#x1d487;" string="${\mathbfit{f}}$"/>
     <!--= \mathbold{g} (fixmath), MATHEMATICAL BOLD ITALIC SMALL G-->
-    <char character="&#x1d488;" string="${\mathbold{g}}$"/>
+    <char character="&#x1d488;" string="${\mathbfit{g}}$"/>
     <!--= \mathbold{h} (fixmath), MATHEMATICAL BOLD ITALIC SMALL H-->
-    <char character="&#x1d489;" string="${\mathbold{h}}$"/>
+    <char character="&#x1d489;" string="${\mathbfit{h}}$"/>
     <!--= \mathbold{i} (fixmath), MATHEMATICAL BOLD ITALIC SMALL I-->
-    <char character="&#x1d48a;" string="${\mathbold{i}}$"/>
+    <char character="&#x1d48a;" string="${\mathbfit{i}}$"/>
     <!--= \mathbold{j} (fixmath), MATHEMATICAL BOLD ITALIC SMALL J-->
-    <char character="&#x1d48b;" string="${\mathbold{j}}$"/>
+    <char character="&#x1d48b;" string="${\mathbfit{j}}$"/>
     <!--= \mathbold{k} (fixmath), MATHEMATICAL BOLD ITALIC SMALL K-->
-    <char character="&#x1d48c;" string="${\mathbold{k}}$"/>
+    <char character="&#x1d48c;" string="${\mathbfit{k}}$"/>
     <!--= \mathbold{l} (fixmath), MATHEMATICAL BOLD ITALIC SMALL L-->
-    <char character="&#x1d48d;" string="${\mathbold{l}}$"/>
+    <char character="&#x1d48d;" string="${\mathbfit{l}}$"/>
     <!--= \mathbold{m} (fixmath), MATHEMATICAL BOLD ITALIC SMALL M-->
-    <char character="&#x1d48e;" string="${\mathbold{m}}$"/>
+    <char character="&#x1d48e;" string="${\mathbfit{m}}$"/>
     <!--= \mathbold{n} (fixmath), MATHEMATICAL BOLD ITALIC SMALL N-->
-    <char character="&#x1d48f;" string="${\mathbold{n}}$"/>
+    <char character="&#x1d48f;" string="${\mathbfit{n}}$"/>
     <!--= \mathbold{o} (fixmath), MATHEMATICAL BOLD ITALIC SMALL O-->
-    <char character="&#x1d490;" string="${\mathbold{o}}$"/>
+    <char character="&#x1d490;" string="${\mathbfit{o}}$"/>
     <!--= \mathbold{p} (fixmath), MATHEMATICAL BOLD ITALIC SMALL P-->
-    <char character="&#x1d491;" string="${\mathbold{p}}$"/>
+    <char character="&#x1d491;" string="${\mathbfit{p}}$"/>
     <!--= \mathbold{q} (fixmath), MATHEMATICAL BOLD ITALIC SMALL Q-->
-    <char character="&#x1d492;" string="${\mathbold{q}}$"/>
+    <char character="&#x1d492;" string="${\mathbfit{q}}$"/>
     <!--= \mathbold{r} (fixmath), MATHEMATICAL BOLD ITALIC SMALL R-->
-    <char character="&#x1d493;" string="${\mathbold{r}}$"/>
+    <char character="&#x1d493;" string="${\mathbfit{r}}$"/>
     <!--= \mathbold{s} (fixmath), MATHEMATICAL BOLD ITALIC SMALL S-->
-    <char character="&#x1d494;" string="${\mathbold{s}}$"/>
+    <char character="&#x1d494;" string="${\mathbfit{s}}$"/>
     <!--= \mathbold{t} (fixmath), MATHEMATICAL BOLD ITALIC SMALL T-->
-    <char character="&#x1d495;" string="${\mathbold{t}}$"/>
+    <char character="&#x1d495;" string="${\mathbfit{t}}$"/>
     <!--= \mathbold{u} (fixmath), MATHEMATICAL BOLD ITALIC SMALL U-->
-    <char character="&#x1d496;" string="${\mathbold{u}}$"/>
+    <char character="&#x1d496;" string="${\mathbfit{u}}$"/>
     <!--= \mathbold{v} (fixmath), MATHEMATICAL BOLD ITALIC SMALL V-->
-    <char character="&#x1d497;" string="${\mathbold{v}}$"/>
+    <char character="&#x1d497;" string="${\mathbfit{v}}$"/>
     <!--= \mathbold{w} (fixmath), MATHEMATICAL BOLD ITALIC SMALL W-->
-    <char character="&#x1d498;" string="${\mathbold{w}}$"/>
+    <char character="&#x1d498;" string="${\mathbfit{w}}$"/>
     <!--= \mathbold{x} (fixmath), MATHEMATICAL BOLD ITALIC SMALL X-->
-    <char character="&#x1d499;" string="${\mathbold{x}}$"/>
+    <char character="&#x1d499;" string="${\mathbfit{x}}$"/>
     <!--= \mathbold{y} (fixmath), MATHEMATICAL BOLD ITALIC SMALL Y-->
-    <char character="&#x1d49a;" string="${\mathbold{y}}$"/>
+    <char character="&#x1d49a;" string="${\mathbfit{y}}$"/>
     <!--= \mathbold{z} (fixmath), MATHEMATICAL BOLD ITALIC SMALL Z-->
-    <char character="&#x1d49b;" string="${\mathbold{z}}$"/>
+    <char character="&#x1d49b;" string="${\mathbfit{z}}$"/>
     <!--MATHEMATICAL SCRIPT CAPITAL A-->
     <char character="&#x1d49c;" string="${\mathcal{A}}$"/>
     <!--MATHEMATICAL SCRIPT CAPITAL C-->
@@ -3209,85 +3209,85 @@
     <!--= \mathit{\varpi} (omlmathit), MATHEMATICAL ITALIC PI SYMBOL-->
     <char character="&#x1d71b;" string="${\varpi}$"/>
     <!--= \mathbold{\Gamma} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL GAMMA-->
-    <char character="&#x1d71e;" string="${\mathbold{Gamma}}$"/>
+    <char character="&#x1d71e;" string="${\mathbfit{Gamma}}$"/>
     <!--= \mathbold{\Delta} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL DELTA-->
-    <char character="&#x1d71f;" string="${\mathbold{Delta}}$"/>
+    <char character="&#x1d71f;" string="${\mathbfit{Delta}}$"/>
     <!--= \mathbold{\Theta} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL THETA-->
-    <char character="&#x1d723;" string="${\mathbold{Theta}}$"/>
+    <char character="&#x1d723;" string="${\mathbfit{Theta}}$"/>
     <!--= \mathbold{\Lambda} (fixmath), mathematical bold italic capital lambda-->
-    <char character="&#x1d726;" string="${\mathbold{Lambda}}$"/>
+    <char character="&#x1d726;" string="${\mathbfit{Lambda}}$"/>
     <!--= \mathbold{\Xi} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL XI-->
-    <char character="&#x1d729;" string="${\mathbold{Xi}}$"/>
+    <char character="&#x1d729;" string="${\mathbfit{Xi}}$"/>
     <!--= \mathbold{\Pi} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL PI-->
-    <char character="&#x1d72b;" string="${\mathbold{Pi}}$"/>
+    <char character="&#x1d72b;" string="${\mathbfit{Pi}}$"/>
     <!--= \mathbold{\Sigma} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL SIGMA-->
-    <char character="&#x1d72e;" string="${\mathbold{Sigma}}$"/>
+    <char character="&#x1d72e;" string="${\mathbfit{Sigma}}$"/>
     <!--= \mathbold{\Upsilon} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL UPSILON-->
-    <char character="&#x1d730;" string="${\mathbold{Upsilon}}$"/>
+    <char character="&#x1d730;" string="${\mathbfit{Upsilon}}$"/>
     <!--= \mathbold{\Phi} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL PHI-->
-    <char character="&#x1d731;" string="${\mathbold{Phi}}$"/>
+    <char character="&#x1d731;" string="${\mathbfit{Phi}}$"/>
     <!--= \mathbold{\Psi} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL PSI-->
-    <char character="&#x1d733;" string="${\mathbold{Psi}}$"/>
+    <char character="&#x1d733;" string="${\mathbfit{Psi}}$"/>
     <!--= \mathbold{\Omega} (fixmath), MATHEMATICAL BOLD ITALIC CAPITAL OMEGA-->
-    <char character="&#x1d734;" string="${\mathbold{Omega}}$"/>
+    <char character="&#x1d734;" string="${\mathbfit{Omega}}$"/>
     <!--= \mathbold{\alpha} (fixmath), MATHEMATICAL BOLD ITALIC SMALL ALPHA-->
-    <char character="&#x1d736;" string="${\mathbold{alpha}}$"/>
+    <char character="&#x1d736;" string="${\mathbfit{alpha}}$"/>
     <!--= \mathbold{\beta} (fixmath), MATHEMATICAL BOLD ITALIC SMALL BETA-->
-    <char character="&#x1d737;" string="${\mathbold{beta}}$"/>
+    <char character="&#x1d737;" string="${\mathbfit{beta}}$"/>
     <!--= \mathbold{\gamma} (fixmath), MATHEMATICAL BOLD ITALIC SMALL GAMMA-->
-    <char character="&#x1d738;" string="${\mathbold{gamma}}$"/>
+    <char character="&#x1d738;" string="${\mathbfit{gamma}}$"/>
     <!--= \mathbold{\delta} (fixmath), MATHEMATICAL BOLD ITALIC SMALL DELTA-->
-    <char character="&#x1d739;" string="${\mathbold{delta}}$"/>
+    <char character="&#x1d739;" string="${\mathbfit{delta}}$"/>
     <!--= \mathbold{\varepsilon} (fixmath), MATHEMATICAL BOLD ITALIC SMALL EPSILON-->
-    <char character="&#x1d73a;" string="${\mathbold{varepsilon}}$"/>
+    <char character="&#x1d73a;" string="${\mathbfit{varepsilon}}$"/>
     <!--= \mathbold{\zeta} (fixmath), MATHEMATICAL BOLD ITALIC SMALL ZETA-->
-    <char character="&#x1d73b;" string="${\mathbold{zeta}}$"/>
+    <char character="&#x1d73b;" string="${\mathbfit{zeta}}$"/>
     <!--= \mathbold{\eta} (fixmath), MATHEMATICAL BOLD ITALIC SMALL ETA-->
-    <char character="&#x1d73c;" string="${\mathbold{eta}}$"/>
+    <char character="&#x1d73c;" string="${\mathbfit{eta}}$"/>
     <!--= \mathbold{\theta} (fixmath), MATHEMATICAL BOLD ITALIC SMALL THETA-->
-    <char character="&#x1d73d;" string="${\mathbold{theta}}$"/>
+    <char character="&#x1d73d;" string="${\mathbfit{theta}}$"/>
     <!--= \mathbold{\iota} (fixmath), MATHEMATICAL BOLD ITALIC SMALL IOTA-->
-    <char character="&#x1d73e;" string="${\mathbold{iota}}$"/>
+    <char character="&#x1d73e;" string="${\mathbfit{iota}}$"/>
     <!--= \mathbold{\kappa} (fixmath), MATHEMATICAL BOLD ITALIC SMALL KAPPA-->
-    <char character="&#x1d73f;" string="${\mathbold{kappa}}$"/>
+    <char character="&#x1d73f;" string="${\mathbfit{kappa}}$"/>
     <!--= \mathbold{\lambda} (fixmath), mathematical bold italic small lambda-->
-    <char character="&#x1d740;" string="${\mathbold{lambda}}$"/>
+    <char character="&#x1d740;" string="${\mathbfit{lambda}}$"/>
     <!--= \mathbold{\mu} (fixmath), MATHEMATICAL BOLD ITALIC SMALL MU-->
-    <char character="&#x1d741;" string="${\mathbold{mu}}$"/>
+    <char character="&#x1d741;" string="${\mathbfit{mu}}$"/>
     <!--= \mathbold{\nu} (fixmath), MATHEMATICAL BOLD ITALIC SMALL NU-->
-    <char character="&#x1d742;" string="${\mathbold{nu}}$"/>
+    <char character="&#x1d742;" string="${\mathbfit{nu}}$"/>
     <!--= \mathbold{\xi} (fixmath), MATHEMATICAL BOLD ITALIC SMALL XI-->
-    <char character="&#x1d743;" string="${\mathbold{xi}}$"/>
+    <char character="&#x1d743;" string="${\mathbfit{xi}}$"/>
     <!--= \mathbold{\pi} (fixmath), MATHEMATICAL BOLD ITALIC SMALL PI-->
-    <char character="&#x1d745;" string="${\mathbold{pi}}$"/>
+    <char character="&#x1d745;" string="${\mathbfit{pi}}$"/>
     <!--= \mathbold{\rho} (fixmath), MATHEMATICAL BOLD ITALIC SMALL RHO-->
-    <char character="&#x1d746;" string="${\mathbold{rho}}$"/>
+    <char character="&#x1d746;" string="${\mathbfit{rho}}$"/>
     <!--= \mathbold{\varsigma} (fixmath), MATHEMATICAL BOLD ITALIC SMALL FINAL SIGMA-->
-    <char character="&#x1d747;" string="${\mathbold{varsigma}}$"/>
+    <char character="&#x1d747;" string="${\mathbfit{varsigma}}$"/>
     <!--= \mathbold{\sigma} (fixmath), MATHEMATICAL BOLD ITALIC SMALL SIGMA-->
-    <char character="&#x1d748;" string="${\mathbold{sigma}}$"/>
+    <char character="&#x1d748;" string="${\mathbfit{sigma}}$"/>
     <!--= \mathbold{\tau} (fixmath), MATHEMATICAL BOLD ITALIC SMALL TAU-->
-    <char character="&#x1d749;" string="${\mathbold{tau}}$"/>
+    <char character="&#x1d749;" string="${\mathbfit{tau}}$"/>
     <!--= \mathbold{\upsilon} (fixmath), MATHEMATICAL BOLD ITALIC SMALL UPSILON-->
-    <char character="&#x1d74a;" string="${\mathbold{upsilon}}$"/>
+    <char character="&#x1d74a;" string="${\mathbfit{upsilon}}$"/>
     <!--= \mathbold{\varphi} (fixmath), MATHEMATICAL BOLD ITALIC SMALL PHI-->
-    <char character="&#x1d74b;" string="${\mathbold{varphi}}$"/>
+    <char character="&#x1d74b;" string="${\mathbfit{varphi}}$"/>
     <!--= \mathbold{\chi} (fixmath), MATHEMATICAL BOLD ITALIC SMALL CHI-->
-    <char character="&#x1d74c;" string="${\mathbold{chi}}$"/>
+    <char character="&#x1d74c;" string="${\mathbfit{chi}}$"/>
     <!--= \mathbold{\psi} (fixmath), MATHEMATICAL BOLD ITALIC SMALL PSI-->
-    <char character="&#x1d74d;" string="${\mathbold{psi}}$"/>
+    <char character="&#x1d74d;" string="${\mathbfit{psi}}$"/>
     <!--= \mathbold{\omega} (fixmath), MATHEMATICAL BOLD ITALIC SMALL OMEGA-->
-    <char character="&#x1d74e;" string="${\mathbold{omega}}$"/>
+    <char character="&#x1d74e;" string="${\mathbfit{omega}}$"/>
     <!--= \mathbold{\epsilon} (fixmath), MATHEMATICAL BOLD ITALIC EPSILON SYMBOL-->
-    <char character="&#x1d750;" string="${\mathbold{epsilon}}$"/>
+    <char character="&#x1d750;" string="${\mathbfit{epsilon}}$"/>
     <!--= \mathbold{\vartheta} (fixmath), MATHEMATICAL BOLD ITALIC THETA SYMBOL-->
-    <char character="&#x1d751;" string="${\mathbold{vartheta}}$"/>
+    <char character="&#x1d751;" string="${\mathbfit{vartheta}}$"/>
     <!--= \mathbold{\phi} (fixmath), MATHEMATICAL BOLD ITALIC PHI SYMBOL-->
-    <char character="&#x1d753;" string="${\mathbold{phi}}$"/>
+    <char character="&#x1d753;" string="${\mathbfit{phi}}$"/>
     <!--= \mathbold{\varrho} (fixmath), MATHEMATICAL BOLD ITALIC RHO SYMBOL-->
-    <char character="&#x1d754;" string="${\mathbold{varrho}}$"/>
+    <char character="&#x1d754;" string="${\mathbfit{varrho}}$"/>
     <!--= \mathbold{\varpi} (fixmath), MATHEMATICAL BOLD ITALIC PI SYMBOL-->
-    <char character="&#x1d755;" string="${\mathbold{varpi}}$"/>
+    <char character="&#x1d755;" string="${\mathbfit{varpi}}$"/>
     <!--MATHEMATICAL SANS-SERIF BOLD CAPITAL GAMMA-->
     <char character="&#x1d758;" string="${\mathsfbf{Gamma}}$"/>
     <!--MATHEMATICAL SANS-SERIF BOLD CAPITAL DELTA-->
