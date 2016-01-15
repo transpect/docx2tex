@@ -421,7 +421,7 @@
     <char character="~" string="\textasciitilde{}"/>
     <char character="^" string="\textasciicircum{}"/>
     <!-- degree sign -->
-    <char character="°" string="${\circ}$"/>
+    <char character="°" string="$^{\circ}$"/>
     <char character="&lt;" string="{\textless}"/>
     <char character="&gt;" string="{\textgreater}"/>
     <char character="²" string="\textsuperscript{2}"/>
