@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="17.0">
+<project version="17.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="17.0" xml:space="preserve">
+            <serialized version="17.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
@@ -26,6 +26,7 @@
     <projectTree name="docx2tex.xpr">
         <folder masterFiles="true" name="Master Files">
             <file name="xpl/docx2tex.xpl"/>
+            <file name="evolve-hub/xsl/evolve-hub.xsl"/>
             <file name="docx2hub/xsl/main.xsl"/>
         </folder>
     </projectTree>
