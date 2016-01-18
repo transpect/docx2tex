@@ -176,7 +176,7 @@
   <!-- variable list -->
   
   <template context="dbk:variablelist">
-    <rule name="description" type="env">
+    <rule name="description" type="env" break-after="2">
       <text/>
     </rule>
   </template>
