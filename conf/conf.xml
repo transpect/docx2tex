@@ -128,17 +128,17 @@
   </template>
 
   <!-- links -->
-
-  <template context="dbk:link[@xlink:href][not(matches(@xlink:href, '^(mailto|https?|ftp):'))]">
+  
+  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(mailto|https?|ftp):')]">
     <rule name="href" type="cmd">
       <param select="@xlink:href"/>
       <param select="dbk:phrase"/>
     </rule>
   </template>
   
-  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(mailto|https?|ftp):')]">
+  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(mailto|https?|ftp):')][matches(dbk:phrase, '^(mailto|https?|ftp|[a-z0-9A-Z_\-\.]+@[a-z0-9A-Z_\-\.]+\.[a-zA-Z0-9]+)')]">
     <rule name="url" type="cmd">
-      <param select="@xlink:href"/>
+      <param select="dbk:phrase"/>
     </rule>
   </template>
 
