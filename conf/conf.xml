@@ -164,7 +164,7 @@
     </rule>
   </template>
   
-  <template context="dbk:listitem[not(ancestor::dbk:variablelist)]">
+  <template context="dbk:listitem[not(parent::dbk:varlistentry)]">
     <rule name="item" type="cmd">
       <text select="' '"/>
       <text/>
@@ -181,13 +181,13 @@
     </rule>
   </template>
   
-  <template context="dbk:listitem[ancestor::dbk:variablelist]">
+  <!--<template context="dbk:listitem[parent::dbk:varlistentry]">
     <rule>
       <text/>
     </rule>
-  </template>
+  </template>-->
   
-  <template context="dbk:term[ancestor::dbk:variablelist]">
+  <template context="dbk:term[parent::dbk:varlistentry]">
     <rule name="item" type="cmd">
       <option/>
     </rule>
