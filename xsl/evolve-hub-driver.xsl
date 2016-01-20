@@ -117,11 +117,11 @@
   
   <!-- move leading and trailing whitespace out of phrase #13913 -->
   
-  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')][not(matches(., '^\s+$'))]" mode="docx2tex-preprocess">
+  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
-  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')]" mode="docx2tex-preprocess" priority="10">
+  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess" priority="10">
     <xsl:if test="matches(., '^\s+')">
       <xsl:value-of select="replace(., '^(\s+).+', '$1')"/>
     </xsl:if>
@@ -131,23 +131,19 @@
     <xsl:if test="matches(., '\s+$')">
       <xsl:value-of select="replace(., '.+(\s+)$', '$1')"/>
     </xsl:if>
-  </xsl:template>  
+  </xsl:template>
   
-  <!-- remove phrase tag if it contains only whitespace -->
+  <!-- remove phrase tags which contains only whitespace -->
   
-  <xsl:template match="phrase[matches(., '^\s+$')]" mode="docx2tex-preprocess">
+  <xsl:template match="phrase[string-length(normalize-space(.)) eq 0][not(@role eq 'cr')]" mode="docx2tex-preprocess">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
+  
   
   <!-- remove empty paragraphs #13946 -->
   
   <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="docx2tex-preprocess"/>
   
-  <!-- resolve empty phrases which don't include text -->
-  
-  <xsl:template match="phrase[string-length(normalize-space(.)) eq 0][not(@role eq 'cr')]" mode="docx2tex-preprocess">
-    <xsl:apply-templates mode="#current"/>
-  </xsl:template>
   
   <!-- resolve carriage returns in empty paragraphs. the paragraph will cause a break as well #14306 -->
   
