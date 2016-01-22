@@ -86,7 +86,7 @@
   
   <!-- remove each list which counts only one list item -->
   
-  <xsl:template match="orderedlist[count(*) eq 1]|itemizedlist[count(*) eq 1]" mode="docx2tex-preprocess">
+  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]|itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
     <xsl:apply-templates select="listitem/node()" mode="#current"/>
   </xsl:template>
   
