@@ -99,7 +99,6 @@
 
   <template context="dbk:table|dbk:informaltable">
     <rule name="table" type="env" break-after="1">
-      <text>\centering</text>
       <text/>
     </rule>
   </template>
