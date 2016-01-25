@@ -641,6 +641,14 @@
     <char character="&#x2040;" string="${\cat}$"/>
     <!--QUADRUPLE PRIME, not superscripted-->
     <char character="&#x2057;" string="${\fourth}$"/>
+    <!-- FUNCTION APPLICATION -->
+    <char character="&#x2061;" string=" "/>
+    <!-- INVISIBLE TIMES -->
+    <char character="&#x2062;" string=" "/>
+    <!-- INVISIBLE SEPARATOR -->
+    <char character="&#x2063;" string=" "/>
+    <!-- INVISIBLE PLUS -->
+    <char character="&#x2064;" string=" "/>
     <!--= \medspace (amsmath), MEDIUM MATHEMATICAL SPACE-->
     <char character="&#x205f;" string="${\:}$"/>
     
