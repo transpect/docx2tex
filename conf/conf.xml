@@ -597,7 +597,7 @@
     <!--GREEK SMALL LETTER STIGMA-->
     <char character="&#x3db;" string="${\stigma}$"/>
     <!--= \Digamma (wrisym), capital digamma-->
-    <char character="&#x3dc;" string="${\digamma}$"/>
+    <char character="&#x3dc;" string="${\Digamma}$"/>
     <!--GREEK SMALL LETTER DIGAMMA-->
     <char character="&#x3dd;" string="${\digamma}$"/>
     <!--capital koppa-->
