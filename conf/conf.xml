@@ -363,6 +363,7 @@
     <char character="œ" string="\oe{}"/>
     <char character="Œ" string="\OE{}"/>
     <char character="ł" string="\l{}"/>
+    <char character="Ł" string="\L{}"/>
     <char character="ø" string="\o{}"/>
     <char character="Ø" string="\O{}"/>
     <char character="⋮" string="\vdots"/>
