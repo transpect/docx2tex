@@ -351,117 +351,86 @@
   </template>
 
   <charmap>
-    <!--  *
-          * Unicode - LaTeX text mode
-          * -->
-    <char character="&#xad;" string="&quot;-"/>
-    <char character="ß" string="\ss{}"/>
-    <char character="å" string="\aa{}"/>
-    <char character="Å" string="\AA{}"/>
-    <char character="æ" string="\ae{}"/>
-    <char character="Æ" string="\AE{}"/>
-    <char character="œ" string="\oe{}"/>
-    <char character="Œ" string="\OE{}"/>
-    <char character="ł" string="\l{}"/>
-    <char character="Ł" string="\L{}"/>
-    <char character="ø" string="\o{}"/>
-    <char character="Ø" string="\O{}"/>
-    <char character="⋮" string="\vdots"/>
-    <char character="‑" string="\hbox{-}"/>
-    <!-- whitespace -->
-    <char character="&#x2003;" string="{\quad}"/>
-    <char character="&#x2005;" string="\,"/>
-    <char character="&#x2009;" string="\,"/>
-    <char character="&#x2423;" string="{\textvisiblespace}"/>
-    <!-- punctuation -->
-    <char character="…" string="{\dots}"/>
-    <char character="&#x2035;" string="{\backprime}"/>
-    <char character="&#x2040;" string="{\cat}"/>
-    <char character="&#x2075;" string="{\fourth}"/>
-    <!-- combining diacritical marks, note that standard diacritics conversion is applied in xml2tex.xsl -->
-    <char character="&#x20d0;" string="{\lvec}"/>
-    <char character="&#x20d1;" string="{\vec}"/>
-    <char character="&#x20d6;" string="{\Lvec}"/>
-    <char character="&#x20d7;" string="{\vec}"/>
-    <char character="&#x20db;" string="{\dddot}"/>
-    <char character="&#x20dc;" string="{\ddddot}"/>
-    <char character="&#x20e1;" string="{\overleftrightarrow}"/>
-    <char character="&#x20ee;" string="{\underleftarrow}"/>
-    <char character="&#x20ef;" string="{\underrightarrow}"/>
-    <!-- brackets -->
-    <char character="[" string="{[}"/>
-    <char character="]" string="{]}"/>
-    <!-- dashes -->
-    <char character="−" string="$-$"/>
-    <char character="–" string="-"/>
-    <char character="—" string="--"/>
-    <char character="―" string="---"/>
-    <!-- quotation marks -->
-    <char character="‘" string="`"/>
-    <char character="’" string="'"/>
-    <char character="”" string="''"/>
-    <char character="“" string="``"/>
-    <char character="„" string=",,"/>
-    <char character="‚" string="{\grq}"/>
-    <char character="‘" string="{\glq}"/>
-    <char character="»" string="{\frqq}"/>
-    <char character="«" string="{\flqq}"/>
-    <char character="›" string="{\frq}"/>
-    <char character="‹" string="{\flq}"/>
-    <!-- currencies -->
-    <char character="€" string="\texteuro{}"/>
-    <char character="£" string="{\pounds}"/>
-    <char character="¢" string="{\cent}"/>
-    <char character="¥" string="{\yen}"/>
-    <!-- miscellaneous symbols -->
-    <char character="§" string="{\S}"/>
-    <char character="¿" string="{\textquestiondown}"/>
-    <char character="¡" string="{\textexclamdown}"/>
-    <char character="©" string="{\textcopyright}"/>
-    <char character="&#x2122;" string="{\texttrademark}"/>
-    <char character="®" string="{\textregistered}"/>
-    <char character="•" string="{\textbullet}"/>
-    <char character="¶" string="\P"/>
-    <char character="†" string="{\dag}"/>
-    <char character="‡" string="{\ddag}"/>
-    <char character="~" string="\textasciitilde{}"/>
-    <char character="^" string="\textasciicircum{}"/>
-    <!-- degree sign -->
-    <char character="°" string="$^{\circ}$"/>
-    <char character="&lt;" string="{\textless}"/>
-    <char character="&gt;" string="{\textgreater}"/>
-    <char character="²" string="\textsuperscript{2}"/>
-    <char character="³" string="\textsuperscript{3}"/>
+    
     <!-- *
-         * Unicode - LaTeX math mode commands
-         * -->    
-
+         * UNICODE - LATEX TEXT AND MATH MODE COMMANDS
+         * -->
+    
+    <!-- *
+         * Basic Latin
+         * -->
+    
+    <!-- Less-than sign -->
+    <char character="&#x3c;" string="{\textless}"/>
+    <!-- Greater-than sign -->
+    <char character="&#x3e;" string="{\textgreater}"/>
+    <!-- Circumflex accent -->
+    <char character="&#x5e;" string="\textasciicircum{}"/>
+    <!-- TILDE -->
+    <char character="&#x7e;" string="\textasciitilde{}"/>
+    
     <!-- *
          * Latin-1 Supplement
          * -->
     
     <!--nbsp-->   
-    <char character="&#xa0;" string="${~}$"/>
+    <char character="&#xa0;" string="~"/>
+    <!-- INVERTED EXCLAMATION MARK -->
+    <char character="&#xa1;" string="{\textexclamdown}"/>
     <!--= \mathcent (txfonts), cent-->
-    <char character="&#xa2;" string="${\cent}$"/>
+    <char character="&#xa2;" string="{\cent}"/>
     <!--= \mathsterling (txfonts), POUND SIGN, fourier prints a dollar sign-->
-    <char character="&#xa3;" string="${\pounds}$"/>
+    <char character="&#xa3;" string="{\pounds}"/>
     <!--YEN SIGN-->
-    <char character="&#xa5;" string="${\yen}$"/>
+    <char character="&#xa5;" string="{\yen}"/>
+    <!--paragraph sign, european SECTION SIGN european paragraph sign -->
+    <char character="&#xa7;" string="{\S}"/>
+    <!--COPYRIGHT -->
+    <char character="&#xa9;" string="{\textcopyright}"/>
+    <!--LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <char character="&#xab;" string="{\flqq}"/>
     <!--= \lnot, NOT SIGN-->
     <char character="&#xac;" string="${\neg}$"/>
+    <!--SOFT HYPHEN -->
+    <char character="&#xad;" string="&quot;-"/>
     <!--REGISTERED SIGN-->
-    <char character="&#xae;" string="${\circledR}$"/>
+    <char character="&#xae;" string="{\textregistered}"/>
+    <!--DEGREE SIGN -->
+    <char character="&#xb0;" string="$^{\circ}$"/>
     <!--plus-or-minus sign-->
     <char character="&#xb1;" string="${\pm}$"/>
+    <!--SUPERSCRIPT TWO -->
+    <char character="&#xb2;" string="\textsuperscript{2}"/>
+    <!--SUPERSCRIPT THREE -->
+    <char character="&#xb3;" string="\textsuperscript{3}"/>
     <!--= \tcmu (mathcomp), t \textmu (textcomp), # \mathrm{\mu} (omlmathrm), # \muup (kpfonts mathdesign), MICRO SIGN-->
     <char character="&#xb5;" string="${\mu}$"/>
+    <!--PILCROW SIGN -->
+    <char character="&#xb6;" string="\P"/>
+    <!--RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <char character="&#xbb;" string="{\frqq}"/>
+    <!-- INVERTED QUESTION MARK -->
+    <char character="&#xbf;" string="{\textquestiondown}"/>
+    <!--LATIN CAPITAL LETTER A WITH RING ABOVE -->    
+    <char character="&#xc5;" string="\AA{}"/>
+    <!--Latin Capital letter AE -->
+    <char character="&#xc6;" string="\AE{}"/>
     <!--MULTIPLICATION SIGN, z notation Cartesian product-->
     <char character="&#xd7;" string="${\times}$"/>
+    <!--LATIN CAPITAL LETTER O WITH STROKE -->
+    <char character="&#xd8;" string="\O{}"/>
+    <!--LATIN SMALL LETTER SHARP S -->
+    <char character="&#xdf;" string="\ss{}"/>
+    <!--LATIN SMALL LETTER A WITH RING ABOVE -->
+    <char character="&#xe5;" string="\aa{}"/>
+    <!--Latin Small Letter AE -->
+    <char character="&#xe6;" string="\ae{}"/>
     <!--eth-->
     <char character="&#xf0;" string="${\eth}$"/>
     <!--divide sign-->
     <char character="&#xf7;" string="${\div}$"/>
+    <!--LATIN SMALL LETTER O WITH STROKE -->
+    <char character="&#xf8;" string="\o{}"/>
     
     <!-- *
          * Latin Extended-A
@@ -469,6 +438,14 @@
     
     <!--imath-->
     <char character="&#x131;" string="${\imath}$"/>
+    <!--LATIN CAPITAL LETTER L WITH STROKE -->
+    <char character="&#x141;" string="\L{}"/>
+    <!--LATIN SMALL LETTER L WITH STROKE -->
+    <char character="&#x142;" string="\l{}"/>
+    <!--LATIN CAPITAL LIGATURE OE  -->
+    <char character="&#x152;" string="\OE{}"/>
+    <!--LATIN SMALL LIGATURE OE -->
+    <char character="&#x153;" string="\oe{}"/>
     
     <!-- *
          * Latin Extended-B
@@ -619,15 +596,61 @@
     <!-- *
          * General Punctuation
          * -->
-     
-    <!--emquad-->   
-    <char character="&#x2001;" string="${\quad}$"/>
+    
+    <!--EM QUAD -->   
+    <char character="&#x2001;" string="{\quad}"/>
+    <!--EM SPACE -->
+    <char character="&#x2003;" string="{\quad}"/>
+    <!--THREE-PER-EM SPACE -->
+    <char character="&#x2004;" string="\,"/>
+    <!--FOUR-PER-EM SPACE -->
+    <char character="&#x2005;" string="\,"/>
+    <!--SIX-PER-EM SPACE -->
+    <char character="&#x2006;" string="\,"/>
+    <!--FIGURE SPACE	 -->
+    <char character="&#x2007;" string="\,"/>
+    <!--PUNCTUATION SPACE -->
+    <char character="&#x2008;" string="\,"/>
+    <!--THIN SPACE -->
+    <char character="&#x2009;" string="\,"/>
+    <!--HAIR SPACE -->
+    <char character="&#x200a;" string="\,"/>
+    <!--ZERO WIDTH SPACE -->
+    <char character="&#x200b;" string="\hspace{0pt}"/>
+    <!--NON-BREAKING HYPHEN -->
+    <char character="&#x2011;" string="\hbox{-}"/>
+    <!--MINUS SIGN -->
+    <char character="&#x2012;" string="$-$"/>
+    <!--EN DASH -->
+    <char character="&#x2013;" string="-"/>
+    <!--EM DASH -->
+    <char character="&#x2014;" string="--"/>
+    <!--HORIZONTAL BAR -->
+    <char character="&#x2015;" string="---"/>
     <!--= \Vert, double vertical bar-->
     <char character="&#x2016;" string="${\|}$"/>
+    <!--LEFT SINGLE QUOTATION MARK ‘ -->
+    <char character="&#x2018;" string="`"/>
+    <!--RIGHT SINGLE QUOTATION MARK ’ -->
+    <char character="&#x2019;" string="'"/>
+    <!--SINGLE LOW-9 QUOTATION MARK ‚ -->
+    <char character="&#x201a;" string=","/>
+    <!--SINGLE HIGH-REVERSED-9 QUOTATION MARK -->
+    <char character="&#x201b;" string="`"/>
+    <!--LEFT DOUBLE QUOTATION MARK “ -->
+    <char character="&#x201c;" string="``"/>
+    <!--RIGHT DOUBLE QUOTATION MARK ” -->
+    <char character="&#x201d;" string="''"/>
+    <!--DOUBLE LOW-9 QUOTATION MARK „ -->
+    <char character="&#x201e;" string=",,"/>
     <!--DAGGER relation-->
-    <char character="&#x2020;" string="${\dagger}$"/>
+    <char character="&#x2020;" string="${\dag}$"/>
     <!--DOUBLE DAGGER relation-->
-    <char character="&#x2021;" string="${\ddagger}$"/>
+    <char character="&#x2021;" string="${\ddag}$"/>
+    <!--BULLET -->
+    <char character="&#x2022;" string="{\textbullet}"/>
+    <!--HORIZONTAL ELLIPSIS -->
+    <char character="&#x2026;" string="{\dots}"/>
     <!--ellipsis (horizontal)-->
     <char character="&#x2026;" string="${\ldots}$"/>
     <!--PRIME or minute, not superscripted-->
@@ -638,20 +661,30 @@
     <char character="&#x2034;" string="${\third}$"/>
     <!--reverse prime, not superscripted-->
     <char character="&#x2035;" string="${\backprime}$"/>
+    <!-- SINGLE LEFT-POINTING ANGLE QUOTATION MARK -->
+    <char character="&#x2039;" string="{\flq}"/>
+    <!-- SINGLE RIGHT-POINTING ANGLE QUOTATION MARK -->
+    <char character="&#x203a;" string="{\frq}"/>
     <!--CHARACTER TIE, z notation sequence concatenation-->
-    <char character="&#x2040;" string="${\cat}$"/>
+    <char character="&#x2040;" string="${\cat}$"/>    
     <!--QUADRUPLE PRIME, not superscripted-->
     <char character="&#x2057;" string="${\fourth}$"/>
-    <!-- FUNCTION APPLICATION -->
+    <!--FUNCTION APPLICATION -->
     <char character="&#x2061;" string=" "/>
-    <!-- INVISIBLE TIMES -->
+    <!--INVISIBLE TIMES -->
     <char character="&#x2062;" string=" "/>
-    <!-- INVISIBLE SEPARATOR -->
+    <!--INVISIBLE SEPARATOR -->
     <char character="&#x2063;" string=" "/>
-    <!-- INVISIBLE PLUS -->
+    <!--INVISIBLE PLUS -->
     <char character="&#x2064;" string=" "/>
     <!--= \medspace (amsmath), MEDIUM MATHEMATICAL SPACE-->
     <char character="&#x205f;" string="${\:}$"/>
+    
+    <!-- *
+         * Currency Symbols
+         * -->
+    
+    <char character="&#x20ac;" string="\texteuro{}"/>
     
     <!-- *
          * Combining Diacritical Marks for Symbols
@@ -716,6 +749,8 @@
     <char character="&#x211c;" string="${\Re}$"/>
     <!--= \mathds{R} (dsfont), open face R-->
     <char character="&#x211d;" string="${\mathbb{R}}$"/>
+    <!--TRADEMARK SIGN -->
+    <char character="&#x2122;" string="{\texttrademark}"/>
     <!--= \mathds{Z} (dsfont), open face Z-->
     <char character="&#x2124;" string="${\mathbb{Z}}$"/>
     <!--# \mathrm{\Omega}, ohm (deprecated in math, use greek letter)-->
@@ -1419,6 +1454,13 @@
     <char character="&#x23de;" string="${\overbrace}$"/>
     <!--BOTTOM CURLY BRACKET (mathematical use)-->
     <char character="&#x23df;" string="${\underbrace}$"/>
+    
+    <!--  *
+          * Control Pictures
+          * -->
+    
+    <!-- OPEN BOX -->
+    <char character="&#x2423;" string="{\textvisiblespace}"/>
     
     <!-- *
          * Geometric Shapes
