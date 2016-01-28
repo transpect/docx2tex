@@ -373,9 +373,9 @@
          * Latin-1 Supplement
          * -->
     
-    <!--nbsp-->   
+    <!--NO-BREAK SPACE; nbsp-->   
     <char character="&#xa0;" string="~"/>
-    <!-- INVERTED EXCLAMATION MARK -->
+    <!--INVERTED EXCLAMATION MARK -->
     <char character="&#xa1;" string="{\textexclamdown}"/>
     <!--= \mathcent (txfonts), cent-->
     <char character="&#xa2;" string="{\cent}"/>
