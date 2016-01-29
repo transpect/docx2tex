@@ -17,6 +17,8 @@
   <xsl:import href="http://transpect.io/xslt-util/uri-to-relative-path/xsl/uri-to-relative-path.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/functx/xsl/functx.xsl"/>
   
+  <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
+  
   <!--  *
         * MODE docx2tex-preprocess
         * -->
@@ -112,6 +114,16 @@
         </xsl:choose>
       </xsl:for-each-group>
     </xsl:copy>
+  </xsl:template>
+  
+  <!-- Some authors set superscript or subscript manually with vertical-align. This template applies proper superscript or subscript tags 
+       when such formatting is used. -->
+  
+  <xsl:template match="phrase[@css:top]" mode="docx2tex-postprocess">
+    <xsl:variable name="position" select="xs:decimal(replace(@css:top, '[a-zA-Z\s]', ''))" as="xs:decimal"/>
+    <xsl:element name="{if($position gt 0) then 'subscript' else 'superscript'}">
+      <xsl:apply-templates select="@* except (@css:top, @css:position), node()" mode="#current"/>
+    </xsl:element>
   </xsl:template>
   
   <!-- move leading and trailing whitespace out of phrase #13913 -->
