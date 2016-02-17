@@ -66,7 +66,7 @@
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
-  <xsl:template match="para[*/local-name() = ('inlineequation', 'tab')]
+  <xsl:template match="para[every $i in * satisfies $i/local-name() = ('inlineequation', 'tab')]
     [count(distinct-values(*/local-name())) eq 2]
     [matches(normalize-space(string-join(text(), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
     <equation role="numbered">
