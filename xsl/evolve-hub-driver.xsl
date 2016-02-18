@@ -88,6 +88,7 @@
   <!-- remove each list which counts only one list item -->
   
   <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]|itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
+    <xsl:value-of select="if(listitem/@override) then concat(listitem/@override, '&#x20;') else ''"/>
     <xsl:apply-templates select="listitem/node()" mode="#current"/>
   </xsl:template>
   
