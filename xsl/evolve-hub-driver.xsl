@@ -176,6 +176,25 @@
     <xsl:apply-templates select="anchor" mode="docx2tex-preprocess"/>
   </xsl:template>
   
+  <xsl:variable name="anchor-ids" select="//anchor[@role eq 'start']/@xml:id" as="xs:string*"/>
+  <xsl:variable name="anchor-digits" select="string-length(xs:string(count($anchor-ids)))" as="xs:integer"/>
+  
+  <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-preprocess">
+    <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer"/>
+    <xsl:copy>
+      <xsl:attribute name="xml:id" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)"/>
+      <xsl:apply-templates select="@* except @xml:id, node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="link[@linkend]" mode="docx2tex-preprocess">
+    <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer"/>
+    <xsl:copy>
+      <xsl:attribute name="linkend" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)"/>
+      <xsl:apply-templates select="@* except @linkend, node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <!-- wrap private use-content -->
   
   <xsl:template match="text()" mode="docx2tex-preprocess">
