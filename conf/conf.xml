@@ -1503,7 +1503,7 @@
     <!-- WHITE SQUARE -->
     <char character="&#x25a1;" string="${\square}$"/>
     <!-- BLACK SMALL SQUARE -->
-    <char character="&#x25aa;" string="${\centerdot}"/>
+    <char character="&#x25aa;" string="${\centerdot}$"/>
     
     
     <!--= \triangle (amsfonts), # \vartriangle (amssymb), big up triangle, open-->   
