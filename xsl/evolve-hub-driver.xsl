@@ -171,7 +171,7 @@
   
   <xsl:template match="para[anchor]" mode="docx2tex-preprocess">
     <xsl:copy>
-      <xsl:apply-templates select="node() except anchor" mode="docx2tex-preprocess"/>
+      <xsl:apply-templates select="@*, node() except anchor" mode="docx2tex-preprocess"/>
     </xsl:copy>
     <xsl:apply-templates select="anchor" mode="docx2tex-preprocess"/>
   </xsl:template>
