@@ -149,9 +149,17 @@
   
   <!-- pagerefs -->
   
-  <template context="dbk:link[@role eq 'page']">
+  <template context="dbk:link[@role eq 'page'][@linkend]">
     <rule>
       <text>~\pageref</text>
+      <param select="@linkend"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:link[not(@role eq 'page')][@linkend]">
+    <rule>
+      <text/>
+      <text>~\ref</text>
       <param select="@linkend"/>
     </rule>
   </template>
