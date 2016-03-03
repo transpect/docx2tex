@@ -1487,9 +1487,17 @@
     <!-- OPEN BOX -->
     <char character="&#x2423;" string="{\textvisiblespace}"/>
     
+    <!--  *
+          * Box Drawing 
+          * -->
+    
+    <!-- BOX DRAWINGS LIGHT VERTICAL -->
+    <char character="&#x2502;" string="{\textbar}"/>
+    
     <!-- *
          * Geometric Shapes
          * -->
+      
     <!-- BLACK SQUARE -->
     <char character="&#x25a0;" string="${\blacksquare}$"/>
     <!-- WHITE SQUARE -->
