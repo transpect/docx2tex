@@ -167,6 +167,15 @@
   
   <xsl:template match="phrase[@role eq 'cr'][following-sibling::node()[1][self::phrase[@role eq 'cr']]]" mode="docx2tex-preprocess"/>
   
+  <!-- move anchors outside of block elements -->
+  
+  <xsl:template match="para[anchor]" mode="docx2tex-preprocess">
+    <xsl:copy>
+      <xsl:apply-templates select="node() except anchor" mode="docx2tex-preprocess"/>
+    </xsl:copy>
+    <xsl:apply-templates select="anchor" mode="docx2tex-preprocess"/>
+  </xsl:template>
+  
   <!-- wrap private use-content -->
   
   <xsl:template match="text()" mode="docx2tex-preprocess">
