@@ -389,6 +389,8 @@
     <char character="&#x3e;" string="{\textgreater}"/>
     <!-- Circumflex accent -->
     <char character="&#x5e;" string="\textasciicircum{}"/>
+    <!-- PIPE -->
+    <char character="&#x7c;" string="{\textbar}"/>
     <!-- TILDE -->
     <char character="&#x7e;" string="\textasciitilde{}"/>
     
