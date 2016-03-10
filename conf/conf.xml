@@ -1432,6 +1432,10 @@
     <char character="&#x2322;" string="${\frown}$"/>
     <!--# \smallSMILE, up curve-->
     <char character="&#x2323;" string="${\smile}$"/>
+    <!-- LEFT-POINTING ANGLE BRACKET -->
+    <char character="&#x2329;" string="${\langle}$"/>
+    <!-- RIGHT-POINTING ANGLE BRACKET -->
+    <char character="&#x232a;" string="${\rangle}$"/>    
     <!--APL FUNCTIONAL SYMBOL QUAD DIVIDE-->
     <char character="&#x2339;" string="${\APLinv}$"/>
     <!--APL FUNCTIONAL SYMBOL SLASH BAR, solidus, bar through-->
