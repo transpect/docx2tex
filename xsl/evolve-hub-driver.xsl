@@ -208,11 +208,22 @@
   
   <xsl:template match="link[@linkend]" mode="docx2tex-postprocess">
     <xsl:copy>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:if test="$refs ne 'no'">
         <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer"/>
         <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
-        <xsl:processing-instruction name="latex" select="concat(if(@role eq 'page') then '~\pageref{' else '~\ref{', $ref, '}')"/>  
+        <xsl:processing-instruction name="latex">
+        <xsl:choose>
+          <xsl:when test="@role eq 'page'">
+            <xsl:value-of select="concat('~\pageref{', $ref, '}')"/>  
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="concat('\hyperref[', $ref, ']{')"/>
+            <xsl:apply-templates select="node()"/>
+            <xsl:text>}</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>  
+        </xsl:processing-instruction>  
       </xsl:if>
     </xsl:copy>
   </xsl:template>
