@@ -170,17 +170,19 @@
   
   <!-- move anchors outside of block elements -->
   
-  <xsl:template match="para[anchor]" mode="docx2tex-preprocess">
+  <xsl:template match="para[anchor][not(ancestor::footnote)]" mode="docx2tex-preprocess">
     <xsl:copy>
-      <xsl:apply-templates select="@*, node() except anchor" mode="docx2tex-preprocess"/>
+      <xsl:apply-templates select="@*, node() except anchor" mode="#current"/>
     </xsl:copy>
-    <xsl:apply-templates select="anchor" mode="docx2tex-preprocess"/>
+    <xsl:apply-templates select="anchor" mode="#current"/>
   </xsl:template>
+  
+  <!-- tag \ref, \pageref and \label -->
   
   <xsl:variable name="anchor-ids" select="//anchor[@role eq 'start']/@xml:id" as="xs:string*"/>
   <xsl:variable name="anchor-digits" select="string-length(xs:string(count($anchor-ids)))" as="xs:integer"/>
   
-  <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-preprocess">
+  <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-postprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
       <xsl:if test="$refs ne 'no'">
@@ -191,7 +193,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="link[@linkend]" mode="docx2tex-preprocess">
+  <xsl:template match="link[@linkend]" mode="docx2tex-postprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
       <xsl:if test="$refs ne 'no'">
