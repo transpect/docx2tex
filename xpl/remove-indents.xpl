@@ -6,6 +6,11 @@
   version="1.0" 
   name="docx2tex-remove-indents"
   type="docx2tex:remove-indents">
+
+  <p:documentation>
+    Remove indent and margin-left attributes from headline styles
+    in order to avoid that evolve-hub applies list styles later.
+  </p:documentation>
   
   <p:input port="source" primary="true"/>
   <p:input port="config" primary="false"/>

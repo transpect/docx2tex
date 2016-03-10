@@ -9,6 +9,12 @@
   name="docx2tex-evolve-hub"
   type="docx2tex:evolve-hub">
 
+  <p:documentation>
+    This evolve-hub customization automatically applies list styles,
+    normalize whitespace and applies a preprocessing for xml2tex.
+  </p:documentation>
+    
+
   <p:input port="source" primary="true"/>
   
   <p:input port="config" primary="false"/>

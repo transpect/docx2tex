@@ -6,6 +6,10 @@
   version="1.0" 
   name="docx2tex-load-config" 
   type="docx2tex:load-config">
+
+  <p:documentation>
+    Loads either a XML-based or CSV-based configuration file for docx2tex.
+  </p:documentation>
   
   <p:output port="result"/>
 

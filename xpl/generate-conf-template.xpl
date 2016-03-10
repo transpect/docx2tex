@@ -8,6 +8,11 @@
   version="1.0" 
   name="generate-conf-template" 
   type="docx2tex:generate-conf-template">
+
+  <p:documentation>
+    This step generates a CSV configuration template which includes
+    all styles used in the current document.
+  </p:documentation>
   
   <p:input port="source">
     <p:documentation>Expects a Hub XML document.</p:documentation>
