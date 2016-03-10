@@ -995,6 +995,8 @@
     <char character="&#x2204;" string="${\nexists}$"/>
     <!--circle, slash-->
     <char character="&#x2205;" string="${\varnothing}$"/>
+    <!-- INCREMENT, laplace operator -->
+    <char character="&#x2206;" string="${\Updelta}$"/>
     <!--NABLA, del, hamilton operator-->
     <char character="&#x2207;" string="${\nabla}$"/>
     <!--set membership, variant-->
