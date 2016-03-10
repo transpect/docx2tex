@@ -147,29 +147,6 @@
     </rule>
   </template>
   
-  <!-- pagerefs -->
-  
-  <template context="dbk:link[@role eq 'page'][@linkend]">
-    <rule>
-      <text>~\pageref</text>
-      <param select="@linkend"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:link[not(@role eq 'page')][@linkend]">
-    <rule>
-      <text/>
-      <text>~\ref</text>
-      <param select="@linkend"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:anchor[@role eq 'start']">
-    <rule name="label" type="cmd">
-      <param select="@xml:id"/>
-    </rule>
-  </template>
-
   <!-- breaks -->
 
   <template context="dbk:br">

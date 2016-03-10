@@ -35,6 +35,8 @@
 
   <p:option name="debug" required="false" select="'no'"/>
   <p:option name="debug-dir-uri" required="false" select="'debug'"/>
+
+  <p:option name="refs" select="'yes'"/>
   
   <p:import href="remove-indents.xpl"/>
   
@@ -95,10 +97,10 @@
       <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
     </p:input>
     <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/60'"/>
+    <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>
   
   <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-postprocess" name="docx2tex-postprocess">
@@ -106,10 +108,10 @@
       <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
     </p:input>
     <p:input port="models"><p:empty/></p:input>
-    <p:input port="parameters"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/70'"/>
+    <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>
   
 </p:declare-step>

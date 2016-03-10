@@ -13,8 +13,7 @@
   <p:documentation>
     docx2tex:main generates a LaTeX text document from a DOCX file. The step can be
     used standalone or as library in other XProc pipelines.
-  </p:documentation>
-    
+  </p:documentation>    
 
   <p:output port="result" primary="true">
     <p:documentation>The TeX document is shipped at this port.</p:documentation>
@@ -49,6 +48,18 @@
 			Expects URI where the text files containing the progress information are stored.
 		</p:documentation>
 	</p:option>
+	
+  <p:option name="refs" select="'yes'" required="false">
+    <p:documentation>
+      Whether docx2tex should convert internal references to LaTeX labels and refs.
+    </p:documentation>
+  </p:option>
+  
+  <p:option name="grid" select="'yes'" required="false">
+    <p:documentation>
+      Whether to draw table grid lines.
+    </p:documentation>
+  </p:option>
   
   <p:option name="fail-on-error" select="'true'">
     <p:documentation>
@@ -143,6 +154,7 @@
     <p:input port="parameters">
       <p:empty/>
     </p:input>
+    <p:with-option name="refs" select="$refs"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
   </docx2tex:evolve-hub>
@@ -191,6 +203,7 @@
     <p:input port="conf">
       <p:pipe port="result" step="load-config"/>
     </p:input>
+    <p:with-option name="grid" select="$grid"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
   	<p:with-option name="status-dir-uri" select="$status-dir-uri"/>

@@ -10,6 +10,7 @@ usage() {
     echo "   -o    path to custom output directory"
     echo "   -c    path to custom word2tex configuration file"
     echo "   -p    generate PDF with pdflatex"
+    echo "   -r    omit page and cross-references and labels"
     echo "   -t    draw table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing"
     echo "   -d    debug mode"
@@ -48,7 +49,7 @@ PDFLATEX=pdflatex
 
 
 # specify options
-while getopts ":o:c:x:ptd" opt; do
+while getopts ":o:c:x:ptrd" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -64,6 +65,9 @@ while getopts ":o:c:x:ptd" opt; do
 	    ;;
 	t)
 	    GRID=yes
+	    ;;
+	r)
+	    REFS=no
 	    ;;
 	d)
 	    DEBUG=yes
@@ -168,6 +172,7 @@ $CALABASH \
     custom-xsl=$CUSTOMXSL \
     conf-template=$OUT_DIR/$BASENAME.csv \
     grid=$GRID \
+    refs=$REFS \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
     status-dir-uri=$DEBUG_DIR_URI/status \

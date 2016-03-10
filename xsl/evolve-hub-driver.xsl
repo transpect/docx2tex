@@ -18,6 +18,7 @@
   <xsl:import href="http://transpect.io/xslt-util/functx/xsl/functx.xsl"/>
   
   <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
+  <xsl:param name="refs"/>
   
   <!--  *
         * MODE docx2tex-preprocess
@@ -180,18 +181,24 @@
   <xsl:variable name="anchor-digits" select="string-length(xs:string(count($anchor-ids)))" as="xs:integer"/>
   
   <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-preprocess">
-    <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer"/>
     <xsl:copy>
-      <xsl:attribute name="xml:id" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)"/>
-      <xsl:apply-templates select="@* except @xml:id, node()" mode="#current"/>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:if test="$refs ne 'no'">
+        <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer"/>
+        <xsl:variable name="label" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
+        <xsl:processing-instruction name="latex" select="concat('~\label{', $label, '}')"/>
+      </xsl:if>
     </xsl:copy>
   </xsl:template>
   
   <xsl:template match="link[@linkend]" mode="docx2tex-preprocess">
-    <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer"/>
     <xsl:copy>
-      <xsl:attribute name="linkend" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)"/>
-      <xsl:apply-templates select="@* except @linkend, node()" mode="#current"/>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:if test="$refs ne 'no'">
+        <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer"/>
+        <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
+        <xsl:processing-instruction name="latex" select="concat(if(@role eq 'page') then '~\pageref{' else '~\ref{', $ref, '}')"/>  
+      </xsl:if>
     </xsl:copy>
   </xsl:template>
   
