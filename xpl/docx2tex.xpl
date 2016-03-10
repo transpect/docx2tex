@@ -10,6 +10,12 @@
   name="docx2tex-main"
   type="docx2tex:main">
 
+  <p:documentation>
+    docx2tex:main generates a LaTeX text document from a DOCX file. The step can be
+    used standalone or as library in other XProc pipelines.
+  </p:documentation>
+    
+
   <p:output port="result" primary="true">
     <p:documentation>The TeX document is shipped at this port.</p:documentation>
   </p:output>
