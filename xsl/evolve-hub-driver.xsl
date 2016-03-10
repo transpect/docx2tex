@@ -152,11 +152,9 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
-  
   <!-- remove empty paragraphs #13946 -->
   
   <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="docx2tex-preprocess"/>
-  
   
   <!-- resolve carriage returns in empty paragraphs. the paragraph will cause a break as well #14306 -->
   
@@ -167,14 +165,29 @@
   <xsl:template match="para[not(.//text())]/phrase[position() eq 1 and position() eq last()]/phrase[@role eq 'cr']" mode="docx2tex-preprocess" priority="10"/>
   
   <xsl:template match="phrase[@role eq 'cr'][following-sibling::node()[1][self::phrase[@role eq 'cr']]]" mode="docx2tex-preprocess"/>
+    
+  <!-- drop unused anchors -->
+  
+  <xsl:template match="anchor[not(//link/@linkend = @xml:id)]" mode="docx2tex-preprocess"/>
   
   <!-- move anchors outside of block elements -->
   
-  <xsl:template match="para[anchor][not(ancestor::footnote)]" mode="docx2tex-preprocess">
+  <xsl:template match="para[anchor][not(.//footnote)]" mode="docx2tex-preprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node() except anchor" mode="#current"/>
     </xsl:copy>
-    <xsl:apply-templates select="anchor" mode="#current"/>
+    <xsl:apply-templates select="anchor" mode="#current"/>  
+  </xsl:template>
+  
+  <!-- place footnote anchors inside of the footnote -->
+  
+  <xsl:template match="anchor[following-sibling::node()[1][local-name() eq 'footnote']]" mode="docx2tex-preprocess"/>
+  
+  <xsl:template match="footnote[preceding-sibling::node()[1][local-name() eq 'anchor']]" mode="docx2tex-preprocess">
+    <xsl:copy>
+      <xsl:copy-of select="preceding-sibling::node()[1][local-name() eq 'anchor']"/>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+    </xsl:copy>
   </xsl:template>
   
   <!-- tag \ref, \pageref and \label -->

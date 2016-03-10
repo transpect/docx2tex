@@ -319,7 +319,11 @@
   </template>
 
   <!-- drop leading numbers, tex will do this for us -->
-  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']"/>
+  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']">
+    <rule>
+      <text select="*"/><!-- process only elements -->
+    </rule>
+  </template>
   
   <!-- tagged private use area -->
   <template context="dbk:phrase[@role eq 'unicode-private-use']">
