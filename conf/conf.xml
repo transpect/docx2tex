@@ -271,19 +271,13 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]">
-    <rule break-after="2" name="subsubsubsection" type="cmd">
-      <param/>
-    </rule>
-  </template>
-
-  <template context="dbk:para[@role = ('berschrift6', 'headline6', 'heading6')]/dbk:title">
+  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]/dbk:title">
     <rule break-after="2" name="paragraph" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <template context="dbk:para[matches(@role, '(berschrift|headline|heading)[7-9]')]">
+  <template context="dbk:para[matches(@role, '(berschrift|headline|heading)[6-9]')]">
     <rule break-after="2" name="subparagraph" type="cmd">
       <param/>
     </rule>
