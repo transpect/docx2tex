@@ -271,7 +271,7 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]/dbk:title">
+  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5')]">
     <rule break-after="2" name="paragraph" type="cmd">
       <param/>
     </rule>
