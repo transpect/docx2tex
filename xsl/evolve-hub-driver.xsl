@@ -175,8 +175,8 @@
   <xsl:template match="para[anchor][not(.//footnote)]" mode="docx2tex-preprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node() except anchor" mode="#current"/>
-    </xsl:copy>
-    <xsl:apply-templates select="anchor" mode="#current"/>  
+      <xsl:apply-templates select="anchor" mode="#current"/>
+    </xsl:copy>  
   </xsl:template>
   
   <!-- place footnote anchors inside of the footnote -->
