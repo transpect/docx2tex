@@ -239,6 +239,13 @@
   </template>
 
   <!-- headlines -->
+  
+  <template context="dbk:para/dbk:phrase[@role eq 'hub:identifier']">
+    <rule>
+      <text/>
+      <text select="' '"/>
+    </rule>
+  </template>
 
   <template context="dbk:para[@role = ('berschrift1', 'headline1', 'heading1')]">
     <rule break-after="2" name="chapter" type="cmd">
