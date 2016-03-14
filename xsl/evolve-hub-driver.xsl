@@ -88,9 +88,20 @@
   
   <!-- remove each list which counts only one list item -->
   
-  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]|itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
-    <xsl:value-of select="if(listitem/@override) then concat(listitem/@override, '&#x20;') else ''"/>
-    <xsl:apply-templates select="listitem/node()" mode="#current"/>
+  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]
+                       |itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
+    <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
+  </xsl:template>
+  
+  <xsl:template match="listitem/para[1]" mode="move-list-item">
+    <xsl:copy>
+      <xsl:apply-templates select="@*" mode="docx2tex-preprocess"/>
+      <xsl:value-of select="if(parent::listitem/@override) then concat(parent::listitem/@override, '&#x20;') else ''"/>  
+      <xsl:apply-templates mode="docx2tex-preprocess"/>
+      <xsl:if test="parent::listitem/@override">
+        <xsl:processing-instruction name="latex" select="concat('\label{mark-', parent::listitem/@override,'}')"/>
+      </xsl:if>
+    </xsl:copy>
   </xsl:template>
   
   <xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
