@@ -46,6 +46,12 @@
     <rule name="newline" type="cmd" break-after="1"/>
   </template>
   
+  <!-- line breaks -->
+  
+  <template context="dbk:br">
+    <rule name="newline" type="cmd" break-after="1"/>
+  </template>
+  
   <!-- paras in tables, use only 1 break -->
   
   <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()]">
@@ -145,12 +151,6 @@
     <rule name="url" type="cmd">
       <param/>
     </rule>
-  </template>
-  
-  <!-- breaks -->
-
-  <template context="dbk:br">
-    <rule break-after="1"/>
   </template>
 
   <!-- quotes -->
