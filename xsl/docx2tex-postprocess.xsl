@@ -47,19 +47,25 @@
     <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer?"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="$refs ne 'no' and exists($index)">
-        <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
-        <xsl:processing-instruction name="latex">
-          <xsl:choose>
-            <xsl:when test="@role eq 'page'">
-              <xsl:value-of select="concat('\pageref{', $ref, '}')"/>  
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="concat('\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}</xsl:text>
-            </xsl:otherwise>
-          </xsl:choose>  
-        </xsl:processing-instruction>  
-      </xsl:if>
+      <!-- ref switch, users may want no automatic tagging of refs -->
+      <xsl:choose>
+        <xsl:when test="$refs ne 'no' and exists($index)">
+          <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
+          <xsl:processing-instruction name="latex">
+            <xsl:choose>
+              <xsl:when test="@role eq 'page'">
+                <xsl:value-of select="concat('\pageref{', $ref, '}')"/>  
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="concat('\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>  
+          </xsl:processing-instruction>  
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates mode="#current"/>    
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:copy>
   </xsl:template>
   
