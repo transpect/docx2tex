@@ -207,10 +207,10 @@
   <xsl:variable name="anchor-digits" select="string-length(xs:string(count($anchor-ids)))" as="xs:integer"/>
   
   <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-postprocess">
+    <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer?"/>
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
-      <xsl:if test="$refs ne 'no'">
-        <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer"/>
+      <xsl:if test="$refs ne 'no' and exists($index)">
         <xsl:variable name="label" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
         <xsl:processing-instruction name="latex" select="concat('\label{', $label, '}')"/>
       </xsl:if>
@@ -218,20 +218,20 @@
   </xsl:template>
   
   <xsl:template match="link[@linkend]" mode="docx2tex-postprocess">
+    <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer?"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="$refs ne 'no'">
-        <xsl:variable name="index" select="index-of($anchor-ids, @linkend)" as="xs:integer"/>
+      <xsl:if test="$refs ne 'no' and exists($index)">
         <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
         <xsl:processing-instruction name="latex">
-        <xsl:choose>
-          <xsl:when test="@role eq 'page'">
-            <xsl:value-of select="concat('\pageref{', $ref, '}')"/>  
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="concat('\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>  
+          <xsl:choose>
+            <xsl:when test="@role eq 'page'">
+              <xsl:value-of select="concat('\pageref{', $ref, '}')"/>  
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="concat('\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>  
         </xsl:processing-instruction>  
       </xsl:if>
     </xsl:copy>
