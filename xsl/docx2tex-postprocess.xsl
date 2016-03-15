@@ -100,4 +100,29 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- figures and captions -->
+  
+  <xsl:variable name="figure-caption-start-regex" select="'^(Bild|Abbildung|Abbildungen|Abb\.|Figures?|Figs?\.?)'" as="xs:string"/>
+  
+  <xsl:template match="para[mediaobject|inlinemediaobject][string-length(normalize-space(.)) eq 0]" mode="docx2tex-postprocess">
+    <xsl:choose>
+      <xsl:when test="matches(string-join(following-sibling::*[1][local-name() eq 'para']//text(), ''), $figure-caption-start-regex)">
+        <figure>
+          <title>
+            <xsl:apply-templates select="following-sibling::*[1][local-name() eq 'para']/node()" mode="#current"/>
+          </title>
+          <xsl:apply-templates select="mediaobject|inlinemediaobject" mode="#current"/>      
+        </figure>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy>
+          <xsl:apply-templates select="@*, node()" mode="#current"/>
+        </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="para[preceding-sibling::*[1][local-name() eq 'para'][mediaobject|inlinemediaobject][string-length(normalize-space(.)) eq 0]]
+                           [matches(string-join(.//text(), ''), $figure-caption-start-regex)]" mode="docx2tex-postprocess"/>
+  
 </xsl:stylesheet>

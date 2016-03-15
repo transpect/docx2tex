@@ -101,7 +101,7 @@
     </rule>
   </template>
 
-  <!-- tables and figure captions  -->
+  <!-- tables and figures -->
 
   <template context="dbk:table|dbk:informaltable">
     <rule name="table" type="env" break-after="1">
@@ -110,28 +110,28 @@
   </template>
 
   <template context="dbk:figure/dbk:title|dbk:table/dbk:title">
-    <rule break-after="1" name="caption" type="cmd">
+    <rule break-after="1" break-before="1" name="caption" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <!-- figures -->
   <template context="dbk:figure">
     <rule name="figure" type="env">
-      <option select="'h'"/>
       <text/>
+      <text>&#xa;</text>
+      <text select="concat('\label{fig:', index-of(//dbk:figure, .), '}')"/>
     </rule>
   </template>
-
+  
   <template context="dbk:alt"/>
 
   <template context="dbk:imagedata">
     <rule name="includegraphics" type="cmd">
-      <option select="'width=1\textwidth'"/>
+      <option select="concat('width=', 1 div count(ancestor::*[dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')]),'\textwidth')"/>
       <param select="@fileref"/>
     </rule>
   </template>
-
+  
   <!-- links -->
   
   <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')]">
