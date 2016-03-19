@@ -8,7 +8,7 @@
                     <entry>
                         <String>catalogs.v5</String>
                         <String-array>
-                            <String>${pdu}/xmlcatalog/catalog.xml</String>
+                            <String>${pdu}/calabash-frontend/xmlcatalog/catalog.xml</String>
                         </String-array>
                     </entry>
                     <entry>
