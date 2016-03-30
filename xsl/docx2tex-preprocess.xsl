@@ -29,15 +29,12 @@
   
   <xsl:variable name="equation-label-regex" select="'^[\(\[]((\d+)(\.\d+)*)[\)\]]?$'" as="xs:string"/>
   
-  <xsl:template match="informaltable[every $i 
-    in .//row 
-    satisfies count($i/entry) = (2,3)
-    and $i/entry[matches(normalize-space(.), $equation-label-regex)]
-    and ($i/entry/para/equation
-    or ($i/entry/para/equation and $i/para[not(node())])
-    )]                                                  
-    "
-    mode="docx2tex-preprocess">
+  <xsl:template match="informaltable[every $i in .//row 
+                                     satisfies count($i/entry) = (2,3)
+                                               and $i/entry[matches(normalize-space(.), $equation-label-regex)]
+                                               and ($i/entry/para/equation
+                                               or ($i/entry/para/equation and $i/para[not(node())])
+    )]" mode="docx2tex-preprocess">
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
       <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
@@ -50,8 +47,9 @@
   <xsl:template match="equation" mode="docx2tex-preprocess">
     <xsl:param name="label"/>
     <xsl:copy>
-      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:apply-templates select="@* except @role" mode="#current"/>
       <xsl:if test="string-length($label) gt 1">
+        <xsl:attribute name="role" select="'numbered'"/>
         <xsl:processing-instruction name="latex" select="$label"/>
       </xsl:if>
       <xsl:apply-templates mode="#current"/>
