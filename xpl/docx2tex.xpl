@@ -55,9 +55,15 @@
     </p:documentation>
   </p:option>
   
-  <p:option name="grid" select="'yes'" required="false">
+  <p:option name="table-model" select="'tabularx'" required="false">
     <p:documentation>
-      Whether to draw table grid lines.
+      Used LaTeX package to draw tables. Possible values are 'tabular' and 'tabularx'.
+    </p:documentation>
+  </p:option>
+  
+  <p:option name="table-grid" select="'yes'" required="false">
+    <p:documentation>
+      Draw table cell borders.
     </p:documentation>
   </p:option>
   
@@ -203,7 +209,8 @@
     <p:input port="conf">
       <p:pipe port="result" step="load-config"/>
     </p:input>
-    <p:with-option name="grid" select="$grid"/>
+    <p:with-option name="table-model" select="$table-model"/>
+    <p:with-option name="table-grid" select="$table-grid"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
   	<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
