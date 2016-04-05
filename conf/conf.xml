@@ -53,13 +53,12 @@
     <rule name="newline" type="cmd" break-after="1"/>
   </template>
   
-  <template context="dbk:br[every $precedent in ancestor::dbk:para//node()[. &lt;&lt; current()] 
+  <template context="dbk:br[every $precedent in ancestor::dbk:para[1]//node()[. &lt;&lt; current()] 
                             satisfies (not(normalize-space($precedent)))]">
     <rule>
       <text>\leavevmode\newline
 </text>  
     </rule>
-    
   </template>
   
   <!-- paras in tables, use only 1 break -->
