@@ -84,66 +84,67 @@ while getopts ":o:c:x:ptrd" opt; do
 done
 shift $((OPTIND-1))
 # check if argument for file is set
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
     usage
 fi
 
 # file as 1st argument
-FILE=$1
+FILE="$1"
 
 # set basename
-BASENAME=$(basename $FILE .docx)
+BASENAME="$(basename "$(basename "$FILE" .docx)" .docm)"
+BASENAME="${BASENAME// /_}"
 
 # output directory path
-if [[ -z $OUT_DIR ]]; then
+if [[ -z "$OUT_DIR" ]]; then
     OUT_DIR="$(real_dir "$FILE")"
 else
     if [[ "$OUT_DIR" != /* ]]; then	
-	OUT_DIR=$PWD/$OUT_DIR
+	OUT_DIR="$PWD/$OUT_DIR"
     fi
 fi
 
-mkdir -p $OUT_DIR
+mkdir -p "$OUT_DIR"
 
 # path to configuration file
-if [[ -z $CONF ]]; then
-    CONF=$DIR/conf/conf.csv
+if [[ -z "$CONF" ]]; then
+    CONF="$DIR/conf/conf.csv"
 else
     if [[ "$CONF" != /* ]]; then	
-	CONF=$PWD/$CONF
+	CONF="$PWD/$CONF"
     fi
 fi
 
 # logging
-LOG=$OUT_DIR/$BASENAME.d2t.log
+LOG="$OUT_DIR/$BASENAME.d2t.log"
 
 # remove log from previous runs
-if [ -e $LOG ]; then
-    rm $LOG
+if [ -e "$LOG" ]; then
+    rm "$LOG"
 fi
 
 # debugging
-DEBUG_DIR=$OUT_DIR/$BASENAME.debug
+DEBUG_DIR="$OUT_DIR/$BASENAME.debug"
 
 # pdflatex outdir path
-PDFLATEX_OUT=$OUT_DIR
+PDFLATEX_OUT="$OUT_DIR"
 
 # make absolute paths
 if $cygwin; then
-    FILE=$(cygpath -ma "$FILE")
-    OUT_DIR=$(cygpath -ma "$OUT_DIR")
-    DIR=$(cygpath -ma "$DIR")
-    CONF=$(cygpath -ma "$CONF")
+    FILE="$(cygpath -ma "$FILE")"
+    OUT_DIR="$(cygpath -ma "$OUT_DIR")"
+    DIR="$(cygpath -ma "$DIR")"
+    CONF="$(cygpath -ma "$CONF")"
     DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
 else
-    DEBUG_DIR_URI=file:$DEBUG_DIR
+    DEBUG_DIR_URI="file:$DEBUG_DIR"
 fi
 
-FILE_CP=$OUT_DIR/$BASENAME.docx
-cp $FILE $FILE_CP 2>&1 2>>$LOG
+FILE_CP="$OUT_DIR/$BASENAME.docx"
+cp "$FILE" "$FILE_CP" 2>&1 2>>"$LOG"
 
 # check if file exists
-if [ ! -f $FILE ]; then
+if [ ! -f "$FILE" ]; then
     echo "Error: input file not found: $FILE"
     usage
 fi
@@ -164,31 +165,29 @@ fi
 
 # word2tex xproc pipeline
 $CALABASH \
-    -o result=$OUT_DIR/$BASENAME.tex \
-    -o hub=$OUT_DIR/$BASENAME.xml \
-    $DIR/xpl/docx2tex.xpl \
-    docx=$FILE_CP \
-    conf=$CONF \
-    custom-xsl=$CUSTOMXSL \
-    conf-template=$OUT_DIR/$BASENAME.csv \
+    -o result="$OUT_DIR/$BASENAME.tex" \
+    -o hub="$OUT_DIR/$BASENAME.xml" \
+    "$DIR/xpl/docx2tex.xpl" \
+    docx="$FILE_CP" \
+    conf="$CONF" \
+    custom-xsl="$CUSTOMXSL" \
+    conf-template="$OUT_DIR/$BASENAME.csv" \
     grid=$GRID \
     refs=$REFS \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
     status-dir-uri=$DEBUG_DIR_URI/status \
-    2>&1 2>>$LOG || exitonerror $? docx2tex
+    2>&1 2>>"$LOG" || exitonerror $? docx2tex
 echo "writing texfile => $OUT_DIR/$BASENAME.tex"
 
 # run pdflatex with "-p"
 if [ "$PDF" = "yes" ]; then
-    cd $OUT_DIR && $PDFLATEX \
+    cd "$OUT_DIR" && "$PDFLATEX" \
     -interaction=nonstopmode \
-    -output-directory=$OUT_DIR \
-    $PDFLATEX_OUT/$BASENAME.tex \
-    1>>$LOG || exitonerror $? pdflatex
+    -output-directory="$OUT_DIR" \
+    "$PDFLATEX_OUT/$BASENAME.tex" \
+    1>>"$LOG" || exitonerror $? pdflatex
     echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
 fi
 echo ""
 echo "docx2tex finished."
-
-
