@@ -140,6 +140,9 @@ else
     DEBUG_DIR_URI="file:$DEBUG_DIR"
 fi
 
+DEBUG_DIR_URI="${DEBUG_DIR_URI// /%20}"
+OUT_DIR_PSEUDOURI="${OUT_DIR// /%20}"
+
 FILE_CP="$OUT_DIR/$BASENAME.docx"
 cp "$FILE" "$FILE_CP" 2>&1 2>>"$LOG"
 
@@ -165,8 +168,8 @@ fi
 
 # word2tex xproc pipeline
 $CALABASH \
-    -o result="$OUT_DIR/$BASENAME.tex" \
-    -o hub="$OUT_DIR/$BASENAME.xml" \
+    -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
+    -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
     "$DIR/xpl/docx2tex.xpl" \
     docx="$FILE_CP" \
     conf="$CONF" \
