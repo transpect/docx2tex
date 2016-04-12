@@ -420,7 +420,7 @@
     <!--SUPERSCRIPT THREE -->
     <char character="&#xb3;" string="\textsuperscript{3}"/>
     <!--= \tcmu (mathcomp), t \textmu (textcomp), # \mathrm{\mu} (omlmathrm), # \muup (kpfonts mathdesign), MICRO SIGN-->
-    <char character="&#xb5;" string="${\mu}$"/>
+    <char character="&#xb5;" string="${\mathrm{\mu}}$"/>
     <!--PILCROW SIGN -->
     <char character="&#xb6;" string="\P"/>
     <!--RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
@@ -471,6 +471,7 @@
     <char character="&#x192;" string="${\mathit{f}}$"/>
     <!--jmath-->
     <char character="&#x237;" string="${\jmath}$"/>
+    
         
     <!-- *
          * Greek and Coptic
