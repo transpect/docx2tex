@@ -11,7 +11,8 @@ usage() {
     echo "   -c    path to custom word2tex configuration file"
     echo "   -p    generate PDF with pdflatex"
     echo "   -r    omit page and cross-references and labels"
-    echo "   -t    draw table grid lines"
+    echo "   -t    use tabular instead of tabularx for tables"
+    echo "   -l    draw table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing"
     echo "   -d    debug mode"
     1>&2; exit 1;
@@ -49,7 +50,7 @@ PDFLATEX=pdflatex
 
 
 # specify options
-while getopts ":o:c:x:ptrd" opt; do
+while getopts ":o:c:x:ptlrd" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -64,7 +65,10 @@ while getopts ":o:c:x:ptrd" opt; do
 	    PDF=yes
 	    ;;
 	t)
-	    GRID=yes
+	    TABLEMODEL=tabular
+	    ;;
+	l)
+	    TABLEGRID=yes
 	    ;;
 	r)
 	    REFS=no
@@ -105,6 +109,19 @@ else
 fi
 
 mkdir -p "$OUT_DIR"
+
+# table-model
+if [[ -z "$TABLEMODEL" ]]; then
+    TABLEMODEL="tabularx"
+fi
+# table-grid
+if [[ -z "$TABLEGRID" ]]; then
+    TABLEGRID="no"
+fi
+# references
+if [[ -z "$REFS" ]]; then
+    REFS="yes"
+fi
 
 # path to configuration file
 if [[ -z "$CONF" ]]; then
@@ -158,15 +175,19 @@ if [ "$DEBUG" = "yes" ]; then
     echo "debug mode: $DEBUG"
     echo "storing debug files to $DEBUG_DIR"
     echo ""
-    echo "file:   $FILE"
-    echo "conf:   $CONF"
-    echo "outdir: $OUT_DIR"
-    echo "pwd:    $PWD"
-    echo "script: $DIR"
+    echo "Parameters"
+    echo "  workdir: $DIR"
+    echo "  outdir: $OUT_DIR"
+    echo "  file: $FILE"
+    echo "  config: $CONF"
+    echo "  refs and labels: $REFS"
+    echo "  table model: $TABLEMODEL"
+    echo "  draw table grid lines: $TABLEGRID"
+    echo "  custom xslt: $CUSTOMXSL"
     echo ""
 fi
 
-# word2tex xproc pipeline
+# docx2tex xproc pipeline
 $CALABASH \
     -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
     -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
@@ -175,7 +196,8 @@ $CALABASH \
     conf="$CONF" \
     custom-xsl="$CUSTOMXSL" \
     conf-template="$OUT_DIR/$BASENAME.csv" \
-    grid=$GRID \
+    table-model=$TABLEMODEL \
+    table-grid=$TABLEGRID \
     refs=$REFS \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \
