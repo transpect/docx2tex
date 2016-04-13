@@ -4,9 +4,6 @@
 [submodule "xproc-util"]
 	path = xproc-util
 	url = https://github.com/transpect/xproc-util
-[submodule "mml2tex"]
-	path = mml2tex
-	url = https://github.com/transpect/mml2tex
 [submodule "docx2hub"]
 	path = docx2hub
 	url = https://github.com/transpect/docx2hub
