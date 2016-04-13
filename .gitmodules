@@ -19,3 +19,6 @@
 [submodule "schema/hub"]
 	path = schema/hub
 	url = https://github.com/le-tex/Hub.git
+[submodule "mml2tex"]
+	path = mml2tex
+	url = https://github.com/transpect/mml2tex
