@@ -19,6 +19,8 @@
     \usepackage{amsfonts}
     \usepackage{wasysym}
     \usepackage{isomath}
+    \usepackage{mathtools}
+    \usepackage{txfonts}
     \usepackage{upgreek}
     \usepackage{enumerate}
     \usepackage[ngerman]{babel}
@@ -1014,10 +1016,16 @@
     <char character="&#x2208;" string="${\in}$"/>
     <!--= \nin (wrisym), negated set membership-->
     <char character="&#x2209;" string="${\notin}$"/>
+    <!-- SMALL ELEMENT OF -->
+    <char character="&#x220a;" string="${\in}$"/>
     <!--= \owns, contains, variant-->
     <char character="&#x220b;" string="${\ni}$"/>
     <!--= \notni (txfonts), = \notowner (mathabx), = \notowns (fourier), negated contains, variant-->
-    <char character="&#x220c;" string="${\nni}$"/>
+    <char character="&#x220c;" string="${\notni}$"/>
+    <!-- SMALL CONTAINS AS MEMBER -->
+    <char character="&#x220d;" string="${\ni}$"/>
+    <!-- END OF PROOF -->
+    <char character="&#x220e;" string="${\blacksquare}$"/>
     <!--product operator-->
     <char character="&#x220f;" string="${\prod}$"/>
     <!--coproduct operator-->
@@ -1039,7 +1047,7 @@
     <!--composite function (small circle)-->
     <char character="&#x2218;" string="${\circ}$"/>
     <!--BULLET OPERATOR-->
-    <char character="&#x2219;" string="${\bullet}$"/>
+    <char character="&#x2219;" string="${\cdot}$"/>
     <!--radical-->
     <char character="&#x221a;" string="${\sqrt{}}$"/>
     <!--CUBE ROOT-->
@@ -1051,7 +1059,7 @@
     <!--INFINITY-->
     <char character="&#x221e;" string="${\infty}$"/>
     <!--right (90 degree) angle-->
-    <char character="&#x221f;" string="${\rightangle}$"/>
+    <char character="&#x221f;" string="${\llcorner}$"/>
     <!--ANGLE-->
     <char character="&#x2220;" string="${\angle}$"/>
     <!--MEASURED ANGLE-->
@@ -1097,7 +1105,9 @@
     <!--x \colon, RATIO-->
     <char character="&#x2236;" string="${:}$"/>
     <!--# ::, two colons-->
-    <char character="&#x2237;" string="${\Proportion}$"/>
+    <char character="&#x2237;" string="${::}$"/>
+    <!-- DOT MINUS -->
+    <char character="&#x2238;" string="${\dot{-}}$"/>
     <!--# -: ,EXCESS-->
     <char character="&#x2239;" string="${\eqcolon}$"/>
     <!--similar to, TILDE OPERATOR-->
@@ -1141,9 +1151,9 @@
     <!--equals, rising dots-->
     <char character="&#x2253;" string="${\risingdotseq}$"/>
     <!--= \coloneqq (txfonts), = \SetDelayed (wrisym), # := colon, equals-->
-    <char character="&#x2254;" string="${\coloneq}$"/>
+    <char character="&#x2254;" string="${\coloneqq}$"/>
     <!--= \eqqcolon (txfonts), # =:, equals, colon-->
-    <char character="&#x2255;" string="${\eqcolon}$"/>
+    <char character="&#x2255;" string="${\eqqcolon}$"/>
     <!--circle on equals sign-->
     <char character="&#x2256;" string="${\eqcirc}$"/>
     <!--circle, equals-->
@@ -1409,7 +1419,7 @@
     <!--three dots, centered-->
     <char character="&#x22ef;" string="${\cdots}$"/>
     <!--= \adots (yhmath), three dots, ascending-->
-    <char character="&#x22f0;" string="${\iddots}$"/>
+    <char character="&#x22f0;" string="${\adots}$"/>
     <!--three dots, descending-->
     <char character="&#x22f1;" string="${\ddots}$"/>
     <!--ELEMENT OF WITH OVERBAR-->
