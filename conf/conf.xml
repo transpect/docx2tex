@@ -669,9 +669,7 @@
     <!--BULLET -->
     <char character="&#x2022;" string="{\textbullet}"/>
     <!--HORIZONTAL ELLIPSIS -->
-    <char character="&#x2026;" string="{\dots}"/>
-    <!--ellipsis (horizontal)-->
-    <char character="&#x2026;" string="${\ldots}$"/>
+    <char character="&#x2026;" string="{\ldots}"/>
     <!--PRIME or minute, not superscripted-->
     <char character="&#x2032;" string="${\prime}$"/>
     <!--DOUBLE PRIME or second, not superscripted-->
