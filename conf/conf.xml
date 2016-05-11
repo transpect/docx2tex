@@ -23,6 +23,7 @@
     \usepackage{txfonts}
     \usepackage{upgreek}
     \usepackage{enumerate}
+    \usepackage{tensor}
     \usepackage[ngerman]{babel}
   </preamble>
 
