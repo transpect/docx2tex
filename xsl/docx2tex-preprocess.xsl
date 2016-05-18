@@ -144,6 +144,10 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
+  <xsl:template match="phrase[matches(., '^\s+$')]" mode="docx2tex-preprocess">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
   <!-- remove empty paragraphs #13946 -->
   
   <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="docx2tex-preprocess"/>
@@ -180,12 +184,12 @@
       <xsl:copy-of select="preceding-sibling::node()[1][local-name() eq 'anchor']"/>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
     </xsl:copy>
-  </xsl:template>
+  </xsl:template>  
   
   <!-- wrap private use-content -->
   
-  <xsl:template match="text()" mode="docx2tex-preprocess">
-    <xsl:analyze-string select="." regex="[&#xE000;-&#xF8FF;]|[&#xF0000;-&#xFFFFF;]|[&#x100000;-&#x10FFFF;]">
+  <xsl:template match="text()[matches(., '[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]')]" mode="docx2tex-preprocess">
+    <xsl:analyze-string select="." regex="[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]">
       <xsl:matching-substring>
         <phrase role="unicode-private-use">
           <xsl:value-of select="."/>
