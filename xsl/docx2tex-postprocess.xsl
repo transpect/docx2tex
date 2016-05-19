@@ -73,14 +73,20 @@
   
   <xsl:template match="*[count(equation) gt 1]" mode="docx2tex-postprocess">
     <xsl:copy>
-      <xsl:apply-templates select="@*" mode="#current" />
-      <xsl:for-each-group select="node()" group-adjacent="local-name() eq 'equation'">       
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:for-each-group select="node()" group-adjacent="local-name() eq 'equation'">
         <xsl:choose>
           <xsl:when test="current-grouping-key() eq true() and count(current-group()) gt 1">
             <xsl:variable name="texname" select="if(ancestor::table or ancestor::informaltable) 
-              then 'aligned'
-              else if(@role eq 'numbered') then 'align' else 'align*'" as="xs:string"/>
-            <xsl:processing-instruction name="latex" select="concat(if(ancestor::table or ancestor::informaltable) then '{$' else '', '\begin{', $texname, '}&#xa;')"/>
+                                                 then 'aligned'
+                                                 else if(@role eq 'numbered') 
+                                                      then 'align' 
+                                                      else 'align*'" as="xs:string"/>
+            <xsl:processing-instruction name="latex" select="concat(
+                                                                    if(ancestor::table or ancestor::informaltable) 
+                                                                    then '{$' 
+                                                                    else '', 
+                                                                    '\begin{', $texname, '}&#xa;')"/>
             <xsl:for-each select="current-group()">
               <xsl:apply-templates mode="docx2tex-alignment"/><xsl:text>&#x20;</xsl:text><xsl:processing-instruction name="latex" select="if(position() ne last()) then '\\&#xa;' else '&#xa;'"/>
             </xsl:for-each>

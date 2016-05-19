@@ -56,6 +56,10 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- drop empty equations -->
+  
+  <xsl:template match="equation[not(node() except @*)]|inlineequation[not(node() except @*)]" mode="docx2tex-preprocess"/>
+  
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
   <xsl:template match="para[every $i in * satisfies $i/local-name() = ('inlineequation', 'tab')]
@@ -70,7 +74,7 @@
   </xsl:template>
   
   <xsl:template match="para[equation and count(distinct-values(*/local-name())) eq 1]" mode="docx2tex-preprocess">
-    <xsl:apply-templates/>
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
   <xsl:template match="blockquote[@role = 'hub:lists']" mode="docx2tex-preprocess">
@@ -184,7 +188,7 @@
       <xsl:copy-of select="preceding-sibling::node()[1][local-name() eq 'anchor']"/>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
     </xsl:copy>
-  </xsl:template>  
+  </xsl:template>
   
   <!-- wrap private use-content -->
   
