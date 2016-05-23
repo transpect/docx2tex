@@ -18,10 +18,11 @@
         * -->
   
   <xsl:template match="@fileref" mode="docx2tex-preprocess">
-    <xsl:variable name="fileref" select="tr:uri-to-relative-path(
-      /hub/info/keywordset/keyword[@role eq 'source-dir-uri'],
-      concat(/hub/info/keywordset/keyword[@role eq 'source-dir-uri'], replace(., 'container:', '/'))
-      )"/>
+    <xsl:variable name="fileref" 
+                  select="if(matches(., '^container:'))
+                          then tr:uri-to-relative-path(/hub/info/keywordset/keyword[@role eq 'source-dir-uri'],
+                                                       concat(/hub/info/keywordset/keyword[@role eq 'source-dir-uri'], replace(., 'container:', '/')))
+                          else ."/>
     <xsl:attribute name="fileref" select="$fileref"/>
   </xsl:template>
   
