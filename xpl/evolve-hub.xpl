@@ -35,6 +35,7 @@
 
   <p:option name="debug" required="false" select="'no'"/>
   <p:option name="debug-dir-uri" required="false" select="'debug'"/>
+  <p:option name="status-dir-uri" select="'status'"/>
 
   <p:option name="refs" select="'yes'"/>
   
@@ -45,6 +46,19 @@
   <p:import href="http://transpect.io/xproc-util/xml-model/xpl/prepend-hub-xml-model.xpl"/>
   <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
   <p:import href="http://transpect.io/evolve-hub/xpl/evolve-hub_lists-by-indent.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/simple-progress-msg/xpl/simple-progress-msg.xpl"/>
+  
+  <tr:simple-progress-msg file="docx2tex-evolve-hub-init.txt">
+    <p:input port="msgs">
+      <p:inline>
+        <c:messages>
+          <c:message xml:lang="en">Init XML normalization</c:message>
+          <c:message xml:lang="de">Initialisiere XML-Normalisierung</c:message>
+        </c:messages>
+      </p:inline>
+    </p:input>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+  </tr:simple-progress-msg>
   
   <docx2tex:remove-indents>
     <p:documentation>Remove indent and margin-left attributes from 
@@ -69,6 +83,7 @@
     <p:input port="parameters"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/20'"/>
     <p:with-param name="expand-css-properties" select="'no'"/>
   </tr:xslt-mode>
@@ -81,6 +96,7 @@
     <p:input port="parameters"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/30'"/>
   </tr:xslt-mode>
 
@@ -90,6 +106,7 @@
     </p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </hub:evolve-hub_lists-by-indent>
 
   <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-preprocess" name="docx2tex-preprocess">
@@ -99,6 +116,7 @@
     <p:input port="models"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/60'"/>
     <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>
@@ -110,6 +128,7 @@
     <p:input port="models"><p:empty/></p:input>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
     <p:with-option name="prefix" select="'evolve-hub/70'"/>
     <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>

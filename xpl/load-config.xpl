@@ -17,11 +17,13 @@
   <p:option name="fail-on-error" select="'no'"/>
   <p:option name="debug" select="'no'"/>
   <p:option name="debug-dir-uri" select="'debug'"/>
+  <p:option name="status-dir-uri" select="'status'"/>
   
   <p:import href="http://transpect.io/xproc-util/load/xpl/load.xpl"/>
   <p:import href="http://transpect.io/xproc-util/load/xpl/load-data.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
-
+  <p:import href="http://transpect.io/xproc-util/simple-progress-msg/xpl/simple-progress-msg.xpl"/>
+  
   <p:try>
     <p:group>
       
@@ -29,6 +31,18 @@
         <p:with-option name="href" select="$conf"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
       </tr:load>
+      
+      <tr:simple-progress-msg file="docxtex-load-xml-config.txt">
+        <p:input port="msgs">
+          <p:inline>
+            <c:messages>
+              <c:message xml:lang="en">Loading xml2tex configuration</c:message>
+              <c:message xml:lang="de">Lade xml2tex Konfiguration</c:message>
+            </c:messages>
+          </p:inline>
+        </p:input>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:simple-progress-msg>
       
     </p:group>
     <p:catch>
@@ -56,6 +70,18 @@
           <p:empty/>
         </p:input>
       </p:xslt>
+      
+      <tr:simple-progress-msg file="docxtex-load-csv-config.txt">
+        <p:input port="msgs">
+          <p:inline>
+            <c:messages>
+              <c:message xml:lang="en">Loading style to LaTeX configuration (CSV)</c:message>
+              <c:message xml:lang="de">Lade Formatvorlagenkonfiguration (CSV)</c:message>
+            </c:messages>
+          </p:inline>
+        </p:input>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:simple-progress-msg>
       
       <tr:store-debug pipeline-step="docx2tex/loaded-config">
         <p:with-option name="active" select="$debug"/>
