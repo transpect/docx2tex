@@ -1,6 +1,6 @@
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<set xmlns="http://transpect.io/xml2tex">
+<set xmlns="http://transpect.io/xml2tex" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex --- ``Garbage In, Garbage Out''
@@ -24,7 +24,50 @@
     \usepackage{upgreek}
     \usepackage{enumerate}
     \usepackage{tensor}
-    \usepackage[ngerman]{babel}
+    <xsl:choose>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
+        <xsl:text>\usepackage[ngerman]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'fr'">
+        <xsl:text>\usepackage[frenchb]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'it'">
+        <xsl:text>\usepackage[italian]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'es'">
+        <xsl:text>\usepackage[spanish]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'cs'">
+        <xsl:text>\usepackage[czech]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'fi'">
+        <xsl:text>\usepackage[finnish]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'el'">
+        <xsl:text>\usepackage[english,greek]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'hu'">
+        <xsl:text>\usepackage[magyar]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'is'">
+        <xsl:text>\usepackage[icelandic]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'pl'">
+        <xsl:text>\usepackage[polish]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'pt'">
+        <xsl:text>\usepackage[portuguese]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang = ('ar', 'fa', 'ur', 'ps', 'ku', 'ug')">
+        <xsl:text>\usepackage{arabtex}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang = ('ar', 'fa', 'ur', 'ps', 'ku', 'ug')">
+        <xsl:text>\usepackage[english,bulgarian,russian,ukrainian]{babel}</xsl:text>
+      </xsl:when>
+      <xsl:when test="/dbk:hub/@xml:lang eq 'zh'">
+        <xsl:text>\usepackage{CJK}</xsl:text>
+      </xsl:when>
+    </xsl:choose>
   </preamble>
 
   <!-- xml namespace declaration -->
@@ -671,10 +714,14 @@
     <char character="&#x201b;" string="`"/>
     <!--LEFT DOUBLE QUOTATION MARK “ -->
     <char character="&#x201c;" string="``"/>
+    <char character="&#x201c;" string="{\grqq}" context="dbk:para[(for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@xml:lang eq 'de', 
+                                                                   if(@xml:lang) then @xml:lang eq 'de' else exists(ancestor::*[@xml:lang eq 'de']))[1]]"/>
     <!--RIGHT DOUBLE QUOTATION MARK ” -->
     <char character="&#x201d;" string="''"/>
     <!--DOUBLE LOW-9 QUOTATION MARK „ -->
     <char character="&#x201e;" string=",,"/>
+    <char character="&#x201e;" string="{\glqq}" context="dbk:para[(for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@xml:lang eq 'de', 
+                                                                  if(@xml:lang) then @xml:lang eq 'de' else exists(ancestor::*[@xml:lang eq 'de']))[1]]"/>
     <!--DAGGER relation-->
     <char character="&#x2020;" string="${\dag}$"/>
     <!--DOUBLE DAGGER relation-->
