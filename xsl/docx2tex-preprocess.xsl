@@ -63,12 +63,12 @@
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
-  <xsl:template match="para[every $i in * satisfies $i/local-name() = ('inlineequation', 'tab')]
-    [count(distinct-values(*/local-name())) eq 2]
-    [matches(normalize-space(string-join(text(), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
+  <xsl:template match="para[(every $i in * satisfies $i/local-name() = ('inlineequation', 'tab')) or (every $i in * satisfies $i/local-name() = ('inlineequation', 'phrase'))]
+                           [count(distinct-values(*/local-name())) eq 2]
+                           [matches(normalize-space(string-join((text(), phrase/text()), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
     <equation role="numbered">
       <xsl:processing-instruction name="latex">
-      <xsl:value-of select="concat('\tag{', replace(text(), $equation-label-regex, '$1'), '}&#xa;')"/>
+      <xsl:value-of select="concat('\tag{', replace(string-join((text(), phrase/text()), ''), $equation-label-regex, '$1'), '}&#xa;')"/>
     </xsl:processing-instruction>
       <xsl:apply-templates select="inlineequation/*" mode="#current"/>
     </equation>
@@ -205,5 +205,71 @@
       </xsl:non-matching-substring>
     </xsl:analyze-string>
   </xsl:template>
+  
+  <!-- resolve regular greek letters which are manually set to italic -->
+  
+  <xsl:variable name="greek-regex">
+    <char char="&#x393;" character="&#x1d6e4;"/><!-- Gamma -->
+    <char char="&#x394;" character="&#x1d6e5;"/><!-- Delta -->
+    <char char="&#x398;" character="&#x1d6e9;"/><!-- Thetha -->
+    <char char="&#x39b;" character="&#x1d6ec;"/><!-- Lambda -->
+    <char char="&#x39e;" character="&#x1d6ef;"/><!-- Xi -->
+    <char char="&#x3a0;" character="&#x1d6f1;"/><!-- Pi -->
+    <char char="&#x3a3;" character="&#x1d6f4;"/><!-- Sigma -->
+    <char char="&#x3a5;" character="&#x1d6f6;"/><!-- Upsilon -->
+    <char char="&#x3a6;" character="&#x1d6f7;"/><!-- Phi -->
+    <char char="&#x3a8;" character="&#x1d6f9;"/><!-- Psi -->
+    <char char="&#x3a9;" character="&#x1d6fa;"/><!-- Omega -->
+    <char char="&#x3b1;" character="&#x1d6fc;"/><!-- alpha -->
+    <char char="&#x3b2;" character="&#x1d6fd;"/><!-- beta -->
+    <char char="&#x3b3;" character="&#x1d6fe;"/><!-- gamme -->
+    <char char="&#x3b4;" character="&#x1d6ff;"/><!-- delta -->
+    <char char="&#x3b5;" character="&#x1d700;"/><!-- varepsilon -->
+    <char char="&#x3b6;" character="&#x1d701;"/><!-- zeta -->
+    <char char="&#x3b7;" character="&#x1d702;"/><!-- eta -->
+    <char char="&#x3b8;" character="&#x1d703;"/><!-- theta -->
+    <char char="&#x3b9;" character="&#x1d704;"/><!-- iota -->
+    <char char="&#x3ba;" character="&#x1d705;"/><!-- kappa -->
+    <char char="&#x3bb;" character="&#x1d706;"/><!-- lambda -->
+    <char char="&#x3bc;" character="&#x1d707;"/><!-- mu -->
+    <char char="&#x3bd;" character="&#x1d708;"/><!-- nu -->
+    <char char="&#x3be;" character="&#x1d709;"/><!-- xi -->
+    <char char="&#x3c0;" character="&#x1d70b;"/><!-- pi -->
+    <char char="&#x3c1;" character="&#x1d70c;"/><!-- rho -->
+    <char char="&#x3c2;" character="&#x1d70d;"/><!-- varsigma -->
+    <char char="&#x3c3;" character="&#x1d70e;"/><!-- sigma -->
+    <char char="&#x3c4;" character="&#x1d70f;"/><!-- tau -->
+    <char char="&#x3c5;" character="&#x1d710;"/><!-- upsilon -->
+    <char char="&#x3c6;" character="&#x1d711;"/><!-- varphi -->
+    <char char="&#x3c7;" character="&#x1d712;"/><!-- chi -->
+    <char char="&#x3c8;" character="&#x1d713;"/><!-- psi -->
+    <char char="&#x3c9;" character="&#x1d714;"/><!-- omega -->
+    <char char="&#x3d0;" character="&#x1d715;"/><!-- partial -->
+    <char char="&#x3f5;" character="&#x1d716;"/><!-- epsilon -->
+    <!--<char char="&#x3d1;" character="&#x1d717;" string="${{\vartheta}}$"/>
+    <char char="&#x3c1;" character="&#x1d718;" string="${{\varkappa}}$"/>-->    
+    <char char="&#x3c6;" character="&#x1d719;"/><!-- phi -->
+    <char char="&#x3f1;" character="&#x1d71a;"/><!-- varrho -->
+    <char char="&#x3d6;" character="&#x1d71b;"/><!-- varpi -->
+  </xsl:variable>
+  
+  <!--<xsl:template match="dbk:phrase[@css:font-style eq 'italic' and matches(., $greek-regex)]" mode="docx2tex-preprocess">
+    <xsl:variable name="attributes" select="@*" as="attribute()*"/>
+    
+    
+    <xsl:analyze-string select="." regex="{$greek-regex}">
+      <xsl:matching-substring>
+        <xsl:value-of select="translate(.,
+          '&#x393;&#x394;&#x398;&#x39b;&#x39e;&#x3a0;&#x3a3;&#x3a5;&#x3a6;&#x3a8;&#x3a9;&#x3b1;&#x3b2;&#x3b3;&#x3b4;&#x3b5;&#x3b6;&#x3b7;&#x3b8;&#x3b9;&#x3ba;&#x3bb;&#x3bc;&#x3bd;&#x3be;&#x3c0;&#x3c1;&#x3c2;&#x3c3;&#x3c4;&#x3c5;&#x3c6;&#x3c7;&#x3c8;&#x3c9;&#x3d0;&#x3d1;',
+                                        '')"/>        
+      </xsl:matching-substring>
+      <xsl:non-matching-substring>
+        <xsl:copy>
+          <xsl:copy-of select="$attributes"/>
+          <xsl:value-of select="."/>
+        </xsl:copy>
+      </xsl:non-matching-substring>
+    </xsl:analyze-string>
+  </xsl:template>-->
   
 </xsl:stylesheet>
