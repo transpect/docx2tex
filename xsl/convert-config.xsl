@@ -16,7 +16,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="set">
+  <xsl:template match="/set">
     <xsl:copy>
       <xsl:variable name="alternate-config" select="/collection()[2]" as="document-node(element(c:body))"/>
       
@@ -24,7 +24,8 @@
       
       <xsl:apply-templates/>
       
-      <xsl:comment select="'This part of the custom configuration file is generated from', $alternate-config/base-uri(),
+      <xsl:comment select="'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -&#xa;
+        This part of the custom configuration file is generated from', $alternate-config/base-uri(),
         '&#xa;The templates are treated with a higher priority and should overwrite ambiguous templates above'"/>
       
       <xsl:for-each select="$split-per-line[string-length(.) gt 0]">
@@ -35,31 +36,44 @@
         <xsl:variable name="tag-end" select="normalize-space(tokenize(., $delimiter)[3])" as="xs:string*"/>
         <xsl:variable name="target-inline-elements" select="('anchor', 'emphasis', 'footnote', 'link', 'olink', 'phrase', 'sup', 'sub', 'xref')" as="xs:string+"/>
         
-        <xsl:if test="not(matches($tag-start, 'chapter|section') or matches($tag-end, 'chapter|section'))">
-          <template context="{string-join(
-                                          for $i 
-                                          in $target-inline-elements 
-                                          return concat('dbk:', $i, '[@role eq ', '''', $css-style-name, ''']'),
-                                        '|')}">
-            <rule>
-              <text><xsl:value-of select="$tag-start"/></text>
+        <xsl:if test="string-length(string-join(($tag-start, $tag-end), '')) gt 0">        
+        
+          <xsl:if test="not(matches($tag-start, 'chapter|section') 
+                            or matches($tag-end, 'chapter|section'))">
+            
+            <!-- template that match inline styles -->
+            <template context="{string-join(
+                                            for $i 
+                                            in $target-inline-elements 
+                                            return concat('dbk:', $i, '[@role eq ', '''', $css-style-name, ''']'),
+                                          '|')}">
+              <rule>
+                <xsl:if test="string-length($tag-start) gt 0">
+                  <text><xsl:value-of select="$tag-start"/></text>
+                </xsl:if>
+                <text/>
+                <xsl:if test="string-length($tag-end) gt 0">
+                  <text><xsl:value-of select="$tag-end"/></text>
+                </xsl:if>
+              </rule>
+            </template>
+          </xsl:if>
+          
+          <!-- template that match paragraph styles -->
+          <template context="{concat('dbk:para[@role eq ', '''', $css-style-name, ''']')}">
+            <rule break-after="2">
+              <xsl:if test="string-length($tag-start) gt 0">
+                <text><xsl:value-of select="$tag-start"/></text>
+              </xsl:if>
               <text/>
-              <xsl:if test="string-length(normalize-space($tag-end)) gt 0">
+              <xsl:if test="string-length($tag-end) gt 0">
                 <text><xsl:value-of select="$tag-end"/></text>
               </xsl:if>
             </rule>
           </template>
+        
         </xsl:if>
         
-        <template context="{concat('dbk:para[@role eq ', '''', $css-style-name, ''']')}">
-          <rule break-after="2">
-            <text><xsl:value-of select="$tag-start"/></text>
-            <text/>
-            <xsl:if test="string-length(normalize-space($tag-end)) gt 0">
-              <text><xsl:value-of select="$tag-end"/></text>
-            </xsl:if>
-          </rule>
-        </template>
         
       </xsl:for-each>
       
