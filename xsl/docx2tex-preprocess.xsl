@@ -94,8 +94,19 @@
       <xsl:apply-templates select="@*" mode="docx2tex-preprocess"/>
       <xsl:value-of select="if(parent::listitem/@override) then concat(parent::listitem/@override, '&#x20;') else ''"/>  
       <xsl:apply-templates mode="docx2tex-preprocess"/>
+      <!-- add label -->
       <xsl:if test="parent::listitem/@override">
         <xsl:processing-instruction name="latex" select="concat('\label{mark-', parent::listitem/@override,'}')"/>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="para[@docx2tex:config eq 'headline']" mode="docx2tex-preprocess">
+    <xsl:copy>
+      <xsl:apply-templates select="@*, node()" mode="docx2tex-preprocess"/>
+      <!-- add label -->
+      <xsl:if test="phrase[@role eq 'docx2tex:identifier']">
+        <xsl:processing-instruction name="latex" select="concat('\label{mark-', phrase[@role eq 'docx2tex:identifier'],'}')"/>
       </xsl:if>
     </xsl:copy>
   </xsl:template>

@@ -155,9 +155,10 @@
   
   <!-- tabs -->
   
-  <template context="dbk:tab">
+  <template context="dbk:tab|dbk:phrase[@role eq 'tab']">
     <rule>
       <text>&#x9;</text>
+      <text/>
     </rule>
   </template>
 
@@ -318,7 +319,7 @@
 
   <!-- headlines -->
   
-  <template context="dbk:para/dbk:phrase[@role eq 'hub:identifier']">
+  <template context="dbk:para/dbk:phrase[@role = ('hub:identifier', 'docx2tex:identifier')]">
     <rule>
       <text/>
       <text select="' '"/>
@@ -398,7 +399,7 @@
   </template>
 
   <!-- drop leading numbers, tex will do this for us -->
-  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']">
+  <template context="dbk:footnote//dbk:phrase[@role = ('hub:identifier', 'docx2tex:identifier')]">
     <rule>
       <text select="*"/><!-- process only elements -->
     </rule>

@@ -4,6 +4,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:xml2tex="http://transpect.io/xml2tex"
+  xmlns:docx2tex="http://transpect.io/docx2tex"
   xmlns:c="http://www.w3.org/ns/xproc-step"
   xmlns:xso="tobereplaced" 
   version="2.0">
@@ -23,6 +24,7 @@
     
     <xso:stylesheet
       xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:docx2tex="http://transpect.io/docx2tex"
       xmlns:xso="tobereplaced">
       
       <!-- generate namespace nodes -->
@@ -50,18 +52,32 @@
     
     <xsl:comment>Remove margin-left and text-indent in order to avoid generation of list-styles</xsl:comment>
     
-    <xso:template match="{concat(
-        @context, '/@css:margin-left',
-        '|',
-        @context, '/@css:text-indent'
-        )}" priority="{position()}"/>
+    <xso:template match="{@context}" priority="{position()}">
+      <xso:copy>
+        <xso:attribute name="docx2tex:config" select="'headline'"/>
+        <xso:apply-templates select="@*, node()"/>
+      </xso:copy>
+    </xso:template>
     
-    <xso:template match="{concat(
-      @context, '/dbk:tab'
-      )}" priority="{position()}">
+    <xso:template match="{concat(@context, '/dbk:phrase[@role eq ''hub:identifier'']/@role')}" priority="{position()}">
+      <xso:attribute name="role" select="'docx2tex:identifier'"/>
+    </xso:template>
+    
+    <xso:template match="{concat(@context, '/@css:margin-left',
+                                 '|',
+                                 @context, '/@css:text-indent'
+                                 )}" priority="{position()}"/>
+    
+    <xso:template match="{concat(@context, '/@css:margin-left', 
+                                 '|', @context, '/@css:text-indent')}" priority="{position()}"/>
+    
+    <xso:template match="{concat(@context, '/dbk:tab')}" priority="{position()}">
       <phrase role="tab" xmlns="http://docbook.org/ns/docbook"><xso:text>&#x9;</xso:text></phrase>
     </xso:template>
+        
   </xsl:template>
+  
+  <!-- remove identifiers -->
   
   <xsl:template match="xml2tex:ns">
     <!-- the code is taken from the schematron project. for information please visit this url
