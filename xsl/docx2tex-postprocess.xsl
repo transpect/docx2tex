@@ -17,16 +17,6 @@
         * MODE docx2tex-postprocess
         * -->
   
-  <!-- Some authors set superscript or subscript manually with vertical-align. This template applies proper superscript or subscript tags 
-       when such formatting is used. -->
-  
-  <xsl:template match="phrase[@css:top]" mode="docx2tex-postprocess">
-    <xsl:variable name="position" select="xs:decimal(replace(@css:top, '[a-zA-Z\s]', ''))" as="xs:decimal"/>
-    <xsl:element name="{if($position gt 0) then 'subscript' else 'superscript'}">
-      <xsl:apply-templates select="@* except (@css:top, @css:position), node()" mode="#current"/>
-    </xsl:element>
-  </xsl:template>
-  
   <!-- tag \ref, \pageref and \label -->
   
   <xsl:variable name="anchor-ids" select="//anchor[@role eq 'start']/@xml:id" as="xs:string*"/>

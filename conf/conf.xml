@@ -127,6 +127,8 @@
       <param/>
     </rule>
   </template>
+  
+  <!-- superscript, subscript, manual raise or lowering position -->
 
   <template context="dbk:subscript" mathmode="true">
     <rule>
@@ -143,6 +145,15 @@
       <text select="'}'"/>
     </rule>
   </template>
+  
+  <template context="dbk:phrase[@css:top]">
+    <rule name="raisebox" type="cmd">
+      <param select="@css:top"/>
+      <text/>
+    </rule>
+  </template>
+  
+  <!-- tabs -->
   
   <template context="dbk:tab">
     <rule>
