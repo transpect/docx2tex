@@ -149,7 +149,7 @@
   <template context="dbk:phrase[@css:top]">
     <rule name="raisebox" type="cmd">
       <param select="@css:top"/>
-      <text/>
+      <param/>
     </rule>
   </template>
   
