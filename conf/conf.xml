@@ -754,7 +754,7 @@
     <!-- PER MILLE SIGN -->
     <char character="&#x2030;" string="{\textperthousand}"/>
     <!-- PER TEN THOUSAND SIGN -->
-    <char character="&#x2031;" string="{\textpertenthousand}">
+    <char character="&#x2031;" string="{\textpertenthousand}"/>
     <!--PRIME or minute, not superscripted-->
     <char character="&#x2032;" string="${\prime}$"/>
     <!--DOUBLE PRIME or second, not superscripted-->
