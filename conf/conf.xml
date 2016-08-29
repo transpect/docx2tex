@@ -295,7 +295,8 @@
 
   <template context="dbk:phrase[@css:text-decoration-line eq 'underline' 
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline'])]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline'])
+                                and not(@role eq 'Hyperlink')]">
     <rule name="underline" type="cmd">
       <param/>
     </rule>
@@ -415,8 +416,8 @@
   <!-- comments -->
 
   <template context="dbk:annotation">
-    <rule name="comment" type="env">
-      <text/>
+    <rule break-after="1">
+      <text select="concat('%', string-join(.//node(), ' '))"/>
     </rule>
   </template>
 
