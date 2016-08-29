@@ -138,11 +138,43 @@
     </rule>
   </template>
   
+  <template context="dbk:subscript[matches(., '^[a-z][a-z]+$')]" mathmode="true">
+    <rule>
+      <text select="'_{\text{'"/>
+      <text/>
+      <text select="'}}'"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:subscript[matches(., '^[a-z]$')]" mathmode="true">
+    <rule>
+      <text select="'_{\mathrm{'"/>
+      <text/>
+      <text select="'}}'"/>
+    </rule>
+  </template>
+  
   <template context="dbk:superscript" mathmode="true">
     <rule>
       <text select="'^{'"/>
       <text/>
       <text select="'}'"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:superscript[matches(., '^[a-z][a-z]+$')]" mathmode="true">
+    <rule>
+      <text select="'^{\text{'"/>
+      <text/>
+      <text select="'}}'"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:superscript[matches(., '^[a-z]$')]" mathmode="true">
+    <rule>
+      <text select="'^{\mathrm{'"/>
+      <text/>
+      <text select="'}}'"/>
     </rule>
   </template>
   
