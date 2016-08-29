@@ -741,8 +741,20 @@
     <char character="&#x2021;" string="${\ddag}$"/>
     <!--BULLET -->
     <char character="&#x2022;" string="{\textbullet}"/>
+    <!--TRIANGULAR BULLET-->
+    <char character="&#x2023;" string="${\blacktriangleright}$"/>
+    <!--ONE DOT LEADER-->
+    <char character="&#x2024;" string="${\ldotp}$"/>
+    <!--TWO DOT LEADER-->
+    <char character="&#x2025;" string="${\ldotp\ldotp}$"/>
     <!--HORIZONTAL ELLIPSIS -->
     <char character="&#x2026;" string="{\ldots}"/>
+    <!-- HYPHENATION POINT -->
+    <char character="&#x2027;" string="{\textbullet}"/>
+    <!-- PER MILLE SIGN -->
+    <char character="&#x2030;" string="{\textperthousand}"/>
+    <!-- PER TEN THOUSAND SIGN -->
+    <char character="&#x2031;" string="{\textpertenthousand}">
     <!--PRIME or minute, not superscripted-->
     <char character="&#x2032;" string="${\prime}$"/>
     <!--DOUBLE PRIME or second, not superscripted-->
@@ -1645,6 +1657,10 @@
     <char character="&#x2605;" string="${\bigstar}$"/>
     <!--SUN-->
     <char character="&#x2609;" string="${\Sun}$"/>
+    <!--BLACK TELEPHONE -->
+    <char character="&#x260e;" string="${\phone}$"/>
+    <!--WHITE TELEPHONE -->
+    <char character="&#x260f;" string="${\phone}$"/>
     <!--BALLOT BOX-->
     <char character="&#x2610;" string="${\Square}$"/>
     <!--t \Checkedbox (marvosym), BALLOT BOX WITH CHECK-->
@@ -3716,7 +3732,8 @@
     <char character="&#x1d7fe;" string="${\mathtt{8}}$"/>
     <!--mathematical monospace digit 9-->
     <char character="&#x1d7ff;" string="${\mathtt{9}}$"/>
-
+    <!--BELL -->
+    <char character="&#x1f514;" string="${\bell}$"/>
   </charmap>
 
 </set>
