@@ -178,9 +178,20 @@
     </rule>
   </template>
   
-  <template context="dbk:phrase[@css:top]">
+  <template context="dbk:phrase[@css:top[not(starts-with(., '-'))]]">
     <rule name="raisebox" type="cmd">
-      <param select="@css:top"/>
+      <text>{-</text>
+      <text select="@css:top"/>
+      <text>}</text>
+      <param/>
+    </rule>
+  </template>
+  
+  <template context="dbk:phrase[@css:top[starts-with(., '-')]]">
+    <rule name="raisebox" type="cmd">
+      <text>{</text>
+      <text select="replace(@css:top, '^-', '')"/>
+      <text>}</text>
       <param/>
     </rule>
   </template>
