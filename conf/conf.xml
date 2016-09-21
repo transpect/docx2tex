@@ -17,6 +17,7 @@
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
+    \usepackage{amsxtra}
     \usepackage{wasysym}
     \usepackage{isomath}
     \usepackage{mathtools}
