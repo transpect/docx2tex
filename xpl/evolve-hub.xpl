@@ -16,11 +16,8 @@
     
 
   <p:input port="source" primary="true"/>
-  
   <p:input port="config" primary="false"/>
-  
   <p:input port="stylesheet"/>
-  
   <p:input port="parameters" kind="parameter" primary="true"/>
   
   <p:input port="models">
@@ -36,6 +33,7 @@
   <p:option name="debug" required="false" select="'no'"/>
   <p:option name="debug-dir-uri" required="false" select="'debug'"/>
   <p:option name="status-dir-uri" select="'status'"/>
+  <p:option name="fail-on-error" select="'yes'"/>
 
   <p:option name="refs" select="'yes'"/>
   
@@ -84,6 +82,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
     <p:with-option name="prefix" select="'evolve-hub/20'"/>
     <p:with-param name="expand-css-properties" select="'no'"/>
   </tr:xslt-mode>
@@ -97,6 +96,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
     <p:with-option name="prefix" select="'evolve-hub/30'"/>
   </tr:xslt-mode>
 
@@ -107,6 +107,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
   </hub:evolve-hub_lists-by-indent>
 
   <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-preprocess" name="docx2tex-preprocess">
@@ -117,6 +118,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
     <p:with-option name="prefix" select="'evolve-hub/60'"/>
     <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>
@@ -129,6 +131,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
     <p:with-option name="prefix" select="'evolve-hub/70'"/>
     <p:with-param name="refs" select="$refs"/>
   </tr:xslt-mode>
