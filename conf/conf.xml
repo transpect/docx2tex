@@ -85,7 +85,6 @@
                                                ','),
                                    '}'
                                    )"/>
-        <xsl:text>&#xa;</xsl:text>
     </xsl:for-each>
   </preamble>
 
