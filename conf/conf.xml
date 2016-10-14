@@ -81,7 +81,7 @@
                                    return concat('color-', index-of(distinct-values($doc//@css:color[. ne '#000000']), $i)),
                                    '}{rgb}{',
                                    string-join(for $i in tr:hex-rgb-color-to-ints(.) 
-                                               return xs:string($i div 255),
+                                               return xs:string(round-half-to-even($i div 255, 2)),
                                                ','),
                                    '}'
                                    )"/>
@@ -333,7 +333,8 @@
                                 or exists(for $i in ./@role 
                                 return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:color and not(@css:color eq '#000000') ]))]">
     <rule name="textcolor" type="cmd">
-      <param select="for $i in @css:color return concat('color-', index-of(distinct-values(//@css:color[. ne '#000000']), $i))"/>
+      <param select="for $i in (@css:color, for $i in @role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:color)[1] 
+                     return concat('color-', index-of(distinct-values(//@css:color[. ne '#000000']), $i))"/>
       <param/>
     </rule>
   </template>
