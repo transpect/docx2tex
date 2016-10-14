@@ -67,7 +67,7 @@
     </p:documentation>
   </p:option>
   
-  <p:option name="fail-on-error" select="'true'">
+  <p:option name="fail-on-error" select="'yes'">
     <p:documentation>
       Whether the pipeline should fail on some errors.
     </p:documentation>
