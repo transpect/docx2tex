@@ -105,9 +105,9 @@
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="docx2tex-preprocess"/>
       <!-- add label -->
-      <xsl:if test="phrase[@role eq 'docx2tex:identifier']">
-        <xsl:processing-instruction name="latex" select="concat('\label{mark-', phrase[@role eq 'docx2tex:identifier'],'}')"/>
-      </xsl:if>
+      <xsl:for-each select="phrase[@role eq 'docx2tex:identifier']">
+        <xsl:processing-instruction name="latex" select="concat('\label{mark-', .,'}')"/>
+      </xsl:for-each>
     </xsl:copy>
   </xsl:template>
   
