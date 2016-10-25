@@ -103,7 +103,7 @@
   
   <xsl:template match="para[@docx2tex:config eq 'headline']" mode="docx2tex-preprocess">
     <xsl:copy>
-      <xsl:apply-templates select="@*, node()" mode="docx2tex-preprocess"/>
+      <xsl:apply-templates select="@*, node() except phrase[@role eq 'docx2tex:identifier']" mode="docx2tex-preprocess"/>
       <!-- add label -->
       <xsl:for-each select="phrase[@role eq 'docx2tex:identifier']">
         <xsl:processing-instruction name="latex" select="concat('\label{mark-', .,'}')"/>
