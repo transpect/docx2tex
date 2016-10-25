@@ -138,8 +138,11 @@
   
   <!-- move leading and trailing whitespace out of phrase #13913 -->
   
-  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0][not(following-sibling::text()[not(matches(., '^\s'))])]" mode="docx2tex-preprocess">
-    <xsl:value-of select="replace(., '\s+', ' ')"/>
+  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')] (: leading or trailing whitespace :)
+                             [string-length(normalize-space(.)) gt 0]
+                             [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
+                              not(preceding-sibling::text()[1][not(matches(., '\s$'))])]" mode="docx2tex-preprocess">
+    <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
   <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess">
