@@ -74,7 +74,9 @@
     </xsl:choose>
     <xsl:variable name="doc" select="/*" as="element()"/>
     <!-- iterate over colors and generate global color declaration -->
-    <xsl:for-each select="distinct-values(//@css:color[. ne '#000000'])">
+    <xsl:for-each select="distinct-values(//@css:color[not(. eq '#000000' 
+                                                           or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
+                                                           )])">
       <xsl:text>&#xa;</xsl:text>
       <xsl:value-of select="concat('\definecolor{',
                                    for $i in . 
@@ -339,7 +341,7 @@
 
   <!-- text styles -->
   
-  <template context="dbk:phrase[not(@css:color eq '#000000') and (@css:color 
+  <template context="dbk:phrase[not(@css:color eq '#000000' or @role = ('ZFinlineequation', 'ZFequation')) and (@css:color 
                                 or exists(for $i in ./@role 
                                 return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:color and not(@css:color eq '#000000') ]))]">
     <rule name="textcolor" type="cmd">
