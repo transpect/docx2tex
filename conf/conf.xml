@@ -149,14 +149,6 @@
   
   <!-- superscript, subscript, manual raise or lowering position -->
 
-  <template context="dbk:subscript" mathmode="true">
-    <rule>
-      <text select="'_{'"/>
-      <text/>
-      <text select="'}'"/>
-    </rule>
-  </template>
-  
   <template context="dbk:subscript[matches(., '^[a-z][a-z]+$', 'i')]" mathmode="true">
     <rule>
       <text select="'_{\text{'"/>
@@ -170,14 +162,6 @@
       <text select="'_{\mathrm{'"/>
       <text/>
       <text select="'}}'"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript" mathmode="true">
-    <rule>
-      <text select="'^{'"/>
-      <text/>
-      <text select="'}'"/>
     </rule>
   </template>
   
@@ -196,7 +180,33 @@
       <text select="'}}'"/>
     </rule>
   </template>
+
+  <template context="dbk:subscript
+                    |dbk:phrase[xs:integer(replace((@css:top, 
+                                                    for $i in ./@role 
+                                                    return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top
+                                                    )[1],
+                                                    '[a-z]+$', '')) lt 0]" mathmode="true">
+    <rule>
+      <text select="'^{'"/>
+      <text/>
+      <text select="'}'"/>
+    </rule>
+  </template>
   
+  <template context="dbk:superscript
+                    |dbk:phrase[xs:integer(replace((@css:top, 
+                                                    for $i in ./@role 
+                                                    return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top
+                                                    )[1],
+                                                    '[a-z]+$', '')) gt 0]" mathmode="true">
+    <rule>
+      <text select="'^{'"/>
+      <text/>
+      <text select="'}'"/>
+    </rule>
+  </template>
+    
   <template context="dbk:phrase[@css:top[not(starts-with(., '-'))]]">
     <rule name="raisebox" type="cmd">
       <text>{-</text>
