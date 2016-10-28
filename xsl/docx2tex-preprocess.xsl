@@ -141,7 +141,8 @@
   <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')] (: leading or trailing whitespace :)
                              [string-length(normalize-space(.)) gt 0]
                              [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
-                              not(preceding-sibling::text()[1][not(matches(., '\s$'))])]" mode="docx2tex-preprocess">
+                              not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
+                              [not(@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
