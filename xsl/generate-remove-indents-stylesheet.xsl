@@ -67,10 +67,7 @@
                                  '|',
                                  @context, '/@css:text-indent'
                                  )}" priority="{position()}"/>
-    
-    <xso:template match="{concat(@context, '/@css:margin-left', 
-                                 '|', @context, '/@css:text-indent')}" priority="{position()}"/>
-    
+        
     <xso:template match="{concat(@context, '/dbk:tab')}" priority="{position()}">
       <phrase role="tab" xmlns="http://docbook.org/ns/docbook"><xso:text>&#x9;</xso:text></phrase>
     </xso:template>
