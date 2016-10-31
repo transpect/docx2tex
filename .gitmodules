@@ -22,3 +22,6 @@
 [submodule "mml2tex"]
 	path = mml2tex
 	url = https://github.com/transpect/mml2tex
+[submodule "htmlreports"]
+	path = htmlreports
+	url = https://github.com/transpect/htmlreports
