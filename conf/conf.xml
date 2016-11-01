@@ -477,6 +477,16 @@
       <text select="concat('!', .)"/>
     </rule>
   </template>
+  
+  <!-- textbox -->
+  
+  <template context="dbk:sidebar">
+    <rule break-after="2" break-before="1">
+      <text>\fbox{\begin{minipage}[t]{0.8\textwidth}</text>
+      <text/>
+      <text>\end{minipage}}</text>
+    </rule>
+  </template>
 
   <charmap>
     
