@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-  xmlns:c="http://www.w3.org/ns/xproc-step" 
+  xmlns:c="http://www.w3.org/ns/xproc-step"   
   xmlns:tr="http://transpect.io"
   xmlns:docx2tex="http://transpect.io/docx2tex"
   version="1.0" 
@@ -31,6 +31,11 @@
         <p:with-option name="href" select="$conf"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
       </tr:load>
+      
+      <tr:store-debug pipeline-step="docx2tex/loaded-config-xml">
+        <p:with-option name="active" select="$debug"/>
+        <p:with-option name="base-uri" select="$debug-dir-uri"/>
+      </tr:store-debug>
       
       <tr:simple-progress-msg file="docxtex-load-xml-config.txt">
         <p:input port="msgs">
@@ -83,7 +88,7 @@
         <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
       </tr:simple-progress-msg>
       
-      <tr:store-debug pipeline-step="docx2tex/loaded-config">
+      <tr:store-debug pipeline-step="docx2tex/loaded-config-csv">
         <p:with-option name="active" select="$debug"/>
         <p:with-option name="base-uri" select="$debug-dir-uri"/>
       </tr:store-debug>
