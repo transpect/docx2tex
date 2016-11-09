@@ -212,7 +212,7 @@
     <rule name="figure" type="env">
       <text/>
       <text>&#xa;</text>
-      <text select="concat('\label{fig:', index-of(//dbk:figure, .), '}')"/>
+      <text select="concat('\label{fig:', index-of(for $i in //dbk:figure return generate-id($i), generate-id(.)), '}')"/>
     </rule>
   </template>
   
