@@ -540,13 +540,15 @@
     <!--plus-or-minus sign-->
     <char character="&#xb1;" string="${\pm}$"/>
     <!--SUPERSCRIPT TWO -->
-    <char character="&#xb2;" string="\textsuperscript{2}"/>
+    <char character="&#xb2;" string="$^{2}$"/>
     <!--SUPERSCRIPT THREE -->
-    <char character="&#xb3;" string="\textsuperscript{3}"/>
+    <char character="&#xb3;" string="$^{3}$"/>
     <!--= \tcmu (mathcomp), t \textmu (textcomp), # \mathrm{\mu} (omlmathrm), # \muup (kpfonts mathdesign), MICRO SIGN-->
     <char character="&#xb5;" string="${\mathrm{\mu}}$"/>
     <!--PILCROW SIGN -->
     <char character="&#xb6;" string="\P"/>
+    <!--SUPERSCRIPT ONE -->
+    <char character="&#xb9;" string="$^{1}$"/>
     <!--RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
     <char character="&#xbb;" string="{\frqq}"/>
     <!-- INVERTED QUESTION MARK -->
@@ -872,6 +874,91 @@
     <char character="&#x2064;" string=" "/>
     <!--= \medspace (amsmath), MEDIUM MATHEMATICAL SPACE-->
     <char character="&#x205f;" string="${\:}$"/>
+    
+    <!--  *
+          * Superscripts and Subscripts
+          * -->
+    
+    <!-- SUPERSCRIPT FOUR -->
+    <char character="&#x2074;" string="$^{4}$"/>
+    <!-- SUPERSCRIPT FIVE -->
+    <char character="&#x2075;" string="$^{5}$"/>
+    <!-- SUPERSCRIPT SIX -->
+    <char character="&#x2076;" string="$^{6}$"/>
+    <!-- SUPERSCRIPT SEVEN -->
+    <char character="&#x2077;" string="$^{7}$"/>
+    <!-- SUPERSCRIPT EIGHT -->
+    <char character="&#x2078;" string="$^{8}$"/>
+    <!-- SUPERSCRIPT NINE -->
+    <char character="&#x2079;" string="$^{9}$"/>
+    <!-- SUPERSCRIPT PLUS SIGN -->
+    <char character="&#x207a;" string="$^{+}$"/>
+    <!-- SUPERSCRIPT MINUS SIGN -->
+    <char character="&#x207b;" string="$^{-}$"/>
+    <!-- SUPERSCRIPT EQUALS SIGN -->
+    <char character="&#x207c;" string="$^{=}$"/>
+    <!-- SUPERSCRIPT LEFT PARENTHESIS -->
+    <char character="&#x207d;" string="$^{(}$"/>
+    <!-- SUPERSCRIPT RIGHT PARENTHESIS  -->
+    <char character="&#x207e;" string="$^{)}$"/>
+    <!-- SUPERSCRIPT LATIN SMALL LETTER N -->
+    <char character="&#x207f;" string="$^{n}$"/>
+    <!-- SUBSCRIPT ZERO -->
+    <char character="&#x2080;" string="$_{0}$"/>
+    <!-- SUBSCRIPT ONE -->
+    <char character="&#x2081;" string="$_{1}$"/>
+    <!-- SUBSCRIPT TWO -->
+    <char character="&#x2082;" string="$_{2}$"/>
+    <!-- SUBSCRIPT THREE -->
+    <char character="&#x2083;" string="$_{3}$"/>
+    <!-- SUBSCRIPT FOUR -->
+    <char character="&#x2084;" string="$_{4}$"/>
+    <!-- SUBSCRIPT FIVE -->
+    <char character="&#x2085;" string="$_{5}$"/>
+    <!-- SUBSCRIPT SIX -->
+    <char character="&#x2086;" string="$_{6}$"/>
+    <!-- SUBSCRIPT SEVEN -->
+    <char character="&#x2087;" string="$_{7}$"/>
+    <!-- SUBSCRIPT EIGHT -->
+    <char character="&#x2088;" string="$_{8}$"/>
+    <!-- SUBSCRIPT NINE -->
+    <char character="&#x2089;" string="$_{9}$"/>
+    <!-- SUBSCRIPT PLUS SIGN -->
+    <char character="&#x208a;" string="$_{+}$"/>
+    <!-- SUBSCRIPT MINUS SIGN -->
+    <char character="&#x208b;" string="$_{-}$"/>
+    <!-- SUBSCRIPT EQUALS SIGN -->
+    <char character="&#x208c;" string="$_{=}$"/>
+    <!-- SUBSCRIPT LEFT PARENTHESIS -->
+    <char character="&#x208d;" string="$_{(}$"/>
+    <!-- SUBSCRIPT RIGHT PARENTHESIS  -->
+    <char character="&#x208e;" string="$_{)}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER A -->
+    <char character="&#x2090;" string="$_{a}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER E -->
+    <char character="&#x2091;" string="$_{e}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER O -->
+    <char character="&#x2092;" string="$_{o}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER X -->
+    <char character="&#x2093;" string="$_{x}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER SCHWA -->
+    <char character="&#x2094;" string="$_{\text{\textschwa}}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER H -->
+    <char character="&#x2095;" string="$_{h}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER K -->
+    <char character="&#x2096;" string="$_{k}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER L -->
+    <char character="&#x2097;" string="$_{l}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER M -->
+    <char character="&#x2098;" string="$_{m}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER N -->
+    <char character="&#x2099;" string="$_{n}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER p -->
+    <char character="&#x209a;" string="$_{p}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER S -->
+    <char character="&#x209b;" string="$_{s}$"/>
+    <!-- LATIN SUBSCRIPT SMALL LETTER T -->
+    <char character="&#x209t;" string="$_{t}$"/>
     
     <!-- *
          * Currency Symbols
