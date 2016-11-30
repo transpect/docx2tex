@@ -958,7 +958,7 @@
     <!-- LATIN SUBSCRIPT SMALL LETTER S -->
     <char character="&#x209b;" string="$_{s}$"/>
     <!-- LATIN SUBSCRIPT SMALL LETTER T -->
-    <char character="&#x209t;" string="$_{t}$"/>
+    <char character="&#x209c;" string="$_{t}$"/>
     
     <!-- *
          * Currency Symbols
