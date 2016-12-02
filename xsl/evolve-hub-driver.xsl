@@ -23,7 +23,7 @@
   <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
   <xsl:param name="refs"/>
   
-  <!-- group phrases, superscript and subscript, #13898, # -->
+  <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
   
   <xsl:template match="para[count(phrase) gt 1 or count(superscript) gt 1 or count(subscript) gt 1]" mode="hub:identifiers" priority="-10">
     <xsl:copy>
