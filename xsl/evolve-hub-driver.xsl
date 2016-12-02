@@ -28,10 +28,15 @@
   <xsl:template match="para[count(phrase) gt 1 or count(superscript) gt 1 or count(subscript) gt 1]" mode="hub:identifiers" priority="-10">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>        
-      <xsl:for-each-group select="node()" group-adjacent="concat(local-name(), 
-                                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch)
-                                                                             return concat($i/local-name(), '=', $i),
-                                                                             '--'))">
+      <xsl:for-each-group select="node()" 
+                          group-adjacent="concat(local-name(), 
+                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch)
+                                                             return concat($i/local-name(), '=', $i),
+                                                             '--'),
+                                                             (if(replace(@css:letter-spacing, '[a-z]+$', '') castable as xs:decimal) 
+                                                              then xs:decimal(replace(@css:letter-spacing, '[a-z]+$', '')) 
+                                                              else 0) gt 2 (: visual perceivable letter-spacing :) 
+                                                             )">
         <xsl:copy>
           <xsl:choose>
             <xsl:when test="self::phrase or self::superscript or self::subscript">
