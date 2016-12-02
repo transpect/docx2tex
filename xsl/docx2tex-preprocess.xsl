@@ -114,28 +114,7 @@
   <xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
     <xsl:apply-templates select="varlistentry/term/node(), varlistentry/listitem/node()" mode="#current"/>
   </xsl:template>
-  
-  <!-- join subscript and superscript, #13898 -->
-  
-  <xsl:template match="*[count(superscript) gt 1 or count(subscript) gt 1]" mode="docx2tex-preprocess">
-    <xsl:copy>
-      <xsl:apply-templates select="@*" mode="#current" />
-      <xsl:for-each-group select="node()" group-adjacent="string-join((local-name(), @role, @css:*), '-')">
-        <xsl:choose>
-          <xsl:when test="self::superscript or self::subscript">
-            <xsl:copy>
-              <xsl:copy-of select="@*"/>
-              <xsl:apply-templates select="current-group()/node()" mode="#current" />
-            </xsl:copy>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:apply-templates select="current-group()" mode="#current" />
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each-group>
-    </xsl:copy>
-  </xsl:template>
-  
+    
   <!-- move leading and trailing whitespace out of phrase #13913 -->
   
   <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')] (: leading or trailing whitespace :)

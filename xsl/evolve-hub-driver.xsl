@@ -22,5 +22,29 @@
   
   <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
   <xsl:param name="refs"/>
+  
+  <!-- group phrases, superscript and subscript, #13898, # -->
+  
+  <xsl:template match="para[count(phrase) gt 1 or count(superscript) gt 1 or count(subscript) gt 1]" mode="hub:identifiers" priority="-10">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>        
+      <xsl:for-each-group select="node()" group-adjacent="concat(local-name(), 
+                                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch)
+                                                                             return concat($i/local-name(), '=', $i),
+                                                                             '--'))">
+        <xsl:copy>
+          <xsl:choose>
+            <xsl:when test="self::phrase or self::superscript or self::subscript">
+              <xsl:apply-templates select="current-group()/@*" mode="#current"/>
+              <xsl:apply-templates select="current-group()/node()" mode="#current"/>            
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="@*, node()" mode="#current"/>
+            </xsl:otherwise>
+          </xsl:choose>  
+        </xsl:copy>
+      </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
 
 </xsl:stylesheet>
