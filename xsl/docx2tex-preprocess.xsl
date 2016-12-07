@@ -85,7 +85,10 @@
   <!-- remove each list which counts only one list item -->
   
   <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]
-    |itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
+                       |itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
+    <xsl:if test="@mark">
+      <xsl:processing-instruction name="latex" select="concat('$\', @mark, '$ ')"/>
+    </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
   </xsl:template>
   
