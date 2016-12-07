@@ -34,7 +34,7 @@ REM debugging
 
 REM start 
 echo starting docx2tex
-call %CALABASH% -i conf=%CONF% -o result=%OUT_DIR%/%BASENAME%.tex -o hub=%OUT_DIR%/%BASENAME%.xml %DIR%/xpl/docx2tex.xpl docx=%FILE% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>>%LOG% || GOTO exitonerror
+call %CALABASH% -o result=%OUT_DIR%/%BASENAME%.tex -o hub=%OUT_DIR%/%BASENAME%.xml %DIR%/xpl/docx2tex.xpl docx=%FILE% conf=%CONF% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>>%LOG% || GOTO exitonerror
 
 goto finish
 
