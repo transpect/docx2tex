@@ -180,6 +180,12 @@
     </rule>
   </template>
   
+  <template context="dbk:superscript[matches(., '^\{\\(textregistered|texttrademark)\}$')]">
+    <rule name="textsuperscript" type="cmd">
+      <text/>
+    </rule>
+  </template>
+  
   <!-- tabs -->
   
   <template context="dbk:tab|dbk:phrase[@role eq 'tab']">
