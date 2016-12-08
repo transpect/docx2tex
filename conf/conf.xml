@@ -75,6 +75,7 @@
     <xsl:variable name="colors" 
                   select="distinct-values(//@css:color[not(. eq '#000000' 
                                                            or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
+                                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation')]
                                                            or ancestor-or-self::dbk:link
                                                            or parent::*[@native-name eq 'Hyperlink']
                                                            )])" as="xs:string*"/>
@@ -295,6 +296,8 @@
   
   <template context="dbk:phrase[not(@css:color eq '#000000'
                                     or @role = ('ZFinlineequation', 'ZFequation')
+                                    or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
+                                    or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or ancestor-or-self::dbk:link)
                                 and (@css:color 
                                 or exists(for $i in ./@role 
