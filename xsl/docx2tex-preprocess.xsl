@@ -6,12 +6,15 @@
   xmlns:mml="http://www.w3.org/1998/Math/MathML" 
   xmlns:tr="http://transpect.io"
   xmlns:docx2tex="http://transpect.io/docx2tex"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-  xmlns:functx="http://www.functx.com"  
+  xmlns:xml2tex="http://transpect.io/xml2tex"
+  xmlns:mml2tex="http://transpect.io/mml2tex"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"   
   xmlns="http://docbook.org/ns/docbook"
   version="2.0" 
   exclude-result-prefixes="#all"
-  xpath-default-namespace="http://docbook.org/ns/docbook">  
+  xpath-default-namespace="http://docbook.org/ns/docbook">
+  
+  <xsl:include href="http://transpect.io/mml2tex/xsl/mml2tex.xsl"/>
   
   <!--  *
         * MODE docx2tex-preprocess
@@ -84,10 +87,15 @@
   
   <!-- remove each list which counts only one list item -->
   
+  <xsl:variable name="texmap-override" select="document('http://transpect.io/mml2tex/texmap/texmap.xml')/xml2tex:set/xml2tex:charmap/xml2tex:char" as="element(xml2tex:char)+"/>
+  
   <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]
                        |itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
     <xsl:if test="@mark">
-      <xsl:processing-instruction name="latex" select="concat('$\', @mark, '$ ')"/>
+      <xsl:processing-instruction name="latex" 
+                                  select="if(string-length(@mark) eq 1) 
+                                          then concat('$', string-join(mml2tex:utf2tex(@mark, (), $texmap-override), ''), '$ ') 
+                                          else concat('$\', @mark, '$ ')"/>
     </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
   </xsl:template>
@@ -124,7 +132,7 @@
                              [string-length(normalize-space(.)) gt 0]
                              [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
                               not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
-                              [not(@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
+                              [not(parent::phrase/@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
