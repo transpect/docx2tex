@@ -76,7 +76,7 @@
     <xsl:variable name="colors" 
                   select="distinct-values(//@css:color[not(. eq '#000000' 
                                                            or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
-                                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation')]
+                                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                                            or ancestor-or-self::dbk:link
                                                            or parent::*[@native-name eq 'Hyperlink']
                                                            )])" as="xs:string*"/>
@@ -302,7 +302,7 @@
   <!-- text styles -->
   
   <template context="dbk:phrase[not(@css:color eq '#000000'
-                                    or @role = ('ZFinlineequation', 'ZFequation')
+                                    or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
                                     or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or ancestor-or-self::dbk:link)
@@ -312,7 +312,7 @@
     <rule name="textcolor" type="cmd">
       <param select="for $i in (@css:color, for $j in @role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:color)[1] 
                      return concat('color-', index-of(distinct-values(//@css:color[not(. eq '#000000' 
-                                                                                   or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
+                                                                                   or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                                                                    or ancestor-or-self::dbk:link
                                                                                    or parent::*[@native-name eq 'Hyperlink']
                                                                                    )]), $i))"/><!-- xpath must be equivalent to preamble color definition -->
