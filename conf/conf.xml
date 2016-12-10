@@ -28,6 +28,7 @@
     \usepackage{upgreek}
     \usepackage{enumerate}
     \usepackage{tensor}
+    \usepackage{pifont}
     <xsl:choose>
       <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
         <xsl:text>\usepackage[ngerman]{babel}</xsl:text>
@@ -1967,16 +1968,388 @@
          * Dingbats
          * -->
     
-    <!--LOWER RIGHT PENCIL-->   
-    <char character="&#x270e;" string="${\pencil}$"/>
-    <!--= \ballotcheck (arevmath), tick, CHECK MARK-->
-    <char character="&#x2713;" string="${\checkmark}$"/>
-    <!--BALLOT X-->
-    <char character="&#x2717;" string="${\ballotx}$"/>
-    <!--MALTESE CROSS-->
-    <char character="&#x2720;" string="${\maltese}$"/>
-    <!--THREE-D TOP-LIGHTED RIGHTWARDS ARROWHEAD-->
-    <char character="&#x27a2;" string="${\arrowbullet}$"/>
+    <!-- BLACK SAFETY SCISSORS -->
+    <char character="&#x2700;" string="\ding{34}"/>
+    <!-- UPPER BLADE SCISSORS -->
+    <char character="&#x2701;" string="\ding{33}"/>
+    <!-- BLACK SCISSORS -->
+    <char character="&#x2702;" string="\ding{34}"/>
+    <!-- LOWER BLADE SCISSORS -->
+    <char character="&#x2703;" string="\ding{35}"/>
+    <!-- WHITE SCISSORS -->
+    <char character="&#x2704;" string="\ding{36}"/>
+    <!-- WHITE HEAVY CHECK MARK -->
+    <char character="&#x2705;" string="\ding{52}"/>
+    <!-- TELEPHONE LOCATION SIGN -->
+    <char character="&#x2706;" string="\ding{38}"/>
+    <!-- TAPE DRIVE -->
+    <char character="&#x2707;" string="\ding{39}"/>
+    <!-- AIRPLANE -->
+    <char character="&#x2708;" string="\ding{40}"/>
+    <!-- ENVELOPE -->
+    <char character="&#x2709;" string="\ding{41}"/>
+    <!-- RAISED FIST -->
+    <char character="&#x270a;" string="\ding{42}"/>
+    <!-- RAISED HAND -->
+    <char character="&#x270b;" string="\ding{43}"/>
+    <!-- VICTORY HAND -->
+    <char character="&#x270c;" string="\ding{44}"/>
+    <!-- WRITING HAND -->
+    <char character="&#x270d;" string="\ding{45}"/>
+    <!-- LOWER RIGHT PENCIL -->
+    <char character="&#x270e;" string="\ding{46}"/>
+    <!-- PENCIL -->
+    <char character="&#x270f;" string="\ding{47}"/>
+    <!-- UPPER RIGHT PENCIL -->
+    <char character="&#x2710;" string="\ding{48}"/>
+    <!-- WHITE NIB -->
+    <char character="&#x2711;" string="\ding{49}"/>
+    <!-- BLACK NIB -->
+    <char character="&#x2712;" string="\ding{50}"/>
+    <!-- CHECK MARK -->
+    <char character="&#x2713;" string="\ding{51}"/>
+    <!-- HEAVY CHECK MARK -->
+    <char character="&#x2714;" string="\ding{52}"/>
+    <!-- MULTIPLICATION X -->
+    <char character="&#x2715;" string="\ding{53}"/>
+    <!-- HEAVY MULTIPLICATION X -->
+    <char character="&#x2716;" string="\ding{54}"/>
+    <!-- BALLOT X -->
+    <char character="&#x2717;" string="\ding{55}"/>
+    <!-- HEAVY BALLOT X -->
+    <char character="&#x2718;" string="\ding{56}"/>
+    <!-- OUTLINED GREEK CROSS -->
+    <char character="&#x2719;" string="\ding{57}"/>
+    <!-- HEAVY GREEK CROSS -->
+    <char character="&#x271a;" string="\ding{58}"/>
+    <!-- OPEN CENTRE CROSS -->
+    <char character="&#x271b;" string="\ding{59}"/>
+    <!-- HEAVY OPEN CENTRE CROSS -->
+    <char character="&#x271c;" string="\ding{60}"/>
+    <!-- LATIN CROSS -->
+    <char character="&#x271d;" string="\ding{61}"/>
+    <!-- SHADOWED WHITE LATIN CROSS -->
+    <char character="&#x271e;" string="\ding{62}"/>
+    <!-- OUTLINED LATIN CROSS -->
+    <char character="&#x271f;" string="\ding{63}"/>
+    <!-- MALTESE CROSS -->
+    <char character="&#x2720;" string="\ding{64}"/>
+    <!-- STAR OF DAVID -->
+    <char character="&#x2721;" string="\ding{65}"/>
+    <!-- FOUR TEARDROP-SPOKED ASTERISK -->
+    <char character="&#x2722;" string="\ding{66}"/>
+    <!-- FOUR BALLOON-SPOKED ASTERISK -->
+    <char character="&#x2723;" string="\ding{67}"/>
+    <!-- HEAVY FOUR BALLOON-SPOKED ASTERISK -->
+    <char character="&#x2724;" string="\ding{68}"/>
+    <!-- BLACK FOUR POINTED STAR -->
+    <char character="&#x2725;" string="\ding{69}"/>
+    <!-- WHITE FOUR POINTED STAR -->
+    <char character="&#x2726;" string="\ding{70}"/>
+    <!-- WHITE FOUR POINTED STAR -->
+    <char character="&#x2727;" string="\ding{71}"/>
+    <!-- SPARKLES -->
+    <char character="&#x2728;" string="\ding{72}"/>
+    <!-- STRESS OUTLINED WHITE STAR -->
+    <char character="&#x2729;" string="\ding{73}"/>
+    <!-- CIRCLED WHITE STAR -->
+    <char character="&#x272a;" string="\ding{74}"/>
+    <!-- OPEN CENTRE BLACK STAR -->
+    <char character="&#x272b;" string="\ding{75}"/>
+    <!-- BLACK CENTRE WHITE STAR -->
+    <char character="&#x272c;" string="\ding{76}"/>
+    <!-- OUTLINED BLACK STAR -->
+    <char character="&#x272d;" string="\ding{77}"/>
+    <!-- HEAVY OUTLINED BLACK STAR -->
+    <char character="&#x272e;" string="\ding{78}"/>
+    <!-- PINWHEEL STAR -->
+    <char character="&#x272f;" string="\ding{79}"/>
+    <!-- SHADOWED WHITE STAR -->
+    <char character="&#x2730;" string="\ding{80}"/>
+    <!-- HEAVY ASTERISK -->
+    <char character="&#x2731;" string="\ding{81}"/>
+    <!-- OPEN CENTRE ASTERISK -->
+    <char character="&#x2732;" string="\ding{82}"/>
+    <!-- EIGHT SPOKED ASTERISK -->
+    <char character="&#x2733;" string="\ding{83}"/>
+    <!-- EIGHT POINTED BLACK STAR -->
+    <char character="&#x2734;" string="\ding{84}"/>
+    <!-- EIGHT POINTED PINWHEEL STAR -->
+    <char character="&#x2735;" string="\ding{85}"/>
+    <!-- SIX POINTED BLACK STAR -->
+    <char character="&#x2736;" string="\ding{86}"/>
+    <!-- EIGHT POINTED RECTILINEAR BLACK STAR -->
+    <char character="&#x2737;" string="\ding{87}"/>
+    <!-- HEAVY EIGHT POINTED RECTILINEAR BLACK STAR -->
+    <char character="&#x2738;" string="\ding{88}"/>
+    <!-- TWELVE POINTED BLACK STAR -->
+    <char character="&#x2739;" string="\ding{89}"/>
+    <!-- SIXTEEN POINTED ASTERISK -->
+    <char character="&#x273a;" string="\ding{90}"/>
+    <!-- TEARDROP-SPOKED ASTERISK -->
+    <char character="&#x273b;" string="\ding{91}"/>
+    <!-- OPEN CENTRE TEARDROP-SPOKED ASTERISK -->
+    <char character="&#x273c;" string="\ding{92}"/>
+    <!-- HEAVY TEARDROP-SPOKED ASTERISK -->
+    <char character="&#x273d;" string="\ding{93}"/>
+    <!-- SIX PETALLED BLACK AND WHITE FLORETTE -->
+    <char character="&#x273e;" string="\ding{94}"/>
+    <!-- BLACK FLORETTE -->
+    <char character="&#x273f;" string="\ding{95}"/>
+    <!-- WHITE FLORETTE -->
+    <char character="&#x2740;" string="\ding{96}"/>
+    <!-- EIGHT PETALLED OUTLINED BLACK FLORETTE -->
+    <char character="&#x2741;" string="\ding{97}"/>
+    <!-- CIRCLED OPEN CENTRE EIGHT POINTED STAR -->
+    <char character="&#x2742;" string="\ding{98}"/>
+    <!-- HEAVY TEARDROP-SPOKED PINWHEEL ASTERISK -->
+    <char character="&#x2743;" string="\ding{99}"/>
+    <!-- SNOWFLAKE -->
+    <char character="&#x2744;" string="\ding{100}"/>
+    <!-- TIGHT TRIFOLIATE SNOWFLAKE -->
+    <char character="&#x2745;" string="\ding{101}"/>
+    <!-- HEAVY CHEVRON SNOWFLAKE -->
+    <char character="&#x2746;" string="\ding{102}"/>
+    <!-- SPARKLE -->
+    <char character="&#x2747;" string="\ding{103}"/>
+    <!-- HEAVY SPARKLE -->
+    <char character="&#x2748;" string="\ding{104}"/>
+    <!-- BALLOON-SPOKED ASTERISK -->
+    <char character="&#x2749;" string="\ding{105}"/>
+    <!-- EIGHT TEARDROP-SPOKED PROPELLER ASTERISK -->
+    <char character="&#x274a;" string="\ding{106}"/>
+    <!-- HEAVY EIGHT TEARDROP-SPOKED PROPELLER ASTERISK -->
+    <char character="&#x274b;" string="\ding{107}"/>
+    <!-- CROSS MARK -->
+    <char character="&#x274c;" string="\ding{53}"/>
+    <!-- SHADOWED WHITE CIRCLE -->
+    <char character="&#x274d;" string="\ding{109}"/>
+    <!-- NEGATIVE SQUARED CROSS MARK -->
+    <char character="&#x274e;" string="\ding{53}"/>
+    <!-- LOWER RIGHT DROP-SHADOWED WHITE SQUARE -->
+    <char character="&#x274f;" string="\ding{111}"/>
+    <!-- UPPER RIGHT DROP-SHADOWED WHITE SQUARE -->
+    <char character="&#x2750;" string="\ding{112}"/>
+    <!-- LOWER RIGHT SHADOWED WHITE SQUARE -->
+    <char character="&#x2751;" string="\ding{113}"/>
+    <!-- UPPER RIGHT SHADOWED WHITE SQUARE -->
+    <char character="&#x2752;" string="\ding{114}"/>
+    <!-- BLACK QUESTION MARK ORNAMENT -->
+    <char character="&#x2753;" string="?"/>
+    <!-- WHITE QUESTION MARK ORNAMENT -->
+    <char character="&#x2754;" string="?"/>
+    <!-- WHITE EXCLAMATION MARK ORNAMENT -->
+    <char character="&#x2755;" string="!"/>
+    <!-- BLACK DIAMOND MINUS WHITE X -->
+    <char character="&#x2756;" string="\ding{118}"/>
+    <!-- HEAVY EXCLAMATION MARK SYMBOL -->
+    <char character="&#x2757;" string="!"/>
+    <!-- LIGHT VERTICAL BAR -->
+    <char character="&#x2758;" string="\ding{120}"/>
+    <!-- MEDIUM VERTICAL BAR -->
+    <char character="&#x2759;" string="\ding{121}"/>
+    <!-- HEAVY VERTICAL BAR -->
+    <char character="&#x275a;" string="\ding{122}"/>
+    <!-- HEAVY SINGLE TURNED COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x275b;" string="\ding{123}"/>
+    <!-- HEAVY SINGLE COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x275c;" string="\ding{124}"/>
+    <!-- HEAVY DOUBLE TURNED COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x275d;" string="\ding{125}"/>
+    <!-- HEAVY DOUBLE COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x275e;" string="\ding{126}"/>
+    <!-- HEAVY LOW SINGLE COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x275f;" string="\raisebox{-1ex}{\ding{124}}"/>
+    <!-- HEAVY LOW DOUBLE COMMA QUOTATION MARK ORNAMENT -->
+    <char character="&#x2760;" string="\raisebox{-1ex}{\ding{126}}"/>
+    <!-- CURVED STEM PARAGRAPH SIGN ORNAMENT -->
+    <char character="&#x2761;" string="\ding{161}"/>
+    <!-- HEAVY EXCLAMATION MARK ORNAMENT -->
+    <char character="&#x2762;" string="\ding{162}"/>
+    <!-- HEAVY HEART EXCLAMATION MARK ORNAMENT -->
+    <char character="&#x2763;" string="\ding{163}"/>
+    <!-- HEAVY BLACK HEART -->
+    <char character="&#x2764;" string="\ding{164}"/>
+    <!-- ROTATED HEAVY BLACK HEART BULLET -->
+    <char character="&#x2765;" string="\ding{165}"/>    
+    <!-- FLORAL HEART -->
+    <char character="&#x2766;" string="\ding{166}"/>
+    <!-- ROTATED FLORAL HEART BULLET -->
+    <char character="&#x2767;" string="\ding{167}"/>
+    <!-- MEDIUM LEFT PARENTHESIS ORNAMENT -->
+    <char character="&#x2768;" string="\("/>
+    <!-- MEDIUM RIGHT PARENTHESIS ORNAMENT -->
+    <char character="&#x2769;" string="\)"/>
+    <!-- MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT -->
+    <char character="&#x276a;" string="\("/>
+    <!-- MEDIUM FLATTENED RIGHT PARENTHESIS ORNAMENT -->
+    <char character="&#x276b;" string="\)"/>
+    <!-- MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT -->
+    <char character="&#x276c;" string="\("/>
+    <!-- MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT -->
+    <char character="&#x276d;" string="\)"/>
+    <!-- HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT -->
+    <char character="&#x276e;" string="{\flqq}"/>
+    <!-- HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT -->
+    <char character="&#x276f;" string="{\frqq}"/>
+    <!-- HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT -->
+    <char character="&#x2770;" string="{\flq}"/>
+    <!-- HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT -->
+    <char character="&#x2771;" string="{\frq}"/>
+    <!-- LIGHT LEFT TORTOISE SHELL BRACKET ORNAMENT -->
+    <char character="&#x2772;" string="\["/>
+    <!-- LIGHT RIGHT TORTOISE SHELL BRACKET ORNAMENT -->
+    <char character="&#x2773;" string="\]"/>
+    <!-- MEDIUM LEFT CURLY BRACKET ORNAMENT -->
+    <char character="&#x2774;" string="\{"/>
+    <!-- MEDIUM RIGHT CURLY BRACKET ORNAMENT -->
+    <char character="&#x2775;" string="\}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT ONE -->    
+    <char character="&#x2776;" string="\ding{182}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT TWO -->
+    <char character="&#x2777;" string="\ding{183}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT THREE -->
+    <char character="&#x2778;" string="\ding{184}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT FOUR -->
+    <char character="&#x2779;" string="\ding{185}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT FIVE -->
+    <char character="&#x277a;" string="\ding{186}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT SIX -->
+    <char character="&#x277b;" string="\ding{187}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT SEVEN -->
+    <char character="&#x277c;" string="\ding{188}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT EIGHT -->
+    <char character="&#x277d;" string="\ding{189}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT NINE -->
+    <char character="&#x277e;" string="\ding{190}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED DIGIT TEN -->
+    <char character="&#x277f;" string="\ding{191}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT ONE -->
+    <char character="&#x2780;" string="\ding{192}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT TWO -->
+    <char character="&#x2781;" string="\ding{193}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT THREE -->
+    <char character="&#x2782;" string="\ding{194}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT FOUR -->
+    <char character="&#x2783;" string="\ding{195}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT FIVE -->
+    <char character="&#x2784;" string="\ding{196}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT SIX -->
+    <char character="&#x2785;" string="\ding{197}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT SEVEN -->
+    <char character="&#x2786;" string="\ding{198}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT EIGHT -->
+    <char character="&#x2787;" string="\ding{199}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT NINE -->
+    <char character="&#x2788;" string="\ding{200}"/>
+    <!-- DINGBAT CIRCLED SANS-SERIF DIGIT TEN -->
+    <char character="&#x2789;" string="\ding{201}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT ONE -->
+    <char character="&#x278a;" string="\ding{202}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT TWO -->
+    <char character="&#x278b;" string="\ding{203}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT THREE -->
+    <char character="&#x278c;" string="\ding{204}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT FOUR -->
+    <char character="&#x278d;" string="\ding{205}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT FIVE -->
+    <char character="&#x278e;" string="\ding{206}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT SIX -->
+    <char character="&#x278f;" string="\ding{207}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT SEVEN -->
+    <char character="&#x2790;" string="\ding{208}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT EIGHT -->
+    <char character="&#x2791;" string="\ding{209}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT NINE -->
+    <char character="&#x2792;" string="\ding{210}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT TEN -->
+    <char character="&#x2793;" string="\ding{211}"/>
+    <!-- DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT TEN -->
+    <char character="&#x2793;" string="\ding{211}"/>
+    <!-- HEAVY WIDE-HEADED RIGHTWARDS ARROW -->
+    <char character="&#x2794;" string="\ding{212}"/>
+    <!-- HEAVY PLUS SIGN -->
+    <char character="&#x2795;" string="$+$"/>
+    <!-- HEAVY MINUS SIGN -->
+    <char character="&#x2796;" string="$-$"/>
+    <!-- HEAVY DIVISION SIGN -->
+    <char character="&#x2797;" string="$\div$"/>
+    <!-- HEAVY SOUTH EAST ARROW -->
+    <char character="&#x2798;" string="\ding{216}"/>
+    <!-- HEAVY RIGHTWARDS ARROW -->
+    <char character="&#x2799;" string="\ding{217}"/>
+    <!-- HEAVY NORTH EAST ARROW -->
+    <char character="&#x279a;" string="\ding{218}"/>
+    <!-- DRAFTING POINT RIGHTWARDS ARROW -->
+    <char character="&#x279b;" string="\ding{219}"/>
+    <!-- HEAVY ROUND-TIPPED RIGHTWARDS ARROW -->
+    <char character="&#x279c;" string="\ding{220}"/>
+    <!-- TRIANGLE-HEADED RIGHTWARDS ARROW -->
+    <char character="&#x279d;" string="\ding{221}"/>
+    <!-- HEAVY TRIANGLE-HEADED RIGHTWARDS ARROW -->
+    <char character="&#x279e;" string="\ding{222}"/>
+    <!-- DASHED TRIANGLE-HEADED RIGHTWARDS ARROW -->
+    <char character="&#x279f;" string="\ding{223}"/>
+    <!-- HEAVY DASHED TRIANGLE-HEADED RIGHTWARDS ARROW -->
+    <char character="&#x27a0;" string="\ding{224}"/>
+    <!-- BLACK RIGHTWARDS ARROW -->
+    <char character="&#x27a1;" string="\ding{225}"/>
+    <!-- THREE-D TOP-LIGHTED RIGHTWARDS ARROWHEAD -->
+    <char character="&#x27a2;" string="\ding{226}"/>
+    <!-- THREE-D BOTTOM-LIGHTED RIGHTWARDS ARROWHEAD -->
+    <char character="&#x27a3;" string="\ding{227}"/>
+    <!-- BLACK RIGHTWARDS ARROWHEAD -->
+    <char character="&#x27a4;" string="\ding{228}"/>
+    <!-- HEAVY BLACK CURVED DOWNWARDS AND RIGHTWARDS ARROW -->
+    <char character="&#x27a5;" string="\ding{229}"/>
+    <!-- HEAVY BLACK CURVED UPWARDS AND RIGHTWARDS ARROW -->
+    <char character="&#x27a6;" string="\ding{230}"/>
+    <!-- SQUAT BLACK RIGHTWARDS ARROW -->
+    <char character="&#x27a7;" string="\ding{231}"/>
+    <!-- HEAVY CONCAVE-POINTED BLACK RIGHTWARDS ARROW -->
+    <char character="&#x27a8;" string="\ding{232}"/>
+    <!-- RIGHT-SHADED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27a9;" string="\ding{233}"/>
+    <!-- LEFT-SHADED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27aa;" string="\ding{234}"/>
+    <!-- BACK-TILTED SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27ab;" string="\ding{235}"/>
+    <!-- FRONT-TILTED SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27ac;" string="\ding{236}"/>
+    <!-- HEAVY LOWER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27ad;" string="\ding{237}"/>
+    <!-- HEAVY UPPER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27ae;" string="\ding{238}"/>
+    <!-- NOTCHED LOWER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27af;" string="\ding{239}"/>
+    <!-- NOTCHED UPPER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27b1;" string="\ding{241}"/>
+    <!-- CIRCLED HEAVY WHITE RIGHTWARDS ARROW -->
+    <char character="&#x27b2;" string="\ding{242}"/>
+    <!-- WHITE-FEATHERED RIGHTWARDS ARROW -->
+    <char character="&#x27b3;" string="\ding{243}"/>
+    <!-- BLACK-FEATHERED SOUTH EAST ARROW -->
+    <char character="&#x27b4;" string="\ding{244}"/>
+    <!-- BLACK-FEATHERED RIGHTWARDS ARROW -->
+    <char character="&#x27b5;" string="\ding{245}"/>
+    <!-- BLACK-FEATHERED NORTH EAST ARROW -->
+    <char character="&#x27b6;" string="\ding{246}"/>
+    <!-- HEAVY BLACK-FEATHERED SOUTH EAST ARROW -->
+    <char character="&#x27b7;" string="\ding{247}"/>
+    <!-- HEAVY BLACK-FEATHERED RIGHTWARDS ARROW -->
+    <char character="&#x27b8;" string="\ding{248}"/>
+    <!-- HEAVY BLACK-FEATHERED NORTH EAST ARROW -->
+    <char character="&#x27b9;" string="\ding{249}"/>
+    <!-- TEARDROP-BARBED RIGHTWARDS ARROW -->
+    <char character="&#x27ba;" string="\ding{250}"/>
+    <!-- HEAVY TEARDROP-SHANKED RIGHTWARDS ARROW -->
+    <char character="&#x27bb;" string="\ding{251}"/>
+    <!-- WEDGE-TAILED RIGHTWARDS ARROW -->
+    <char character="&#x27bc;" string="\ding{252}"/>
+    <!-- HEAVY WEDGE-TAILED RIGHTWARDS ARROW -->
+    <char character="&#x27bd;" string="\ding{253}"/>
+    <!-- OPEN-OUTLINED RIGHTWARDS ARROW -->
+    <char character="&#x27be;" string="\ding{254}"/>
     
     <!-- *
          * Miscellaneous Mathematical Symbols-A
