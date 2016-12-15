@@ -226,4 +226,10 @@
     </xsl:analyze-string>
   </xsl:template>
   
+  <!-- preserve unmapped characters -->
+  
+  <xsl:template match="phrase[@role eq 'hub:ooxml-symbol']" mode="docx2tex-preprocess">
+    <xsl:processing-instruction name="latex" select="concat('\', @css:font-family, '{', @annotations, '}')"/>
+  </xsl:template>
+  
 </xsl:stylesheet>
