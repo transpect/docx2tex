@@ -1767,6 +1767,331 @@
     <char character="&#x2423;" string="{\textvisiblespace}"/>
     
     <!--  *
+          * ENCLOSED ALPHANUMERICS
+          *-->
+
+    <!-- CIRCLED DIGIT ONE -->
+    <char character="&#x2460;" string="\ding{172}"/>
+    <!-- CIRCLED DIGIT TWO -->
+    <char character="&#x2461;" string="\ding{173}"/>
+    <!-- CIRCLED DIGIT THREE -->
+    <char character="&#x2462;" string="\ding{174}"/>
+    <!-- CIRCLED DIGIT FOUR -->
+    <char character="&#x2463;" string="\ding{175}"/>
+    <!-- CIRCLED DIGIT FIVE -->
+    <char character="&#x2464;" string="\ding{176}"/>
+    <!-- CIRCLED DIGIT SIX -->
+    <char character="&#x2465;" string="\ding{177}"/>
+    <!-- CIRCLED DIGIT SEVEN -->
+    <char character="&#x2466;" string="\ding{178}"/>
+    <!-- CIRCLED DIGIT EIGHT -->
+    <char character="&#x2467;" string="\ding{179}"/>
+    <!-- CIRCLED DIGIT NINE -->
+    <char character="&#x2468;" string="\ding{180}"/>
+    <!-- CIRCLED DIGIT TEN -->
+    <char character="&#x2469;" string="\ding{181}"/>
+    <!-- CIRCLED DIGIT ELEVEN -->
+    <char character="&#x246a;" string="\ding{172}\ding{172}"/>
+    <!-- CIRCLED DIGIT TWELVE -->
+    <char character="&#x246b;" string="\ding{172}\ding{173}"/>
+    <!-- CIRCLED DIGIT THIRTEEN -->
+    <char character="&#x246c;" string="\ding{172}\ding{174}"/>
+    <!-- CIRCLED DIGIT FOURTEEN -->
+    <char character="&#x246d;" string="\ding{172}\ding{175}"/>
+    <!-- CIRCLED DIGIT FIVTEEN -->
+    <char character="&#x246e;" string="\ding{172}\ding{176}"/>
+    <!-- CIRCLED DIGIT SIXTEEN -->
+    <char character="&#x246f;" string="\ding{172}\ding{177}"/>
+    <!-- CIRCLED DIGIT SEVENTEEN -->
+    <char character="&#x2470;" string="\ding{172}\ding{178}"/>
+    <!-- CIRCLED DIGIT EIGHTEEN -->
+    <char character="&#x2471;" string="\ding{172}\ding{179}"/>
+    <!-- CIRCLED DIGIT NINETEEN -->
+    <char character="&#x2472;" string="\ding{172}\ding{180}"/>
+    <!-- CIRCLED DIGIT TWENTY -->
+    <char character="&#x2473;" string="\ding{173}\ding{173}"/>
+    <!-- PARENTHESIZED DIGIT ONE -->
+    <char character="&#x2474;" string="(1)"/>
+    <!-- PARENTHESIZED DIGIT TWO -->
+    <char character="&#x2475;" string="(2)"/>
+    <!-- PARENTHESIZED DIGIT THREE -->
+    <char character="&#x2476;" string="(3)"/>
+    <!-- PARENTHESIZED DIGIT FOUR -->
+    <char character="&#x2477;" string="(4)"/>
+    <!-- PARENTHESIZED DIGIT FIVE -->
+    <char character="&#x2478;" string="(5)"/>
+    <!-- PARENTHESIZED DIGIT SIX -->
+    <char character="&#x2479;" string="(6)"/>
+    <!-- PARENTHESIZED DIGIT SEVEN -->
+    <char character="&#x247a;" string="(7)"/>
+    <!-- PARENTHESIZED DIGIT EIGHT -->
+    <char character="&#x247b;" string="(8)"/>
+    <!-- PARENTHESIZED DIGIT NINE -->
+    <char character="&#x247c;" string="(9)"/>
+    <!-- PARENTHESIZED NUMBER TEN -->
+    <char character="&#x247d;" string="(10)"/>
+    <!-- PARENTHESIZED NUMBER ELEVEN -->
+    <char character="&#x247e;" string="(11)"/>
+    <!-- PARENTHESIZED NUMBER TWELVE -->
+    <char character="&#x247f;" string="(12)"/>
+    <!-- PARENTHESIZED NUMBER THIRTEEN -->
+    <char character="&#x2480;" string="(13)"/>
+    <!-- PARENTHESIZED NUMBER FOURTEEN -->
+    <char character="&#x2481;" string="(14)"/>
+    <!-- PARENTHESIZED NUMBER FIVTEEN -->
+    <char character="&#x2482;" string="(15)"/>
+    <!-- PARENTHESIZED NUMBER SIXTEEN -->
+    <char character="&#x2483;" string="(16)"/>
+    <!-- PARENTHESIZED NUMBER SEVENTEEN -->
+    <char character="&#x2484;" string="(17)"/>
+    <!-- PARENTHESIZED NUMBER EIGHTEEN -->
+    <char character="&#x2485;" string="(18)"/>
+    <!-- PARENTHESIZED NUMBER NINETEEN -->
+    <char character="&#x2486;" string="(19)"/>
+    <!-- PARENTHESIZED NUMBER TWENTY -->
+    <char character="&#x2487;" string="(20)"/>
+    <!--DIGIT ONE FULL STOP (U+2488)-->
+    <char character="&#x2488;" string="1."/>
+    <!--DIGIT TWO FULL STOP (U+2489)-->
+    <char character="&#x2489;" string="2."/>
+    <!--DIGIT THREE FULL STOP (U+248A)-->
+    <char character="&#x248a;" string="3."/>
+    <!--DIGIT FOUR FULL STOP (U+248B)-->
+    <char character="&#x248b;" string="4."/>
+    <!--DIGIT FIVE FULL STOP (U+248C)-->
+    <char character="&#x248c;" string="5."/>
+    <!--DIGIT SIX FULL STOP (U+248D)-->
+    <char character="&#x248d;" string="6."/>
+    <!--DIGIT SEVEN FULL STOP (U+248E)-->
+    <char character="&#x248e;" string="7."/>
+    <!--DIGIT EIGHT FULL STOP (U+248F)-->
+    <char character="&#x248f;" string="8."/>
+    <!--DIGIT NINE FULL STOP (U+2490)-->
+    <char character="&#x2490;" string="9."/>
+    <!--NUMBER TEN FULL STOP (U+2491)-->
+    <char character="&#x2491;" string="10."/>
+    <!--NUMBER ELEVEN FULL STOP (U+2492)-->
+    <char character="&#x2492;" string="11."/>
+    <!--NUMBER TWELVE FULL STOP (U+2493)-->
+    <char character="&#x2493;" string="12."/>
+    <!--NUMBER THIRTEEN FULL STOP (U+2494)-->
+    <char character="&#x2494;" string="13."/>
+    <!--NUMBER FOURTEEN FULL STOP (U+2495)-->
+    <char character="&#x2495;" string="14."/>
+    <!--NUMBER FIFTEEN FULL STOP (U+2496)-->
+    <char character="&#x2496;" string="15."/>
+    <!--NUMBER SIXTEEN FULL STOP (U+2497)-->
+    <char character="&#x2497;" string="16."/>
+    <!--NUMBER SEVENTEEN FULL STOP (U+2498)-->
+    <char character="&#x2498;" string="17."/>
+    <!--NUMBER EIGHTEEN FULL STOP (U+2499)-->
+    <char character="&#x2499;" string="18."/>
+    <!--NUMBER NINETEEN FULL STOP (U+249A)-->
+    <char character="&#x249a;" string="19."/>
+    <!--NUMBER TWENTY FULL STOP (U+249B)-->
+    <char character="&#x249b;" string="20."/>
+    <!--PARENTHESIZED LATIN SMALL LETTER A (U+249C)-->
+    <char character="&#x249c;" string="(a)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER B (U+249D)-->
+    <char character="&#x249d;" string="(b)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER C (U+249E)-->
+    <char character="&#x249e;" string="(c)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER D (U+249F)-->
+    <char character="&#x249f;" string="(d)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER E (U+24A0)-->
+    <char character="&#x24a0;" string="(e)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER F (U+24A1)-->
+    <char character="&#x24a1;" string="(f)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER G (U+24A2)-->
+    <char character="&#x24a2;" string="(g)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER H (U+24A3)-->
+    <char character="&#x24a3;" string="(h)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER I (U+24A4)-->
+    <char character="&#x24a4;" string="(i)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER J (U+24A5)-->
+    <char character="&#x24a5;" string="(j)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER K (U+24A6)-->
+    <char character="&#x24a6;" string="(k)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER L (U+24A7)-->
+    <char character="&#x24a7;" string="(l)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER M (U+24A8)-->
+    <char character="&#x24a8;" string="(m)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER N (U+24A9)-->
+    <char character="&#x24a9;" string="(n)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER O (U+24AA)-->
+    <char character="&#x24aa;" string="(o)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER P (U+24AB)-->
+    <char character="&#x24ab;" string="(p)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER Q (U+24AC)-->
+    <char character="&#x24ac;" string="(q)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER R (U+24AD)-->
+    <char character="&#x24ad;" string="(r)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER S (U+24AE)-->
+    <char character="&#x24ae;" string="(s)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER T (U+24AF)-->
+    <char character="&#x24af;" string="(t)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER U (U+24B0)-->
+    <char character="&#x24b0;" string="(u)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER V (U+24B1)-->
+    <char character="&#x24b1;" string="(v)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER W (U+24B2)-->
+    <char character="&#x24b2;" string="(w)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER X (U+24B3)-->
+    <char character="&#x24b3;" string="(x)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER Y (U+24B4)-->
+    <char character="&#x24b4;" string="(y)"/>
+    <!--PARENTHESIZED LATIN SMALL LETTER Z (U+24B5)-->
+    <char character="&#x24b5;" string="(z)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER A (U+24B6)-->
+    <char character="&#x24b6;" string="\textcircled(A)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER B (U+24B7)-->
+    <char character="&#x24b7;" string="\textcircled(B)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER C (U+24B8)-->
+    <char character="&#x24b8;" string="\textcircled(C)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER D (U+24B9)-->
+    <char character="&#x24b9;" string="\textcircled(D)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER E (U+24BA)-->
+    <char character="&#x24ba;" string="\textcircled(E)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER F (U+24BB)-->
+    <char character="&#x24bb;" string="\textcircled(F)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER G (U+24BC)-->
+    <char character="&#x24bc;" string="\textcircled(G)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER H (U+24BD)-->
+    <char character="&#x24bd;" string="\textcircled(H)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER I (U+24BE)-->
+    <char character="&#x24be;" string="\textcircled(I)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER J (U+24BF)-->
+    <char character="&#x24bf;" string="\textcircled(J)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER K (U+24C0)-->
+    <char character="&#x24c0;" string="\textcircled(K)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER L (U+24C1)-->
+    <char character="&#x24c1;" string="\textcircled(L)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER M (U+24C2)-->
+    <char character="&#x24c2;" string="\textcircled(M)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER N (U+24C3)-->
+    <char character="&#x24c3;" string="\textcircled(N)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER O (U+24C4)-->
+    <char character="&#x24c4;" string="\textcircled(O)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER P (U+24C5)-->
+    <char character="&#x24c5;" string="\textcircled(P)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER Q (U+24C6)-->
+    <char character="&#x24c6;" string="\textcircled(Q)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER R (U+24C7)-->
+    <char character="&#x24c7;" string="\textcircled(R)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER S (U+24C8)-->
+    <char character="&#x24c8;" string="\textcircled(S)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER T (U+24C9)-->
+    <char character="&#x24c9;" string="\textcircled(T)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER U (U+24CA)-->
+    <char character="&#x24ca;" string="\textcircled(U)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER V (U+24CB)-->
+    <char character="&#x24cb;" string="\textcircled(V)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER W (U+24CC)-->
+    <char character="&#x24cc;" string="\textcircled(W)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER X (U+24CD)-->
+    <char character="&#x24cd;" string="\textcircled(X)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER Y (U+24CE)-->
+    <char character="&#x24ce;" string="\textcircled(Y)"/>
+    <!--CIRCLED LATIN CAPITAL LETTER Z (U+24CF)-->
+    <char character="&#x24cf;" string="\textcircled(Z)"/>
+    <!--CIRCLED LATIN SMALL LETTER A (U+24D0)-->
+    <char character="&#x24d0;" string="\textcircled(a)"/>
+    <!--CIRCLED LATIN SMALL LETTER B (U+24D1)-->
+    <char character="&#x24d1;" string="\textcircled(b)"/>
+    <!--CIRCLED LATIN SMALL LETTER C (U+24D2)-->
+    <char character="&#x24d2;" string="\textcircled(c)"/>
+    <!--CIRCLED LATIN SMALL LETTER D (U+24D3)-->
+    <char character="&#x24d3;" string="\textcircled(d)"/>
+    <!--CIRCLED LATIN SMALL LETTER E (U+24D4)-->
+    <char character="&#x24d4;" string="\textcircled(e)"/>
+    <!--CIRCLED LATIN SMALL LETTER F (U+24D5)-->
+    <char character="&#x24d5;" string="\textcircled(f)"/>
+    <!--CIRCLED LATIN SMALL LETTER G (U+24D6)-->
+    <char character="&#x24d6;" string="\textcircled(g)"/>
+    <!--CIRCLED LATIN SMALL LETTER H (U+24D7)-->
+    <char character="&#x24d7;" string="\textcircled(h)"/>
+    <!--CIRCLED LATIN SMALL LETTER I (U+24D8)-->
+    <char character="&#x24d8;" string="\textcircled(i)"/>
+    <!--CIRCLED LATIN SMALL LETTER J (U+24D9)-->
+    <char character="&#x24d9;" string="\textcircled(j)"/>
+    <!--CIRCLED LATIN SMALL LETTER K (U+24DA)-->
+    <char character="&#x24da;" string="\textcircled(k)"/>
+    <!--CIRCLED LATIN SMALL LETTER L (U+24DB)-->
+    <char character="&#x24db;" string="\textcircled(l)"/>
+    <!--CIRCLED LATIN SMALL LETTER M (U+24DC)-->
+    <char character="&#x24dc;" string="\textcircled(m)"/>
+    <!--CIRCLED LATIN SMALL LETTER N (U+24DD)-->
+    <char character="&#x24dd;" string="\textcircled(b)"/>
+    <!--CIRCLED LATIN SMALL LETTER O (U+24DE)-->
+    <char character="&#x24de;" string="\textcircled(o)"/>
+    <!--CIRCLED LATIN SMALL LETTER P (U+24DF)-->
+    <char character="&#x24df;" string="\textcircled(p)"/>
+    <!--CIRCLED LATIN SMALL LETTER Q (U+24E0)-->
+    <char character="&#x24e0;" string="\textcircled(q)"/>
+    <!--CIRCLED LATIN SMALL LETTER R (U+24E1)-->
+    <char character="&#x24e1;" string="\textcircled(r)"/>
+    <!--CIRCLED LATIN SMALL LETTER S (U+24E2)-->
+    <char character="&#x24e2;" string="\textcircled(s)"/>
+    <!--CIRCLED LATIN SMALL LETTER T (U+24E3)-->
+    <char character="&#x24e3;" string="\textcircled(t)"/>
+    <!--CIRCLED LATIN SMALL LETTER U (U+24E4)-->
+    <char character="&#x24e4;" string="\textcircled(u)"/>
+    <!--CIRCLED LATIN SMALL LETTER V (U+24E5)-->
+    <char character="&#x24e5;" string="\textcircled(v)"/>
+    <!--CIRCLED LATIN SMALL LETTER W (U+24E6)-->
+    <char character="&#x24e6;" string="\textcircled(w)"/>
+    <!--CIRCLED LATIN SMALL LETTER X (U+24E7)-->
+    <char character="&#x24e7;" string="\textcircled(x)"/>
+    <!--CIRCLED LATIN SMALL LETTER Y (U+24E8)-->
+    <char character="&#x24e8;" string="\textcircled(y)"/>
+    <!--CIRCLED LATIN SMALL LETTER Z (U+24E9)-->
+    <char character="&#x24e9;" string="\textcircled(z)"/>
+    <!--CIRCLED DIGIT ZERO (U+24EA)-->
+    <char character="&#x24ea;" string="\textcircled(0)"/>
+    <!--NEGATIVE CIRCLED NUMBER ELEVEN (U+24EB)-->
+    <char character="&#x24eb;" string="\ding{182}\ding{182}"/>
+    <!--NEGATIVE CIRCLED NUMBER TWELVE (U+24EC)-->
+    <char character="&#x24ec;" string="\ding{182}\ding{183}"/>
+    <!--NEGATIVE CIRCLED NUMBER THIRTEEN (U+24ED)-->
+    <char character="&#x24ed;" string="\ding{182}\ding{184}"/>
+    <!--NEGATIVE CIRCLED NUMBER FOURTEEN (U+24EE)-->
+    <char character="&#x24ee;" string="\ding{182}\ding{185}"/>
+    <!--NEGATIVE CIRCLED NUMBER FIFTEEN (U+24EF)-->
+    <char character="&#x24ef;" string="\ding{182}\ding{186}"/>
+    <!--NEGATIVE CIRCLED NUMBER SIXTEEN (U+24F0)-->
+    <char character="&#x24f0;" string="\ding{182}\ding{187}"/>
+    <!--NEGATIVE CIRCLED NUMBER SEVENTEEN (U+24F1)-->
+    <char character="&#x24f1;" string="\ding{182}\ding{188}"/>
+    <!--NEGATIVE CIRCLED NUMBER EIGHTEEN (U+24F2)-->
+    <char character="&#x24f2;" string="\ding{182}\ding{189}"/>
+    <!--NEGATIVE CIRCLED NUMBER NINETEEN (U+24F3)-->
+    <char character="&#x24f3;" string="\ding{182}\ding{190}"/>
+    <!--NEGATIVE CIRCLED NUMBER TWENTY (U+24F4)-->
+    <char character="&#x24f4;" string="\ding{183}\ding{183}"/>
+    <!--DOUBLE CIRCLED DIGIT ONE (U+24F5)-->
+    <char character="&#x24f5;" string="\ding{172}"/>
+    <!--DOUBLE CIRCLED DIGIT TWO (U+24F6)-->
+    <char character="&#x24f6;" string="\ding{173}"/>
+    <!--DOUBLE CIRCLED DIGIT THREE (U+24F7)-->
+    <char character="&#x24f7;" string="\ding{174}"/>
+    <!--DOUBLE CIRCLED DIGIT FOUR (U+24F8)-->
+    <char character="&#x24f8;" string="\ding{175}"/>
+    <!--DOUBLE CIRCLED DIGIT FIVE (U+24F9)-->
+    <char character="&#x24f9;" string="\ding{176}"/>
+    <!--DOUBLE CIRCLED DIGIT SIX (U+24FA)-->
+    <char character="&#x24fa;" string="\ding{177}"/>
+    <!--DOUBLE CIRCLED DIGIT SEVEN (U+24FB)-->
+    <char character="&#x24fb;" string="\ding{178}"/>
+    <!--DOUBLE CIRCLED DIGIT EIGHT (U+24FC)-->
+    <char character="&#x24fc;" string="\ding{179}"/>
+    <!--DOUBLE CIRCLED DIGIT NINE (U+24FD)-->
+    <char character="&#x24fd;" string="\ding{180}"/>
+    <!--DOUBLE CIRCLED NUMBER TEN (U+24FE)-->
+    <char character="&#x24fe;" string="\ding{181}"/>
+    <!--NEGATIVE CIRCLED DIGIT ZERO (U+24FF)-->
+    <char character="&#x24ff;" string="\textcircled{0}"/>
+    
+    <!--  *
           * Box Drawing 
           * -->
     
