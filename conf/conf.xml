@@ -2171,9 +2171,9 @@
     <!--SUN-->
     <char character="&#x2609;" string="${\Sun}$"/>
     <!--BLACK TELEPHONE -->
-    <char character="&#x260e;" string="${\phone}$"/>
+    <char character="&#x260e;" string="\ding{37}"/>
     <!--WHITE TELEPHONE -->
-    <char character="&#x260f;" string="${\phone}$"/>
+    <char character="&#x260f;" string="\ding{37}"/>
     <!--BALLOT BOX-->
     <char character="&#x2610;" string="${\Square}$"/>
     <!--t \Checkedbox (marvosym), BALLOT BOX WITH CHECK-->
