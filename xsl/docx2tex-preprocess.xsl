@@ -89,8 +89,8 @@
   
   <xsl:variable name="texmap-override" select="document('http://transpect.io/mml2tex/texmap/texmap.xml')/xml2tex:set/xml2tex:charmap/xml2tex:char" as="element(xml2tex:char)+"/>
   
-  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist)]
-                       |itemizedlist[count(*) eq 1][not(ancestor::orderedlist)]" mode="docx2tex-preprocess">
+  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist or ancestor::itemizedlist)]
+                       |itemizedlist[count(*) eq 1][not(ancestor::orderedlist  or ancestor::itemizedlist)]" mode="docx2tex-preprocess">
     <xsl:if test="@mark">
       <xsl:processing-instruction name="latex" 
                                   select="if(string-length(@mark) eq 1) 
