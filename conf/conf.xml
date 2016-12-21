@@ -1748,6 +1748,8 @@
     <char character="&#x235d;" string="${\APLcomment}$"/>
     <!--APL FUNCTIONAL SYMBOL QUOTE QUAD-->
     <char character="&#x235e;" string="${\APLinput}$"/>
+    <!-- APL FUNCTIONAL SYMBOL ALPHA -->
+    <char character="&#x237a;" string="${\upalpha}$"/>
     <!--APL FUNCTIONAL SYMBOL CIRCLE STAR-->
     <char character="&#x235f;" string="${\APLlog}$"/>
     <!--= \wideparen (yhmath mathabx fourier), TOP PARENTHESIS (mathematical use)-->
