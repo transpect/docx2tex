@@ -55,6 +55,12 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="preprocessing" select="'yes'" required="false">
+    <p:documentation>
+      Switch for some heuristical XSLT optimizations to generate smoother TeX code.
+    </p:documentation>
+  </p:option>
+  
   <p:option name="table-model" select="'tabularx'" required="false">
     <p:documentation>
       Used LaTeX package to draw tables. Possible values are 'tabular' and 'tabularx'.
@@ -161,6 +167,7 @@
       <p:empty/>
     </p:input>
     <p:with-option name="refs" select="$refs"/>
+    <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
@@ -210,6 +217,7 @@
     <p:input port="conf">
       <p:pipe port="result" step="load-config"/>
     </p:input>
+    <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="table-model" select="$table-model"/>
     <p:with-option name="table-grid" select="$table-grid"/>
     <p:with-option name="debug" select="$debug"/>

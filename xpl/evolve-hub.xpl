@@ -36,6 +36,7 @@
   <p:option name="fail-on-error" select="'yes'"/>
 
   <p:option name="refs" select="'yes'"/>
+  <p:option name="preprocessing" select="'yes'"/>
   
   <p:import href="remove-indents.xpl"/>
   
@@ -110,30 +111,39 @@
     <p:with-option name="fail-on-error" select="$fail-on-error"/>
   </hub:evolve-hub_lists-by-indent>
 
-  <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-preprocess" name="docx2tex-preprocess">
-    <p:input port="stylesheet">
-      <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-    <p:with-option name="fail-on-error" select="$fail-on-error"/>
-    <p:with-option name="prefix" select="'evolve-hub/60'"/>
-    <p:with-param name="refs" select="$refs"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-postprocess" name="docx2tex-postprocess">
-    <p:input port="stylesheet">
-      <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
-    </p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-    <p:with-option name="fail-on-error" select="$fail-on-error"/>
-    <p:with-option name="prefix" select="'evolve-hub/70'"/>
-    <p:with-param name="refs" select="$refs"/>
-  </tr:xslt-mode>
+  <p:choose>
+    <p:when test="$preprocessing eq 'yes'">
+
+      <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-preprocess" name="docx2tex-preprocess">
+        <p:input port="stylesheet">
+          <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
+        </p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+        <p:with-option name="fail-on-error" select="$fail-on-error"/>
+        <p:with-option name="prefix" select="'evolve-hub/60'"/>
+        <p:with-param name="refs" select="$refs"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-postprocess" name="docx2tex-postprocess">
+        <p:input port="stylesheet">
+          <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
+        </p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+        <p:with-option name="fail-on-error" select="$fail-on-error"/>
+        <p:with-option name="prefix" select="'evolve-hub/70'"/>
+        <p:with-param name="refs" select="$refs"/>
+      </tr:xslt-mode>
+      
+    </p:when>
+    <p:otherwise>
+      <p:identity/>
+    </p:otherwise>
+  </p:choose>
   
 </p:declare-step>
