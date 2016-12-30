@@ -476,11 +476,19 @@
 
   <!-- indexterms -->
 
-  <template context="dbk:indexterm">
+  <template context="dbk:indexterm[not(@type)]">
     <rule name="index" type="cmd">
       <param/>
     </rule>
   </template>
+
+  <template context="dbk:indexterm[@type]">
+    <rule name="index" type="cmd">
+      <option select="@type"/>
+      <param/>
+    </rule>
+  </template>
+
 
   <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
     <rule>
