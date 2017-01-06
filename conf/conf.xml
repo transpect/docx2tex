@@ -330,7 +330,9 @@
     </rule>
   </template>
   
-  <template context="dbk:phrase[@css:background-color]">
+  <template context="dbk:phrase[not(@css:background-color eq '#FFFFFF')
+                                and (@css:background-color or exists(for $i in ./@role 
+                                                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]">
     <rule name="colorbox" type="cmd">
       <param select="for $i in (@css:background-color, for $j in @role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:background-color)[1] 
                      return concat('color-', index-of(distinct-values((//@css:background-color,
