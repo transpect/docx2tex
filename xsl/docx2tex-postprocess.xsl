@@ -12,16 +12,18 @@
   exclude-result-prefixes="#all"
   xpath-default-namespace="http://docbook.org/ns/docbook">  
 
+  <xsl:param name="refs" select="'yes'"/>
+
   <!--  *
         * MODE docx2tex-postprocess
         * -->
   
   <!-- tag \ref, \pageref and \label -->
   
-  <xsl:variable name="anchor-ids" select="//anchor[@role eq 'start']/@xml:id" as="xs:string*"/>
+  <xsl:variable name="anchor-ids" select="//anchor[@role eq 'start' or not(@role)]/@xml:id" as="xs:string*"/>
   <xsl:variable name="anchor-digits" select="string-length(xs:string(count($anchor-ids)))" as="xs:integer"/>
   
-  <xsl:template match="anchor[@role eq 'start']" mode="docx2tex-postprocess">
+  <xsl:template match="anchor[@role eq 'start' or not(@role)]" mode="docx2tex-postprocess">
     <xsl:variable name="index" select="index-of($anchor-ids, @xml:id)" as="xs:integer?"/>
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
