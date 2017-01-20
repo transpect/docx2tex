@@ -48,7 +48,7 @@
                 <xsl:value-of select="concat('\pageref{', $ref, '}')"/>  
               </xsl:when>
               <xsl:when test="not(node())">
-                <xsl:value-of select="concat('\ref{', $ref, '}')"/>  
+                <xsl:value-of select="concat('~\ref{', $ref, '}')"/>  
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="concat('{\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}}</xsl:text>
