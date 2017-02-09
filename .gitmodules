@@ -10,9 +10,6 @@
 [submodule "evolve-hub"]
 	path = evolve-hub
 	url = https://github.com/transpect/evolve-hub
-[submodule "calabash-frontend"]
-	path = calabash-frontend
-	url = https://github.com/transpect/calabash-frontend
 [submodule "xml2tex"]
 	path = xml2tex
 	url = https://github.com/transpect/xml2tex
