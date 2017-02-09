@@ -22,3 +22,6 @@
 [submodule "htmlreports"]
 	path = htmlreports
 	url = https://github.com/transpect/htmlreports
+[submodule "calabash-frontend"]
+	path = calabash-frontend
+	url = https://github.com/transpect/calabash-frontend
