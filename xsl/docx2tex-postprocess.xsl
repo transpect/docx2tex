@@ -41,7 +41,10 @@
       <!-- ref switch, users may want no automatic tagging of refs -->
       <xsl:choose>
         <xsl:when test="$refs ne 'no' and exists($index)">
-          <xsl:variable name="ref" select="concat('ref-', string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) return '0', ''), $index)" as="xs:string"/>
+          <xsl:variable name="leading-zeros" select="string-join(for $i in (string-length(xs:string($index)) to $anchor-digits) 
+                                                                 return '0', 
+                                                                 '')" as="xs:string*"/>
+          <xsl:variable name="ref" select="concat('ref-', $leading-zeros, $index)" as="xs:string"/>
           <xsl:processing-instruction name="latex">
             <xsl:choose>
               <xsl:when test="@role eq 'page'">
