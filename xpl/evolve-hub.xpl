@@ -88,6 +88,20 @@
     <p:with-param name="expand-css-properties" select="'no'"/>
   </tr:xslt-mode>
   
+  <tr:xslt-mode msg="yes" hub-version="1.2" mode="hub:split-at-tab">
+    <p:input port="stylesheet">
+      <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
+    </p:input>
+    <p:input port="models"><p:empty/></p:input>
+    <p:input port="parameters"><p:empty/></p:input>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
+    <p:with-option name="prefix" select="'evolve-hub/25'"/>
+    <p:with-param name="expand-css-properties" select="'no'"/>
+  </tr:xslt-mode>
+
   <tr:xslt-mode msg="yes" hub-version="1.2" mode="hub:identifiers">
     <p:input port="stylesheet">
       <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
