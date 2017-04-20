@@ -51,5 +51,9 @@
       </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
+  
+  <!-- remove visually indistinct css:font-stretch property from identifiers -->
+  
+  <xsl:template match="dbk:phrase[@role eq 'hub:identifier']//@css:font-stretch[. eq 'ultra-condensed']" mode="hub:handle-indent"/>
 
 </xsl:stylesheet>
