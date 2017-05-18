@@ -42,6 +42,7 @@
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
       <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
+      <xsl:message select="'#####################', $label"></xsl:message>
       <xsl:apply-templates select="entry/* except $label/*" mode="#current">
         <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')" 
                         tunnel="yes"/>
@@ -67,9 +68,9 @@
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
-  <xsl:template match="para[(every $i in * satisfies $i/local-name() = ('inlineequation', 'tab')) or (every $i in * satisfies $i/local-name() = ('inlineequation', 'phrase'))]
-                           [count(distinct-values(*/local-name())) eq 2]
-                           [matches(normalize-space(string-join((text(), phrase/text()), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
+  <xsl:template match="para[(every $i in * satisfies $i/local-name() = ('inlineequation', 'tab', 'phrase'))]
+                           [count(distinct-values(*/local-name())) &lt;= 3]
+                           [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
     <equation role="numbered">
       <xsl:processing-instruction name="latex">
       <xsl:value-of select="concat('\tag{', replace(string-join((text(), phrase/text()), ''), $equation-label-regex, '$1'), '}&#xa;')"/>
