@@ -42,14 +42,15 @@
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
       <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
-      <xsl:apply-templates select=".//equation" mode="#current">
-        <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')"/>
+      <xsl:apply-templates select="entry/* except $label/*" mode="#current">
+        <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')" 
+                        tunnel="yes"/>
       </xsl:apply-templates>
     </xsl:for-each>
   </xsl:template>
   
   <xsl:template match="equation" mode="docx2tex-preprocess">
-    <xsl:param name="label"/>
+    <xsl:param name="label" tunnel="yes"/>
     <xsl:copy>
       <xsl:apply-templates select="@* except @role" mode="#current"/>
       <xsl:if test="string-length($label) gt 1">
