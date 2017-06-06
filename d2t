@@ -42,7 +42,7 @@ esac
 # script directory
 PWD="$( pwd)"
 DIR="$( real_dir "${BASH_SOURCE[0]}" )"
-CALABASH=$DIR/calabash-frontend/calabash.sh
+CALABASH=$DIR/calabash/calabash.sh
 
 # invoke pdflatex
 PDFLATEX=pdflatex
