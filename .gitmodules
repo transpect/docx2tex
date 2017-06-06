@@ -19,3 +19,9 @@
 [submodule "htmlreports"]
 	path = htmlreports
 	url = https://github.com/transpect/htmlreports
+[submodule "calabash"]
+	path = calabash
+	url = https://github.com/transpect/calabash-frontend
+[submodule "schema/hub"]
+	path = schema/hub
+	url = https://github.com/gimsieke/Hub
