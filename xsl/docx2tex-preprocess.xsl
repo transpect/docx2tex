@@ -216,12 +216,23 @@
   <!-- wrap private use-content -->
   
   <xsl:template match="text()[matches(., '[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]')]" mode="docx2tex-preprocess">
-    <xsl:analyze-string select="." regex="[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]">
-      <xsl:matching-substring>
+    <xsl:variable name="mml" select="boolean(parent::mml:*)"/>
+     <xsl:analyze-string select="." regex="[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]">
+       <xsl:matching-substring>
         <phrase role="unicode-private-use">
           <xsl:value-of select="."/>
         </phrase>
-      </xsl:matching-substring>
+        <xsl:choose>
+          <xsl:when test="$mml">
+            <mml:mglyph alt="{current()}"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <phrase role="unicode-private-use">
+            <xsl:value-of select="."/>
+          </phrase>
+          </xsl:otherwise>
+        </xsl:choose>
+       </xsl:matching-substring>
       <xsl:non-matching-substring>
         <xsl:value-of select="."/>
       </xsl:non-matching-substring>
