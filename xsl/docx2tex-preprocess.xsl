@@ -239,7 +239,11 @@
   <!-- preserve unmapped characters -->
   
   <xsl:template match="phrase[@role eq 'hub:ooxml-symbol']" mode="docx2tex-preprocess">
-    <xsl:processing-instruction name="latex" select="concat('\', @css:font-family, '{', @annotations, '}')"/>
+    <xsl:processing-instruction name="latex" select="concat('\', replace(@css:font-family, '\s', ''), '{', @annotations, '}')"/>
+  </xsl:template>
+  
+  <xsl:template match="mml:math//phrase[@role eq 'unicode-private-use']" mode="docx2tex-postprocess">
+    <xsl:processing-instruction name="latex" select="concat('\', replace(parent::*/@font-family, '\s', ''), '{', ., '}')"/>
   </xsl:template>
   
 </xsl:stylesheet>
