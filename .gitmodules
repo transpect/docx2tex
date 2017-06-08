@@ -25,3 +25,6 @@
 [submodule "schema/hub"]
 	path = schema/hub
 	url = https://github.com/gimsieke/Hub
+[submodule "mml-normalize"]
+	path = mml-normalize
+	url = https://github.com/transpect/mml-normalize
