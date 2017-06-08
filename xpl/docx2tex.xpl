@@ -136,13 +136,13 @@
     <p:try>
       <p:group>
         <p:directory-list>
-          <p:with-option name="path" select="$custom-font-maps-dir"/>
+          <p:with-option name="path" select="replace($custom-font-maps-dir, '([^/])/?$', '$1/')"/>
           <p:with-option name="include-filter" select="'.*\.xml'"/>
         </p:directory-list>
         <p:for-each>
           <p:iteration-source select="c:directory/c:file"/>
           <p:output port="result" sequence="true"/>
-          <p:variable name="file" select="concat($custom-font-maps-dir, //@name)"/>
+          <p:variable name="file" select="concat(replace($custom-font-maps-dir, '([^/])/?$', '$1/'), //@name)"/>
           <p:load>
             <p:with-option name="href" select="$file"/>
           </p:load>
