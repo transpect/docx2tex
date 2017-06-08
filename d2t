@@ -9,6 +9,7 @@ usage() {
     echo "Options:"
     echo "   -o    path to custom output directory"
     echo "   -c    path to custom word2tex configuration file"
+    echo "   -f    path to custom fontmaps directory"
     echo "   -p    generate PDF with pdflatex"
     echo "   -r    omit page and cross-references and labels"
     echo "   -t    use tabular instead of tabularx for tables"
@@ -47,10 +48,8 @@ CALABASH=$DIR/calabash/calabash.sh
 # invoke pdflatex
 PDFLATEX=pdflatex
 
-
-
 # specify options
-while getopts ":o:c:x:ptlrd" opt; do
+while getopts ":o:c:x:f:ptlrd" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -61,6 +60,9 @@ while getopts ":o:c:x:ptlrd" opt; do
 	x)
 	    CUSTOMXSL=${OPTARG}
 	    ;;
+   f)
+       FONTMAPS=${OPTARG}
+       ;;
 	p)
 	    PDF=yes
 	    ;;
@@ -179,6 +181,7 @@ if [ "$DEBUG" = "yes" ]; then
     echo "  workdir: $DIR"
     echo "  outdir: $OUT_DIR"
     echo "  file: $FILE"
+    echo "  fontmaps-dir: $FONTMAPS"
     echo "  config: $CONF"
     echo "  refs and labels: $REFS"
     echo "  table model: $TABLEMODEL"
@@ -195,6 +198,7 @@ $CALABASH \
     docx="$FILE_CP" \
     conf="$CONF" \
     custom-xsl="$CUSTOMXSL" \
+	 custom-font-maps-dir=$FONTMAPS \
     conf-template="$OUT_DIR/$BASENAME.csv" \
     table-model=$TABLEMODEL \
     table-grid=$TABLEGRID \

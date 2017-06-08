@@ -28,13 +28,16 @@ REM convert backward slash to slash
 @set CONF=%CONF:\=/%
 @set OUT_DIR=%OUT_DIR:\=/%
 
+REM path to fontmaps dir
+@set FONTMAPS=file://%DIR%/fontmaps/
+
 REM debugging
 @set DEBUGDIR_URI=file:/%OUT_DIR%/%BASENAME%.debug
 @set LOG=%OUT_DIR%%BASENAME%.log
 
 REM start 
 echo starting docx2tex
-call %CALABASH% -o result=%OUT_DIR%/%BASENAME%.tex -o hub=%OUT_DIR%/%BASENAME%.xml %DIR%/xpl/docx2tex.xpl docx=%FILE% conf=%CONF% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>>%LOG% || GOTO exitonerror
+call %CALABASH% -o result=%OUT_DIR%/%BASENAME%.tex -o hub=%OUT_DIR%/%BASENAME%.xml %DIR%/xpl/docx2tex.xpl docx=%FILE% conf=%CONF% custom-font-maps-dir=%FONTMAPS% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>>%LOG% || GOTO exitonerror
 
 goto finish
 
