@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step 
   xmlns:p="http://www.w3.org/ns/xproc"
-  xmlns:c="http://www.w3.org/ns/xproc-step" 
+  xmlns:c="http://www.w3.org/ns/xproc-step"
   xmlns:docx2hub="http://transpect.io/docx2hub"
   xmlns:docx2tex="http://transpect.io/docx2tex"
   xmlns:xml2tex="http://transpect.io/xml2tex"
@@ -91,6 +91,12 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="custom-font-maps-dir" required="false">
+    <p:documentation>
+      Path to a directory containing fontmaps for docx2hub and mathtype-extension.
+    </p:documentation>
+  </p:option>
+  
   <p:option name="conf-template" select="''" required="false">
     <p:documentation>
       Path to the generated CSV-based configuration template.
@@ -123,6 +129,49 @@
 		<p:with-option name="status-dir-uri" select="$status-dir-uri"/>
 	</tr:simple-progress-msg>
   
+  <p:sink/>
+
+  <p:group name="custom-font-maps">
+    <p:output port="result" sequence="true"/>
+    <p:try>
+      <p:group>
+        <p:directory-list>
+          <p:with-option name="path" select="$custom-font-maps-dir"/>
+          <p:with-option name="include-filter" select="'.*\.xml'"/>
+        </p:directory-list>
+        <p:for-each>
+          <p:iteration-source select="c:directory/c:file"/>
+          <p:output port="result" sequence="true"/>
+          <p:variable name="file" select="concat($custom-font-maps-dir, //@name)"/>
+          <p:load>
+            <p:with-option name="href" select="$file"/>
+          </p:load>
+        </p:for-each>
+      </p:group>
+      <p:catch>
+        <p:xslt template-name="init">
+          <p:input port="source">
+            <p:empty/>
+          </p:input>
+          <p:input port="stylesheet">
+            <p:inline>
+              <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:template name="init">
+                  <xsl:message>No custom-font-maps loaded.</xsl:message>
+                </xsl:template>
+              </xsl:stylesheet>
+            </p:inline>
+          </p:input>
+          <p:input port="parameters">
+            <p:empty/>
+          </p:input>
+        </p:xslt>
+      </p:catch>
+    </p:try>
+  </p:group>
+  
+  <p:sink/>
+  
   <!--  *
         * load xml2tex config or generate one from CSV plain text file
         * -->
@@ -138,6 +187,9 @@
   
   <docx2hub:convert name="docx2hub">
     <p:documentation>Converts DOCX to Hub XML.</p:documentation>
+    <p:input port="custom-font-maps">
+      <p:pipe port="result" step="custom-font-maps"/>
+    </p:input>
     <p:with-option name="docx" select="$docx"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
