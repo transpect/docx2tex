@@ -17,6 +17,8 @@
   <nextCatalog catalog="../evolve-hub/xmlcatalog/catalog.xml"/>
   
   <nextCatalog catalog="../mml2tex/xmlcatalog/catalog.xml"/>
+
+  <nextCatalog catalog="../mml-normalize/xmlcatalog/catalog.xml"/>
   
   <nextCatalog catalog="../xml2tex/xmlcatalog/catalog.xml"/>
 
