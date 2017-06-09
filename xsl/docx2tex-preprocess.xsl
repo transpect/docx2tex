@@ -42,7 +42,6 @@
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
       <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
-      <xsl:message select="'#####################', $label"></xsl:message>
       <xsl:apply-templates select="entry/* except $label/*" mode="#current">
         <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')" 
                         tunnel="yes"/>
@@ -75,7 +74,7 @@
       <xsl:processing-instruction name="latex">
       <xsl:value-of select="concat('\tag{', replace(string-join((text(), phrase/text()), ''), $equation-label-regex, '$1'), '}&#xa;')"/>
     </xsl:processing-instruction>
-      <xsl:apply-templates select="inlineequation/*" mode="#current"/>
+      <xsl:apply-templates select=".//inlineequation/*" mode="#current"/>
     </equation>
   </xsl:template>
   
