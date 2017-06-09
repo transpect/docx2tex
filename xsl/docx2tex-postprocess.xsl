@@ -54,7 +54,7 @@
                 <xsl:value-of select="concat('~\ref{', $ref, '}')"/>  
               </xsl:when>
               <xsl:otherwise>
-                <xsl:value-of select="concat('{\hyperref[', $ref, ']{')"/><xsl:apply-templates mode="#current"/><xsl:text>}}</xsl:text>
+                <xsl:value-of select="concat('{\hyperref[', $ref, ']{', string-join(.//text(), ' '), '}}')"/>
               </xsl:otherwise>
             </xsl:choose>  
           </xsl:processing-instruction>  
@@ -64,6 +64,12 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:copy>
+  </xsl:template>
+  
+  <!-- resolve links without a destination and nested links -->
+  
+  <xsl:template match="link[@linkend eq '']|link[link]" mode="docx2tex-postprocess">
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
   <!-- group adjacent equations and apply align environment -->
@@ -132,6 +138,7 @@
   </xsl:template>
   
   <xsl:template match="para[preceding-sibling::*[1][local-name() eq 'para'][mediaobject|inlinemediaobject][string-length(normalize-space(.)) eq 0]]
-                           [matches(string-join(.//text(), ''), $figure-caption-start-regex)]" mode="docx2tex-postprocess"/>
+                           [matches(string-join(.//text(), ''), $figure-caption-start-regex)]" mode="docx2tex-postprocess">
+  </xsl:template>
   
 </xsl:stylesheet>
