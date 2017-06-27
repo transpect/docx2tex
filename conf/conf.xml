@@ -827,6 +827,8 @@
     
     <!--EM QUAD -->   
     <char character="&#x2001;" string="{\quad}"/>
+    <!-- EN SPACE -->
+    <char character="&#x2002;" string="{\enspace}"/>
     <!--EM SPACE -->
     <char character="&#x2003;" string="{\quad}"/>
     <!--THREE-PER-EM SPACE -->
@@ -891,6 +893,8 @@
     <char character="&#x2026;" string="{\ldots}"/>
     <!-- HYPHENATION POINT -->
     <char character="&#x2027;" string="{\textbullet}"/>
+    <!-- NARROW NO-BREAK SPACE -->
+    <char character="&#x202f;" string="\,"/>
     <!-- PER MILLE SIGN -->
     <char character="&#x2030;" string="{\textperthousand}"/>
     <!-- PER TEN THOUSAND SIGN -->
