@@ -826,13 +826,11 @@
          * -->
     
     <!--EM QUAD -->   
-    <char character="&#x2001;" string="\quad"/>
+    <char character="&#x2001;" string="{\quad}"/>
     <!-- EN SPACE -->
-    <char character="&#x2002;" string="\enspace"
-    <!-- EN SPACE -->
-    <char character="&#x2002;" string="{\enspace}"/>
+    <char character="&#x2002;" string="{\enspace}"
     <!--EM SPACE -->
-    <char character="&#x2003;" string="\quad"/>
+    <char character="&#x2003;" string="{\quad}"/>
     <!--THREE-PER-EM SPACE -->
     <char character="&#x2004;" string="\,"/>
     <!--FOUR-PER-EM SPACE -->
