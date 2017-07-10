@@ -174,9 +174,10 @@
   
   <!-- regular superscript and subscripts -->
   
-  <template context="dbk:superscript
+  <template context="dbk:superscript[not(dbk:footnote)]
                      |dbk:subscript
-                     |dbk:phrase[exists(for $i in ./@role 
+                     |dbk:phrase[not(dbk:footnote)]
+                                [exists(for $i in ./@role 
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]" mathmode="true">
     <rule>
       <text select="concat(if(local-name() eq 'subscript'
