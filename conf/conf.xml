@@ -486,10 +486,10 @@
   </template>
   
   <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
-  
-  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']/dbk:superscript"/>
 
   <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']/node()[not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]"/>
+  
+  <template context="dbk:footnote//text()[string-length(normalize-space(.)) eq 0][1]"/>
 
   <!-- equations -->
 
