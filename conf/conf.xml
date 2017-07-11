@@ -29,6 +29,8 @@
     \usepackage{enumerate}
     \usepackage{tensor}
     \usepackage{pifont}
+    \usepackage{makeidx}
+    \makeindex
     <xsl:choose>
       <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
         <xsl:text>\usepackage[ngerman]{babel}</xsl:text>
@@ -98,11 +100,28 @@
 
   <ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
   <ns prefix="css" uri="http://www.w3.org/1996/css"/>
+  <ns prefix="docx2tex" uri="http://transpect.io/docx2tex"/>
   <ns prefix="tr" uri="http://transpect.io"/>
 
   <!-- drop metadata -->
 
   <template context="/dbk:hub/dbk:info"/>
+
+  <!-- toc -->
+  
+  <template context="dbk:div[@role eq 'hub:toc']">
+    <rule break-after="2">
+      <text>\tableofcontents</text>
+    </rule>
+  </template>
+
+  <!-- index -->
+
+  <template context="dbk:div[@role eq 'hub:index']">
+    <rule break-after="2">
+      <text>\printindex</text>
+    </rule>
+  </template>
 
   <!-- regular paras -->
 
@@ -415,7 +434,7 @@
 
   <!-- headlines -->
   
-  <template context="dbk:para/dbk:phrase[@role = ('hub:identifier', 'docx2tex:identifier')]">
+  <template context="dbk:para[@docx2tex:config eq 'headline']/dbk:phrase[@role eq 'docx2tex:identifier']"/>
     <rule>
       <text/>
       <text select="' '"/>
