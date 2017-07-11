@@ -503,13 +503,13 @@
     </rule>
   </template>
 
-  <template context="dbk:equation[@role eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+  <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation" type="env" break-after="1">
       <text/>
     </rule>
   </template>
   
-  <template context="dbk:equation[not(@role eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+  <template context="dbk:equation[not(@condition eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation*" type="env" break-after="1">
       <text/>
     </rule>

@@ -82,7 +82,7 @@
           <xsl:when test="current-grouping-key() eq true() and count(current-group()) gt 1">
             <xsl:variable name="texname" select="if(ancestor::table or ancestor::informaltable) 
                                                  then 'aligned'
-                                                 else if(@role eq 'numbered') 
+                                                 else if(@condition eq 'numbered') 
                                                       then 'align' 
                                                       else 'align*'" as="xs:string"/>
             <xsl:processing-instruction name="latex" select="concat(

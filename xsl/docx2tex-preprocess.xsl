@@ -52,9 +52,9 @@
   <xsl:template match="equation" mode="docx2tex-preprocess">
     <xsl:param name="label" tunnel="yes"/>
     <xsl:copy>
-      <xsl:apply-templates select="@* except @role" mode="#current"/>
+      <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:if test="string-length($label) gt 1">
-        <xsl:attribute name="role" select="'numbered'"/>
+        <xsl:attribute name="condition" select="'numbered'"/>
         <xsl:processing-instruction name="latex" select="$label"/>
       </xsl:if>
       <xsl:apply-templates mode="#current"/>
@@ -70,7 +70,7 @@
   <xsl:template match="para[(every $i in * satisfies $i/local-name() = ('inlineequation', 'tab', 'phrase'))]
                            [count(distinct-values(*/local-name())) &lt;= 3]
                            [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
-    <equation role="numbered">
+    <equation condition="numbered">
       <xsl:processing-instruction name="latex">
       <xsl:value-of select="concat('\tag{', replace(string-join((text(), phrase/text()), ''), $equation-label-regex, '$1'), '}&#xa;')"/>
     </xsl:processing-instruction>
