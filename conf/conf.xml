@@ -493,6 +493,8 @@
   
   <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
 
+  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']"/>
+
   <!-- equations -->
 
   <template context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
@@ -512,13 +514,6 @@
   <template context="dbk:equation[not(@role eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation*" type="env" break-after="1">
       <text/>
-    </rule>
-  </template>
-
-  <!-- drop leading numbers, tex will do this for us -->
-  <template context="dbk:footnote//dbk:phrase[@role = ('hub:identifier', 'docx2tex:identifier')]">
-    <rule>
-      <text select="*"/><!-- process only elements -->
     </rule>
   </template>
   
