@@ -324,12 +324,6 @@
     </rule>
   </template>
   
-  <!--<template context="dbk:listitem[parent::dbk:varlistentry]">
-    <rule>
-      <text/>
-    </rule>
-  </template>-->
-  
   <template context="dbk:term[parent::dbk:varlistentry]">
     <rule name="item" type="cmd">
       <option/>
@@ -434,7 +428,7 @@
 
   <!-- headlines -->
   
-  <template context="dbk:para[@docx2tex:config eq 'headline']/dbk:phrase[@role eq 'docx2tex:identifier']"/>
+  <template context="dbk:para[@docx2tex:config eq 'headline']/dbk:phrase[@role eq 'docx2tex:identifier']">
     <rule>
       <text/>
       <text select="' '"/>
