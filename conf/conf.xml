@@ -491,7 +491,7 @@
   
   <template context="dbk:footnote//text()[string-length(normalize-space(.)) eq 0][1]"/>
   
-  <template context="dbk:footnote/dbk:para/*[1][local-name() eq 'superscript'][matches(., '\d+')]
+  <template context="dbk:footnote/dbk:para/*[1][local-name() eq 'superscript'][matches(., '\d+')]"/>
 
   <!-- equations -->
 
