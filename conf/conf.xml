@@ -29,8 +29,9 @@
     \usepackage{enumerate}
     \usepackage{tensor}
     \usepackage{pifont}
-    \usepackage{makeidx}
-    \makeindex
+    <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
+      <xsl:text>\usepackage{makeidx}&#xa;\makeindex</xsl:text>
+    </xsl:if>
     <xsl:choose>
       <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
         <xsl:text>\usepackage[ngerman]{babel}</xsl:text>
