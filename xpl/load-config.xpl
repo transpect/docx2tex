@@ -3,6 +3,7 @@
   xmlns:c="http://www.w3.org/ns/xproc-step"   
   xmlns:tr="http://transpect.io"
   xmlns:docx2tex="http://transpect.io/docx2tex"
+  xmlns:xml2tex="http://transpect.io/xml2tex"
   version="1.0" 
   name="docx2tex-load-config" 
   type="docx2tex:load-config">
@@ -19,6 +20,7 @@
   <p:option name="debug-dir-uri" select="'debug'"/>
   <p:option name="status-dir-uri" select="'status'"/>
   
+  <p:import href="http://transpect.io/xml2tex/xpl/load-config.xpl"/>
   <p:import href="http://transpect.io/xproc-util/load/xpl/load.xpl"/>
   <p:import href="http://transpect.io/xproc-util/load/xpl/load-data.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
@@ -27,10 +29,13 @@
   <p:try>
     <p:group>
       
-      <tr:load>
+      <xml2tex:load-config>
+        <p:input port="source">
+          <p:empty/>
+        </p:input>
         <p:with-option name="href" select="$conf"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
-      </tr:load>
+      </xml2tex:load-config>
       
       <tr:store-debug pipeline-step="docx2tex/loaded-config-xml">
         <p:with-option name="active" select="$debug"/>
