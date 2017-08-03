@@ -88,10 +88,12 @@ The configuration in conf/conf.xml is used by default and works with the styles 
 
 Learn how to edit this file [here](https://github.com/transpect/xml2tex).
 
-### docx2hub fontmaps
-Simply drop your *fontmap.xml* files in one folder.  
-Then when calling d2t, provide the option `-f /path/to/your/fontmaps/`
+### fontmaps
 
-If you use the XProc Pipeline, the location containing your fontmaps can be specified with the option *custom-font-maps-dir*.
+The docx conversion supports individual fontmaps for mapping non-unicode characters to unicode. Please note that this is just needed for fonts that are not unicode-compatible. If you want to map characters from Unicode to LaTeX, please use the character map in the [xml2tex configuration](https://github.com/transpect/xml2tex) instead.
 
-See docx2hub/fontmaps/README.md for further informations
+Please find further documentation on how to create a fontmap [here](https://github.com/transpect/docx2hub/blob/master/fontmaps/README.md).
+
+After you created your fontmap, store it in a directory and pass the path of the directory to docx2tex with the `-f` option.
+
+If you invoke the docx2tex XProc pipeline (`xpl/docx2tex.xpl`), you can specify the fontmap directory with the option  `custom-font-maps-dir`.
