@@ -427,6 +427,13 @@
     </rule>
   </template>
 
+  <!-- no formatting for phrases which contain math environments -->
+  <template context="dbk:phrase[starts-with(., '$') and ends-with(., '$')]">
+    <rule>
+      <text/>
+    </rule>
+  </template>
+
   <!-- headlines -->
   
   <template context="dbk:para[@docx2tex:config eq 'headline']/dbk:phrase[@role eq 'docx2tex:identifier']">
