@@ -113,12 +113,15 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:variable name="headline-paras" select="for $i in //para[@docx2tex:config eq 'headline'] return generate-id($i)" as="xs:string*"/>
+  
   <xsl:template match="para[@docx2tex:config eq 'headline']" mode="docx2tex-preprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node() except phrase[@role eq 'docx2tex:identifier']" mode="docx2tex-preprocess"/>
       <!-- add label -->
-      <xsl:for-each select="phrase[@role eq 'docx2tex:identifier']">
-        <xsl:processing-instruction name="latex" select="concat('\label{mark-', .,'}')"/>
+      <xsl:for-each select="phrase[@role = ('docx2tex:identifier', 'hub:identifier')][1]">
+        <xsl:processing-instruction name="latex" select="concat('\label{mark-', (.[string-length() gt 0], 
+                                                                                   index-of($headline-paras, generate-id(parent::*))[1]),'}')"/>
       </xsl:for-each>
     </xsl:copy>
   </xsl:template>
