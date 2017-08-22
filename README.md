@@ -28,7 +28,7 @@ You can run docx2tex with a bash script (Linux, Mac OSX, Cygwin) or the calabash
 Option  | Description
 ------  | -------------
  -o     | path to custom output directory
- -c     | path to custom word2tex configuration file
+ -c     | path to custom docx2tex configuration file
  -f     | path to custom fontmaps directory
  -p     | generate PDF with pdflatex
  -t     | draw table grid lines
