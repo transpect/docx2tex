@@ -121,7 +121,7 @@
       <!-- add label -->
       <xsl:for-each select="phrase[@role = ('docx2tex:identifier', 'hub:identifier')][1]">
         <xsl:processing-instruction name="latex" select="concat('\label{mark-', (.[string-length() gt 0], 
-                                                                                   index-of($headline-paras, generate-id(parent::*))[1]),'}')"/>
+                                                                                   index-of($headline-paras, generate-id(parent::*)))[1],'}')"/>
       </xsl:for-each>
     </xsl:copy>
   </xsl:template>
