@@ -30,7 +30,7 @@
     \usepackage{tensor}
     \usepackage{pifont}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
-      <xsl:text>\usepackage{makeidx}&#xa;\makeindex</xsl:text>
+      <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
@@ -113,14 +113,6 @@
   <template context="dbk:div[@role eq 'hub:toc']">
     <rule break-after="2">
       <text>\tableofcontents</text>
-    </rule>
-  </template>
-
-  <!-- index -->
-
-  <template context="dbk:div[@role eq 'hub:index']">
-    <rule break-after="2">
-      <text>\printindex</text>
     </rule>
   </template>
 
@@ -557,6 +549,18 @@
   <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
     <rule>
       <text select="concat('!', .)"/>
+    </rule>
+  </template>
+  
+  <!-- index listing -->
+  
+  <template context="dbk:para[@role eq 'Index_Heading']"/>
+  
+  <template context="dbk:div[@role eq 'hub:index']">
+    <rule break-after="2">
+      <text select="if(//dbk:para[@role eq 'Index_Heading'][string-length() gt 0]) 
+        then concat('\renewcommand{\indexname}{', //dbk:para[@role eq 'Index_Heading'][string-length() gt 0][1], '}&#xa;\printindex')
+        else '\printindex'"/>
     </rule>
   </template>
   
