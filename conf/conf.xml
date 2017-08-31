@@ -939,11 +939,11 @@
     <!-- PER TEN THOUSAND SIGN -->
     <char character="&#x2031;" string="{\textpertenthousand}"/>
     <!--PRIME or minute, not superscripted-->
-    <char character="&#x2032;" string="${\prime}$"/>
+    <char character="&#x2032;" string="$^{\prime}$"/>
     <!--DOUBLE PRIME or second, not superscripted-->
-    <char character="&#x2033;" string="${\second}$"/>
+    <char character="&#x2033;" string="$^{\prime\prime}$"/>
     <!--TRIPLE PRIME (not superscripted)-->
-    <char character="&#x2034;" string="${\third}$"/>
+    <char character="&#x2034;" string="$^{\prime\prime\prime}$"/>
     <!--reverse prime, not superscripted-->
     <char character="&#x2035;" string="${\backprime}$"/>
     <!-- SINGLE LEFT-POINTING ANGLE QUOTATION MARK -->
