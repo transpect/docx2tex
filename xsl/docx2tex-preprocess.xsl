@@ -63,7 +63,11 @@
   
   <!-- drop empty equations -->
   
-  <xsl:template match="equation[not(node() except @*)]|inlineequation[not(node() except @*)]" mode="docx2tex-preprocess"/>
+  <xsl:template match="equation[not(node() except @*)]
+                      |equation[mml:math[not(node() except @*)] and not(normalize-space(.))]
+                      |equation[mml:math[not(node() except @*)] and not(node() except @*)]
+                      |inlineequation[not(node() except @*)]
+                      |inlineequation[mml:math[not(node() except @*)] and not(normalize-space(.))]" mode="docx2tex-preprocess"/>
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
