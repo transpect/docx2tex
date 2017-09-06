@@ -386,10 +386,10 @@
     </rule>
   </template>
 
-  <template context="dbk:phrase[@css:text-decoration-line eq 'underline' 
+  <template context="dbk:phrase[(@css:text-decoration-line eq 'underline' 
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline'])
-                                and not(@role eq 'Hyperlink')]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline']))
+                                and not(@role eq 'Hyperlink' or parent::dbk:link)]">
     <rule name="underline" type="cmd">
       <param/>
     </rule>
