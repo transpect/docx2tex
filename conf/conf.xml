@@ -107,15 +107,7 @@
   <!-- drop metadata -->
 
   <template context="/dbk:hub/dbk:info"/>
-
-  <!-- toc -->
   
-  <template context="dbk:div[@role eq 'hub:toc']">
-    <rule break-after="2">
-      <text>\tableofcontents</text>
-    </rule>
-  </template>
-
   <!-- regular paras -->
 
   <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]">
@@ -435,31 +427,36 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift1', 'headline1', 'heading1', 'Heading1')]">
+  <template context="dbk:para[@role = ('berschrift1', 'headline1', 'heading1', 'Heading1')]
+                    |dbk:section/dbk:title[@role = ('berschrift1', 'headline1', 'heading1', 'Heading1')]">
     <rule break-after="2" name="chapter" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift2', 'headline2', 'heading2', 'Heading2')]">
+  <template context="dbk:para[@role = ('berschrift2', 'headline2', 'heading2', 'Heading2')]
+                    |dbk:section/dbk:title[@role = ('berschrift2', 'headline2', 'heading2', 'Heading2')]">
     <rule break-after="2" name="section" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift3', 'headline3', 'heading3', 'Heading3')]">
+  <template context="dbk:para[@role = ('berschrift3', 'headline3', 'heading3', 'Heading3')]
+                    |dbk:section/dbk:title[@role = ('berschrift3', 'headline3', 'heading3', 'Heading3')]">
     <rule break-after="2" name="subsection" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift4', 'headline4', 'heading4', 'Heading4')]">
+  <template context="dbk:para[@role = ('berschrift4', 'headline4', 'heading4', 'Heading4')]
+                    |dbk:section/dbk:title[@role = ('berschrift4', 'headline4', 'heading4', 'Heading4')]">
     <rule break-after="2" name="subsubsection" type="cmd">
       <param/>
     </rule>
   </template>
 
-  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5', 'Heading5')]">
+  <template context="dbk:para[@role = ('berschrift5', 'headline5', 'heading5', 'Heading5')]
+                    |dbk:section/dbk:title[@role = ('berschrift5', 'headline5', 'heading5', 'Heading5')]">
     <rule break-after="2" name="paragraph" type="cmd">
       <param/>
     </rule>
@@ -530,6 +527,20 @@
     </rule>
   </template>
 
+  <!-- toc -->
+  
+  <template context="dbk:para[@role = ('Inhaltsverzeichnisberschrift', 'TOC Heading')]">
+    <rule break-after="2">
+      <text select="concat('\renewcommand{\contentsname}{', ., '}')"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:div[@role eq 'hub:toc']">
+    <rule break-after="2">
+      <text>\tableofcontents</text>
+    </rule>
+  </template>
+
   <!-- indexterms -->
 
   <template context="dbk:indexterm[not(@type)]">
@@ -544,8 +555,7 @@
       <param/>
     </rule>
   </template>
-
-
+  
   <template context="dbk:secondary|dbk:secondary|dbk:tertiary|dbk:see|dbk:seealso">
     <rule>
       <text select="concat('!', .)"/>
