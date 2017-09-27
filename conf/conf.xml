@@ -78,7 +78,7 @@
     </xsl:choose>
     <xsl:variable name="colors" 
                   select="distinct-values((//@css:background-color,
-                                           //@css:color[not(. eq '#000000' 
+                                           //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 25  
                                                            or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
                                                            or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                                            or ancestor-or-self::dbk:link
@@ -317,18 +317,22 @@
 
   <!-- text styles -->
   
-  <template context="dbk:phrase[not(@css:color eq '#000000'
+  <template context="dbk:phrase[not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 25  
                                     or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
                                     or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or ancestor-or-self::dbk:link)
                                 and (@css:color 
                                 or exists(for $i in ./@role 
-                                return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:color and not(@css:color eq '#000000') ]))]/text()">
+                                return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                           [@css:color 
+                                                                            and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
+                                                                                    satisfies $i &lt; 25) ]))]/text()">
     <rule name="textcolor" type="cmd">
       <param select="for $i in (parent::*/@css:color, for $j in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:color)[1] 
                      return concat('color-', index-of(distinct-values((//@css:background-color,
-                                                                       //@css:color[not(. eq '#000000' 
+                                                                       //@css:color[not(every $i in tr:hex-rgb-color-to-ints(.) 
+                                                                                        satisfies $i &lt; 25
                                                                                         or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                                                                         or ancestor-or-self::dbk:link
                                                                                         or parent::*[@native-name eq 'Hyperlink']
