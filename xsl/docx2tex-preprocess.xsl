@@ -34,14 +34,15 @@
   <xsl:variable name="equation-label-regex" select="'^[\(\[]((\d+)(\.\d+)*)[\)\]]?$'" as="xs:string"/>
   
   <xsl:template match="informaltable[every $i in .//row 
-                                     satisfies count($i/entry) = (2,3)
-                                               and $i/entry[matches(normalize-space(.), $equation-label-regex)]
-                                               and ($i/entry/para/equation
-                                               or ($i/entry/para/equation and $i/para[not(node())])
-    )]" mode="docx2tex-preprocess">
+                                     satisfies count($i/entry) = (2,3) 
+                                               and $i/entry[matches(normalize-space(.), $equation-label-regex)
+                                               or equation/processing-instruction()[name() eq 'latex'][matches(., '^\s*\\tag')]]
+                                               and (($i/entry/para/equation|$i/entry/para/phrase/equation) 
+                                                    or ($i/entry/para/equation and $i/para[not(node())]))]" mode="docx2tex-preprocess">
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
-      <xsl:variable name="label" select="entry[matches(normalize-space(.), $equation-label-regex)]" as="element(entry)"/>
+      <xsl:variable name="label" select="(entry[matches(normalize-space(.), $equation-label-regex)],
+                                          entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]" as="element(entry)"/>
       <xsl:apply-templates select="entry/* except $label/*" mode="#current">
         <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')" 
                         tunnel="yes"/>
