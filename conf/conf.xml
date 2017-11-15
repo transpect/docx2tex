@@ -174,40 +174,7 @@
       <text>}</text>
       <param/>
     </rule>
-  </template>
-  
-  <!-- regular superscript and subscripts -->
-  
-  <template context="dbk:superscript[not(dbk:footnote)]
-                     |dbk:subscript
-                     |dbk:phrase[not(dbk:footnote)]
-                                [exists(for $i in ./@role 
-                                        return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]" mathmode="true">
-    <rule>
-      <text select="concat(if(local-name() eq 'subscript'
-                           or exists(for $i in ./@role 
-                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('subscript')])
-                           )
-                           then '_'
-                           else '^',
-                           '{',
-                           if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) then ''
-                           else if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold')) then '\mathrm{'
-                           else if(@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')) then '\mathbf{'
-                           else if(@css:font-weight eq 'bold') then '\mathbfit{'
-                           else '')"/>
-      <text/>
-      <text select="concat('}', 
-        if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) then ''
-        else if(not(@css:font-style eq 'italic') or @css:font-weight eq 'bold') then '}' else '')"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript[matches(., '^\{\\(textregistered|texttrademark)\}$')]">
-    <rule name="textsuperscript" type="cmd">
-      <text/>
-    </rule>
-  </template>
+  </template>  
   
   <!-- tabs -->
   
@@ -421,6 +388,44 @@
       <text/>
     </rule>
   </template>
+
+  <!-- regular superscript and subscripts -->
+  
+  <template context="dbk:superscript[not(dbk:footnote)]
+                    |dbk:subscript
+                    |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]" 
+            mathmode="true">
+    <rule>
+      <text select="concat(if(local-name() eq 'subscript'
+                           or exists(for $i in ./@role 
+                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('subscript')])
+                                     )
+                           then '_'
+                           else '^',
+                           '{',
+                           if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$'))
+                             then ''
+                           else if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold')) 
+                             then '\mathrm{'
+                           else if(@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')) 
+                             then '\mathbf{'
+                           else if(@css:font-weight eq 'bold') 
+                             then '\mathbfit{'
+                           else '')"/>
+      <text/>
+      <text select="concat('}', 
+                          if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) then ''
+                          else if(not(@css:font-style eq 'italic') or @css:font-weight eq 'bold') then '}' else '')"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:superscript[matches(., '^\{\\(textregistered|texttrademark)\}$')]">
+    <rule name="textsuperscript" type="cmd">
+      <text/>
+    </rule>
+  </template>
+  
 
   <!-- headlines -->
   
