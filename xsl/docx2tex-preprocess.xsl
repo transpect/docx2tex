@@ -62,6 +62,14 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:template match="entry/para[matches(normalize-space(string-join((.//text()), '')), $equation-label-regex)]
+                                 [ancestor::row//equation or ancestor::row/inlineequation]" mode="docx2tex-preprocess">
+    <xsl:processing-instruction name="latex" 
+                                select="concat('\tag{', 
+                                               normalize-space(string-join((.//text()), ''))[matches(., $equation-label-regex)],
+                                               '}')"/>
+  </xsl:template>
+  
   <!-- drop empty equations -->
   
   <xsl:template match="equation[not(node() except @*)]
@@ -72,13 +80,16 @@
   
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
-  <xsl:template match="para[(every $i in * satisfies $i/local-name() = ('inlineequation', 'tab', 'phrase'))]
+  <xsl:template match="para[.//inlineequation and */local-name() = ('inlineequation', 'tab', 'phrase')]
                            [count(distinct-values(*/local-name())) &lt;= 3]
                            [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
     <equation condition="numbered">
-      <xsl:processing-instruction name="latex">
-      <xsl:value-of select="concat('\tag{', replace(string-join((text(), phrase/text()), ''), $equation-label-regex, '$1'), '}&#xa;')"/>
-    </xsl:processing-instruction>
+      <xsl:processing-instruction name="latex" 
+                                  select="concat('\tag{',
+                                                 replace(string-join((text(), phrase/text()), ''), 
+                                                         $equation-label-regex, 
+                                                         '$1'),
+                                                '}&#xa;')"/>
       <xsl:apply-templates select=".//inlineequation/*" mode="#current"/>
     </equation>
   </xsl:template>
