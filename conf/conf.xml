@@ -138,7 +138,7 @@
   
   <!-- paras in tables, use only 1 break -->
   
-  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()]">
+  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()][@*:morerows eq '0']">
     <rule>
       <text/>
       <text>\par </text>
