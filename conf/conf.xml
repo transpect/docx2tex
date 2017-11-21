@@ -130,7 +130,13 @@
   
   <template context="dbk:entry//dbk:br">
     <rule>
-      <text> \\ </text>
+      <text> \newline </text>
+    </rule>
+  </template>
+  
+  <template context="dbk:entry/dbk:para[not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']//dbk:br">
+    <rule>
+      <text> \par </text>
     </rule>
   </template>
   
@@ -144,10 +150,10 @@
   
   <!-- paras in tables, use only 1 break -->
   
-  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']">
+  <template context="dbk:entry/dbk:para[not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']">
     <rule>
       <text/>
-      <text>\par </text>
+      <text> \par </text>
     </rule>
   </template>
   
