@@ -128,6 +128,12 @@
     <rule name="newline" type="cmd" break-after="1"/>
   </template>
   
+  <template context="dbk:entry//dbk:br">
+    <rule>
+      <text> \\ </text>
+    </rule>
+  </template>
+  
   <template context="dbk:br[every $precedent in ancestor::dbk:para[1]//node()[. &lt;&lt; current()] 
                             satisfies (not(normalize-space($precedent)))]">
     <rule>
@@ -138,7 +144,7 @@
   
   <!-- paras in tables, use only 1 break -->
   
-  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()][@*:morerows eq '0']">
+  <template context="dbk:para[parent::dbk:entry][not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']">
     <rule>
       <text/>
       <text>\par </text>
