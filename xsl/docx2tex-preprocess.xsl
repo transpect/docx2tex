@@ -204,22 +204,7 @@
       <xsl:apply-templates select="anchor" mode="#current"/>
     </xsl:copy>  
   </xsl:template>
-  
-  <!-- move phrases outside of links -->
-  
-  <xsl:template match="link/phrase" mode="docx2tex-preprocess">
-    <xsl:apply-templates mode="#current"/>
-  </xsl:template>
-  
-  <xsl:template match="link[phrase]" mode="docx2tex-preprocess">
-    <phrase>
-      <xsl:apply-templates select="phrase/@*" mode="#current"/>
-      <xsl:copy>
-        <xsl:apply-templates select="@*, node()" mode="#current"/>
-      </xsl:copy>
-    </phrase>
-  </xsl:template>
-  
+    
   <!-- place footnote anchors inside of the footnote -->
   
   <xsl:template match="anchor[following-sibling::node()[1][local-name() eq 'footnote']]" mode="docx2tex-preprocess"/>
