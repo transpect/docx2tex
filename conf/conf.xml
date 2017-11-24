@@ -644,7 +644,7 @@
     <!--= \lnot, NOT SIGN-->
     <char character="&#xac;" string="${\neg}$"/>
     <!--SOFT HYPHEN -->
-    <char character="&#xad;" string="&quot;-"/>
+    <char character="&#xad;" string="\-"/>
     <!--REGISTERED SIGN-->
     <char character="&#xae;" string="{\textregistered}"/>
     <!--DEGREE SIGN -->
