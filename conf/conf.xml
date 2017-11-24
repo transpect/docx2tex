@@ -248,12 +248,6 @@
       <text/>
     </rule>
   </template>
-  
-  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')][matches(dbk:phrase, '^(https?|ftp)')]">
-    <rule name="url" type="cmd">
-      <param/>
-    </rule>
-  </template>
 
   <!-- quotes -->
 
