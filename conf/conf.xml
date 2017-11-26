@@ -134,8 +134,17 @@
     </rule>
   </template>
   
-  <template context="dbk:entry/dbk:para[not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']//dbk:br">
+  <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
+                                                                               [following-sibling::dbk:para]//dbk:br">
     <rule>
+      <text> \par </text>
+    </rule>
+  </template>
+  
+  <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
+                                                                               [following-sibling::dbk:para]">
+    <rule>
+      <text/>
       <text> \par </text>
     </rule>
   </template>
@@ -143,17 +152,8 @@
   <template context="dbk:br[every $precedent in ancestor::dbk:para[1]//node()[. &lt;&lt; current()] 
                             satisfies (not(normalize-space($precedent)))]">
     <rule>
-      <text>\leavevmode\newline
+      <text>\leavemode\newline
 </text>  
-    </rule>
-  </template>
-  
-  <!-- paras in tables, use only 1 break -->
-  
-  <template context="dbk:entry/dbk:para[not(parent::dbk:footnote)][position() ne last()][not(@*:morerows) or @*:morerows eq '0']">
-    <rule>
-      <text/>
-      <text> \par </text>
     </rule>
   </template>
   
