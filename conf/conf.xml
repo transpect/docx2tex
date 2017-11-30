@@ -486,17 +486,33 @@
     </rule>
   </template>
 
-  <template context="dbk:footnote/dbk:para">
+  <template context="dbk:footnote/dbk:para[following-sibling::dbk:para]">
     <rule break-after="1">
       <text/>
     </rule>
   </template>
   
+  <template context="dbk:footnote/dbk:para[not(following-sibling::dbk:para)]">
+    <rule>
+      <text/>
+    </rule>
+  </template>
+  
+  <!-- remove whitespace at the beginning of footnotes -->
+  
+  <template context="dbk:footnote//text()[starts-with(., ' ')][1]">
+    <rule>
+      <text select="replace(., '^\s', '')"/> 
+    </rule>
+  </template>
+  
+  <!-- remove footnote numbers and whitespace -->
+  
+  <template context="dbk:footnote//dbk:phrase[@role eq 'hub:separator']"/>
+  
   <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
 
   <template context="dbk:footnote//dbk:phrase[@role eq 'hub:identifier']/node()[not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]"/>
-  
-  <template context="dbk:footnote//text()[string-length(normalize-space(.)) eq 0][1]"/>
   
   <template context="dbk:footnote/dbk:para/*[1][local-name() eq 'superscript'][matches(., '\d+')]"/>
 
