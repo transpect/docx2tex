@@ -84,6 +84,13 @@
       Path to the docx file.
     </p:documentation>
   </p:option>
+  
+  <p:option name="mml-space-handling" select="'xml-space'">
+    <p:documentation>
+      How Math spaces should be treated in MathML. 'xml-space' results in more 
+      &lt;mml:mtext&gt; (LaTeX: $\text{ }$) whereas 'mspace' leads to more $\:$.  
+    </p:documentation>
+  </p:option>
 	
   <p:option name="custom-xsl" select="''" required="false">
     <p:documentation>
@@ -191,6 +198,7 @@
       <p:pipe port="result" step="custom-font-maps"/>
     </p:input>
     <p:with-option name="docx" select="$docx"/>
+    <p:with-option name="mml-space-handling" select="$mml-space-handling"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
