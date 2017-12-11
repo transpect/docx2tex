@@ -104,6 +104,14 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="image-output-dir" required="false">
+    <p:documentation>
+      Provide a custom directory name for the image file references. If the option 
+      is set to '' or '.', just the filename will appear in the file reference. 
+      If no value is provided, the standard output path from docx2hub is used.
+    </p:documentation>
+  </p:option>
+  
   <p:option name="conf-template" select="''" required="false">
     <p:documentation>
       Path to the generated CSV-based configuration template.
@@ -181,7 +189,7 @@
   
   <!--  *
         * load xml2tex config or generate one from CSV plain text file
-        * -->
+        * --> 
   
   <docx2tex:load-config name="load-config">
     <p:with-option name="conf" select="$conf"/>
@@ -264,6 +272,27 @@
           <p:pipe port="result" step="evolve-hub"/>
         </p:input>
       </p:xslt>
+    </p:when>
+    <p:otherwise>
+      <p:identity/>
+    </p:otherwise>
+  </p:choose>
+  
+  <p:choose>
+    <p:when test="p:value-available('image-output-dir')">
+      
+      <p:viewport match="//*:imagedata">
+        <p:variable name="filename" select="replace(*:imagedata/@fileref, '^.+/(.+)$', '$1')"/>
+        <p:variable name="new-fileref" select="if($image-output-dir eq '' or $image-output-dir eq '.')
+                                               then $filename
+                                               else concat($image-output-dir, '/', $filename)"/>
+        
+        <p:string-replace match="//*:imagedata/@fileref">
+          <p:with-option name="replace" select="concat('&quot;', $new-fileref ,'&quot;')"/>
+        </p:string-replace>
+        
+      </p:viewport>
+      
     </p:when>
     <p:otherwise>
       <p:identity/>
