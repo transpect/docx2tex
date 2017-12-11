@@ -123,6 +123,7 @@
   <p:import href="evolve-hub.xpl"/>
   <p:import href="load-config.xpl"/>
   <p:import href="generate-conf-template.xpl"/>
+  <p:import href="rename-and-copy-files.xpl"/>
   
   <p:import href="http://transpect.io/docx2hub/xpl/docx2hub.xpl"/>
   <p:import href="http://transpect.io/xml2tex/xpl/xml2tex.xpl"/>
@@ -278,26 +279,11 @@
     </p:otherwise>
   </p:choose>
   
-  <p:choose>
-    <p:when test="p:value-available('image-output-dir')">
-      
-      <p:viewport match="//*:imagedata">
-        <p:variable name="filename" select="replace(*:imagedata/@fileref, '^.+/(.+)$', '$1')"/>
-        <p:variable name="new-fileref" select="if($image-output-dir eq '' or $image-output-dir eq '.')
-                                               then $filename
-                                               else concat($image-output-dir, '/', $filename)"/>
-        
-        <p:string-replace match="//*:imagedata/@fileref">
-          <p:with-option name="replace" select="concat('&quot;', $new-fileref ,'&quot;')"/>
-        </p:string-replace>
-        
-      </p:viewport>
-      
-    </p:when>
-    <p:otherwise>
-      <p:identity/>
-    </p:otherwise>
-  </p:choose>
+  <docx2tex:rename-and-copy-files name="copy-and-rename-files">
+    <p:with-option name="image-output-dir" select="$image-output-dir"/>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+  </docx2tex:rename-and-copy-files>
     
   <p:identity name="identity-input"/>
   
