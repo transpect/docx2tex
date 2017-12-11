@@ -32,7 +32,7 @@
       
       <xsl:attribute name="version">2.0</xsl:attribute>
       
-      <xsl:apply-templates select="* except (xml2tex:ns, xml2tex:charmap, xml2tex:preamble)"/>
+      <xsl:apply-templates select="xml2tex:* except (xml2tex:ns, xml2tex:charmap, xml2tex:preamble)"/>
       
       <!-- identity template -->
       <xso:template match="@*|*">
