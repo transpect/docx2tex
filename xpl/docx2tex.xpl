@@ -104,7 +104,7 @@
     </p:documentation>
   </p:option>
   
-  <p:option name="image-output-dir" required="false">
+  <p:option name="image-output-dir" select="''" required="false">
     <p:documentation>
       Provide a custom directory name for the image file references. If the option 
       is set to '' or '.', just the filename will appear in the file reference. 
