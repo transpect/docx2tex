@@ -112,7 +112,7 @@
     </p:documentation>
   </p:option>
   
-  <p:option name="conf-template" select="''" required="false">
+  <p:option name="conf-template" select="replace($docx, '\.docx$', '.csv')" required="false">
     <p:documentation>
       Path to the generated CSV-based configuration template.
     </p:documentation>
