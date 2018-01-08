@@ -234,7 +234,7 @@
   
   <!-- preserve unmapped characters -->
   
-  <xsl:template match="phrase[@role eq 'hub:ooxml-symbol']" mode="docx2tex-preprocess">
+  <xsl:template match="phrase[@role eq 'hub:ooxml-symbol'][not(.//dbk:*)]" mode="docx2tex-preprocess">
     <xsl:processing-instruction name="latex" select="concat('\', replace(@css:font-family, '\s', ''), '{', @annotations, '}')"/>
   </xsl:template>
   
