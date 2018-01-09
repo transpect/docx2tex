@@ -13,7 +13,16 @@
   <p:documentation>
     docx2tex:main generates a LaTeX text document from a DOCX file. The step can be
     used standalone or as library in other XProc pipelines.
-  </p:documentation>    
+  </p:documentation>
+  
+  <p:input port="custom-evolve-hub-driver">
+    <p:document href="../xsl/evolve-hub-driver.xsl"/>
+    <p:documentation>
+      Provide a custom evolve-hub driver stylesheet if you like. I would strongly advise to 
+      import the standard evolve-hub-driver in ../xsl/evolve-hub-driver.xsl as it brings many 
+      improvements for the subsequent processing.
+    </p:documentation>
+  </p:input>
 
   <p:output port="result" primary="true">
     <p:documentation>The TeX document is shipped at this port.</p:documentation>
@@ -227,7 +236,7 @@
   <docx2tex:evolve-hub name="evolve-hub">
     <p:documentation>Use the evolve-hub function library to detect lists.</p:documentation>
     <p:input port="stylesheet">
-      <p:document href="../xsl/evolve-hub-driver.xsl"/>
+      <p:pipe port="custom-evolve-hub-driver" step="docx2tex-main"/>
     </p:input>
     <p:input port="config">
       <p:pipe port="result" step="load-config"/>
