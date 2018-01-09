@@ -549,7 +549,11 @@
 
   <template context="dbk:annotation">
     <rule break-after="1">
-      <text select="concat('%', string-join(.//node(), ' '))"/>
+      <text select="concat(if(parent::*/following-sibling::node()[1][self::text()][matches(., '^\s')])
+                           then ' '
+                           else '',
+                           '%', string-join(.//node(), 
+                           ' '))"/>
     </rule>
   </template>
 
