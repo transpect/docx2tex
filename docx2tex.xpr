@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="17.1">
+<project version="19.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="17.1" xml:space="preserve">
+            <serialized version="19.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
                         <String-array>
                             <String>${pdu}/calabash-frontend/xmlcatalog/catalog.xml</String>
+                            <String>${pdu}/xmlcatalog/catalog.xml</String>
                         </String-array>
                     </entry>
                     <entry>
