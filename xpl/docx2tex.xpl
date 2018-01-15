@@ -127,6 +127,12 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="use-filename-from-http-response" required="false" select="'no'">
+    <p:documentation>Use filename that is passed on from http request response instead of 
+    possible filename read from URL in tr:file-uri (for example when using Gdocs URLs:
+    https://docs.google.com/document/d/1Z5eYyjLoRhB24HYZ-d-wQKAFD3QDWZUsQH4cKHs2eiM/export?format=docx)</p:documentation>
+  </p:option>
+  
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   
   <p:import href="evolve-hub.xpl"/>
@@ -220,6 +226,7 @@
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+    <p:with-option name="use-filename-from-http-response" select="$use-filename-from-http-response"/>
   </docx2hub:convert>
   
   <docx2tex:generate-conf-template>
