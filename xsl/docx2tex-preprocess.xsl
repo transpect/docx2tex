@@ -78,6 +78,19 @@
                       |inlineequation[not(node() except @*)]
                       |inlineequation[mml:math[not(node() except @*)] and not(normalize-space(.))]" mode="docx2tex-preprocess"/>
   
+  <!-- move whitespace at the beginning or end of an equation in the regular text since they would be trimmed during whitespace normalization -->
+  
+  <xsl:template match="inlineequation[mml:math[*[1][self::mml:mtext[. eq ' ']]
+                       or *[last()][self::mml:mtext[. eq ' ']]]]" mode="docx2tex-postprocess">
+    <xsl:if test="mml:math/*[1][self::mml:mtext[. eq ' ']]">
+      <phrase xml:space="preserve"> </phrase>
+    </xsl:if>
+    <xsl:copy-of select="."/>
+    <xsl:if test="mml:math/*[last()][self::mml:mtext[. eq ' ']]">
+      <phrase xml:space="preserve"> </phrase>
+    </xsl:if>
+  </xsl:template>
+  
   <!-- paragraph contains only inlineequation, tabs and an equation label -->
   
   <xsl:template match="para[.//inlineequation and */local-name() = ('inlineequation', 'tab', 'phrase')]
