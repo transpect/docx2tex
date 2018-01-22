@@ -133,6 +133,11 @@
     https://docs.google.com/document/d/1Z5eYyjLoRhB24HYZ-d-wQKAFD3QDWZUsQH4cKHs2eiM/export?format=docx)</p:documentation>
   </p:option>
   
+  <p:option name="extract-dir" select="''">
+    <p:documentation>Directory (OS path, not file: URL) to which the file will be unzipped. If option is empty string, will be
+      '.tmp' appended to OS file path.</p:documentation>
+  </p:option>
+  
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   
   <p:import href="evolve-hub.xpl"/>
@@ -227,6 +232,7 @@
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
     <p:with-option name="use-filename-from-http-response" select="$use-filename-from-http-response"/>
+    <p:with-option name="extract-dir" select="$extract-dir"/>
   </docx2hub:convert>
   
   <docx2tex:generate-conf-template>
