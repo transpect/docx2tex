@@ -15,6 +15,7 @@
   xpath-default-namespace="http://docbook.org/ns/docbook">
   
   <xsl:include href="http://transpect.io/mml2tex/xsl/mml2tex.xsl"/>
+  <xsl:include href="http://transpect.io/xslt-util/uri-to-relative-path/xsl/uri-to-relative-path.xsl"/>
   
   <!--  *
         * MODE docx2tex-preprocess
