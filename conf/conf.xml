@@ -621,6 +621,21 @@
       <text>\end{minipage}}</text>
     </rule>
   </template>
+  
+  <template context="dbk:bibliography">
+    <rule name="thebibliography" type="env" break-after="2" break-before="1">
+      <param>0</param>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:bibliomixed">
+    <rule name="bibitem" type="cmd" break-before="1">
+      <option>aaa(000)</option>
+      <param select="@xreflabel"/>
+      <text/>
+    </rule>
+  </template>
 
   <charmap>
     
