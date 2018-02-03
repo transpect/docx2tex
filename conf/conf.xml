@@ -4760,8 +4760,27 @@
     <char character="&#x1d7fe;" string="${\mathtt{8}}$"/>
     <!--mathematical monospace digit 9-->
     <char character="&#x1d7ff;" string="${\mathtt{9}}$"/>
+    
+    <!--  *
+          * Miscellaneous Symbols and Pictographs
+          * -->
+    
     <!--BELL -->
     <char character="&#x1f514;" string="${\bell}$"/>
+    
+    <!--  *
+          * Supplemental Arrows-C
+          * -->
+    
+    <!-- WIDE-HEADED LEFTWARDS BARB ARROW (U+1F868) -->
+    <char character="&#x1f868;" string="${\leftarrow}$"/>
+    <!-- WIDE-HEADED UPWARDS BARB ARROW (U+1F869) -->
+    <char character="&#x1f869;" string="${\uparrow}$"/>
+    <!--WIDE-HEADED RIGHTWARDS BARB ARROW (U+1F86A)-->
+    <char character="&#x1f86a;" string="${\rightarrow}$"/>
+    <!-- WIDE-HEADED DOWNWARDS BARB ARROW (U+1F86B) -->
+    <char character="&#x1f86b;" string="${\downarrow}$"/>
+    
   </charmap>
 
 </set>
