@@ -538,6 +538,21 @@
     </rule>
   </template>
   
+  <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
+                                 [contains(., '\\')]">
+    <rule name="align" type="env" break-after="1">
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:equation[not(@condition eq 'numbered')]
+                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
+                                 [contains(., '\\')]">
+    <rule name="align*" type="env" break-after="1">
+      <text/>
+    </rule>
+  </template>
+  
   <!-- tagged private use area -->
   <template context="dbk:phrase[@role eq 'unicode-private-use']">
     <rule name="privateuse" type="cmd">
