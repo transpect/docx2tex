@@ -225,8 +225,9 @@
   
   <xsl:template match="footnote[preceding-sibling::node()[1][local-name() eq 'anchor']]" mode="docx2tex-preprocess">
     <xsl:copy>
+      <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:copy-of select="preceding-sibling::node()[1][local-name() eq 'anchor']"/>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:apply-templates mode="#current"/>
     </xsl:copy>
   </xsl:template>
   
