@@ -400,9 +400,8 @@
   <template context="dbk:superscript[not(dbk:footnote)]
                     |dbk:subscript
                     |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
-                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]" 
-            mathmode="true">
-    <rule>
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]">
+    <rule mathmode="true">
       <text select="concat(if(local-name() eq 'subscript'
                            or exists(for $i in ./@role 
                                      return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('subscript')])
