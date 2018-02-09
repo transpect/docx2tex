@@ -1,9 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<set xmlns="http://transpect.io/xml2tex" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<set xmlns="http://transpect.io/xml2tex"  
+  xmlns:tr="http://transpect.io"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
   <xsl:import href="http://transpect.io/xslt-util/colors/xsl/colors.xsl"/>
-
+  <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
+  
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex --- ``Garbage In, Garbage Out''
     %
@@ -4796,5 +4800,66 @@
     <char character="&#x1f86b;" string="${\downarrow}$"/>
     
   </charmap>
+  
+  <template context="dbk:orderedlist">
+    <xsl:variable name="list-type" 
+                  select="tr:enumerate-list-type((@numeration, 'arabic')[1], *:listitem[1]/@override)" as="xs:string"/>
+    <!-- use 1st override or if empty 1st override of sublist -->
+    <xsl:variable name="override" as="xs:string?"
+                  select="(*:listitem[1], *:listitem[1]/*:orderedlist[1]/*:listitem[1])[string-length(@override) gt 0][1]/@override"/>
+    <xsl:variable name="start" as="xs:integer" 
+                  select="if(string-length($override) gt 0 and @numeration) 
+                          then tr:list-number-to-integer($override, @numeration) - 1
+                          else 0"/>
+    <xsl:variable name="level" select="count(ancestor::*:orderedlist) + 1" as="xs:integer"/>
+    <xsl:variable name="level-roman" as="xs:string">
+      <xsl:number value="$level" format="i"/>
+    </xsl:variable>
+    <xsl:value-of select="concat('\begin{enumerate}[',
+                                 $list-type,']&#xa;',
+                                 if($start gt 0) 
+                                 then concat('\setcounter{enum', $level-roman, '}{', $start, '}') 
+                                 else ''
+                                 )"/>
+    <xsl:text>&#xa;&#xa;</xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:value-of select="'\end{enumerate}'"/>
+    <xsl:text>&#xa;&#xa;</xsl:text>
+  </template>
+
+  <xsl:function name="tr:enumerate-list-type" as="xs:string">
+    <xsl:param name="numeration" as="xs:string"/>
+    <xsl:param name="override" as="xs:string?"/>
+    <xsl:variable name="list-type" as="xs:string"
+                  select="if($numeration eq 'loweralpha') then 'a'
+                     else if($numeration eq 'upperalpha') then 'A'
+                     else if($numeration eq 'lowerroman') then 'i'
+                     else if($numeration eq 'upperroman') then 'I'
+                     else if($numeration eq 'arabic' and matches($override, '(\d+)(\.\d+)+')) then replace($override, '^(.+)\.\d+\.?$', '{$1}.1')
+                     else                                      '1'"/>
+    <xsl:value-of select="$list-type"/>
+  </xsl:function>
+  
+  <xsl:function name="tr:list-number-to-integer" as="xs:integer">
+    <xsl:param name="override" as="xs:string"/>
+    <xsl:param name="list-type" as="xs:string"/>
+    <xsl:variable name="counter"
+                  select="tokenize(
+                                   replace(
+                                           replace($override, '[\s\(\)\]\[\{\}&#xa0;]', '', 'i'), 
+                                           '\p{P}$', ''),
+                                  '\.')[last()]" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$list-type = ('upperroman', 'lowerroman')">
+        <xsl:value-of select="tr:roman-to-int($counter)"/>
+      </xsl:when>
+      <xsl:when test="$list-type = ('upperalpha', 'loweralpha')">
+        <xsl:value-of select="string-length(substring-before('abcdefghijklmnopqrstuvwxyz', $counter)) + 1"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="xs:integer(normalize-space($counter))"/>
+      </xsl:otherwise>
+    </xsl:choose> 
+  </xsl:function>
 
 </set>
