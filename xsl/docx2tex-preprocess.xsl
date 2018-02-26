@@ -44,7 +44,7 @@
     <xsl:for-each select=".//row">
       <xsl:variable name="equation-label" select="(entry[matches(normalize-space(.), $equation-label-regex)],
                                           entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]" as="element(entry)"/>
-      <xsl:apply-templates select="entry/* except $label/*" mode="#current">
+      <xsl:apply-templates select="entry/* except $equation-label/*" mode="#current">
         <xsl:with-param name="equation-label" 
                         select="concat('\tag{', 
                                        replace(normalize-space(string-join($equation-label, '')), $equation-label-regex, '$1'), 
