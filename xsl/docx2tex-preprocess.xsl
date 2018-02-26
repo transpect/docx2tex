@@ -32,7 +32,12 @@
   
   <!-- dissolve pseudo tables frequently used for numbered equations -->
   
-  <xsl:variable name="equation-label-regex" select="'^(\s*[\(\[]((\d+)(\.\d+)*)[\)\]]\s*)+?$'" as="xs:string"/>
+  <xsl:variable name="equation-label-regex" as="xs:string" 
+                select="concat( '^(\s*',
+                                $parenthesis-regex,
+                                '((\d+)(\.\d+)*)',
+                                $parenthesis-regex,
+                                '\s*)+$' )"/>
   
   <xsl:template match="informaltable[every $i in .//row 
                                      satisfies count($i/entry) = (2,3) 
@@ -46,15 +51,11 @@
                     select="(entry[matches(normalize-space(.), $equation-label-regex)], 
                              entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]"/>
       <xsl:variable name="equation-labels" as="node()+" 
-        select="for $i in ($equation-entry//text()[matches(normalize-space(.), $equation-label-regex)]
-                          |$equation-entry//processing-instruction()[name() eq 'latex'])
-                                  return $i"/>
+                    select="for $i in ($equation-entry//text()[matches(normalize-space(.), $equation-label-regex)]
+                                      |$equation-entry//processing-instruction()[name() eq 'latex'])
+                            return $i"/>
       <xsl:apply-templates select="entry/* except $equation-entry/*" mode="#current">
-        <xsl:with-param name="equation-labels" select="$equation-labels" tunnel="yes"/> <!--
-                        select="concat('\tag{', 
-                                       replace(normalize-space(string-join($equation-labels, '')), $equation-label-regex, '$1'), 
-                                       '}&#xa;')" 
-                        tunnel="yes"/>-->
+        <xsl:with-param name="equation-labels" select="$equation-labels" tunnel="yes"/>
       </xsl:apply-templates>
     </xsl:for-each>
   </xsl:template>
@@ -65,11 +66,10 @@
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:if test="$equation-labels">
         <xsl:variable name="index" select="index-of(for $i in ancestor::entry//equation 
-                                                    return generate-id($i), generate-id())" as="xs:integer"/>
+                                                    return generate-id($i), generate-id())" as="xs:integer?"/>
         <xsl:attribute name="condition" select="'numbered'"/>
-        <xsl:processing-instruction name="latex" select="replace(normalize-space(string-join($equation-labels[$index]
-                                                                                             ,'')), $equation-label-regex, 
-                                                                 '\\tag{$1}&#xa;')"/>
+        <xsl:processing-instruction name="latex" 
+                                    select="docx2tex:equation-label($equation-labels[$index])"/>
       </xsl:if>
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
@@ -78,9 +78,7 @@
   <xsl:template match="entry/para[matches(normalize-space(string-join((.//text()), '')), $equation-label-regex)]
                                  [ancestor::row//equation or ancestor::row/inlineequation]" mode="docx2tex-preprocess">
     <xsl:processing-instruction name="latex" 
-                                select="concat('\tag{', 
-                                               normalize-space(string-join((.//text()), ''))[matches(., $equation-label-regex)],
-                                               '}')"/>
+                                select="docx2tex:equation-label(.//text())"/>
   </xsl:template>
   
   <!-- drop empty equations -->
@@ -111,14 +109,24 @@
                            [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
     <equation condition="numbered">
       <xsl:processing-instruction name="latex" 
-                                  select="concat('\tag{',
-                                                 replace(string-join((text(), phrase/text()), ''), 
-                                                         $equation-label-regex, 
-                                                         '$1'),
-                                                '}&#xa;')"/>
+                                  select="docx2tex:equation-label(
+                                                                  (text(), phrase/text())
+                                                                  )"/>
       <xsl:apply-templates select=".//inlineequation/*" mode="#current"/>
     </equation>
   </xsl:template>
+  
+  <xsl:function name="docx2tex:equation-label" as="xs:string*">
+    <xsl:param name="label" as="xs:string*"/>
+    <xsl:variable name="label-normalized"
+                  select="replace(
+                                  replace(normalize-space(string-join($label, '')),
+                                          $equation-label-regex, '$1'),
+                                  $parenthesis-regex, '')"/>
+    <xsl:if test="normalize-space($label-normalized)">
+      <xsl:value-of select="concat('\tag{', $label-normalized, '}&#xa;')"/>  
+    </xsl:if>
+  </xsl:function>
   
   <xsl:template match="para[equation and count(distinct-values(*/local-name())) eq 1]" mode="docx2tex-preprocess">
     <xsl:apply-templates mode="#current"/>
@@ -178,7 +186,7 @@
                              [string-length(normalize-space(.)) gt 0]
                              [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
                               not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
-                              [not(parent::phrase/@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
+                             [not(parent::phrase/@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
