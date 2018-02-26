@@ -42,22 +42,28 @@
                                                     or ($i/entry/para/equation and $i/para[not(node())]))]" mode="docx2tex-preprocess">
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
-      <xsl:variable name="label" select="(entry[matches(normalize-space(.), $equation-label-regex)],
+      <xsl:variable name="equation-label" select="(entry[matches(normalize-space(.), $equation-label-regex)],
                                           entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]" as="element(entry)"/>
       <xsl:apply-templates select="entry/* except $label/*" mode="#current">
-        <xsl:with-param name="label" select="concat('\tag{', replace(normalize-space(string-join($label, '')), $equation-label-regex, '$1'), '}&#xa;')" 
+        <xsl:with-param name="equation-label" 
+                        select="concat('\tag{', 
+                                       replace(normalize-space(string-join($equation-label, '')), $equation-label-regex, '$1'), 
+                                       '}&#xa;')" 
                         tunnel="yes"/>
       </xsl:apply-templates>
     </xsl:for-each>
   </xsl:template>
   
   <xsl:template match="equation" mode="docx2tex-preprocess">
-    <xsl:param name="label" tunnel="yes"/>
+    <xsl:param name="equation-label" tunnel="yes"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="string-length($label) gt 1">
-        <xsl:attribute name="condition" select="'numbered'"/>
-        <xsl:processing-instruction name="latex" select="$label"/>
+      <xsl:if test="string-length($equation-label) gt 1">
+        <xsl:variable name="index" select="index-of(for $i in ancestor::entry//equation return generate-id($i), generate-id())" as="xs:integer"/>
+        <xsl:if test="$index eq 1">
+          <xsl:attribute name="condition" select="'numbered'"/>
+          <xsl:processing-instruction name="latex" select="$equation-label"/>          
+        </xsl:if>
       </xsl:if>
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
