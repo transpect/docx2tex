@@ -647,6 +647,13 @@
     </rule>
   </template>
   
+  <template context="dbk:bibliodiv">
+    <rule name="bibsect" type="env">
+      <param select="dbk:title"/>
+      <text select="node() except dbk:title"/>
+    </rule>
+  </template>
+  
   <template context="dbk:bibliomixed">
     <rule name="bibitem" type="cmd" break-before="1">
       <option>aaa(000)</option>
