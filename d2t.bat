@@ -21,7 +21,7 @@ REM output directory
 
 REM script parameters
 @set JAVA=java
-@set CALABASH=calabash-frontend/calabash.bat
+@set CALABASH=calabash/calabash.bat
 
 REM convert backward slash to slash
 @set FILE=%FILE:\=/%
@@ -44,12 +44,12 @@ goto finish
 REM exit with errors
 :exitonerror
 echo Errors encountered while running docx2tex. Please see %LOG% for details.
-exit 1
+exit /b 1
 
 REM exit
 :finish
 echo docx2tex finished. Output written to %OUT_DIR%/%BASENAME%.tex.
-exit 0
+exit /b 0
 
 REM Sample invocation:
 :usage
