@@ -9,7 +9,7 @@
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex --- ``Garbage In, Garbage Out''
+  <preamble>% docx2tex 1.1 --- ``Escape from MS Island''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
