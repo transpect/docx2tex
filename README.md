@@ -1,7 +1,7 @@
-# docx2tex
-Converts Microsoft docx to LaTeX
+[![Current Release](https://img.shields.io/github/release/transpect/docx2tex.svg)](https://github.com/transpect/docx2tex/releases/latest) [![Github All Releases Downloads](https://img.shields.io/github/downloads/transpect/docx2tex/total.svg)](https://github.com/transpect/docx2tex/releases/)
 
-Authors: Martin Kraetke
+# docx2tex
+Converts Microsoft Word's DOCX to LaTeX
 
 ## get docx2tex
 
