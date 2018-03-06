@@ -503,7 +503,7 @@
   
   <!-- remove whitespace at the beginning of footnotes -->
   
-  <template context="dbk:footnote//text()[starts-with(., ' ')][1]">
+  <template context="dbk:footnote//text()[1][starts-with(., ' ')]">
     <rule>
       <text select="replace(., '^\s', '')"/> 
     </rule>
