@@ -261,6 +261,12 @@
     </rule>
   </template>
 
+  <template context="dbk:blockquote[count(dbk:para) gt 1]">
+    <rule name="quotation" type="env">
+      <text/>
+    </rule>
+  </template>
+  
   <!-- itemized lists -->
 
   <template context="dbk:itemizedlist">
