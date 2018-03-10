@@ -92,6 +92,10 @@ fi
 
 # file as 1st argument
 FILE="$1"
+if ! [[ $FILE =~ \.docx$ ]]; then
+    echo "Only docx files are supported."
+    exit 1
+fi
 
 # set basename
 BASENAME="$(basename "$(basename "$FILE" .docx)" .docm)"
