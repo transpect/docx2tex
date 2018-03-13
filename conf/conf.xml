@@ -509,7 +509,7 @@
   
   <!-- remove whitespace at the beginning of footnotes -->
   
-  <template context="dbk:footnote//text()[1][starts-with(., ' ')]">
+  <template context="dbk:footnote//text()[1][preceding-sibling::*[1][@role eq 'hub:identifier']][starts-with(., ' ')]">
     <rule>
       <text select="replace(., '^\s', '')"/> 
     </rule>
