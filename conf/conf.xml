@@ -540,7 +540,8 @@
 
   <!-- equations -->
 
-  <template context="dbk:inlineequation|dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
+  <template context="dbk:inlineequation[not(ancestor::dbk:superscript or ancestor::dbk:subscript )]
+                    |dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
     <rule>
       <text select="'$'"/>
       <text/>
