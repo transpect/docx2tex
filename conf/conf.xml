@@ -510,7 +510,8 @@
   <!-- remove whitespace at the beginning of footnotes -->
   
   <template context="dbk:footnote//text()[1][preceding-sibling::*[1][@role eq 'hub:identifier']][starts-with(., ' ')]
-                    |dbk:footnote//dbk:phrase[not(@role eq 'hub:identifier')][1][preceding-sibling::*[1][@role eq 'hub:identifier']][starts-with(., ' ')]/text()">
+                    |dbk:footnote/dbk:para[1]//dbk:phrase[not(@role eq 'hub:identifier')][1][preceding-sibling::*[1][@role eq 'hub:identifier']][starts-with(., ' ')]/text()
+                    |dbk:footnote[not(.//dbk:phrase[@role eq 'hub:identifier'])]/dbk:para//text()[1][starts-with(., ' ')]">
     <rule>
       <text select="replace(., '^\s', '')"/> 
     </rule>
