@@ -162,6 +162,7 @@
   </template>
   
   <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]
+                             [not(@css:font-style eq 'normal')]
                              [@css:font-style eq 'italic'
                               or exists(for $i in ./@role 
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]">
@@ -171,6 +172,7 @@
   </template>
   
   <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]
+                             [not(@css:font-weight eq 'normal')]
                              [@css:font-weight eq 'bold'
                               or exists(for $i in ./@role 
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]">
@@ -349,7 +351,8 @@
   
   <template context="dbk:phrase[@css:font-style eq 'italic' 
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]
+                               [not(@css:font-style eq 'normal')]">
     <rule name="textit" type="cmd">
       <param/>
     </rule>
@@ -357,7 +360,8 @@
 
   <template context="dbk:phrase[@css:font-weight eq 'bold'
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]
+                                [not(@css:font-weight eq 'normal')]">
     <rule name="textbf" type="cmd">
       <param/>
     </rule>
@@ -365,11 +369,18 @@
 
   <template context="dbk:phrase[(@css:font-style eq 'italic' and @css:font-weight eq 'bold')
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic' and @css:font-weight eq 'bold'])]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic' and @css:font-weight eq 'bold'])]
+                               [not((@css:font-style, @css:font-weight) = 'normal')]">
     <rule>
       <text>\textbf{\textit{</text>
       <text/>
       <text>}}</text>      
+    </rule>
+  </template>
+  
+  <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
+    <rule name="normalfont" type="cmd">
+      <param/>
     </rule>
   </template>
 
