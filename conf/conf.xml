@@ -379,7 +379,7 @@
   </template>
   
   <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
-    <rule name="normalfont" type="cmd">
+    <rule name="textnormal" type="cmd">
       <param/>
     </rule>
   </template>
