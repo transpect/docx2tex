@@ -114,8 +114,8 @@
   
   <xsl:template match="mml:math/mml:mo[. eq '='][1]" mode="docx2tex-alignment">
     <xsl:copy>
-      <xsl:processing-instruction name="latex">&amp;</xsl:processing-instruction>
       <xsl:apply-templates select="@*"/>
+      <xsl:processing-instruction name="latex">&amp;</xsl:processing-instruction>
       <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
