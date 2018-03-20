@@ -242,10 +242,18 @@
   
   <!-- links -->
   
-  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')]|dbk:ulink">
+  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')]">
     <rule name="href" type="cmd">
       <param select="replace((@xlink:href, @url)[1], '([%#])', '\\$1')"/>
       <param/>
+    </rule>
+  </template>
+
+  <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')]
+                             [@xlink:href = text()]
+                    |dbk:ulink">
+    <rule name="url" type="cmd">
+      <param select="replace((@xlink:href, @url)[1], '([%#])', '\\$1')"/>
     </rule>
   </template>
   
