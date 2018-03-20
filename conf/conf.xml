@@ -935,6 +935,7 @@
     <char character="&#x3c1;" string="${\rho}$" context="*[@css:font-style eq 'italic']"/>
     <!--= \mathrm{\varsigma} (omlmathrm), = \varsigmaup (kpfonts mathdesign), terminal sigma, greek-->
     <char character="&#x3c2;" string="${\mathrm{\varsigma}}$"/>
+    <char character="&#x3c2;" string="$\boldsymbol{\mathrm{\varsigma}}$" context="*[@css:font-weight eq 'bold']"/>
     <char character="&#x3c2;" string="${\varsigma}$" context="*[@css:font-style eq 'italic']"/>
     <!--= \mathrm{\sigma} (omlmathrm), = \sigmaup (kpfonts mathdesign), = \upsigma (upgreek),  sigma, greek-->
     <char character="&#x3c3;" string="${\upsigma}$"/>
@@ -980,25 +981,34 @@
     <char character="&#x3d6;" string="${\varpi}$" context="*[@css:font-style eq 'italic']"/>
     <!--= \Koppa (wrisym), t \Qoppa (LGR), GREEK LETTER ARCHAIC KOPPA-->
     <char character="&#x3d8;" string="${\Koppa}$"/>
+    <char character="&#x3d8;" string="$\boldsymbol{\Koppa}$" context="*[@css:font-weight eq 'bold']"/>
     <!--= \koppa (wrisym), t \qoppa (LGR), GREEK SMALL LETTER ARCHAIC KOPPA-->
     <char character="&#x3d9;" string="${\koppa}$"/>
+    <char character="&#x3d9;" string="$\boldsymbol{\koppa}$" context="*[@css:font-weight eq 'bold']"/>
     <!--capital stigma-->
     <char character="&#x3da;" string="${\Stigma}$"/>
+    <char character="&#x3da;" string="$\boldsymbol{\Stigma}$" context="*[@css:font-weight eq 'bold']"/>
     <!--GREEK SMALL LETTER STIGMA-->
     <char character="&#x3db;" string="${\stigma}$"/>
+    <char character="&#x3db;" string="$\boldsymbol{\stigma}$" context="*[@css:font-weight eq 'bold']"/>
     <!--= \Digamma (wrisym), capital digamma-->
     <char character="&#x3dc;" string="${\Digamma}$"/>
+    <char character="&#x3dc;" string="$\boldsymbol{\Digamma}$" context="*[@css:font-weight eq 'bold']"/>
     <!--GREEK SMALL LETTER DIGAMMA-->
     <char character="&#x3dd;" string="${\digamma}$"/>
     <char character="&#x3dd;" string="$\boldsymbol{\digamma}$" context="*[@css:font-weight eq 'bold']"/>
     <!--capital koppa-->
     <char character="&#x3de;" string="${\Koppa}$"/>
+    <char character="&#x3de;" string="$\boldsymbol{\Koppa}$" context="*[@css:font-weight eq 'bold']"/>
     <!--GREEK SMALL LETTER KOPPA-->
     <char character="&#x3df;" string="${\koppa}$"/>
+    <char character="&#x3df;" string="$\boldsymbol{\koppa}$" context="*[@css:font-weight eq 'bold']"/>
     <!--capital sampi-->
     <char character="&#x3e0;" string="${\Sampi}$"/>
+    <char character="&#x3e0;" string="$\boldsymbol{\Sampi}$" context="*[@css:font-weight eq 'bold']"/>
     <!--# \sampi (wrisym), GREEK SMALL LETTER SAMPI-->
     <char character="&#x3e1;" string="${\sampi}$"/>
+    <char character="&#x3e1;" string="$\boldsymbol{\sampi}$" context="*[@css:font-weight eq 'bold']"/>
     <!--= \mathrm{\varrho} (omlmathrm), = \varrhoup (kpfonts mathdesign), GREEK RHO SYMBOL (round)-->
     <char character="&#x3f1;" string="${\varrho}$"/>
     <char character="&#x3f1;" string="$\boldsymbol{\varrho}$" context="*[@css:font-weight eq 'bold']"/>
