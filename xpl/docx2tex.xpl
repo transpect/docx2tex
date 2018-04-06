@@ -228,6 +228,7 @@
     </p:input>
     <p:with-option name="docx" select="$docx"/>
     <p:with-option name="mml-space-handling" select="$mml-space-handling"/>
+    <p:with-option name="srcpaths" select="'no'"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
