@@ -136,17 +136,12 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
-  <!-- remove each list which counts only one list item -->
-  
-  <xsl:variable name="texmap-override" select="document('http://transpect.io/mml2tex/texmap/texmap.xml')/xml2tex:set/xml2tex:charmap/xml2tex:char" as="element(xml2tex:char)+"/>
-  
-  <xsl:template match="orderedlist[count(*) eq 1][not(ancestor::orderedlist or ancestor::itemizedlist)]
-                       |itemizedlist[count(*) eq 1][not(ancestor::orderedlist  or ancestor::itemizedlist)]" mode="docx2tex-preprocess">
+  <xsl:template match="*[local-name() = ('orderedlist', 'itemizedlist')]
+                        [count(*) eq 1]
+                        [not(ancestor::orderedlist or ancestor::itemizedlist)]
+                        [not(listitem/orderedlist or listitem/itemizedlist)]" mode="docx2tex-preprocess">
     <xsl:if test="@mark">
-      <xsl:processing-instruction name="latex" 
-                                  select="if(string-length(@mark) eq 1) 
-                                          then concat('$', string-join(mml2tex:utf2tex(@mark, (), $texmap-override), ''), '$ ') 
-                                          else concat('$\', @mark, '$ ')"/>
+      <xsl:value-of select="concat(@mark, '&#xa0;')"/>
     </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
   </xsl:template>
@@ -154,7 +149,7 @@
   <xsl:template match="listitem/para[1]" mode="move-list-item">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="docx2tex-preprocess"/>
-      <xsl:value-of select="if(parent::listitem/@override) then concat(parent::listitem/@override, '&#x20;') else ''"/>  
+      <xsl:value-of select="if(parent::listitem/@override) then concat(parent::listitem/@override, '&#xa0;') else ''"/>  
       <xsl:apply-templates mode="docx2tex-preprocess"/>
       <!-- add label -->
       <xsl:if test="parent::listitem/@override">
