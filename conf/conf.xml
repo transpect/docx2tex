@@ -386,6 +386,15 @@
     </rule>
   </template>
   
+  <template context="dbk:phrase[@css:font-family = ('Consolas', 'Courier New', 'Courier')
+                                or exists(for $i in ./@role 
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                     [@css:font-family = ('Consolas', 'Courier New', 'Courier')])]">
+    <xsl:value-of select="'\texttt{'"/>
+    <xsl:next-match/>
+    <xsl:value-of select="'}'"/>
+  </template>
+  
   <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
     <rule name="textnormal" type="cmd">
       <param/>
