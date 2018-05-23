@@ -60,6 +60,24 @@
     </xsl:for-each>
   </xsl:template>
   
+  <xsl:template match="dbk:variablelist[every $i in dbk:varlistentry 
+                                        satisfies matches(normalize-space(string-join($i/dbk:listitem//text(), '')), 
+                                                          $equation-label-regex)
+                                                  and ($i/dbk:term/dbk:phrase/dbk:inlineequation
+                                                       or $i/dbk:term/dbk:inlineequation)
+                                                  and not(normalize-space($i/dbk:term/dbk:phrase/text())
+                                                       or normalize-space($i/dbk:term/text()))]" mode="docx2tex-preprocess">
+    <equation>
+      <xsl:for-each select="dbk:varlistentry">
+        <xsl:variable name="equation-label" select="normalize-space(string-join(dbk:listitem//text(), ''))" as="xs:string"/>
+        <xsl:value-of select="if(not( position() eq 1)) then '&#xa;' else ()"/>
+        <xsl:processing-instruction name="latex" 
+                                    select="docx2tex:equation-label($equation-label)"/>
+        <xsl:apply-templates select="dbk:term/node()" mode="#current"/>
+      </xsl:for-each>
+    </equation>
+  </xsl:template>
+  
   <xsl:template match="equation" mode="docx2tex-preprocess">
     <xsl:param name="equation-labels" as="node()*" tunnel="yes"/>
     <xsl:copy>
