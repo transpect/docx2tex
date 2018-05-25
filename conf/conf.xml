@@ -357,73 +357,60 @@
     </rule>
   </template>
   
+  <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
+    <xsl:text>\textnormal{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
   <template context="dbk:phrase[@css:font-style eq 'italic' 
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]
-                               [not(@css:font-style eq 'normal')]">
-    <rule name="textit" type="cmd">
-      <param/>
-    </rule>
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]">
+    <xsl:text>\textit{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
-
+  
   <template context="dbk:phrase[@css:font-weight eq 'bold'
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]
-                                [not(@css:font-weight eq 'normal')]">
-    <rule name="textbf" type="cmd">
-      <param/>
-    </rule>
-  </template>
-
-  <template context="dbk:phrase[(@css:font-style eq 'italic' and @css:font-weight eq 'bold')
-                                or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic' and @css:font-weight eq 'bold'])]
-                               [not((@css:font-style, @css:font-weight) = 'normal')]">
-    <rule>
-      <text>\textbf{\textit{</text>
-      <text/>
-      <text>}}</text>      
-    </rule>
+                                   return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]">
+    <xsl:text>\textbf{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:phrase[@css:font-family = ('Consolas', 'Courier New', 'Courier')
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
                                                                                      [@css:font-family = ('Consolas', 'Courier New', 'Courier')])]">
-    <xsl:value-of select="'\texttt{'"/>
+    <xsl:text>\texttt{</xsl:text>
     <xsl:next-match/>
-    <xsl:value-of select="'}'"/>
-  </template>
-  
-  <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
-    <rule name="textnormal" type="cmd">
-      <param/>
-    </rule>
+    <xsl:text>}</xsl:text>
   </template>
 
   <template context="dbk:phrase[(@css:text-decoration-line eq 'underline' 
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline']))
                                 and not(@role eq 'Hyperlink' or parent::dbk:link)]">
-    <rule name="underline" type="cmd">
-      <param/>
-    </rule>
+    <xsl:text>\underline{</xsl:text>
+      <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
 
   <template context="dbk:phrase[@css:text-transform eq 'uppercase'
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-transform eq 'uppercase'])]">
-    <rule name="uppercase" type="cmd">
-      <param/>
-    </rule>
+    <xsl:text>\uppercase{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
 
   <template context="dbk:phrase[@css:font-variant eq 'small-caps'
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-variant eq 'small-caps'])]">
-    <rule name="textsc" type="cmd">
-      <param/>
-    </rule>
+    <xsl:text>\textsc{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
 
   <!-- no formatting for phrases which contain math environments -->
