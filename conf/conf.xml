@@ -1282,6 +1282,8 @@
     <char character="&#x211c;" string="${\Re}$"/>
     <!--= \mathds{R} (dsfont), open face R-->
     <char character="&#x211d;" string="${\mathbb{R}}$"/>
+    <!-- SERVICE MARK -->
+    <char character="&#x2120;" string="{\textservicemark}"/>
     <!--TRADEMARK SIGN -->
     <char character="&#x2122;" string="{\texttrademark}"/>
     <!--= \mathds{Z} (dsfont), open face Z-->
