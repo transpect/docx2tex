@@ -1217,8 +1217,27 @@
     <!-- *
          * Currency Symbols
          * -->
-    
-    <char character="&#x20ac;" string="\texteuro{}"/>
+
+    <!-- COLON SIGN -->
+    <char character="&#x20a1;" string="{\textcolonmonetary}"/>
+    <!-- LIRA SIGN -->
+    <char character="&#x20a4;" string="{\textlira}"/>
+    <!-- NAIRA SIGN -->
+    <char character="&#x20a6;" string="{\textnaira}"/>
+    <!-- PESETA SIGN -->
+    <char character="&#x20a7;" string="Pt"/>
+    <!-- RUPEE SIGN -->
+    <char character="&#x20a8;" string="Rs"/>
+    <!-- WON SIGN -->
+    <char character="&#x20a9;" string="{\textwon}"/>
+    <!-- DONG SIGN -->
+    <char character="&#x20ab;" string="{\textdong}"/>
+    <!-- EURO SIGN -->
+    <char character="&#x20ac;" string="{\texteuro}"/>
+    <!-- PESO SIGN -->
+    <char character="&#x20b1;" string="{\textpeso}"/>
+    <!-- GUARANI SIGN -->
+    <char character="&#x20b2;" string="{\textguarani}"/>
     
     <!-- *
          * Combining Diacritical Marks for Symbols
