@@ -21,6 +21,7 @@
     \usepackage{multirow}
     \usepackage{tabularx}
     \usepackage{color}
+    \usepackage{textcomp}
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
