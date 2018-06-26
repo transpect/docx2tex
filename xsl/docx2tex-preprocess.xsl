@@ -159,7 +159,13 @@
                         [not(ancestor::orderedlist or ancestor::itemizedlist)]
                         [not(listitem/orderedlist or listitem/itemizedlist)]" mode="docx2tex-preprocess">
     <xsl:if test="@mark">
-      <xsl:value-of select="concat(@mark, '&#xa0;')"/>
+      <xsl:value-of select="if(@mark eq 'bullet') then '&#x2022;&#xa0;'
+                       else if(@mark eq 'arabic') then '1.&#xa0;'
+                       else if(@mark eq 'lowerroman') then 'i.&#xa0;'
+                       else if(@mark eq 'upperroman') then 'I.&#xa0;'
+                       else if(@mark eq 'loweralpha') then 'a.&#xa0;'
+                       else if(@mark eq 'upperalpha') then 'A.&#xa0;'
+                       else                                concat(@mark, '&#xa0;')"/>
     </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
   </xsl:template>
