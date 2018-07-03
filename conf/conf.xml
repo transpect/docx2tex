@@ -629,9 +629,21 @@
     </rule>
   </template>
   
+  <template context="dbk:primary">
+    <rule>
+      <xsl:if test="@sortas">
+        <text select="concat(@sortas, '@')"/>
+      </xsl:if>
+      <text/>
+    </rule>
+  </template>
+  
   <template context="dbk:secondary|dbk:tertiary">
     <rule>
       <text>!</text>
+      <xsl:if test="@sortas">
+        <text select="concat(@sortas, '@')"/>
+      </xsl:if>
       <text/>
     </rule>
   </template>
