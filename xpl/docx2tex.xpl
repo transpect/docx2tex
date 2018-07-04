@@ -57,6 +57,15 @@
 			Expects URI where the text files containing the progress information are stored.
 		</p:documentation>
 	</p:option>
+  
+  <p:option name="mtef-source" select="'ole'">
+    <p:documentation>
+      Choose source format for MathType conversion. Permitted values are:
+      ole (OLE object, default)
+      wmf (MTEF code embedded in the WMF preview image)
+      ole+wmf or wmf+ole (convert from OLE and WMF. In case they are not equal, output both versions)
+    </p:documentation>
+  </p:option>
 	
   <p:option name="refs" select="'yes'" required="false">
     <p:documentation>
@@ -228,6 +237,7 @@
     </p:input>
     <p:with-option name="docx" select="$docx"/>
     <p:with-option name="mml-space-handling" select="$mml-space-handling"/>
+    <p:with-option name="mathtype2mml" select="$mtef-source"/>
     <p:with-option name="srcpaths" select="'no'"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>

@@ -10,6 +10,7 @@ usage() {
     echo "   -o    path to custom output directory"
     echo "   -c    path to custom word2tex configuration file"
     echo "   -p    generate PDF with pdflatex"
+    echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
     echo "   -t    use tabular instead of tabularx for tables"
     echo "   -l    draw table grid lines"
@@ -48,7 +49,7 @@ CALABASH=$DIR/calabash/calabash.sh
 PDFLATEX=pdflatex
 
 # specify options
-while getopts ":o:c:x:ptlrd" opt; do
+while getopts ":o:c:m:x:ptlrd" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -56,6 +57,9 @@ while getopts ":o:c:x:ptlrd" opt; do
 	c)
 	    CONF=${OPTARG}
 	    ;;
+        m)
+            MTEFSOURCE=${OPTARG}
+            ;;
 	x)
 	    CUSTOMXSL=${OPTARG}
 	    ;;
@@ -182,6 +186,7 @@ if [ "$DEBUG" = "yes" ]; then
     echo "  outdir: $OUT_DIR"
     echo "  file: $FILE"
     echo "  config: $CONF"
+    echo "  MathType source: $MTEFSOURCE"
     echo "  refs and labels: $REFS"
     echo "  table model: $TABLEMODEL"
     echo "  draw table grid lines: $TABLEGRID"
@@ -198,6 +203,7 @@ $CALABASH \
     conf="$CONF" \
     custom-xsl="$CUSTOMXSL" \
     conf-template="$OUT_DIR/$BASENAME.csv" \
+    mtef-source="$MTEFSOURCE" \
     table-model=$TABLEMODEL \
     table-grid=$TABLEGRID \
     refs=$REFS \
