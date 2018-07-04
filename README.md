@@ -29,6 +29,7 @@ Option  | Description
 ------  | -------------
  -o     | path to custom output directory
  -c     | path to custom docx2tex configuration file
+ -m     | choose MathType source (ole|wmf|ole+wmf)
  -f     | path to custom fontmaps directory
  -p     | generate PDF with pdflatex
  -t     | draw table grid lines
