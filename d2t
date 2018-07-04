@@ -116,6 +116,10 @@ fi
 
 mkdir -p "$OUT_DIR"
 
+# mathtype source format
+if [[ -z "MTEFSOURCE" ]]; then
+    MTEFSOURCE="ole"
+fi
 # table-model
 if [[ -z "$TABLEMODEL" ]]; then
     TABLEMODEL="tabularx"
