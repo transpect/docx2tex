@@ -1116,20 +1116,32 @@
     <char character="&#x2031;" string="{\textpertenthousand}"/>
     <!--PRIME or minute, not superscripted-->
     <char character="&#x2032;" string="$^{\prime}$"/>
-    <!--DOUBLE PRIME or second, not superscripted-->
-    <char character="&#x2033;" string="$^{\prime\prime}$"/>
+    <!--DOUBLE PRIME or second, not superscripted-->
+    <char character="&#x2033;" string="$^{\dprime}$"/>
     <!--TRIPLE PRIME (not superscripted)-->
-    <char character="&#x2034;" string="$^{\prime\prime\prime}$"/>
-    <!--reverse prime, not superscripted-->
+    <char character="&#x2034;" string="$^{\trprime}$"/>
+    <!--REVERSE PRIME, not superscripted-->
     <char character="&#x2035;" string="${\backprime}$"/>
+    <!-- DOUBLE REVERSE PRIME, not superscripted -->
+    <char character="&#x2036;" string="${\backdprime}$"/>
+    <!-- TRIPLE REVERSE PRIME, not superscripted -->
+    <char character="&#x2037;" string="${\backtrprime}$"/>
+    <!-- CARET (insertion mark) -->
+    <char character="&#x2038;" string="${\caretinsert}"/>
     <!-- SINGLE LEFT-POINTING ANGLE QUOTATION MARK -->
     <char character="&#x2039;" string="{\flq}"/>
     <!-- SINGLE RIGHT-POINTING ANGLE QUOTATION MARK -->
     <char character="&#x203a;" string="{\frq}"/>
+    <!-- DOUBLE EXCLAMATION MARK -->
+    <char character="&#x203c;" string="{\Exclam}"/>    
     <!--CHARACTER TIE, z notation sequence concatenation-->
-    <char character="&#x2040;" string="${\cat}$"/>    
+    <char character="&#x2040;" string="${\cat}$"/>
+    <!-- HYPHEN BULLET -->
+    <char character="&#x2043;" string="${\hyphenbullet}$"/>
+    <!-- DOUBLE QUESTION MARK -->
+    <char character="&#x2047;" string="${\Question}$"/>
     <!--QUADRUPLE PRIME, not superscripted-->
-    <char character="&#x2057;" string="${\fourth}$"/>
+    <char character="&#x2057;" string="${\qprime}$"/>
     <!--FUNCTION APPLICATION -->
     <char character="&#x2061;" string=" "/>
     <!--INVISIBLE TIMES -->
@@ -1267,8 +1279,16 @@
     <char character="&#x20db;" string="${\dddot}$"/>
     <!--COMBINING FOUR DOTS ABOVE-->
     <char character="&#x20dc;" string="${\ddddot}$"/>
+    <!--COMBINING ENCLOSING CIRCLE -->
+    <char character="&#x20dd;" string="${\enclosecircle}$"/>
+    <!--COMBINING ENCLOSING SQUARE -->
+    <char character="&#x20dd;" string="${\enclosesquare}$"/>
+    <!--COMBINING ENCLOSING DIAMOND -->
+    <char character="&#x20de;" string="${\enclosediamond}$"/>
     <!--COMBINING LEFT RIGHT ARROW ABOVE-->
     <char character="&#x20e1;" string="${\overleftrightarrow}$"/>
+    <!--COMBINING ENCLOSING UPWARD POINTING TRIANGLE -->
+    <char character="&#x20e4;" string="${\enclosetriangle}$"/>
     <!--COMBINING LEFT ARROW BELOW-->
     <char character="&#x20ee;" string="${\underleftarrow}$"/>
     <!--COMBINING RIGHT ARROW BELOW-->
@@ -1288,8 +1308,10 @@
     <char character="&#x210b;" string="${\mathcal{H}}$"/>
     <!--/frak H, black-letter capital H-->
     <char character="&#x210c;" string="${\mathfrak{H}}$"/>
-    <!--= \mathds{H} (dsfont), open face capital H-->
+    <!--DOUBLE-STRUCK CAPITAL H-->
     <char character="&#x210d;" string="${\mathbb{H}}$"/>
+    <!--PLANCK CONSTANT-->
+    <char character="&#x210e;" string="${\mathit{h}}$"/>
     <!--=\HBar (wrisym), Planck's h over 2pi-->
     <char character="&#x210f;" string="${\hslash}$"/>
     <!--/scr I, script capital I-->
@@ -1362,6 +1384,12 @@
     <char character="&#x213f;" string="${\mathbb{Pi}}$"/>
     <!--DOUBLE-STRUCK N-ARY SUMMATION-->
     <char character="&#x2140;" string="${\mathbb{Sigma}}$"/>
+    <!--TURNED SANS-SERIF CAPITAL G-->
+    <char character="&#x2141;" string="${\Game}$"/>
+    <!--TURNED SANS-SERIF CAPITAL L-->
+    <char character="&#x2142;" string="${\sansLturned}$"/>
+    <!--REVERSED SANS-SERIF CAPITAL L-->
+    <char character="&#x2143;" string="${\sansLmirrored}$"/>
     <!--TURNED SANS-SERIF CAPITAL Y-->
     <char character="&#x2144;" string="${\Yup}$"/>
     <!--= \DD (wrisym), DOUBLE-STRUCK ITALIC CAPITAL D-->
@@ -1374,6 +1402,8 @@
     <char character="&#x2148;" string="${\ComplexI}$"/>
     <!--= \jj (wrisym), DOUBLE-STRUCK ITALIC SMALL J-->
     <char character="&#x2149;" string="${\ComplexJ}$"/>
+    <!--PROPERTY LINE-->
+    <char character="&#x214a;" string="${\PropertyLine}$"/>
     <!--# \bindnasrepma (stmaryrd), TURNED AMPERSAND-->
     <char character="&#x214b;" string="${\invamp}$"/>
     
@@ -1421,6 +1451,8 @@
     <char character="&#x21a6;" string="${\mapsto}$"/>
     <!--maps to, downward-->
     <char character="&#x21a7;" string="${\MapsDown}$"/>
+    <!--UP DOWN ARROW WITH BASE-->
+    <char character="&#x21a8;" string="${\updownarrowbar}$"/>
     <!--left arrow-hooked-->
     <char character="&#x21a9;" string="${\hookleftarrow}$"/>
     <!--right arrow-hooked-->
@@ -1641,7 +1673,7 @@
     <!--= \dbloint (wrisym), double contour integral operator-->
     <char character="&#x222f;" string="${\oiint}$"/>
     <!--triple contour integral operator-->
-    <char character="&#x2230;" string="${\oiiint}$"/>
+    <char character="&#x2230;" string="${\oiiint}$"/>    
     <!--= \clockoint (wrisym), contour integral, clockwise-->
     <char character="&#x2232;" string="${\varointclockwise}$"/>
     <!--= \cntclockoint (wrisym), contour integral, anticlockwise-->
@@ -1979,10 +2011,28 @@
     
     <!--# \varnothing (amssymb), DIAMETER SIGN-->   
     <char character="&#x2300;" string="${\diameter}$"/>
+    <!--HOUSE-->
+    <char character="&#x2302;" string="${\house}$"/>
     <!--LEFT CEILING-->
     <char character="&#x2308;" string="${\lceil}$"/>
     <!--RIGHT CEILING-->
     <char character="&#x2309;" string="${\rceil}$"/>
+    <!--REVERSE NOT-->
+    <char character="&#x2310;" string="${\invnot}$"/>
+    <!--SQUARE LOZENGE-->
+    <char character="&#x2311;" string="${\sqlozenge}$"/>
+    <!--PROFILE OF A LINE-->
+    <char character="&#x2312;" string="${\profline}$"/>
+    <!--PROFILE OF A SURFACE-->
+    <char character="&#x2313;" string="${\profsurf}$"/>
+    <!--VIEWDATA SQUARE-->
+    <char character="&#x2317;" string="${\viewdata}$"/>
+    <!--TURNED NOT SIGN-->
+    <char character="&#x2319;" string="${\turnednot}$"/>
+    <!--TOP HALF INTEGRAL-->
+    <char character="&#x2320;" string="${\inttop}$"/>
+    <!--BOTTOM HALF INTEGRAL-->
+    <char character="&#x2321;" string="${\intbottom}$"/>
     <!--LEFT FLOOR-->
     <char character="&#x230a;" string="${\lfloor}$"/>
     <!--RIGHT FLOOR-->
@@ -2006,9 +2056,17 @@
     <!-- LEFT-POINTING ANGLE BRACKET -->
     <char character="&#x2329;" string="${\langle}$"/>
     <!-- RIGHT-POINTING ANGLE BRACKET -->
-    <char character="&#x232a;" string="${\rangle}$"/>    
+    <char character="&#x232a;" string="${\rangle}$"/>
+    <!--BENZENE RING-->
+    <char character="&#x232c;" string="${\varhexagonlrbonds}$"/>
+    <!--CONICAL TAPER-->
+    <char character="&#x2332;" string="${\conictaper}$"/>
+    <!--TOP AND BOTTOM-->
+    <char character="&#x2336;" string="${\topbot}$"/>
     <!--APL FUNCTIONAL SYMBOL QUAD DIVIDE-->
     <char character="&#x2339;" string="${\APLinv}$"/>
+    <!--APL FUNCTIONAL SYMBOL BACKSLASH BAR-->
+    <char character="&#x2340;" string="${\APLnotbackslash}$"/>
     <!--APL FUNCTIONAL SYMBOL SLASH BAR, solidus, bar through-->
     <char character="&#x233f;" string="${\notslash}$"/>
     <!--APL FUNCTIONAL SYMBOL BACKSLASH BAR-->
@@ -2019,16 +2077,24 @@
     <char character="&#x2348;" string="${\APLrightarrowbox}$"/>
     <!--APL FUNCTIONAL SYMBOL QUAD UPWARDS ARROW-->
     <char character="&#x2350;" string="${\APLuparrowbox}$"/>
+    <!--APL FUNCTIONAL SYMBOL QUAD UP CARET-->
+    <char character="&#x2353;" string="${\APLboxupcaret}$"/>
     <!--APL FUNCTIONAL SYMBOL QUAD DOWNWARDS ARROW-->
     <char character="&#x2357;" string="${\APLdownarrowbox}$"/>
     <!--APL FUNCTIONAL SYMBOL UP SHOE JOT-->
     <char character="&#x235d;" string="${\APLcomment}$"/>
     <!--APL FUNCTIONAL SYMBOL QUOTE QUAD-->
     <char character="&#x235e;" string="${\APLinput}$"/>
-    <!-- APL FUNCTIONAL SYMBOL ALPHA -->
-    <char character="&#x237a;" string="${\upalpha}$"/>
     <!--APL FUNCTIONAL SYMBOL CIRCLE STAR-->
     <char character="&#x235f;" string="${\APLlog}$"/>
+    <!--APL FUNCTIONAL SYMBOL QUAD QUESTION-->
+    <char character="&#x2370;" string="${\APLboxquestion}$"/>
+    <!--APL FUNCTIONAL SYMBOL ALPHA-->
+    <char character="&#x237a;" string="${\upalpha}$"/>
+    <!--RIGHT ANGLE WITH DOWNWARDS ZIGZAG ARROW-->
+    <char character="&#x237c;" string="${\rangledownzigzagarrow}$"/>
+    <!--SOFTWARE-FUNCTION SYMBOL, HEXAGON-->
+    <char character="&#x2394;" string="${\hexagon}$"/>
     <!--= \wideparen (yhmath mathabx fourier), TOP PARENTHESIS (mathematical use)-->
     <char character="&#x23dc;" string="${\overparen}$"/>
     <!--BOTTOM PARENTHESIS (mathematical use)-->
