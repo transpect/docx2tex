@@ -1117,9 +1117,9 @@
     <!--PRIME or minute, not superscripted-->
     <char character="&#x2032;" string="$^{\prime}$"/>
     <!--DOUBLE PRIME or second, not superscripted-->
-    <char character="&#x2033;" string="$^{\dprime}$"/>
+    <char character="&#x2033;" string="$^{\prime\prime}$"/>
     <!--TRIPLE PRIME (not superscripted)-->
-    <char character="&#x2034;" string="$^{\trprime}$"/>
+    <char character="&#x2034;" string="$^{\prime\prime\prime}$"/>
     <!--REVERSE PRIME, not superscripted-->
     <char character="&#x2035;" string="${\backprime}$"/>
     <!-- DOUBLE REVERSE PRIME, not superscripted -->
