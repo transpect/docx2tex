@@ -1133,7 +1133,7 @@
     <!-- SINGLE RIGHT-POINTING ANGLE QUOTATION MARK -->
     <char character="&#x203a;" string="{\frq}"/>
     <!-- DOUBLE EXCLAMATION MARK -->
-    <char character="&#x203c;" string="{\Exclam}"/>    
+    <char character="&#x203c;" string="${\Exclam}$"/>    
     <!--CHARACTER TIE, z notation sequence concatenation-->
     <char character="&#x2040;" string="${\cat}$"/>
     <!-- HYPHEN BULLET -->
@@ -2037,10 +2037,6 @@
     <char character="&#x230a;" string="${\lfloor}$"/>
     <!--RIGHT FLOOR-->
     <char character="&#x230b;" string="${\rfloor}$"/>
-    <!--reverse not-->
-    <char character="&#x2310;" string="${\invneg}$"/>
-    <!--SQUARE LOZENGE-->
-    <char character="&#x2311;" string="${\wasylozenge}$"/>
     <!--upper left corner-->
     <char character="&#x231c;" string="${\ulcorner}$"/>
     <!--upper right corner-->
