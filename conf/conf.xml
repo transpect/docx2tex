@@ -2018,9 +2018,9 @@
     <!--RIGHT CEILING-->
     <char character="&#x2309;" string="${\rceil}$"/>
     <!--REVERSE NOT-->
-    <char character="&#x2310;" string="${\invnot}$"/>
+    <char character="&#x2310;" string="${\invneg}$"/>
     <!--SQUARE LOZENGE-->
-    <char character="&#x2311;" string="${\sqlozenge}$"/>
+    <char character="&#x2311;" string="${\wasylozenge}$"/>
     <!--PROFILE OF A LINE-->
     <char character="&#x2312;" string="${\profline}$"/>
     <!--PROFILE OF A SURFACE-->
