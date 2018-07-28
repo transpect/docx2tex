@@ -296,4 +296,20 @@
     <xsl:processing-instruction name="latex" select="concat('\', replace(parent::*/@font-family, '\s', ''), '{', ., '}')"/>
   </xsl:template>
   
+  <xsl:template match="equation[mml:math//footnote]
+                      |inlineequation[mml:math//footnote]" mode="docx2tex-preprocess">
+    <xsl:copy>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+    </xsl:copy>
+    <xsl:for-each select=".//footnote">
+      <xsl:processing-instruction name="latex">\footnotetext{</xsl:processing-instruction>
+      <xsl:apply-templates select="para/node()[not(self::phrase[@role = ('hub:identifier', 'hub:separator')])]" mode="#current"/>
+      <xsl:processing-instruction name="latex">}</xsl:processing-instruction>  
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template match="mml:math//footnote" mode="docx2tex-preprocess">
+    <xsl:processing-instruction name="latex">\footnotemark</xsl:processing-instruction>
+  </xsl:template>
+  
 </xsl:stylesheet>
