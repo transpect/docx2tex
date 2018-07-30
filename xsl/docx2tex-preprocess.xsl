@@ -73,8 +73,10 @@
         <xsl:processing-instruction name="latex" 
                                     select="docx2tex:equation-label($equation-label)"/>
         <xsl:apply-templates select="dbk:term//dbk:inlineequation/node()" mode="#current"/>
-        <xsl:text>&#x20;</xsl:text>
-        <xsl:processing-instruction name="latex">\\</xsl:processing-instruction>
+        <xsl:if test="not(position() eq last())">
+          <xsl:text>&#x20;</xsl:text>
+          <xsl:processing-instruction name="latex">\\</xsl:processing-instruction>  
+        </xsl:if>
       </xsl:for-each>
     </equation>
   </xsl:template>
