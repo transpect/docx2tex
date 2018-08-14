@@ -308,6 +308,10 @@
       <option/>
     </rule>
   </template>
+  
+  <!-- resolve tab when it's the begin of a term -->
+  
+  <template context="dbk:term/node()[1][self::dbk:tabs or self::dbk:tab]"/>
 
   <!-- text styles -->
   
