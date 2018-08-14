@@ -199,7 +199,9 @@
   </xsl:template>
   
   <xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
-    <xsl:apply-templates select="varlistentry/term/node(), varlistentry/listitem/node()" mode="#current"/>
+    <xsl:apply-templates select="varlistentry/term/node()" mode="#current"/>
+    <tab role="docx2tex-preprocess"/>
+    <xsl:apply-templates select="varlistentry/listitem/node()" mode="#current"/>
   </xsl:template>
     
   <!-- move leading and trailing whitespace out of phrase #13913 -->
