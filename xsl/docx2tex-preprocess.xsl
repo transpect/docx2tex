@@ -35,9 +35,9 @@
   <xsl:variable name="equation-label-regex" as="xs:string" 
                 select="concat( '^(\s*',
                                 $parenthesis-regex,
-                                '((\d+)(\.\d+)*)',
+                                '*((\d+)(\.\d+)*)',
                                 $parenthesis-regex,
-                                '\s*)+$' )"/>
+                                '*\s*)+$' )"/>
   
   <xsl:template match="informaltable[every $i in .//row 
                                      satisfies count($i/entry) = (2,3) 
