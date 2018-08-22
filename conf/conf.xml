@@ -149,36 +149,40 @@
   <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
                                                                                [following-sibling::dbk:para]">
     <rule>
-      <text/>
+      <xsl:next-match/>
       <text> \par </text>
     </rule>
   </template>
   
   <template context="dbk:entry//dbk:br[every $precedent in ancestor::dbk:para[1]//node()[. &lt;&lt; current()] 
-                            satisfies (not(normalize-space($precedent)))]">
+                                       satisfies (not(normalize-space($precedent)))]">
     <rule>
       <text>\leavemode\newline
 </text>  
     </rule>
   </template>
   
-  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]
-                             [not(@css:font-style eq 'normal')]
+  <template context="dbk:para[not(@css:font-style eq 'normal')]
                              [@css:font-style eq 'italic'
                               or exists(for $i in ./@role 
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]">
     <rule name="textit" type="cmd" break-after="2">
       <param/>
+      <xsl:if test="not(parent::dbk:footnote or parent::dbk:entry)">
+        <xsl:text>&#xa;&#xa;</xsl:text>
+      </xsl:if>
     </rule>
   </template>
   
-  <template context="dbk:para[not(parent::dbk:entry)][not(parent::dbk:footnote)]
-                             [not(@css:font-weight eq 'normal')]
+  <template context="dbk:para[not(@css:font-weight eq 'normal')]
                              [@css:font-weight eq 'bold'
                               or exists(for $i in ./@role 
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]">
-    <rule name="textbf" type="cmd" break-after="2">
+    <rule name="textbf" type="cmd">
       <param/>
+      <xsl:if test="not(parent::dbk:footnote or parent::dbk:entry)">
+        <xsl:text>&#xa;&#xa;</xsl:text>
+      </xsl:if>
     </rule>
   </template>
   
