@@ -1079,12 +1079,6 @@
     <char character="&#x2015;" string="---"/>
     <!--= \Vert, double vertical bar-->
     <char character="&#x2016;" string="${\|}$"/>
-    <!--LEFT SINGLE QUOTATION MARK ‘ -->
-    <char character="&#x2018;" string="`"/>
-    <!--RIGHT SINGLE QUOTATION MARK ’ -->
-    <char character="&#x2019;" string="'"/>
-    <!--SINGLE LOW-9 QUOTATION MARK ‚ -->
-    <char character="&#x201a;" string=","/>
     <!--SINGLE HIGH-REVERSED-9 QUOTATION MARK -->
     <char character="&#x201b;" string="`"/>
     <!--DAGGER relation-->
