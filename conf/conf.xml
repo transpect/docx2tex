@@ -747,8 +747,6 @@
     <char character="&#xa7;" string="{\S}"/>
     <!--COPYRIGHT -->
     <char character="&#xa9;" string="{\textcopyright}"/>
-    <!--LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-    <char character="&#xab;" string="{\flqq}"/>
     <!--= \lnot, NOT SIGN-->
     <char character="&#xac;" string="${\neg}$"/>
     <!--SOFT HYPHEN -->
@@ -769,8 +767,6 @@
     <char character="&#xb6;" string="\P"/>
     <!--SUPERSCRIPT ONE -->
     <char character="&#xb9;" string="$^{1}$"/>
-    <!--RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-    <char character="&#xbb;" string="{\frqq}"/>
     <!-- INVERTED QUESTION MARK -->
     <char character="&#xbf;" string="{\textquestiondown}"/>
     <!--LATIN CAPITAL LETTER A WITH RING ABOVE -->    
@@ -1091,16 +1087,6 @@
     <char character="&#x201a;" string=","/>
     <!--SINGLE HIGH-REVERSED-9 QUOTATION MARK -->
     <char character="&#x201b;" string="`"/>
-    <!--LEFT DOUBLE QUOTATION MARK “ -->
-    <char character="&#x201c;" string="``"/>
-    <char character="&#x201c;" string="{\grqq}" context="dbk:para[(for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@xml:lang eq 'de', 
-                                                                   if(@xml:lang) then @xml:lang eq 'de' else exists(ancestor::*[@xml:lang eq 'de']))[1]]"/>
-    <!--RIGHT DOUBLE QUOTATION MARK ” -->
-    <char character="&#x201d;" string="''"/>
-    <!--DOUBLE LOW-9 QUOTATION MARK „ -->
-    <char character="&#x201e;" string=",,"/>
-    <char character="&#x201e;" string="{\glqq}" context="dbk:para[(for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@xml:lang eq 'de', 
-                                                                  if(@xml:lang) then @xml:lang eq 'de' else exists(ancestor::*[@xml:lang eq 'de']))[1]]"/>
     <!--DAGGER relation-->
     <char character="&#x2020;" string="${\dag}$"/>
     <!--DOUBLE DAGGER relation-->
@@ -2863,10 +2849,6 @@
     <char character="&#x276c;" string="\("/>
     <!-- MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT -->
     <char character="&#x276d;" string="\)"/>
-    <!-- HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT -->
-    <char character="&#x276e;" string="{\flqq}"/>
-    <!-- HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT -->
-    <char character="&#x276f;" string="{\frqq}"/>
     <!-- HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT -->
     <char character="&#x2770;" string="{\flq}"/>
     <!-- HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT -->
