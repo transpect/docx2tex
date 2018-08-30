@@ -4987,7 +4987,7 @@
     <xsl:text>&#xa;&#xa;</xsl:text>
     <xsl:apply-templates mode="#current"/>
     <xsl:value-of select="'\end{enumerate}'"/>
-    <xsl:text>&#xa;&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
   </template>
 
   <xsl:function name="tr:enumerate-list-type" as="xs:string">
