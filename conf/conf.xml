@@ -795,7 +795,7 @@
          * -->
     
     <!--imath-->
-    <char character="&#x131;" string="${\imath}$"/>
+    <char character="&#x131;" string="\i{}"/>
     <!--LATIN CAPITAL LETTER L WITH STROKE -->
     <char character="&#x141;" string="\L{}"/>
     <!--LATIN SMALL LETTER L WITH STROKE -->
