@@ -28,3 +28,6 @@
 [submodule "mml-normalize"]
 	path = mml-normalize
 	url = https://github.com/transpect/mml-normalize
+[submodule "cascade"]
+	path = cascade
+	url = https://github.com/transpect/cascade
