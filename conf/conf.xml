@@ -35,6 +35,7 @@
     \usepackage{enumerate}
     \usepackage{tensor}
     \usepackage{pifont}
+    \usepackage{soul}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
@@ -404,6 +405,14 @@
                                 and not(@role eq 'Hyperlink' or parent::dbk:link)]">
     <xsl:text>\underline{</xsl:text>
       <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+
+  <template context="dbk:phrase[@css:text-decoration-line eq 'line-through'
+                                or exists(for $i in ./@role 
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'line-through']))]">
+    <xsl:text>\sout{</xsl:text>
+    <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
