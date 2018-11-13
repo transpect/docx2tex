@@ -410,7 +410,7 @@
 
   <template context="dbk:phrase[@css:text-decoration-line eq 'line-through'
                                 or exists(for $i in ./@role 
-                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'line-through']))]">
+                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'line-through'])]">
     <xsl:text>\sout{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
