@@ -37,17 +37,17 @@
                                                               then xs:decimal(replace(@css:letter-spacing, '[a-z]+$', '')) 
                                                               else 0) gt 2 (: visual perceivable letter-spacing :) 
                                                              )">
-        <xsl:copy>
-          <xsl:choose>
-            <xsl:when test="self::phrase or self::superscript or self::subscript">
+        <xsl:choose>
+          <xsl:when test="self::phrase or self::superscript or self::subscript">
+            <xsl:copy>
               <xsl:apply-templates select="current-group()/@*" mode="#current"/>
-              <xsl:apply-templates select="current-group()/node()" mode="#current"/>            
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:apply-templates select="@*, node()" mode="#current"/>
-            </xsl:otherwise>
-          </xsl:choose>  
-        </xsl:copy>
+              <xsl:apply-templates select="current-group()/node()" mode="#current"/>
+            </xsl:copy>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" mode="#current"/>
+          </xsl:otherwise>
+        </xsl:choose>  
       </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
