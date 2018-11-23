@@ -599,6 +599,21 @@
     </rule>
   </template>
   
+  <!-- replace tabs -->
+  
+  <template context="dbk:tab[@xml:space eq 'preserve']">
+    <rule>
+      <text>&#x20;</text>
+    </rule>
+  </template>
+  
+  <template context="dbk:tab[@xml:space eq 'preserve']
+                            [preceding-sibling::dbk:inlineequation and following-sibling::dbk:inlineequation]">
+    <rule>
+      <text>${\quad}$</text>
+    </rule>
+  </template>
+  
   <!-- tagged private use area -->
   <template context="dbk:phrase[@role eq 'unicode-private-use']">
     <rule name="privateuse" type="cmd">
