@@ -236,6 +236,12 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
+  <!-- remove phrase which contain only math -->
+  
+  <xsl:template match="phrase[count(*) eq 1 and inlineequation and not(text())]" mode="docx2tex-preprocess">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
   <!-- remove empty paragraphs #13946 -->
   
   <xsl:template match="para[not(.//text()) or (every $i in .//text() satisfies matches($i, '^\s+$'))][not(* except tab)]" mode="docx2tex-preprocess"/>
@@ -274,6 +280,10 @@
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
   </xsl:template>
+  
+  <!-- remove whitespace between hub identifier and tab -->
+  
+  <xsl:template match="footnote/para[1]/text()[1][matches(., '^\s$')][following-sibling::*[1][self::tab]][preceding-sibling::*[1][self::phrase][@role eq 'hub:identifier']]"/>
   
   <!-- wrap private use-content -->
   
