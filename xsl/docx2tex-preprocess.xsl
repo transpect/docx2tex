@@ -50,9 +50,9 @@
       <xsl:variable name="equation-entry" as="element(entry)"
                     select="(entry[matches(normalize-space(.), $equation-label-regex)], 
                              entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]"/>
-      <xsl:variable name="equation-labels" as="xs:string+" 
-                    select="for $i in ((normalize-space(string-join($equation-entry, ''))[matches(., $equation-label-regex)],
-                                        $equation-entry//processing-instruction()[name() eq 'latex']))[1]
+      <xsl:variable name="equation-labels" as="node()+" 
+                    select="for $i in ($equation-entry//text()[matches(normalize-space(.), $equation-label-regex)]
+                                      |$equation-entry//processing-instruction()[name() eq 'latex'])
                             return $i"/>
       <xsl:apply-templates select="entry/* except $equation-entry/*" mode="#current">
         <xsl:with-param name="equation-labels" select="$equation-labels" tunnel="yes"/>
@@ -82,7 +82,7 @@
   </xsl:template>
   
   <xsl:template match="equation" mode="docx2tex-preprocess">
-    <xsl:param name="equation-labels" as="xs:string*" tunnel="yes"/>
+    <xsl:param name="equation-labels" as="node()*" tunnel="yes"/>
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:if test="$equation-labels">
