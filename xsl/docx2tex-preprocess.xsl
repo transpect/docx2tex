@@ -281,6 +281,10 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- remove whitespace between hub identifier and tab -->
+  
+  <xsl:template match="footnote/para[1]/text()[1][matches(., '^\s$')][following-sibling::*[1][self::tab]][preceding-sibling::*[1][self::phrase][@role eq 'hub:identifier']]"/>
+  
   <!-- wrap private use-content -->
   
   <xsl:template match="text()[matches(., '[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]')]" mode="docx2tex-preprocess">
