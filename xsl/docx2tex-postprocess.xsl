@@ -146,4 +146,11 @@
                            [matches(string-join(.//text(), ''), $figure-caption-start-regex)]" mode="docx2tex-postprocess">
   </xsl:template>
   
+  <xsl:template match="equation/mml:math" mode="docx2tex-postprocess">
+    <xsl:copy>
+      <xsl:attribute name="display" select="'block'"/>
+      <xsl:apply-templates select="@* except @display" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
 </xsl:stylesheet>
