@@ -771,6 +771,8 @@
     <char character="&#xa7;" string="{\S}"/>
     <!--COPYRIGHT -->
     <char character="&#xa9;" string="{\textcopyright}"/>
+    <!-- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <char character="&#xab;" string="\guillemotleft{}"/>
     <!--= \lnot, NOT SIGN-->
     <char character="&#xac;" string="${\neg}$"/>
     <!--SOFT HYPHEN -->
@@ -791,6 +793,10 @@
     <char character="&#xb6;" string="\P"/>
     <!--SUPERSCRIPT ONE -->
     <char character="&#xb9;" string="$^{1}$"/>
+    <!-- MASCULINE ORDINAL INDICATOR  ^{\circ} -->
+    <char character="&#xba;" string="$^{\circ}$"/>
+    <!-- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+    <char character="&#xbb;" string="\guillemotright{}"/>    
     <!-- INVERTED QUESTION MARK -->
     <char character="&#xbf;" string="{\textquestiondown}"/>
     <!--LATIN CAPITAL LETTER A WITH RING ABOVE -->    
