@@ -31,3 +31,6 @@
 [submodule "cascade"]
 	path = cascade
 	url = https://github.com/transpect/cascade
+[submodule "fontmaps"]
+	path = fontmaps
+	url = http://github.com/transpect/fontmaps

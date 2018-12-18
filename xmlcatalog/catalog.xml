@@ -9,6 +9,8 @@
   <nextCatalog catalog="../cascade/xmlcatalog/catalog.xml"/>
   
   <nextCatalog catalog="../docx2hub/xmlcatalog/catalog.xml"/>
+
+  <nextCatalog catalog="../fontmaps/xmlcatalog/catalog.xml"/>
   
   <nextCatalog catalog="../xproc-util/xmlcatalog/catalog.xml"/>
 
