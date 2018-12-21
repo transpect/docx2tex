@@ -190,16 +190,12 @@
   
   <!-- manually lowered or raised position -->
   
-  <template context="dbk:phrase[(@css:top, for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1]]/text()">
+  <template context="dbk:phrase[(@css:top[. ne '0pt'], for $i in ./@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top[. ne '0pt'])[1]]/text()">
     <rule>
-      <text select="if((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1] eq '0pt')
-		    then ''
-		    else if(starts-with((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '-'))
+      <text select="if(starts-with((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '-'))
                     then concat('\raisebox{', replace((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '^-', ''), '}')
                     else concat('\raisebox{-', (parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '}')"/>
-      <text select="if((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1] eq '0pt')
-		    then .
-		    else concat('{', ., '}')"/>
+      <text select="concat('{', ., '}')"/>
     </rule>
   </template>  
   
