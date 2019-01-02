@@ -212,7 +212,6 @@
   <template context="dbk:tab|dbk:phrase[@role eq 'tab']">
     <rule>
       <text>&#x9;</text>
-      <text/>
     </rule>
   </template>
 
@@ -616,7 +615,7 @@
   <template context="dbk:tab[@xml:space eq 'preserve']
                             [preceding-sibling::dbk:inlineequation and following-sibling::dbk:inlineequation]">
     <rule>
-      <text>${\quad}$</text>
+      <text>{\quad}</text>
     </rule>
   </template>
   
