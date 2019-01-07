@@ -87,7 +87,7 @@
     <xsl:copy>
       <xsl:sequence select="$id"/>
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="$equation-labels">
+      <xsl:if test="exists($equation-labels)">
         <xsl:variable name="index" select="index-of(for $i in ancestor::entry//equation 
                                                     return generate-id($i), generate-id())" as="xs:integer?"/>
         <xsl:attribute name="condition" select="'numbered'"/>

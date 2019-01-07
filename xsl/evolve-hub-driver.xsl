@@ -77,17 +77,44 @@
                ]">
     <informaltable>
       <xsl:apply-templates select="@*(:, phrase[@role = 'hub:equation-number']//@xml:id :)" mode="#current"/>
-      <row>
-        <entry>
-          <xsl:next-match/>
-        </entry>
-        <entry>
-          <para>
-            <xsl:apply-templates select="phrase[@role = 'hub:equation-number']" mode="#current"/>  
-          </para>
-        </entry>
-      </row>
+      <tgroup cols="2">
+        <row>
+          <entry>
+            <xsl:copy copy-namespaces="no">
+              <xsl:apply-templates select="@*" mode="#current"/>
+              <xsl:apply-templates select="(. | phrase)/equation" mode="#current">
+                <xsl:with-param name="insert" as="node()*" tunnel="yes">
+                  <xsl:copy-of select="phrase[@role = 'hub:equation-number']//anchor"/>
+                </xsl:with-param>
+              </xsl:apply-templates>
+            </xsl:copy>
+          </entry>
+          <entry>
+            <para>
+              <xsl:apply-templates select="phrase[@role = 'hub:equation-number']" mode="#current"/>  
+            </para>
+          </entry>
+        </row>
+      </tgroup>
     </informaltable>
+  </xsl:template>
+  
+  <xsl:template match="phrase[@role = 'hub:equation-number']//anchor" mode="hub:split-at-tab"/>
+
+  <xsl:template match="equation" mode="hub:split-at-tab">
+    <xsl:param name="insert" as="node()*" tunnel="yes"/>
+    <xsl:choose>
+      <xsl:when test="exists(node())">
+        <xsl:copy copy-namespaces="no">
+          <xsl:apply-templates select="@*" mode="#current"/>
+          <xsl:sequence select="$insert"/>
+          <xsl:apply-templates mode="#current"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>
