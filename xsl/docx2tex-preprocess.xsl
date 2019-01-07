@@ -83,7 +83,9 @@
   
   <xsl:template match="equation" mode="docx2tex-preprocess">
     <xsl:param name="equation-labels" as="node()*" tunnel="yes"/>
+    <xsl:param name="id" as="attribute(xml:id)?" tunnel="yes"/>
     <xsl:copy>
+      <xsl:sequence select="$id"/>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:if test="$equation-labels">
         <xsl:variable name="index" select="index-of(for $i in ancestor::entry//equation 
@@ -150,7 +152,10 @@
   </xsl:function>
   
   <xsl:template match="para[equation and count(distinct-values(*/local-name())) eq 1]" mode="docx2tex-preprocess">
-    <xsl:apply-templates mode="#current"/>
+    <xsl:apply-templates select="*[1]" mode="#current">
+      <xsl:with-param name="id" select="@xml:id" tunnel="yes"/>
+    </xsl:apply-templates>
+    <xsl:apply-templates select="*[position() gt 1]" mode="#current"/>
   </xsl:template>
   
   <xsl:template match="blockquote[@role = 'hub:lists']" mode="docx2tex-preprocess">
@@ -316,9 +321,7 @@
   
   <xsl:template match="equation[mml:math//footnote]
                       |inlineequation[mml:math//footnote]" mode="docx2tex-preprocess">
-    <xsl:copy>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
-    </xsl:copy>
+    <xsl:next-match/>
     <xsl:for-each select=".//footnote">
       <xsl:processing-instruction name="latex">\footnotetext{</xsl:processing-instruction>
       <xsl:apply-templates select="para/node()[not(self::phrase[@role = ('hub:identifier', 'hub:separator')])]" mode="#current"/>

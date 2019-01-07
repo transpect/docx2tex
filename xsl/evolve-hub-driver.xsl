@@ -56,4 +56,38 @@
   
   <xsl:template match="dbk:phrase[@role eq 'hub:identifier']//@css:font-stretch[. eq 'ultra-condensed']" mode="hub:handle-indent"/>
 
+
+  <!-- MathType equations may have macro-generated equation numbers. Convert them into an informaltable so they can
+  later be converted into properly tagged and labeled LaTeX equations: -->
+  <xsl:template mode="hub:split-at-tab" 
+    match="para[phrase[@role = 'hub:equation-number']]
+               [(. | phrase)/equation[@role = 'mtef']]
+               [every $c in node()[normalize-space() or self::*] 
+                satisfies ($c/self::equation[@role = 'mtef'] 
+                           or
+                           $c/self::phrase[equation[@role = 'mtef']]
+                                          [every $pc in node()[normalize-space()] satisfies ($pc/self::equation[@role = 'mtef'])]
+                           or
+                           $c/self::tab 
+                           or 
+                           $c/self::tabs 
+                           or 
+                           $c/self::phrase[@role = 'hub:equation-number']
+                          )
+               ]">
+    <informaltable>
+      <xsl:apply-templates select="@*(:, phrase[@role = 'hub:equation-number']//@xml:id :)" mode="#current"/>
+      <row>
+        <entry>
+          <xsl:next-match/>
+        </entry>
+        <entry>
+          <para>
+            <xsl:apply-templates select="phrase[@role = 'hub:equation-number']" mode="#current"/>  
+          </para>
+        </entry>
+      </row>
+    </informaltable>
+  </xsl:template>
+
 </xsl:stylesheet>
