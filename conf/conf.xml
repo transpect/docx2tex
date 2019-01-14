@@ -16,6 +16,7 @@
     % https://github.com/transpect/docx2tex
     % 
     \documentclass{scrbook}
+    \usepackage[T1]{fontenc}
     \usepackage[utf8]{inputenc}
     \usepackage{graphicx}
     \usepackage{hyperref}
