@@ -171,9 +171,14 @@
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-style eq 'italic'])]">
     <rule name="textit" type="cmd" break-after="2">
       <param/>
-      <xsl:if test="not(parent::dbk:footnote or parent::dbk:entry)">
-        <xsl:text>&#xa;&#xa;</xsl:text>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="parent::dbk:entry">
+          <xsl:text>\par&#xa;</xsl:text>
+        </xsl:when>
+        <xsl:when test="not(parent::dbk:footnote)">
+          <xsl:text>&#xa;&#xa;</xsl:text>
+        </xsl:when>
+      </xsl:choose>
     </rule>
   </template>
   
@@ -183,9 +188,14 @@
                                         return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:font-weight eq 'bold'])]">
     <rule name="textbf" type="cmd">
       <param/>
-      <xsl:if test="not(parent::dbk:footnote or parent::dbk:entry)">
-        <xsl:text>&#xa;&#xa;</xsl:text>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="parent::dbk:entry">
+          <xsl:text>\par&#xa;</xsl:text>
+        </xsl:when>
+        <xsl:when test="not(parent::dbk:footnote)">
+          <xsl:text>&#xa;&#xa;</xsl:text>
+        </xsl:when>
+      </xsl:choose>
     </rule>
   </template>
 
