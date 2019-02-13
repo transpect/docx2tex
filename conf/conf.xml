@@ -259,7 +259,7 @@
   <template context="dbk:imagedata">
     <rule name="includegraphics" type="cmd">
       <option select="concat('width=', 1 div count(ancestor::*[dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')]),'\textwidth')"/>
-      <param select="@fileref"/>
+      <param select="replace(@fileref, '([%#])', '\\$1')"/>
     </rule>
   </template>
   
