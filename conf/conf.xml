@@ -2,11 +2,15 @@
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://transpect.io/xml2tex/schema/xml2tex.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <set xmlns="http://transpect.io/xml2tex"  
-  xmlns:tr="http://transpect.io"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     xmlns:tr="http://transpect.io"
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
   <xsl:import href="http://transpect.io/xslt-util/colors/xsl/colors.xsl"/>
+  <xsl:import href="http://transpect.io/xslt-util/paths/xsl/paths.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
+  
+  <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
+  <xsl:variable name="basename" select="tr:basename(base-uri())" as="xs:string"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.1 --- ``Escape from MS Island''
@@ -747,8 +751,88 @@
       <text/>
     </rule>
   </template>
-
-  <charmap>
+  
+  <template context="dbk:biblioref">
+    <xsl:for-each select="tokenize(@linkends, '\s')">
+      <rule name="cite" type="cmd">
+        <param select="."/>
+      </rule>  
+    </xsl:for-each>
+  </template>
+  
+  <template context="dbk:bibliography[@role eq 'Citavi']">
+    <xsl:variable name="bibtex-path" select="concat($path, '/', $basename, '-citavi.bib')" as="xs:string"/>
+    <rule name="bibliography" type="cmd" break-after="2" break-before="2">
+      <param select="concat(tr:basename(base-uri()), '-citavi')"/>
+    </rule>
+    <file href="{$bibtex-path}" encoding="utf-8"/>
+  </template>
+  
+  <template context="dbk:bibliography[@role eq 'Citavi']/dbk:biblioentry">
+    <xsl:variable name="main-set" as="element(dbk:biblioset)"
+                  select="(dbk:biblioset[@relation eq 'article'], dbk:biblioset[@relation eq 'inproceedings'], dbk:biblioset)[1]"/>
+    <xsl:value-of select="concat('@', main-set/@relation, '{')"/>
+    <xsl:value-of select="concat(@xml:id, ',&#xa;')"/>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>}&#xa;</xsl:text>
+  </template>
+  
+  <template context="dbk:biblioentry[dbk:biblioset[@relation eq 'article']]/dbk:biblioset[@relation = ('journal', 'incollection', 'inproceedings')]">
+    <xsl:value-of select="concat('journal={', ' ', dbk:title, '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:biblioset/*"/>
+  
+  <template context="dbk:authorgroup">
+    <xsl:text>author={</xsl:text>
+    <xsl:for-each select="dbk:author">
+      <xsl:apply-templates mode="#current"/>
+      <xsl:if test="position() ne last()">
+        <xsl:text>, </xsl:text>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:if test="dbk:editor">
+      <xsl:text>editor={</xsl:text>
+      <xsl:for-each select="dbk:editor">
+        <xsl:apply-templates mode="#current"/>
+        <xsl:if test="position() ne last()">
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+      <xsl:text>},&#xa;</xsl:text>
+    </xsl:if>
+  </template>
+  
+  <template context="dbk:author|dbk:editor">
+    <xsl:value-of select="concat(dbk:personname/dbk:firstname, ' ', dbk:personname/dbk:surname)"/>
+  </template>
+  
+  <template context="dbk:pubdate">
+    <xsl:value-of select="concat('date={', ., '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:publisher">
+    <xsl:value-of select="concat('publisher={', dbk:publishername, '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:pagenums">
+    <xsl:value-of select="concat('pages={', ., '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:volumenum">
+    <xsl:value-of select="concat('number={', ., '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:title">
+    <xsl:value-of select="concat('title={', ., '},&#xa;')"/>
+  </template>
+  
+  <template context="dbk:biblioid">
+    <xsl:value-of select="concat(@class, '={', ., '},&#xa;')"/>
+  </template>
+  
+<charmap>
     
     <!-- *
          * UNICODE - LATEX TEXT AND MATH MODE COMMANDS
