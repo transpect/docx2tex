@@ -763,7 +763,7 @@
   <template context="dbk:bibliography[@role eq 'Citavi']">
     <xsl:variable name="bibtex-path" select="concat($path, '/', $basename, '-citavi.bib')" as="xs:string"/>
     <rule name="bibliography" type="cmd" break-after="2" break-before="2">
-      <param select="concat(tr:basename(base-uri()), '-citavi')"/>
+      <param select="concat($basename, '-citavi')"/>
     </rule>
     <file href="{$bibtex-path}" encoding="utf-8"/>
   </template>
