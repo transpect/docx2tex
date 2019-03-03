@@ -789,7 +789,7 @@
         <xsl:text>, </xsl:text>
       </xsl:if>
     </xsl:for-each>
-    <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>},&#xa;</xsl:text>
     <xsl:if test="dbk:editor">
       <xsl:text>editor={</xsl:text>
       <xsl:for-each select="dbk:editor">
