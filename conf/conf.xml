@@ -753,11 +753,9 @@
   </template>
   
   <template context="dbk:biblioref">
-    <xsl:for-each select="tokenize(@linkends, '\s')">
-      <rule name="cite" type="cmd">
-        <param select="."/>
-      </rule>  
-    </xsl:for-each>
+    <rule name="cite" type="cmd">
+      <param select="string-join(tokenize(@linkends, '\s'), ',')"/>
+    </rule>  
   </template>
   
   <template context="dbk:bibliography[@role eq 'Citavi']">
@@ -771,7 +769,7 @@
   <template context="dbk:bibliography[@role eq 'Citavi']/dbk:biblioentry">
     <xsl:variable name="main-set" as="element(dbk:biblioset)"
                   select="(dbk:biblioset[@relation eq 'article'], dbk:biblioset[@relation eq 'inproceedings'], dbk:biblioset)[1]"/>
-    <xsl:value-of select="concat('@', main-set/@relation, '{')"/>
+    <xsl:value-of select="concat('@', $main-set/@relation, '{')"/>
     <xsl:value-of select="concat(@xml:id, ',&#xa;')"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:text>}&#xa;</xsl:text>
@@ -804,7 +802,11 @@
     </xsl:if>
   </template>
   
-  <template context="dbk:author|dbk:editor">
+  <template context="dbk:personname"><!-- for above bibtex generating template -->
+    <xsl:value-of select="string-join((dbk:firstname, dbk:othername[starts-with(@role, 'middle')], dbk:surname), ' ')"/>
+  </template>
+  
+  <template context="dbk:author|dbk:editor"><!-- probably for authors in the article header? -->
     <xsl:value-of select="concat(dbk:personname/dbk:firstname, ' ', dbk:personname/dbk:surname)"/>
   </template>
   
