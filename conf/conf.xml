@@ -826,7 +826,7 @@
     <xsl:value-of select="concat('number={', ., '},&#xa;')"/>
   </template>
   
-  <template context="dbk:title">
+  <template context="dbk:biblioset/dbk:title">
     <xsl:value-of select="concat('title={', ., '},&#xa;')"/>
   </template>
   
