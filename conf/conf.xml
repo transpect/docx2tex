@@ -786,7 +786,7 @@
     <xsl:for-each select="dbk:author">
       <xsl:apply-templates mode="#current"/>
       <xsl:if test="position() ne last()">
-        <xsl:text>, </xsl:text>
+        <xsl:text> and </xsl:text>
       </xsl:if>
     </xsl:for-each>
     <xsl:text>},&#xa;</xsl:text>
@@ -795,7 +795,7 @@
       <xsl:for-each select="dbk:editor">
         <xsl:apply-templates mode="#current"/>
         <xsl:if test="position() ne last()">
-          <xsl:text>, </xsl:text>
+          <xsl:text> and </xsl:text>
         </xsl:if>
       </xsl:for-each>
       <xsl:text>},&#xa;</xsl:text>
@@ -826,10 +826,14 @@
     <xsl:value-of select="concat('number={', ., '},&#xa;')"/>
   </template>
   
-  <template context="dbk:biblioset/dbk:title">
+  <template context="dbk:biblioset[not(following-sibling::dbk:biblioset[@relation = 'inproceedings'])]/dbk:title">
     <xsl:value-of select="concat('title={', ., '},&#xa;')"/>
   </template>
-  
+
+  <template context="dbk:biblioset[following-sibling::dbk:biblioset[@relation = 'inproceedings']]/dbk:title">
+    <xsl:value-of select="concat('booktitle={', ., '},&#xa;')"/>
+  </template>
+
   <template context="dbk:biblioid">
     <xsl:value-of select="concat(@class, '={', ., '},&#xa;')"/>
   </template>
