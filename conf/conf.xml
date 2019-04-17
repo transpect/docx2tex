@@ -139,6 +139,10 @@
   <template context="dbk:br">
     <rule name="newline" type="cmd" break-after="1"/>
   </template>
+
+  <template context="dbk:title/dbk:br">
+    <rule name="protect\newline" type="cmd" break-after="1"/>
+  </template>
   
   <template context="dbk:entry//dbk:br">
     <rule>
