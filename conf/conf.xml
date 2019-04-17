@@ -144,6 +144,10 @@
     <rule name="protect\newline" type="cmd" break-after="1"/>
   </template>
   
+  <template context="text()[following-sibling::node()[1][self::dbk:br]]">
+    <xsl:value-of select="replace(. ,'\s+$', '')"/>
+  </template>
+  
   <template context="dbk:entry//dbk:br">
     <rule>
       <text> \newline </text>
