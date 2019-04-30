@@ -400,11 +400,18 @@
     </rule>
   </template>
   
-  <template context="dbk:phrase[(@css:font-style, @css:font-weight) = 'normal']">
+  <template context="dbk:phrase[@css:font-weight eq 'normal']">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
+
+  <template context="dbk:phrase[@css:font-style eq 'normal']">
+    <xsl:text>\textup{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+
   
   <template context="dbk:phrase[@css:font-style eq 'italic' 
                                 or exists(for $i in ./@role 
