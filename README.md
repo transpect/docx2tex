@@ -93,7 +93,8 @@ Learn how to edit this file [here](https://github.com/transpect/xml2tex).
 
 The docx conversion supports individual fontmaps for mapping non-unicode characters to unicode. Please note that this is just needed for fonts that are not unicode-compatible. If you want to map characters from Unicode to LaTeX, please use the character map in the [xml2tex configuration](https://github.com/transpect/xml2tex) instead.
 
-Please find further documentation on how to create a fontmap [here](https://github.com/transpect/docx2hub/blob/master/fontmaps/README.md).
+Please find further documentation on how to create a fontmap [here](https://github.com/transpect/docx2hub/tree/2ed00ec56bf5a3add400c56c01a53688a991041c/fontmaps/README.md).
+
 
 After you created your fontmap, store it in a directory and pass the path of the directory to docx2tex with the `-f` option.
 
