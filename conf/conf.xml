@@ -1227,9 +1227,9 @@
     <!--MINUS SIGN -->
     <char character="&#x2012;" string="$-$"/>
     <!--EN DASH -->
-    <char character="&#x2013;" string="{--}"/>
+    <char character="&#x2013;" string="\textendash{}"/>
     <!--EM DASH -->
-    <char character="&#x2014;" string="{---}"/>
+    <char character="&#x2014;" string="\textemdash{}"/>
     <!--HORIZONTAL BAR -->
     <char character="&#x2015;" string="{---}"/>
     <!--= \Vert, double vertical bar-->
