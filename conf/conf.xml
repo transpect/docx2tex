@@ -963,12 +963,13 @@
     <!-- *
          * Latin Extended-B
          * -->
-    
+
+    <!-- LATIN LETTER DENTAL CLICK -->
+    <char character="&#x1c0;" string="{\textbar}"/>
     <!-- LATIN SMALL LETTER F WITH HOOK -->
     <char character="&#x192;" string="${\mathit{f}}$"/>
     <!--jmath-->
     <char character="&#x237;" string="${\jmath}$"/>
-    
         
     <!-- *
          * Greek and Coptic
@@ -3486,8 +3487,14 @@
     <char character="&#x2b27;" string="${\blacklozenge}"/>
     <!-- WHITE MEDIUM LOZENGE -->
     <char character="&#x2b28;" string="${\lozenge}"/>
-    
-    
+
+    <!-- *
+         * Symbols, Other
+         * -->
+
+    <!-- REPLACEMENT CHARACTER -->
+    <char character="&#xfffd;" string="${\blacksquare}$"/>
+     
     <!-- *
          * Mathematical Alphanumeric Symbols
          * -->
