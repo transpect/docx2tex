@@ -126,7 +126,21 @@
                              [not(parent::dbk:footnote)]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
-                             [not(following-sibling::*[1][self::dbk:variablelist])]">
+                             [not(following-sibling::*[1][self::dbk:variablelist])]
+                             [not(.//dbk:equation)]">
+    <rule break-after="2">
+      <text/>
+    </rule>
+  </template>
+  
+  <!-- preserve manual indent for paragraphs after equations -->
+  
+  <template context="dbk:para[not(parent::dbk:entry)]
+                             [not(parent::dbk:footnote)]
+                             [not(following-sibling::*[1][self::dbk:orderedlist])]
+                             [not(following-sibling::*[1][self::dbk:itemizedlist])]
+                             [not(following-sibling::*[1][self::dbk:variablelist])]
+                             [.//dbk:equation and following-sibling::*[1][self::dbk:para[xs:decimal(replace(@css:text-indent, '[a-z]+$', '')) gt 0]]]">
     <rule break-after="2">
       <text/>
     </rule>
@@ -612,20 +626,20 @@
   </template>
 
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation" type="env" break-after="1">
+    <rule name="equation" type="env">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:equation[not(@condition eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation*" type="env" break-after="1">
+    <rule name="equation*" type="env">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [contains(., '\\')]">
-    <rule name="align" type="env" break-after="1">
+    <rule name="align" type="env">
       <text/>
     </rule>
   </template>
@@ -633,7 +647,7 @@
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [contains(., '\\')]">
-    <rule name="align*" type="env" break-after="1">
+    <rule name="align*" type="env">
       <text/>
     </rule>
   </template>
