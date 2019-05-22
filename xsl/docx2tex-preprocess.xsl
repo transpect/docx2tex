@@ -246,7 +246,9 @@
   
   <!-- remove phrase which contain only math -->
   
-  <xsl:template match="phrase[count(*) eq 1 and inlineequation and not(text())]" mode="docx2tex-preprocess" priority="1">
+  <xsl:template match="phrase[count(*) eq 1]
+                             [*/local-name() = ('inlineequation', 'equation')]
+                             [not(text())]" mode="docx2tex-preprocess" priority="1">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
