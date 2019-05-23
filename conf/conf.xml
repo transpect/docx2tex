@@ -124,7 +124,6 @@
   <!-- regular paras -->
 
   <template context="dbk:para[not(parent::dbk:entry)]
-                             [not(parent::dbk:footnote)]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
