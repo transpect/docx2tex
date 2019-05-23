@@ -129,7 +129,8 @@
   
   <xsl:template match="para[.//inlineequation and */local-name() = ('inlineequation', 'tab', 'phrase')]
                            [count(distinct-values(*/local-name())) &lt;= 3]
-                           [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" mode="docx2tex-preprocess">
+                           [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" 
+                mode="docx2tex-preprocess" priority="5">
     <equation condition="numbered">
       <xsl:processing-instruction name="latex" 
                                   select="docx2tex:equation-label(
