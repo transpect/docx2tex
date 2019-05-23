@@ -268,7 +268,9 @@
   
   <!-- drop unused anchors -->
   
-  <xsl:template match="anchor[not(//link/@linkend = @xml:id)]" mode="docx2tex-preprocess"/>
+  <xsl:variable name="linkends-in-doc" select="//link/@linkend" as="attribute(linkend)*"/>
+  
+  <xsl:template match="anchor[not($linkends-in-doc = @xml:id)]" mode="docx2tex-preprocess"/>
   
   <!-- move anchors outside of block elements -->
   

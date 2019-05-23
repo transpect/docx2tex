@@ -54,8 +54,13 @@
   
   <!-- remove visually indistinct css:font-stretch property from identifiers -->
   
-  <xsl:template match="dbk:phrase[@role eq 'hub:identifier']//@css:font-stretch[. eq 'ultra-condensed']" mode="hub:handle-indent"/>
+  <xsl:template match="phrase[@role eq 'hub:identifier']//@css:font-stretch[. eq 'ultra-condensed']" mode="hub:handle-indent"/>
 
+  <xsl:template match="phrase[inlineequation or equation]
+                             [count(*) eq 1]
+                             [not(text())]" mode="hub:handle-indent">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
 
   <!-- MathType equations may have macro-generated equation numbers. Convert them into an informaltable so they can
   later be converted into properly tagged and labeled LaTeX equations: -->
