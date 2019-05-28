@@ -218,7 +218,8 @@
                              [string-length(normalize-space(.)) gt 0]
                              [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
                               not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
-                             [not(parent::phrase/@xml:space eq 'preserve')]" mode="docx2tex-preprocess">
+                             [not(parent::phrase/@xml:space eq 'preserve')]
+			     [not(following-sibling::*[1][self::*:inlineequation])]" mode="docx2tex-preprocess">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
