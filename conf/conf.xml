@@ -11,6 +11,13 @@
   
   <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
   <xsl:variable name="basename" select="tr:basename(base-uri())" as="xs:string"/>
+  <xsl:variable name="colors" 
+                select="(//@css:background-color,
+                         //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 35  
+                                          or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
+                                          or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
+                                          or ancestor-or-self::dbk:link
+                                          or parent::*[@native-name eq 'Hyperlink'])])"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.1 --- ``Escape from MS Island''
@@ -45,68 +52,9 @@
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
-    <xsl:choose>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'de'">
-        <xsl:text>\usepackage[ngerman]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'fr'">
-        <xsl:text>\usepackage[frenchb]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'it'">
-        <xsl:text>\usepackage[italian]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'es'">
-        <xsl:text>\usepackage[spanish]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'cs'">
-        <xsl:text>\usepackage[czech]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'fi'">
-        <xsl:text>\usepackage[finnish]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'el'">
-        <xsl:text>\usepackage[english,greek]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'hu'">
-        <xsl:text>\usepackage[magyar]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'is'">
-        <xsl:text>\usepackage[icelandic]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'pl'">
-        <xsl:text>\usepackage[polish]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'pt'">
-        <xsl:text>\usepackage[portuguese]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang = ('ar', 'fa', 'ur', 'ps', 'ku', 'ug')">
-        <xsl:text>\usepackage{arabtex}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang = ('ar', 'fa', 'ur', 'ps', 'ku', 'ug')">
-        <xsl:text>\usepackage[english,bulgarian,russian,ukrainian]{babel}</xsl:text>
-      </xsl:when>
-      <xsl:when test="/dbk:hub/@xml:lang eq 'zh'">
-        <xsl:text>\usepackage{CJK}</xsl:text>
-      </xsl:when>
-    </xsl:choose>
-    <xsl:variable name="colors" 
-                  select="distinct-values((//@css:background-color,
-                                           //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 35  
-                                                           or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
-                                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
-                                                           or ancestor-or-self::dbk:link
-                                                           or parent::*[@native-name eq 'Hyperlink']
-                                                           )]))" as="xs:string*"/>
-    <!-- iterate over colors and generate global color declaration -->
-    <xsl:for-each select="$colors">
-      <xsl:text>&#xa;</xsl:text>
-      <xsl:value-of select="concat('\definecolor{',
-                                   for $i in . return concat('color-', index-of($colors, $i)),
-                                   '}{rgb}{',
-                                   string-join(for $i in tr:hex-rgb-color-to-ints(.) 
-                                               return xs:string(round-half-to-even($i div 255, 2)),
-                                               ','),
-                                   '}')"/>
+    <xsl:sequence select="xml2tex:lang-to-latex-pkg( /dbk:hub/@xml:lang )"/>
+    <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">        
+      <xsl:value-of select="concat('\define', ., '&#xa;')"/>
     </xsl:for-each>
   </preamble>
 
@@ -388,16 +336,7 @@
                                                                      return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]">
     <rule name="colorbox" type="cmd">
       <param select="for $i in (@css:background-color, for $j in @role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:background-color)[1] 
-                     return concat('color-', index-of(distinct-values((//@css:background-color,
-                                                                       //@css:color[not(. eq '#000000' 
-                                                                                        or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
-                                                                                        or ancestor-or-self::dbk:link
-                                                                                        or parent::*[@native-name eq 'Hyperlink']
-                                                                                        )
-                                                                                     ]
-                                                                     )), 
-                                                      $i)
-                                  )"/>
+                     return concat('color-', index-of(distinct-values($colors), $i))"/>
       <param/>
     </rule>
   </template>
