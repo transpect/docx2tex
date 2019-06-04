@@ -53,6 +53,7 @@
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
     <xsl:sequence select="xml2tex:lang-to-latex-pkg( /dbk:hub/@xml:lang )"/>
+    <xsl:text>&#xa;</xsl:text>
     <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">        
       <xsl:value-of select="concat('\define', ., '&#xa;')"/>
     </xsl:for-each>
