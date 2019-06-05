@@ -82,6 +82,11 @@
       <text/>
     </rule>
   </template>
+
+  <template context="dbk:para[@css:page-break-before='always']">
+    <xsl:text>\pagebreak&#xa;</xsl:text>
+    <xsl:next-match/>
+  </template>
   
   <!-- carriage returns -->
   
