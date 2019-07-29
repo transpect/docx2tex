@@ -125,10 +125,13 @@
     </xsl:if>
   </xsl:template>
   
-  <!-- paragraph contains only inlineequation, tabs and an equation label -->
+  <!-- paragraph contains only inlineequation, tabs, anchors or equation label -->
   
   <xsl:template match="para[.//inlineequation and */local-name() = ('inlineequation', 'tab', 'phrase')]
                            [count(distinct-values(*/local-name())) &lt;= 3]
+                           [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]     
+                      |para[.//inlineequation and */local-name() = ('inlineequation', 'tab', 'phrase', 'anchor')]
+                           [count(distinct-values(*/local-name())) &lt;= 4]
                            [matches(normalize-space(string-join((.//text()[not(ancestor::inlineequation)]), '')), $equation-label-regex)]" 
                 mode="docx2tex-preprocess" priority="5">
     <equation condition="numbered">
