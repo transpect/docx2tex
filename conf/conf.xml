@@ -312,7 +312,8 @@
 
   <!-- text styles -->
   
-  <template context="dbk:phrase[not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
+  <template context="dbk:phrase[@css:color]
+                               [not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
                                     or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
                                     or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
                                     or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
