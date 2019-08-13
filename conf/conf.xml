@@ -5311,10 +5311,10 @@
                           else if($numeration eq 'lowerroman') then 'i'
                           else if($numeration eq 'upperroman') then 'I'
                           else                                      '1'"/>
-    <xsl:value-of select="     if(count($separators) eq 0) then $list-type
-                          else if(count($separators) eq 1) then concat($list-type, $separators[1])
-                          else if(count($separators) eq 2) then concat($separators[1], $list-type, $separators[2])
-                          else $list-type"/>
+        <xsl:value-of select="string-join(
+                                          for $i in (1 to count($indizes))
+                                          return ($list-type, $separators[$i])
+                                          ,'')"/>    
   </xsl:function>
   
   <xsl:function name="tr:list-number-to-integer" as="xs:integer">
