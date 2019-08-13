@@ -5305,15 +5305,15 @@
     <xsl:param name="override" as="xs:string?"/>
     <xsl:variable name="indizes"    select="tokenize($override, '\p{P}')[. ne '']"   as="xs:string*"/>
     <xsl:variable name="separators" select="tokenize($override, '[\w\d]+')[. ne '']" as="xs:string*"/>
-    <xsl:variable name="list-type" as="xs:string*"
+    <xsl:variable name="list-type" as="xs:string"
                   select="     if($numeration eq 'loweralpha') then 'a'
                           else if($numeration eq 'upperalpha') then 'A'
                           else if($numeration eq 'lowerroman') then 'i'
                           else if($numeration eq 'upperroman') then 'I'
                           else                                      '1'"/>
         <xsl:value-of select="string-join(
-                                          for $i in (1 to count($separators))
-                                          return ($separators[$i], $list-type[$i])
+                                          for $i in (1 to count($indizes))
+                                          return ($list-type, $separators[$i])
                                           ,'')"/>    
   </xsl:function>
   
