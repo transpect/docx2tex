@@ -49,6 +49,8 @@
     \usepackage{tensor}
     \usepackage{pifont}
     \usepackage{soul}
+    \usepackage{soul}
+    \usepackage{arydshln}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
