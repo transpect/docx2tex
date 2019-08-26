@@ -241,7 +241,7 @@
   
   <template context="dbk:link[@xlink:href][matches(@xlink:href, '^(https?|ftp):')]">
     <rule name="href" type="cmd">
-      <param select="replace((@xlink:href, @url)[1], '([%#])', '\\$1')"/>
+      <param select="replace((@xlink:href, @url)[1], '([%#_\\])', '\\$1')"/>
       <param/>
     </rule>
   </template>
