@@ -35,7 +35,7 @@
       <xsl:apply-templates select="xml2tex:* except (xml2tex:ns, xml2tex:charmap, xml2tex:preamble)"/>
       
       <!-- identity template -->
-      <xso:template match="@*|*">
+      <xso:template match="@*|*|processing-instruction()">
         <xso:copy>
           <xso:apply-templates select="@*|node()"/>
         </xso:copy>
