@@ -106,11 +106,12 @@
   
   <!-- drop empty equations -->
   
-  <xsl:template match="equation[not(node() except @*)]
-                      |equation[mml:math[not(node() except @*)] and not(normalize-space(.))]
-                      |equation[mml:math[not(node() except @*)] and not(node() except @*)]
-                      |inlineequation[not(node() except @*)]
-                      |inlineequation[mml:math[not(node() except @*)] and not(normalize-space(.))]" mode="docx2tex-preprocess"/>
+  <xsl:template match="equation[not(node())]
+                      |equation[mml:math[not(*)] and not(normalize-space(.))]
+                      |inlineequation[not(node())]
+                      |inlineequation[mml:math[not(*)] and not(normalize-space(.))]" mode="docx2tex-preprocess">
+    <xsl:processing-instruction name="d2t" select="'D2T 001 empty equation object'"/>
+  </xsl:template>
   
   <!-- move whitespace at the beginning or end of an equation in the regular text since they would be trimmed during whitespace normalization -->
   

@@ -593,7 +593,13 @@
   
   <template context="processing-instruction('tr')[starts-with(., 'M2M_212')]">
     <rule>
-      <text>% Equation not converted. See log for details!&#xa;</text>
+      <text>% D2T: Equation not converted. See log for details!&#xa;</text>
+    </rule>
+  </template>
+  
+  <template context="processing-instruction('d2t')[starts-with(., 'D2T 001')]">
+    <rule>
+      <text>% D2T: Empty equation removed!&#xa;</text>
     </rule>
   </template>
   
