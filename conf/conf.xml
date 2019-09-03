@@ -591,6 +591,12 @@
     </rule>
   </template>
   
+  <template context="processing-instruction('tr')[starts-with(., 'M2M_212')]">
+    <rule>
+      <text>% Equation not converted. See log for details!&#xa;</text>
+    </rule>
+  </template>
+  
   <!-- replace tabs -->
   
   <template context="dbk:tab[@xml:space eq 'preserve']">
