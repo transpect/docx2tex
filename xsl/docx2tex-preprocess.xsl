@@ -242,7 +242,7 @@
   <!-- remove phrase tags which contains only whitespace -->
   
   <xsl:template match="phrase[string-length(normalize-space(.)) eq 0][not(@role eq 'cr')]" 
-    mode="docx2tex-preprocess" priority="1">
+                mode="docx2tex-preprocess" priority="1">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
@@ -299,10 +299,14 @@
     </xsl:copy>
   </xsl:template>
   
-  <!-- remove whitespace between hub identifier and tab -->
-  
-  <xsl:template match="footnote/para[1]/text()[1][matches(., '^\s$')][following-sibling::*[1][self::tab]][preceding-sibling::*[1][self::phrase][@role eq 'hub:identifier']]"/>
-  
+  <!-- remove whitespace between hub identifier and tab -->  
+ 
+  <xsl:template mode="docx2tex-preprocess" priority="5"
+                match="footnote/para[1]/*[2][self::phrase]
+                                         [preceding-sibling::*[1][self::superscript]]
+                                         [starts-with(., ' ')]
+                                         [not(preceding-sibling::text())]"/>
+
   <!-- wrap private use-content -->
   
   <xsl:template match="text()[matches(., '[&#xE000;-&#xF8FF;&#xF0000;-&#xFFFFF;&#x100000;-&#x10FFFF;]')]" mode="docx2tex-preprocess">
