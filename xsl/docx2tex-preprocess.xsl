@@ -47,14 +47,14 @@
                                                     or ($i/entry/para/equation and $i/para[not(node())]))]" mode="docx2tex-preprocess">
     <!-- process equation in first row and write label -->
     <xsl:for-each select=".//row">
-      <xsl:variable name="equation-entry" as="element(entry)"
-                    select="(entry[matches(normalize-space(.), $equation-label-regex)], 
-                             entry[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]"/>
+      <xsl:variable name="equation-entry" as="element()"
+                    select="(entry/*[matches(., $equation-label-regex)], 
+                             entry/*[processing-instruction()[name() eq 'latex'][matches(., '^\\tag')]])[1]"/>
       <xsl:variable name="equation-labels" as="node()*" 
-                    select="for $i in ($equation-entry//text()[matches(normalize-space(.), $equation-label-regex)]
+                    select="for $i in ($equation-entry[matches(normalize-space(.), $equation-label-regex)]
                                       |$equation-entry//processing-instruction()[name() eq 'latex'])
                             return $i"/>
-      <xsl:apply-templates select="entry/* except $equation-entry/*" mode="#current">
+      <xsl:apply-templates select="entry/*[. ne $equation-entry]" mode="#current">
         <xsl:with-param name="equation-labels" select="$equation-labels" as="node()*" tunnel="yes"/>
       </xsl:apply-templates>
     </xsl:for-each>
