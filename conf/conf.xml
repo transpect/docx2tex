@@ -35,6 +35,7 @@
     \usepackage{tabularx}
     \usepackage{color}
     \usepackage{textcomp}
+    \usepackage{tipa}
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
@@ -44,7 +45,6 @@
     \usepackage{mathtools}
     \usepackage{txfonts}
     \usepackage{upgreek}
-    \usepackage{tipa}
     \usepackage{enumerate}
     \usepackage{tensor}
     \usepackage{pifont}
