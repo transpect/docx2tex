@@ -35,7 +35,7 @@
     \usepackage{tabularx}
     \usepackage{color}
     \usepackage{textcomp}
-    \usepackage{tipa}
+    \usepackage[safe]{tipa}
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
