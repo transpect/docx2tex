@@ -35,7 +35,9 @@
     \usepackage{tabularx}
     \usepackage{color}
     \usepackage{textcomp}
-    \usepackage[safe]{tipa}
+    <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
+      <xsl:text>\usepackage[safe]{tipa}</xsl:text>
+    </xsl:if>
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
@@ -946,15 +948,15 @@
     <!-- LATIN SMALL LETTER TURNED ALPHA -->
     <char character="&#x252;" string="\textturnscripta(6){}"/>
     <!-- LATIN SMALL LETTER B WITH HOOK  -->
-    <char character="&#x253;" string="\texthtb(\!b){}"/>
+    <char character="&#x253;" string="\texthtb{}"/>
     <!-- LATIN SMALL LETTER OPEN O  -->
     <char character="&#x254;" string="\textopeno(O){}"/>
     <!-- LATIN SMALL LETTER C WITH CURL  -->
     <char character="&#x255;" string="\textctc(C){}"/>
     <!-- LATIN SMALL LETTER D WITH TAIL -->
-    <char character="&#x256;" string="\textrtaild(\:d){}"/>
+    <char character="&#x256;" string="\textrtaild{}"/>
     <!-- LATIN SMALL LETTER D WITH HOOK  -->
-    <char character="&#x257;" string="\texthtd(\!d){}"/>
+    <char character="&#x257;" string="\texthtd{}"/>
     <!-- LATIN SMALL LETTER REVERSED E -->
     <char character="&#x258;" string="\textreve(9){}"/>
     <!-- LATIN SMALL LETTER SCHWA  -->
@@ -972,11 +974,11 @@
     <!-- LATIN SMALL LETTER DOTLESS J WITH STROKE -->
     <char character="&#x25f;" string="\textbardotlessj{}"/>
     <!-- LATIN SMALL LETTER G WITH HOOK  -->
-    <char character="&#x260;" string="\texthtg(\!g){}"/>
+    <char character="&#x260;" string="\texthtg{}"/>
     <!-- LATIN SMALL LETTER SCRIPT G  -->
     <char character="&#x261;" string="\textg(g){}"/>
     <!-- LATIN LETTER SMALL CAPITAL G -->
-    <char character="&#x262;" string="\textscg(\;G){}"/>
+    <char character="&#x262;" string="\textscg{}"/>
     <!-- LATIN SMALL LETTER GAMMA -->
     <char character="&#x263;" string="\textbabygamma{}"/>
     <!-- LATIN SMALL LETTER RAMS HORN  -->
@@ -998,7 +1000,7 @@
     <!-- LATIN SMALL LETTER L WITH BELT -->
     <char character="&#x26c;" string="\textbeltl{}"/>
     <!-- LATIN SMALL LETTER L WITH RETROFLEX HOOK -->
-    <char character="&#x26d;" string="\textrtaill(\:l){}"/>
+    <char character="&#x26d;" string="\textrtaill{}"/>
     <!-- LATIN SMALL LETTER LEZH -->
     <char character="&#x26e;" string="\textlyoghlig{}"/>
     <!-- LATIN SMALL LETTER TURNED M -->
@@ -1012,7 +1014,7 @@
     <!-- LATIN SMALL LETTER N WITH RETROFLEX HOOK -->
     <char character="&#x273;" string="\textnrleg{}"/>
     <!-- LATIN LETTER SMALL CAPITAL N -->
-    <char character="&#x274;" string="\textscn(\;N){}"/>
+    <char character="&#x274;" string="\textscn{}"/>
     <!-- LATIN SMALL LETTER BARRED O -->
     <char character="&#x275;" string="\textbaro(8){}"/>
     <!-- LATIN LETTER SMALL CAPITAL OE -->
@@ -1026,25 +1028,25 @@
     <!-- LATIN SMALL LETTER TURNED R WITH LONG LEG -->
     <char character="&#x27a;" string="\textturnlonglegr{}"/>
     <!-- LATIN SMALL LETTER TURNED R WITH HOOK -->
-    <char character="&#x27b;" string="\textturnrrtail(\:R){}"/>
+    <char character="&#x27b;" string="\textturnrrtail{}"/>
     <!-- LATIN SMALL LETTER R WITH LONG LEG -->
     <char character="&#x27c;" string="\textlonglegr{}"/>
     <!-- LATIN SMALL LETTER R WITH TAIL -->
-    <char character="&#x27d;" string="\textrtailr(\:r){}"/>
+    <char character="&#x27d;" string="\textrtailr{}"/>
     <!-- LATIN SMALL LETTER R WITH FISHHOOK -->
     <char character="&#x27e;" string="\textfishhookr(R){}"/>
     <!-- LATIN SMALL LETTER REVERSED R WITH FISHHOOK -->
     <!--<char character="&#x27f;" string=""/>-->
     <!-- LATIN LETTER SMALL CAPITAL R -->
-    <char character="&#x280;" string="\textscr(\;R){}"/>
+    <char character="&#x280;" string="\textscr{}"/>
     <!-- ATIN LETTER SMALL CAPITAL INVERTED R -->
-    <char character="&#x281;" string="\textinvscr(K){}"/>
+    <char character="&#x281;" string="\textinvscr{}"/>
     <!-- LATIN SMALL LETTER S WITH HOOK -->
-    <char character="&#x282;" string="\textrtails(\:s){}"/>
+    <char character="&#x282;" string="\textrtails{}"/>
     <!-- LATIN SMALL LETTER ESH -->
     <char character="&#x283;" string="\textesh(S){}"/>
     <!-- LATIN SMALL LETTER DOTLESS J WITH STROKE AND HOOK -->
-    <char character="&#x284;" string="\texthtbardotlessj(\!j){}"/>
+    <char character="&#x284;" string="\texthtbardotlessj{}"/>
     <!-- LATIN SMALL LETTER SQUAT REVERSED ESH -->
     <!--<char character="&#x285;" string=""/>-->
     <!-- LATIN SMALL LETTER ESH WITH CURL -->
@@ -1052,7 +1054,7 @@
     <!-- LATIN SMALL LETTER TURNED T -->
     <char character="&#x287;" string="\textturnt(\*t){}"/>
     <!-- LATIN SMALL LETTER T WITH RETROFLEX HOOK -->
-    <char character="&#x288;" string="\textrtailt(\:t){}"/>
+    <char character="&#x288;" string="\textrtailt{}"/>
     <!-- LATIN SMALL LETTER U BAR -->
     <char character="&#x289;" string="\textbaru(0){}"/>
     <!-- LATIN SMALL LETTER UPSILON -->
@@ -1068,7 +1070,7 @@
     <!-- LATIN LETTER SMALL CAPITAL Y -->
     <char character="&#x28f;" string="\textscy(Y){}"/>
     <!-- LATIN SMALL LETTER Z WITH RETROFLEX HOOK  -->
-    <char character="&#x290;" string="\textrtailz(\:z){}"/>
+    <char character="&#x290;" string="\textrtailz{}"/>
     <!-- LATIN SMALL LETTER Z WITH CURL -->
     <char character="&#x291;" string="\textctz{}"/>
     <!-- LATIN SMALL LETTER EZH -->
@@ -1084,21 +1086,21 @@
     <!-- LATIN LETTER STRETCHED C -->
     <char character="&#x297;" string="\textstretchc{}"/>
     <!-- LATIN LETTER BILABIAL CLICK -->
-    <char character="&#x298;" string="\textbullseye(\!o){}"/>
+    <char character="&#x298;" string="\textbullseye{}"/>
     <!-- LATIN LETTER SMALL CAPITAL B -->
-    <char character="&#x299;" string="\textscb(\;B){}"/>
+    <char character="&#x299;" string="\textscb{}"/>
     <!-- LATIN SMALL LETTER CLOSED OPEN E -->
     <char character="&#x29a;" string="\textcloseepsilon{}"/>
     <!-- LATIN LETTER SMALL CAPITAL G WITH HOOK -->
-    <char character="&#x29b;" string="\texthtscg(\!G){}"/>
+    <char character="&#x29b;" string="\texthtscg{}"/>
     <!-- LATIN LETTER SMALL CAPITAL H -->
-    <char character="&#x29c;" string="\textsch(\;H){}"/>
+    <char character="&#x29c;" string="\textsch{}"/>
     <!-- LATIN SMALL LETTER J WITH CROSSED-TAIL -->
     <char character="&#x29d;" string="\textctj(J){}"/>
     <!-- LATIN SMALL LETTER TURNED K -->
     <char character="&#x29e;" string="\textturnk(\*k){}"/>
     <!-- LATIN LETTER SMALL CAPITAL L -->
-    <char character="&#x29f;" string="\textscl(\;L){}"/>
+    <char character="&#x29f;" string="\textscl{}"/>
     <!-- LATIN SMALL LETTER Q WITH HOOK -->
     <char character="&#x2a0;" string="\texthtq{}"/>
     <!-- LATIN LETTER GLOTTAL STOP WITH STROKE -->
