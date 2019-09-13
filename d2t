@@ -13,7 +13,7 @@ usage() {
     echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
     echo "   -t    use tabular instead of tabularx for tables"
-    echo "   -l    draw table grid lines"
+    echo "   -l    suppress table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing"
     echo "   -d    debug mode"
     1>&2; exit 1;
@@ -47,6 +47,12 @@ CALABASH=$DIR/calabash/calabash.sh
 
 # invoke pdflatex
 PDFLATEX=pdflatex
+MTEFSOURCE="ole"
+TABLEMODEL="tabularx"
+PDF=no
+TABLEGRID=yes
+REFS=yes
+DEBUG=no
 
 # specify options
 while getopts ":o:c:m:x:ptlrd" opt; do
@@ -70,7 +76,7 @@ while getopts ":o:c:m:x:ptlrd" opt; do
 	    TABLEMODEL=tabular
 	    ;;
 	l)
-	    TABLEGRID=yes
+	    TABLEGRID=no
 	    ;;
 	r)
 	    REFS=no
@@ -115,23 +121,6 @@ else
 fi
 
 mkdir -p "$OUT_DIR"
-
-# mathtype source format
-if [[ -z "$MTEFSOURCE" ]]; then
-    MTEFSOURCE="ole"
-fi
-# table-model
-if [[ -z "$TABLEMODEL" ]]; then
-    TABLEMODEL="tabularx"
-fi
-# table-grid
-if [[ -z "$TABLEGRID" ]]; then
-    TABLEGRID="no"
-fi
-# references
-if [[ -z "$REFS" ]]; then
-    REFS="yes"
-fi
 
 # path to configuration file
 if [[ -z "$CONF" ]]; then
