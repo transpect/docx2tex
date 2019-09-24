@@ -20,7 +20,7 @@
                                           or parent::*[@native-name eq 'Hyperlink'])])"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex 1.1 --- ``Escape from MS Island''
+  <preamble>% docx2tex 1.3 --- ``If it compiles, print it!''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
