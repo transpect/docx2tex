@@ -1,7 +1,7 @@
 [![Current Release](https://img.shields.io/github/release/transpect/docx2tex.svg)](https://github.com/transpect/docx2tex/releases/latest) [![Github All Releases Downloads](https://img.shields.io/github/downloads/transpect/docx2tex/total.svg)](https://github.com/transpect/docx2tex/releases/)
 
 # docx2tex
-Converts Microsoft Word's DOCX to LaTeX
+Converts Microsoft Word's DOCX to LaTeX. Developed by [le-tex](https://www.le-tex.de/en/company.html)
 
 ## get docx2tex
 
