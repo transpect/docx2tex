@@ -400,7 +400,7 @@
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-decoration-line eq 'underline']))
                                 and not(@role eq 'Hyperlink' or parent::dbk:link)]">
-    <xsl:text>\underline{</xsl:text>
+    <xsl:text>\ul{</xsl:text>
       <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
