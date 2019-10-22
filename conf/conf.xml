@@ -289,7 +289,7 @@
   
   <template context="dbk:listitem[not(parent::dbk:varlistentry)]">
     <rule name="item" type="cmd">
-      <xsl:if test="matches(@override, '[\d\w]+\p{P}[\d\w]+')">
+      <xsl:if test="@override">
         <option select="@override"/>
       </xsl:if>
       <text select="' '"/>
