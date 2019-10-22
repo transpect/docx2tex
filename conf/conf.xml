@@ -5303,7 +5303,7 @@
                   select="if(string-length($override) gt 0 and @numeration) 
                           then tr:list-number-to-integer($override, @numeration) - 1
                           else 0"/>
-    <xsl:variable name="level" select="count(ancestor::*:orderedlist) + 1" as="xs:integer"/>
+    <xsl:variable name="level" select="count(ancestor::*:orderedlist|ancestor::*:itemizedlist) + 1" as="xs:integer"/>
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
