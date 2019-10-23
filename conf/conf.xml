@@ -18,6 +18,7 @@
                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                           or ancestor-or-self::dbk:link
                                           or parent::*[@native-name eq 'Hyperlink'])])"/>
+  <xsl:variable name="langs" select="distinct-values(//@xml:lang)" as="xs:string*"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.3 --- ``If it compiles, print it!''
@@ -55,7 +56,7 @@
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
-    <xsl:sequence select="xml2tex:lang-to-latex-pkg( /dbk:hub/@xml:lang )"/>
+    <xsl:sequence select="xml2tex:langs-to-latex-pkg( $langs )"/>
     <xsl:text>&#xa;</xsl:text>
     <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">        
       <xsl:value-of select="concat('\define', ., '&#xa;')"/>
@@ -718,6 +719,22 @@
       <text>\end{minipage}}</text>
     </rule>
   </template>
+  
+  <!-- babel support -->
+  
+  <template context="dbk:phrase[@xml:lang ne $langs[1]]">
+    <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="dbk:para[not(@xml:lang = $langs[1])]">
+    <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}&#xa;')"/>
+    <xsl:next-match/>
+    <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}&#xa;')"/>
+  </template>
+  
+  <!-- bibliographies -->
   
   <template context="dbk:bibliography">
     <rule name="thebibliography" type="env" break-after="2" break-before="1">
