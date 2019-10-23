@@ -722,13 +722,13 @@
   
   <!-- babel support -->
   
-  <template context="dbk:phrase[@xml:lang ne $langs[1]]">
+  <template context="dbk:phrase[@xml:lang][@xml:lang ne $langs[1]]">
     <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
   
-  <template context="dbk:para[not(@xml:lang = $langs[1])]">
+  <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
     <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}&#xa;')"/>
     <xsl:next-match/>
     <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}&#xa;')"/>
