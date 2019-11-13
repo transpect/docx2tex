@@ -584,6 +584,7 @@
   </template>
   
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
+                                 [not(contains(., '\begin{array}'))]
                                  [contains(., '\\')]">
     <rule name="align" type="env">
       <text/>
@@ -592,6 +593,7 @@
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
+                                 [not(contains(., '\begin{array}'))]
                                  [contains(., '\\')]">
     <rule name="align*" type="env">
       <text/>
