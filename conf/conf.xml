@@ -725,7 +725,10 @@
   
   <!-- babel support -->
   
-  <template context="dbk:phrase[@xml:lang][@xml:lang ne $langs[1]]">
+  <template context="dbk:phrase[@xml:lang]
+                               [@xml:lang ne $langs[1]]
+                               [normalize-space(.)]
+                               [not(matches(., '^[\p{P}\p{Z}\d]+$'))]">
     <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
