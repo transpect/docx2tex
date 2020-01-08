@@ -81,8 +81,7 @@
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
                              [not(following-sibling::*[1][self::dbk:figure])]
-                             [not(.//dbk:equation)]
-                             [not(.//dbk:equation and following-sibling::*[1][self::dbk:para[xs:decimal(replace(@css:text-indent, '[a-z]+$', '')) gt 0]])]">
+                             [not(following-sibling::*[1][self::dbk:equation])]">
     <rule break-after="2">
       <text/>
     </rule>
