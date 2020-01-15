@@ -83,7 +83,7 @@
                              [not(following-sibling::*[1][self::dbk:figure])]
                              [not(following-sibling::*[1][self::dbk:equation])]
                              [not(following-sibling::*[1][self::dbk:dialogue])]
-                             [not(following-sibling::*[1][self::dbk:equation])]">
+                             [not(following-sibling::*[1][self::dbk:blockquote])]">
     <rule break-after="2">
       <text/>
     </rule>
