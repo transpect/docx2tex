@@ -81,6 +81,8 @@
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
                              [not(following-sibling::*[1][self::dbk:figure])]
+                             [not(following-sibling::*[1][self::dbk:equation])]
+                             [not(following-sibling::*[1][self::dbk:dialogue])]
                              [not(following-sibling::*[1][self::dbk:equation])]">
     <rule break-after="2">
       <text/>
@@ -737,7 +739,7 @@
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
     <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}&#xa;')"/>
     <xsl:next-match/>
-    <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}&#xa;')"/>
+    <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}')"/>
   </template>
   
   <!-- bibliographies -->
