@@ -731,7 +731,7 @@
                                [@xml:lang ne $langs[1]]
                                [normalize-space(.)]
                                [not((every $i in * satisfies $i/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
-                                     and not(normalize-space(string-join(text(), ''))))]
+                                     and not(normalize-space(string-join(.//text(), ''))))]
                                [not(matches(., '^[\p{P}\p{Z}\d]+$'))]">
     <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
