@@ -19,6 +19,7 @@
                                           or ancestor-or-self::dbk:link
                                           or parent::*[@native-name eq 'Hyperlink'])])"/>
   <xsl:variable name="langs" select="distinct-values(//@xml:lang)" as="xs:string*"/>
+  <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.3 --- ``If it compiles, print it!''
@@ -217,7 +218,7 @@
   <!-- tables and figures -->
 
   <template context="dbk:table|dbk:informaltable">
-    <rule name="table" type="env" break-after="1">
+    <rule name="table" type="env" break-after="0">
       <text/>
     </rule>
   </template>
@@ -522,12 +523,27 @@
     </rule>
   </template>
 
-  <!-- footnotes -->
-
   <template context="dbk:footnote">
     <rule name="footnote" type="cmd">
       <param/>
     </rule>
+  </template>
+  
+  <template context="dbk:informaltable//dbk:footnote
+                    |dbk:table//dbk:footnote">
+    <rule name="footnotemark" type="cmd">
+      <param select="()"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:informaltable[.//dbk:footnote]
+                    |dbk:table[.//dbk:footnote]">
+    <xsl:next-match/>
+    <xsl:for-each select=".//dbk:footnote">
+      <xsl:value-of select="concat('\footnotetext[', index-of($footnotes, .), ']{')"/>
+      <xsl:apply-templates mode="#current"/>
+      <xsl:text>}&#xa;</xsl:text>
+    </xsl:for-each>
   </template>
 
   <template context="dbk:footnote/dbk:para[following-sibling::dbk:para]">
