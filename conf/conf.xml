@@ -746,6 +746,7 @@
   <template context="dbk:phrase[@xml:lang]
                                [@xml:lang ne $langs[1]]
                                [normalize-space(.)]
+                               [not(ancestor::dbk:entry)]
                                [not((*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
                                     and 
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
