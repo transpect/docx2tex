@@ -199,7 +199,7 @@
                     else concat('\raisebox{-', (parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '}')"/>
       <text select="concat('{', ., '}')"/>
     </rule>
-  </template>  
+  </template>
   
   <!-- tabs -->
   
@@ -435,7 +435,8 @@
   </template>
 
   <!-- no formatting for phrases which contain math environments -->
-  <template context="dbk:phrase[starts-with(., '$') and ends-with(., '$')]">
+  <template context="dbk:phrase[not(@css:text-decoration-line = ('underline', 'line-through'))]
+                               [starts-with(., '$') and ends-with(., '$')]">
     <rule>
       <text/>
     </rule>
