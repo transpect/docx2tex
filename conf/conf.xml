@@ -435,7 +435,7 @@
   </template>
 
   <!-- no formatting for phrases which contain math environments -->
-  <template context="dbk:phrase[not(@css:text-decoration-line = ('underline', 'line-through'))]
+  <template context="dbk:phrase[@css:font-style eq 'italic' or @css:font-weight eq 'bold']
                                [starts-with(., '$') and ends-with(., '$')]">
     <rule>
       <text/>
