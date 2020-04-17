@@ -14,7 +14,7 @@ git clone https://github.com/transpect/docx2tex --recursive
 ```
 
 ## requirements
-* Java 1.7 up to 1.13 (more recent versions not yet tested)
+* Java 1.7 up to 1.14 (more recent versions not yet tested)
 * works on Windows, Linux and Mac OS X
 
 ## run docx2tex
