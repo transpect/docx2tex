@@ -52,7 +52,7 @@ calabash/calabash.sh -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.xm
 #### Windows
 
 ```
-calabash/calabash.bat -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx
+calabash\calabash.bat -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx
 ```
 
 ## configure
