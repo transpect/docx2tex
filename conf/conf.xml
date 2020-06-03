@@ -720,7 +720,14 @@
       <text select="concat('|', replace(., '^(see|voir|véase|vedi|ver|siehe|请参阅|ראה|انظر|참조)\s+(.+)$', 'see{$2}', 'i'))"/>
     </rule>
   </template>
-
+  
+  <template context="dbk:primary//text()[contains(., '!')]
+                    |dbk:secondary//text()[contains(., '!')]
+                    |dbk:tertiary//text()[contains(., '!')]">
+    <rule>
+      <text select="replace(., '!', '{!}')"/>
+    </rule>
+  </template>
   
   <!-- index listing -->
   
