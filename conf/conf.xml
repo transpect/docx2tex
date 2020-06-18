@@ -37,9 +37,14 @@
     \usepackage{tabularx}
     \usepackage{color}
     \usepackage{textcomp}
-    <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
-      <xsl:text>\usepackage[safe]{tipa}</xsl:text>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="//dbk:div[@role eq 'hub:index'][1]">
+        <xsl:text>\usepackage[safe]{tipa}&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\usepackage{tipa}&#xa;</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsfonts}
