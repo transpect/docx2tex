@@ -739,13 +739,15 @@
   
   <!-- index listing -->
   
-  <template context="dbk:para[@role eq 'Index_Heading']"/>
+  <template context="dbk:para[@role = ('Index_Heading', 'Indexberschrift')]"/>
   
   <template context="dbk:div[@role eq 'hub:index']">
     <rule break-after="2">
-      <text select="if(//dbk:para[@role eq 'Index_Heading'][string-length() gt 0]) 
-        then concat('\renewcommand{\indexname}{', //dbk:para[@role eq 'Index_Heading'][string-length() gt 0][1], '}&#xa;\printindex')
-        else '\printindex'"/>
+      <text select="if(//dbk:para[@role = ('Index_Heading', 'Indexberschrift')][string-length() gt 0]) 
+                    then concat('\renewcommand{\indexname}{', 
+                                //dbk:para[@role = ('Index_Heading', 'Indexberschrift')][string-length() gt 0][1], 
+                                '}&#xa;\printindex')
+                    else '\printindex'"/>
     </rule>
   </template>
   
