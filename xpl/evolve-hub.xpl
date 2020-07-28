@@ -13,7 +13,6 @@
     This evolve-hub customization automatically applies list styles,
     normalize whitespace and applies a preprocessing for xml2tex.
   </p:documentation>
-    
 
   <p:input port="source" primary="true"/>
   <p:input port="config" primary="false"/>
@@ -37,6 +36,7 @@
 
   <p:option name="refs" select="'yes'"/>
   <p:option name="preprocessing" select="'yes'"/>
+  <p:option name="strip-lang-variant" select="'no'"/>
   
   <p:import href="remove-indents.xpl"/>
   
@@ -100,6 +100,7 @@
     <p:with-option name="fail-on-error" select="$fail-on-error"/>
     <p:with-option name="prefix" select="'evolve-hub/25'"/>
     <p:with-param name="expand-css-properties" select="'no'"/>
+    <p:with-param name="strip-lang-variant" select="$strip-lang-variant"/>
   </tr:xslt-mode>
 
   <tr:xslt-mode msg="yes" hub-version="1.2" mode="hub:identifiers">
