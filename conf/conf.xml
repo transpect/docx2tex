@@ -5408,12 +5408,8 @@
   <xsl:function name="tr:list-number-to-integer" as="xs:integer">
     <xsl:param name="override" as="xs:string"/>
     <xsl:param name="list-type" as="xs:string"/>
-    <xsl:variable name="counter"
-                  select="tokenize(
-                                   replace(
-                                           replace($override, '[\s\(\)\]\[\{\}&#xa0;]', '', 'i'), 
-                                           '\p{P}$', ''),
-                                  '\.')[last()]" as="xs:string"/>
+    <xsl:variable name="counter" as="xs:string"
+                  select="replace($override, '.*?([A-Z0-9]+).*', '$1', 'i')"/>
     <xsl:choose>
       <xsl:when test="$list-type = ('upperroman', 'lowerroman')">
         <xsl:value-of select="tr:roman-to-int($counter)"/>
