@@ -826,7 +826,12 @@
   <template context="dbk:bibliography[@role eq 'Citavi']/dbk:biblioentry">
     <xsl:variable name="main-set" as="element(dbk:biblioset)"
                   select="(dbk:biblioset[@relation eq 'article'], dbk:biblioset[@relation eq 'inproceedings'], dbk:biblioset)[1]"/>
-    <xsl:value-of select="concat('@', $main-set/@relation, '{')"/>
+    <xsl:value-of select="concat('@', 
+                                 if(matches($main-set/@relation, 'thesis')) 
+                                   then 'phdthesis'
+                                 else if($main-set/@relation) then $main-set/@relation
+                                 else 'misc', 
+                                 '{')"/>
     <xsl:value-of select="concat(@xml:id, ',&#xa;')"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:text>}&#xa;</xsl:text>
