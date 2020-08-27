@@ -712,7 +712,7 @@
     </rule>
   </template>
   
-  <template context="dbk:secondary|dbk:tertiary">
+  <template context="dbk:secondary|dbk:tertiary|dbk:quaternary|dbk:quinary|dbk:senary|dbk:septenary|dbk:octonary|dbk:nonary|dbk:denary">
     <rule>
       <text>!</text>
       <xsl:if test="@sortas">
