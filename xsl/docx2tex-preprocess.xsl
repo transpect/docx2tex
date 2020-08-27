@@ -154,7 +154,9 @@
     </xsl:if>
   </xsl:function>
   
-  <xsl:template match="para[equation and count(distinct-values(*/local-name())) eq 1]" mode="docx2tex-preprocess">
+  <xsl:template match="para[equation]
+                           [count(distinct-values(*/local-name())) eq 1]
+                           [not(text())]" mode="docx2tex-preprocess">
     <xsl:apply-templates select="*[1]" mode="#current">
       <xsl:with-param name="id" select="@xml:id" tunnel="yes"/>
     </xsl:apply-templates>
