@@ -584,7 +584,11 @@
   
   <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
 
-  <template context="dbk:footnote/dbk:para[1]/dbk:phrase[@role eq 'hub:identifier'][1]/node()[not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]"/>
+  <template context="dbk:footnote/dbk:para[1]/dbk:phrase[@role eq 'hub:identifier'][1]//text()[1]
+                      [not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]
+                      ">
+    <xsl:value-of select="replace(., '^[\d*†‡§i]+\.?\s*', '', 'i')"/>
+  </template>
   
   <template context="dbk:footnote/dbk:para/*[1][local-name() eq 'superscript'][matches(., '\d+')]"/>
 
