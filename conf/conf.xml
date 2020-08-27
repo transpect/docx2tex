@@ -829,7 +829,7 @@
     <xsl:value-of select="concat('@', 
                                  if(matches($main-set/@relation, 'thesis')) 
                                    then 'phdthesis'
-                                 else if(matches($main-set/@relation, 'broadcast)) 
+                                 else if(matches($main-set/@relation, 'broadcast')) 
                                    then 'misc'
                                  else if($main-set/@relation) then $main-set/@relation
                                  else 'misc', 
