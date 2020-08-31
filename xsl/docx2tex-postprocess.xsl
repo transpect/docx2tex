@@ -153,4 +153,10 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- only code beautification: remove whitespace before newline -->
+  
+  <xsl:template match="text()[following-sibling::node()[1][self::dbk:br]]" mode="docx2tex-postprocess">
+    <xsl:value-of select="replace(. ,'\s+$', '')"/>
+  </xsl:template>
+  
 </xsl:stylesheet>

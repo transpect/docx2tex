@@ -5,6 +5,7 @@
      xmlns:tr="http://transpect.io"
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
+  <xsl:import href="http://transpect.io/mml2tex/xsl/mml2tex.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/colors/xsl/colors.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/paths/xsl/paths.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
@@ -75,6 +76,7 @@
   <ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
   <ns prefix="css" uri="http://www.w3.org/1996/css"/>
   <ns prefix="docx2tex" uri="http://transpect.io/docx2tex"/>
+  <ns prefix="mml2tex" uri="http://transpect.io/mml2tex"/>
   <ns prefix="tr" uri="http://transpect.io"/>
 
   <!-- drop metadata -->
@@ -119,10 +121,6 @@
 
   <template context="dbk:title/dbk:br">
     <rule name="protect\newline" type="cmd" break-after="1"/>
-  </template>
-  
-  <template context="text()[following-sibling::node()[1][self::dbk:br]]">
-    <xsl:value-of select="replace(. ,'\s+$', '')"/>
   </template>
   
   <template context="dbk:entry//dbk:br">
@@ -203,7 +201,7 @@
       <text select="if(starts-with((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '-'))
                     then concat('\raisebox{', replace((parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '^-', ''), '}')
                     else concat('\raisebox{-', (parent::*/@css:top, for $i in parent::*/@role return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]/@css:top)[1], '}')"/>
-      <text select="concat('{', ., '}')"/>
+      <param select="xml2tex:utf2tex(.., ., $charmap, (), $texregex)"/>
     </rule>
   </template>
   
@@ -398,6 +396,13 @@
     <xsl:text>}</xsl:text>
   </template>
   
+  <template context="dbk:phrase[@css:font-style eq 'italic' or @css:font-weight eq 'bold']
+                               [matches(., '^[&#x393;&#x394;&#x398;&#x39b;&#x39e;&#x3a0;&#x3a3;&#x3a5;&#x3a6;&#x3a8;-&#x3be;&#x3c0;-&#x3f6;]$')]">
+    <rule>
+      <text/>
+    </rule>
+  </template>
+  
   <template context="dbk:phrase[@css:font-family = ('Consolas', 'Courier New', 'Courier')
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
@@ -456,11 +461,13 @@
   <template context="dbk:superscript[not(dbk:footnote)]
                     |dbk:subscript
                     |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
-                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('superscript', 'subscript')])]">
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                     [@remap = ('superscript', 'subscript')])]">
     <rule mathmode="true">
       <text select="concat(if(local-name() eq 'subscript'
                            or exists(for $i in ./@role 
-                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@remap = ('subscript')])
+                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                [@remap = ('subscript')])
                                      )
                            then '_'
                            else '^',
@@ -476,17 +483,56 @@
                            else '')"/>
       <text/>
       <text select="concat('}', 
-                          if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) then ''
-                          else if(not(@css:font-style eq 'italic') or @css:font-weight eq 'bold') then '}' else '')"/>
+                          if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) 
+                            then ''
+                          else if(not(@css:font-style eq 'italic') or @css:font-weight eq 'bold') 
+                            then '}' 
+                          else   ''  )"/>
     </rule>
   </template>
   
-  <template context="dbk:superscript[matches(., '^\{\\(textregistered|texttrademark)\}$')]">
-    <rule name="textsuperscript" type="cmd">
-      <text/>
+  <template context="dbk:superscript[not(dbk:footnote)]//text()
+                    |dbk:subscript//text()
+                    |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                     [@remap = ('superscript', 'subscript')])]//text()">
+    <rule>
+      <text select="mml2tex:utf2tex(replace(normalize-space(.), '\$', ''), (), $texmap)"/>
     </rule>
   </template>
   
+  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-style eq 'italic' and not(@css:font-weight eq 'bold')]
+                    |dbk:subscript//dbk:phrase[@css:font-style eq 'italic' and not(@css:font-weight eq 'bold')]
+                    |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                     [@remap = ('superscript', 'subscript')])]//dbk:phrase[    @css:font-style eq 'italic' 
+                                                                                                                                                           and not(@css:font-weight eq 'bold')]">
+    <rule name="mathit" type="cmd">
+      <param/>
+    </rule>
+  </template>
+  
+  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')]
+                    |dbk:subscript//dbk:phrase[@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')]
+                    |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                     [@remap = ('superscript', 'subscript')])]//dbk:phrase[    @css:font-style eq 'italic' 
+                                                                                                                                                           and not(@css:font-weight eq 'bold')]">
+    <rule name="mathbf" type="cmd">
+      <param/>
+    </rule>
+  </template>
+  
+  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-weight eq 'bold' and @css:font-style eq 'italic']
+                    |dbk:subscript//dbk:phrase[@css:font-weight eq 'bold' and @css:font-style eq 'italic']
+                    |dbk:phrase[not(dbk:footnote)][exists(for $i in ./@role 
+                                                          return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                     [@remap = ('superscript', 'subscript')])]//dbk:phrase[    @css:font-style eq 'italic' 
+                                                                                                                                                           and @css:font-weight eq 'bold']">
+    <rule name="mathbfit" type="cmd">
+      <param/>
+    </rule>
+  </template>
 
   <!-- headlines -->
   
@@ -574,7 +620,7 @@
                     |dbk:footnote/dbk:para[1]//dbk:phrase[not(@role eq 'hub:identifier')][1][preceding-sibling::*[last()][@role eq 'hub:identifier']][starts-with(., ' ')]/text()[normalize-space()]
                     |dbk:footnote[not(.//dbk:phrase[@role eq 'hub:identifier'])]/dbk:para//text()[1][starts-with(., ' ')]">
     <rule>
-      <text select="replace(., '^\s', '')"/> 
+      <text select="replace(string-join(xml2tex:utf2tex(.., ., $charmap, (), $texregex), ''), '^\s', '')"/> 
     </rule>
   </template>
   
@@ -585,9 +631,8 @@
   <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
 
   <template context="dbk:footnote/dbk:para[1]/dbk:phrase[@role eq 'hub:identifier'][1]//text()[1]
-                      [not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]
-                      ">
-    <xsl:value-of select="replace(., '^[\d*†‡§i]+\.?\s*', '', 'i')"/>
+                      [not(descendant-or-self::dbk:anchor or descendant-or-self::processing-instruction())]">
+    <xsl:value-of select="replace(., '^[\d*†‡§i\s]+\.?\s*', '', 'i')"/>
   </template>
   
   <template context="dbk:footnote/dbk:para/*[1][local-name() eq 'superscript'][matches(., '\d+')]"/>
@@ -603,21 +648,23 @@
     </rule>
   </template>
 
-  <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+  <template context="dbk:equation[@condition eq 'numbered']
+                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation" type="env">
       <text/>
     </rule>
   </template>
   
-  <template context="dbk:equation[not(@condition eq 'numbered')][not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+  <template context="dbk:equation[not(@condition eq 'numbered')]
+                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation*" type="env">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
-                                 [not(contains(., '\begin{array}'))]
-                                 [contains(., '\\')]">
+                                 [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
+                                 [some $i in processing-instruction() satisfies contains($i, '\\')]">
     <rule name="align" type="env">
       <text/>
     </rule>
@@ -625,8 +672,8 @@
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
-                                 [not(contains(., '\begin{array}'))]
-                                 [contains(., '\\')]">
+                                 [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
+                                 [some $i in processing-instruction() satisfies contains($i, '\\')]">
     <rule name="align*" type="env">
       <text/>
     </rule>
@@ -772,7 +819,7 @@
   <template context="dbk:phrase[@xml:lang]
                                [@xml:lang ne $langs[1]]
                                [normalize-space(.)]
-                               [not(ancestor::dbk:entry)]
+                               [not(ancestor::dbk:entry or self::dbk:term or self::dbk:listitem)]
                                [not((*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
                                     and 
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
@@ -1232,7 +1279,7 @@
     <!--= \Delta (-slantedGreek), = \mathrm{\Delta}, capital delta, greek-->
     <char character="&#x394;" string="${\Updelta}$"/>
     <char character="&#x394;" string="$\boldsymbol{\Updelta}$" context="*[@css:font-weight eq 'bold']"/> 
-    <char character="&#x394;" string="${\Delta}$" context="*[@css:font-style eq 'italic']"/>
+    <char character="&#x394;x" string="${\Delta}$" context="*[@css:font-style eq 'italic']"/>
     <!-- GREEK CAPITAL LETTER EPSILON -->
     <char character="&#x395;" string="E"/>
     <!-- GREEK CAPITAL LETTER ZETA -->
@@ -1240,7 +1287,7 @@
     <!-- GREEK CAPITAL LETTER ETA -->
     <char character="&#x397;" string="H"/>
     <!--= \Theta (-slantedGreek), = \mathrm{\Theta}, capital theta, greek-->
-    <char character="&#x398;" string="${\Uptheta}$"/>
+    <char character="&#x398;" string="${\Uptheta}$"/> 
     <char character="&#x398;" string="$\boldsymbol{\Uptheta}$" context="*[@css:font-weight eq 'bold']"/> 
     <char character="&#x398;" string="${\Theta}$" context="*[@css:font-style eq 'italic']"/>
     <!-- GREEK CAPITAL LETTER IOTA -->
@@ -1255,12 +1302,12 @@
     <char character="&#x39c;" string="M"/>
     <!-- GREEK CAPITAL LETTER NU -->
     <char character="&#x39d;" string="N"/>
-    <!-- GREEK CAPITAL LETTER OMICRON -->
-    <char character="&#x39f;" string="O"/>
     <!--= \Xi (-slantedGreek), = \mathrm{\Xi}, capital xi, greek-->
     <char character="&#x39e;" string="${\Upxi}$"/>
     <char character="&#x39e;" string="$\boldsymbol{\Upxi}$" context="*[@css:font-weight eq 'bold']"/>    
     <char character="&#x39e;" string="${\Xi}$" context="*[@css:font-style eq 'italic']"/>
+    <!-- GREEK CAPITAL LETTER OMICRON -->
+    <char character="&#x39f;" string="O"/>
     <!--= \Pi (-slantedGreek), = \mathrm{\Pi}, capital pi, greek-->
     <char character="&#x3a0;" string="${\Uppi}$"/>
     <char character="&#x3a0;" string="$\boldsymbol{\Uppi}$" context="*[@css:font-weight eq 'bold']"/>    
@@ -1436,6 +1483,10 @@
     <!--= \mathrm{\varrho} (omlmathrm), = \varrhoup (kpfonts mathdesign), GREEK RHO SYMBOL (round)-->
     <char character="&#x3f1;" string="${\varrho}$"/>
     <char character="&#x3f1;" string="$\boldsymbol{\varrho}$" context="*[@css:font-weight eq 'bold']"/>
+    <!-- GREEK CAPITAL THETA SYMBOL  -->
+    <char character="&#x3f4;" string="${\Uptheta}$"/>
+    <char character="&#x3f4;" string="$\boldsymbol{\Uptheta}$" context="*[@css:font-weight eq 'bold']"/> 
+    <char character="&#x3f4;" string="${\Theta}$" context="*[@css:font-style eq 'italic']"/>
     <!--= \mathrm{\epsilon} (omlmathrm), = \epsilonup (kpfonts mathdesign), GREEK LUNATE EPSILON SYMBOL-->
     <char character="&#x3f5;" string="${\epsilon}$"/>
     <char character="&#x3f5;" string="$\boldsymbol{\epsilon}$" context="*[@css:font-weight eq 'bold']"/>
