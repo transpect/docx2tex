@@ -930,7 +930,7 @@
   </template>
   
   <template context="dbk:publisher">
-    <xsl:value-of select="concat('publisher={', dbk:publishername, '},&#xa;')"/>
+    <xsl:value-of select="concat('publisher={', dbk:publishername[1], '},&#xa;')"/>
   </template>
   
   <template context="dbk:pagenums">
