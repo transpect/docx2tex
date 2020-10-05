@@ -834,7 +834,7 @@
                                     and 
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
                                    )]
-                               [not(matches(., '^[\p{P}\p{Z}\d]+$'))]">
+                               [not(matches(., '^[\p{P}\p{Z}\d&#x4e00;-&#x9fff;&#x530;-&#x58f;&#xfb13;-&#xfb17;]+$'))]">
     <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
