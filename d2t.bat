@@ -21,7 +21,7 @@ REM output directory
 
 REM script parameters
 @set JAVA=java
-@set CALABASH=calabash/calabash.bat
+@set CALABASH=%DIR%/calabash/calabash.bat
 
 REM convert backward slash to slash
 @set FILE=%FILE:\=/%
