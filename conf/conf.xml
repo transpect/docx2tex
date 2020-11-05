@@ -800,6 +800,56 @@
     </rule>
   </template>
   
+  <!-- static index -->
+  
+  <template context="dbk:index">
+    <xsl:variable name="index-path" select="concat($path, '/', $basename, '.ind')" as="xs:string"/>
+    <file href="{$index-path}" encoding="utf-8"/>
+  </template>
+  
+  <template context="dbk:index/node()">
+    <xsl:apply-templates mode="#current"/>
+  </template>
+
+  <template context="dbk:indexdiv">
+    <xsl:if test="not(preceding-sibling::dbk:indexdiv)">
+      <xsl:value-of select="string-join(('\begin{theindex}',
+                                         '  \providecommand*\lettergroupDefault[1]{}',
+                                         '  \providecommand*\lettergroup[1]{%',
+                                         '    \par\textbf{#1}\par',
+                                         '    \nopagebreak',
+                                         '  }'), 
+                                        '&#xa;')"/>
+    </xsl:if>
+    <xsl:value-of select="concat('&#xa;&#x20;&#x20;\indexspace&#xa;&#xa;&#x20;&#x20;\lettergroup{', dbk:title, '}\nopagebreak&#xa;&#xa;')"/>
+    <xsl:apply-templates select="dbk:indexentry" mode="#current"/>
+    <xsl:if test="not(following-sibling::dbk:indexdiv)">
+      <xsl:text>\end{theindex}</xsl:text>
+    </xsl:if>
+  </template>
+  
+  <template context="dbk:indexentry">
+    <xsl:text>&#x20;&#x20;</xsl:text>
+    <rule name="item" type="cmd" break-after="1">
+      <text>&#x20;</text>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:seeie">
+    <rule name="see" type="cmd" break-after="1">
+      <param/>
+      <param select="()"/>
+    </rule>
+  </template>
+  
+  <template context="dbk:primaryie/dbk:xref
+                    |dbk:seeie/dbk:xref">
+    <rule>
+      <text select="replace(@xlink:href, '^page-', '')"/>
+    </rule>
+  </template>
+
   <!-- index listing -->
   
   <template context="dbk:para[@role = ('Index_Heading', 'Indexberschrift')]"/>
