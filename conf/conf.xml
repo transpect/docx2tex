@@ -433,7 +433,7 @@
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5
+  <template context="dbk:phrase[(@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
                                 or exists(for $i in ./@role 
                                           return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
                                                                                      [xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
