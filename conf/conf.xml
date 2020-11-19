@@ -804,6 +804,9 @@
   
   <template context="dbk:index">
     <xsl:variable name="index-path" select="concat($path, '/', $basename, '.ind')" as="xs:string"/>
+    <xsl:if test="dbk:title">
+      <xsl:value-of select="concat('\renewcommand{\indexname}{', dbk:title, '}&#xa;')"/>
+    </xsl:if>
     <rule name="printindex" type="cmd" break-after="1"/>
     <file href="{$index-path}" encoding="utf-8"/>
   </template>
@@ -811,6 +814,8 @@
   <template context="dbk:index/node()">
     <xsl:apply-templates mode="#current"/>
   </template>
+  
+  <template context="dbk:index/dbk:title"/>
 
   <template context="dbk:indexdiv">
     <xsl:if test="not(preceding-sibling::dbk:indexdiv)">
