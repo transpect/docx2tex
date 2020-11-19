@@ -804,6 +804,7 @@
   
   <template context="dbk:index">
     <xsl:variable name="index-path" select="concat($path, '/', $basename, '.ind')" as="xs:string"/>
+    <rule name="printindex" type="cmd" break-after="1"/>
     <file href="{$index-path}" encoding="utf-8"/>
   </template>
   
