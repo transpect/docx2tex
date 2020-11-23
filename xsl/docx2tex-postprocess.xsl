@@ -72,6 +72,10 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
+  <xsl:template match="dbk:link[starts-with(@linkend, 'ZEqnNum')][dbk:link[starts-with(@linkend, 'ZEqnNum')]]" mode="docx2tex-postprocess">
+    <xsl:apply-templates select="dbk:link" mode="#current"/>
+  </xsl:template>
+  
   <!-- group adjacent equations and apply align environment -->
   
   <xsl:template match="*[count(equation) gt 1]" mode="docx2tex-postprocess">
