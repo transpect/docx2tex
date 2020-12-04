@@ -356,17 +356,6 @@
     </rule>
   </template>
   
-  <template context="dbk:phrase[not(@css:background-color eq '#FFFFFF')
-                                and (@css:background-color or exists(for $i in ./@role 
-                                                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]
-                               [not(.//dbk:footnote)]">
-    <rule name="colorbox" type="cmd">
-      <param select="for $i in (@css:background-color, for $j in @role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:background-color)[1] 
-                     return concat('color-', index-of(distinct-values($colors), $i))"/>
-      <param/>
-    </rule>
-  </template>
-  
   <template context="dbk:phrase[@css:font-weight eq 'normal']">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
@@ -456,6 +445,21 @@
     <xsl:text>\textsc{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
+  </template>
+
+
+  <template context="dbk:phrase[not(@css:background-color eq '#FFFFFF')
+                                and (@css:background-color or exists(for $i in ./@role 
+                                                                     return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name]
+                                                                                                                [@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]
+                               [not(.//dbk:footnote)]">
+    <rule name="colorbox" type="cmd">
+      <param select="for $i in (@css:background-color, for $j in @role return /dbk:hub/dbk:info/css:rules/css:rule[$j eq @name]/@css:background-color)[1] 
+                                                       return concat('color-', index-of(distinct-values($colors), $i))"/>
+      <xsl:text>{</xsl:text>
+      <xsl:next-match/>
+      <xsl:text>}</xsl:text>
+    </rule>
   </template>
 
   <!-- no formatting for phrases which contain math environments -->
