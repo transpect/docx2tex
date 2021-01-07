@@ -11,7 +11,7 @@
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
   
   <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
-  <xsl:variable name="basename" select="tr:basename(base-uri())" as="xs:string"/>
+  <xsl:variable name="basename" select="tr:basename(/dbk:hub/@xml:base)" as="xs:string"/>
   <xsl:variable name="colors" 
                 select="(//@css:background-color,
                          //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 35  
