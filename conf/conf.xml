@@ -594,9 +594,20 @@
   </template>
 
   <template context="dbk:footnote">
+    <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]
+                            /@xreflabel/concat('\renewcommand*{\thefootnote}{',
+                                                     if(matches(., '\*')) then '\fnsymbol'
+                                               else if(matches(., 'ivxlcdm')) then '\roman'
+                                               else if(matches(., 'IVXLCDM')) then '\Roman'
+                                               else if(matches(., '[a-z]')) then '\alph'
+                                               else if(matches(., '[A-Z]')) then '\Alph'
+                                               else if(matches(., '[\*†‡§]')) then '\fnsymbol'
+                                               else '\arabic',
+                                               '{footnote}}')"/>
     <rule name="footnote" type="cmd">
       <param/>
     </rule>
+    <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]/@xreflabel/'\renewcommand*{\thefootnote}{\arabic{footnote}}'"/>
   </template>
   
   <template context="dbk:informaltable//dbk:footnote
@@ -1114,7 +1125,7 @@
     <!-- *
          * Latin Extended-A
          * -->
-    
+
     <!--imath-->
     <char character="&#x131;" string="\i{}"/>
     <!--LATIN CAPITAL LETTER L WITH STROKE -->
