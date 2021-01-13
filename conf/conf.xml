@@ -1126,7 +1126,9 @@
          * Latin Extended-A
          * -->
 
-    <!--imath-->
+    <!--LATIN SMALL LETTER H WITH STROKE-->
+    <char character="&#x127;" string="\textcrh{}"/>
+    <!--LATIN SMALL LETTER DOTLESS I, imath-->
     <char character="&#x131;" string="\i{}"/>
     <!--LATIN CAPITAL LETTER L WITH STROKE -->
     <char character="&#x141;" string="\L{}"/>
