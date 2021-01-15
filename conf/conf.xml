@@ -779,6 +779,8 @@
     </rule>
   </template>
   
+  <template context="dbk:indexterm[not(normalize-space())]"/>
+  
   <template context="dbk:primary">
     <rule>
       <xsl:if test="@sortas">
