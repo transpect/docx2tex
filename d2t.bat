@@ -3,6 +3,7 @@
 REM command line parameters
 @set FILE=%~dpnx1
 @set CONF=%~dpnx2
+@set OUT_DIR=%~dpnx3
 
 IF [%FILE%] == [] GOTO usage
 
@@ -17,7 +18,7 @@ IF [%CONF%] == [] @set CONF=%DIR%/conf/conf.xml
 
 REM output directory
 @set sd=%~dp1
-@set OUT_DIR=%sd:\=/%
+IF [%OUT_DIR%] == [] @set OUT_DIR=%sd:\=/%
 
 REM script parameters
 @set JAVA=java
