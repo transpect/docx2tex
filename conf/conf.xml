@@ -98,10 +98,29 @@
     </rule>
   </template>
 
+  <template context="dbk:para[@css:text-align='center'
+                              or exists(for $i in ./@role 
+                                        return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-align eq 'center'])]
+                             [not(parent::dbk:entry)]">
+    <rule name="center" type="env" break-after="2">
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:para[@css:text-align='right'
+                              or exists(for $i in ./@role 
+                                        return /dbk:hub/dbk:info/css:rules/css:rule[$i eq @name][@css:text-align eq 'right'])]
+                             [not(parent::dbk:entry)]">
+    <rule name="flushright" type="env" break-after="2">
+      <text/>
+    </rule>
+  </template>
+
   <template context="dbk:para[@css:page-break-before='always']">
     <xsl:text>\pagebreak&#xa;</xsl:text>
     <xsl:next-match/>
   </template>
+    
   
   <!-- carriage returns -->
   
