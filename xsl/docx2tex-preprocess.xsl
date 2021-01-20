@@ -163,7 +163,11 @@
     <xsl:apply-templates select="*[position() gt 1]" mode="#current"/>
   </xsl:template>
   
-  <xsl:template match="blockquote[@role = 'hub:lists']" mode="docx2tex-preprocess">
+  <xsl:template match="blockquote[@role = ('hub:lists', 'hub:citation')]
+                                 [not(para/@role = ('Quote', 
+                                                    'IntenseQuote', 
+                                                    'Zitat', 
+                                                    'IntensivesZitat'))]" mode="docx2tex-preprocess">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
