@@ -1095,7 +1095,7 @@
     <!--COPYRIGHT -->
     <char character="&#xa9;" string="{\textcopyright}"/>
     <!-- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-    <char character="&#xab;" string="\guillemotleft{}"/>
+    <char character="&#xab;" string="&quot;&lt;"/>
     <!--= \lnot, NOT SIGN-->
     <char character="&#xac;" string="${\neg}$"/>
     <!--SOFT HYPHEN -->
@@ -1119,7 +1119,7 @@
     <!-- MASCULINE ORDINAL INDICATOR  ^{\circ} -->
     <char character="&#xba;" string="$^{\circ}$"/>
     <!-- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
-    <char character="&#xbb;" string="\guillemotright{}"/>    
+    <char character="&#xbb;" string="&quot;&gt;"/>    
     <!-- INVERTED QUESTION MARK -->
     <char character="&#xbf;" string="{\textquestiondown}"/>
     <!--LATIN CAPITAL LETTER A WITH RING ABOVE -->    
@@ -1131,7 +1131,7 @@
     <!--LATIN CAPITAL LETTER O WITH STROKE -->
     <char character="&#xd8;" string="\O{}"/>
     <!--LATIN SMALL LETTER SHARP S -->
-    <char character="&#xdf;" string="\ss{}"/>
+    <char character="&#xdf;" string="&quot;z"/>
     <!--LATIN SMALL LETTER A WITH RING ABOVE -->
     <char character="&#xe5;" string="\aa{}"/>
     <!--Latin Small Letter AE -->
@@ -1640,6 +1640,12 @@
     <char character="&#x201a;" string=","/>  
     <!--SINGLE HIGH-REVERSED-9 QUOTATION MARK -->
     <char character="&#x201b;" string="`"/>
+    <!--LEFT DOUBLE QUOTATION MARK-->
+    <char character="&#x201c;" string="``"/>
+    <!--RIGHT DOUBLE QUOTATION MARK-->
+    <char character="&#x201d;" string="''"/>
+    <!--DOUBLE LOW-9 QUOTATION MARK -->
+    <char character="&#x201e;" string="&quot;`"/>
     <!--DAGGER relation-->
     <char character="&#x2020;" string="${\dag}$"/>
     <!--DOUBLE DAGGER relation-->
