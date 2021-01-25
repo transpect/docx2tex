@@ -24,7 +24,7 @@
   <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex 1.5 --- ``Keep your distance and avoid spreading Word''
+  <preamble>% docx2tex 1.6 --- ``The last thing your Word file sees before the recycle bin.''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
