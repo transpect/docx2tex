@@ -46,13 +46,13 @@ d2t.bat myfile.docx
 
 #### Linux/Mac OSX
 ```
-calabash/calabash.sh -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx
+calabash/calabash.sh -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx conf=conf/conf.xml
 ```
 
 #### Windows
 
 ```
-calabash\calabash.bat -i conf=conf/conf.xml -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx
+calabash\calabash.bat -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl docx=myfile.docx conf=conf/conf.xml
 ```
 
 ## configure
