@@ -786,7 +786,49 @@
     </rule>
   </template>
   
-  <template context="dbk:secondary|dbk:tertiary|dbk:quaternary|dbk:quinary|dbk:senary|dbk:septenary|dbk:octonary|dbk:nonary|dbk:denary">
+  <template context="*[local-name() = ('primary', 
+                                       'secondary', 
+                                       'tertiary', 
+                                       'quaternary', 
+                                       'quinary', 
+                                       'senary', 
+                                       'septenary', 
+                                       'octonary', 
+                                       'nonary', 
+                                       'denary')]
+                      [@css:font-weight eq 'bold'
+                       or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
+    <xsl:text>\textbf{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="*[local-name() = ('primary', 
+                                       'secondary', 
+                                       'tertiary', 
+                                       'quaternary', 
+                                       'quinary', 
+                                       'senary', 
+                                       'septenary', 
+                                       'octonary', 
+                                       'nonary', 
+                                       'denary')]
+                      [@css:font-style eq 'italic'
+                       or exists(key('style', @role)[@css:font-style eq 'italic'])]">
+    <xsl:text>\textit{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="dbk:secondary
+                    |dbk:tertiary
+                    |dbk:quaternary
+                    |dbk:quinary
+                    |dbk:senary
+                    |dbk:septenary
+                    |dbk:octonary
+                    |dbk:nonary
+                    |dbk:denary">
     <rule>
       <text>!</text>
       <xsl:if test="@sortas">
