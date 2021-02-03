@@ -333,7 +333,7 @@
     <!--= \Delta (-slantedGreek), = \mathrm{\Delta}, capital delta, greek-->
     <char character="&#x394;" string="${\Updelta}$"/>
     <char character="&#x394;" string="$\boldsymbol{\Updelta}$" context="*[@css:font-weight eq 'bold']"/> 
-    <char character="&#x394;x" string="${\Delta}$" context="*[@css:font-style eq 'italic']"/>
+    <char character="&#x394;" string="${\Delta}$" context="*[@css:font-style eq 'italic']"/>
     <!-- GREEK CAPITAL LETTER EPSILON -->
     <char character="&#x395;" string="E"/>
     <!-- GREEK CAPITAL LETTER ZETA -->
