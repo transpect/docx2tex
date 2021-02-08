@@ -12,7 +12,7 @@ usage() {
     echo "   -p    generate PDF with pdflatex"
     echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
-    echo "   -t    use tabular instead of tabularx for tables"
+    echo "   -t    chosse table model (tabularx|tabular|htmltabs)"
     echo "   -l    suppress table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing"
     echo "   -d    debug mode"
@@ -55,7 +55,7 @@ REFS=yes
 DEBUG=no
 
 # specify options
-while getopts ":o:c:m:x:ptlrd" opt; do
+while getopts ":o:c:m:t:x:plrd" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -69,11 +69,11 @@ while getopts ":o:c:m:x:ptlrd" opt; do
 	x)
 	    CUSTOMXSL=${OPTARG}
 	    ;;
+        t)
+	    TABLEMODEL=${OPTARG}
+	    ;;
 	p)
 	    PDF=yes
-	    ;;
-	t)
-	    TABLEMODEL=tabular
 	    ;;
 	l)
 	    TABLEGRID=no
