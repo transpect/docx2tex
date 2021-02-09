@@ -250,7 +250,7 @@
   </template>
 
   <template context="dbk:figure/dbk:title|dbk:table/dbk:title">
-    <rule break-after="1" break-before="1" name="caption" type="cmd">
+    <rule break-before="1" name="caption" type="cmd">
       <param/>
     </rule>
   </template>
