@@ -12,10 +12,11 @@ usage() {
     echo "   -p    generate PDF with pdflatex"
     echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
-    echo "   -t    chosse table model (tabularx|tabular|htmltabs)"
+    echo "   -t    choose table model (tabularx|tabular|htmltabs)"
     echo "   -l    suppress table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing"
     echo "   -d    debug mode"
+    echo "   -h    heap (main memory) that Java is allowed to use (for ex., 4096m)"
     1>&2; exit 1;
 }
 # print out error step and exit code
@@ -55,7 +56,7 @@ REFS=yes
 DEBUG=no
 
 # specify options
-while getopts ":o:c:m:t:x:plrd" opt; do
+while getopts ":o:c:m:t:x:plrdh:" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -69,7 +70,7 @@ while getopts ":o:c:m:t:x:plrd" opt; do
 	x)
 	    CUSTOMXSL=${OPTARG}
 	    ;;
-        t)
+	t)
 	    TABLEMODEL=${OPTARG}
 	    ;;
 	p)
@@ -83,6 +84,9 @@ while getopts ":o:c:m:t:x:plrd" opt; do
 	    ;;
 	d)
 	    DEBUG=yes
+	    ;;
+	h)
+	    HEAP=${OPTARG}
 	    ;;
 	\?)
 	    echo "Invalid option: -$OPTARG" >&2
@@ -139,6 +143,12 @@ if [ -e "$LOG" ]; then
     rm "$LOG"
 fi
 
+# Java max. amount of main memory
+if [ -z $HEAP ]; then
+    HEAP=1400m
+fi
+
+
 # debugging
 DEBUG_DIR="$OUT_DIR/$BASENAME.debug"
 
@@ -184,11 +194,12 @@ if [ "$DEBUG" = "yes" ]; then
     echo "  table model: $TABLEMODEL"
     echo "  draw table grid lines: $TABLEGRID"
     echo "  custom xslt: $CUSTOMXSL"
+    echo "  Java heap: $HEAP"
     echo ""
 fi
 
 # docx2tex xproc pipeline
-$CALABASH \
+HEAP=$HEAP $CALABASH \
     -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
     -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
     "$DIR/xpl/docx2tex.xpl" \
