@@ -319,7 +319,31 @@
   
   <template context="dbk:listitem[not(parent::dbk:varlistentry)]">
     <rule name="item" type="cmd">
-      <xsl:if test="@override">
+      <text select="' '"/>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:orderedlist/dbk:listitem">
+    <xsl:variable name="level" select="count(ancestor::*:orderedlist|ancestor::*:itemizedlist)" as="xs:integer"/>
+    <xsl:variable name="level-roman" as="xs:string">
+      <xsl:number value="$level" format="i"/>
+    </xsl:variable>
+    <xsl:if test="@override
+                  and not(  tr:list-number-to-integer(@override, parent::*/@numeration) 
+                          - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                          = 1 )
+                  and position() ne 1">
+      <xsl:value-of select="concat('\setcounter{enum', $level-roman, '}{', 
+                                   xs:string(
+                                       preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                                     + tr:list-number-to-integer(@override, parent::*/@numeration)
+                                     - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                                     - 1), 
+                                   '}&#xa;')"/>
+    </xsl:if>
+    <rule name="item" type="cmd">
+      <xsl:if test="matches(@override, '[a-z0-9]\.([a-z0-9])+')">
         <option select="@override"/>
       </xsl:if>
       <text select="' '"/>
