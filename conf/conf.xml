@@ -1117,8 +1117,8 @@
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
-    <xsl:value-of select="concat('\begin{enumerate}[',
-                                 $list-type,']&#xa;',
+    <xsl:value-of select="concat('\begin{enumerate}[{',
+                                 $list-type,'}]&#xa;',
                                  if($start gt 0) 
                                  then concat('\setcounter{enum', $level-roman, '}{', $start, '}') 
                                  else ''
