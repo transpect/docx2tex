@@ -505,6 +505,11 @@
 
   <!-- regular superscript and subscripts -->
   
+  <xsl:template match="dbk:superscript//text()
+                      |dbk:subscript//text()" mode="escape-bad-chars">
+    <xsl:copy-of select="."/>
+  </xsl:template>
+  
   <template context="dbk:superscript[not(dbk:footnote)]
                     |dbk:subscript
                     |dbk:phrase[not(dbk:footnote)]
