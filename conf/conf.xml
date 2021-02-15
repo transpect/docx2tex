@@ -37,7 +37,9 @@
     \documentclass{scrbook}
     \usepackage[T1]{fontenc}
     \usepackage[utf8]{inputenc}
-    \usepackage{graphicx}
+    <xsl:if test="//dbk:imagedata">
+      <xsl:text>\usepackage{graphicx}&#xa;</xsl:text>
+    </xsl:if>
     \usepackage{hyperref}
     \usepackage{multirow}
     \usepackage{tabularx}
@@ -81,6 +83,7 @@
 
   <ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
   <ns prefix="css" uri="http://www.w3.org/1996/css"/>
+  <ns prefix="svg" uri="http://www.w3.org/2000/svg"/>
   <ns prefix="docx2tex" uri="http://transpect.io/docx2tex"/>
   <ns prefix="mml2tex" uri="http://transpect.io/mml2tex"/>
   <ns prefix="tr" uri="http://transpect.io"/>
@@ -270,6 +273,18 @@
       <option select="concat('width=', 1 div count(ancestor::*[dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')]),'\textwidth')"/>
       <param select="replace(@fileref, '([%#])', '\\$1')"/>
     </rule>
+  </template>
+  
+  <xsl:variable name="svg-images" as="element(svg:svg)*"
+                select="//svg:svg"/>
+  
+  <template context="svg:svg">
+    <xsl:variable name="svg-filename" select="concat($basename, '-svg-', index-of($svg-images, .), '.svg')" as="xs:string"/>
+    <xsl:variable name="svg-path" select="concat($path, '/', $svg-filename)" as="xs:string"/>
+    <rule name="includegraphics" type="cmd">
+      <param select="$svg-filename"/>
+    </rule>
+    <file href="{$svg-path}" encoding="utf-8" method="xml"/>
   </template>
   
   <!-- links -->
