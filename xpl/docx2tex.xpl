@@ -238,6 +238,8 @@
     <p:with-option name="docx" select="$docx"/>
     <p:with-option name="mml-space-handling" select="$mml-space-handling"/>
     <p:with-option name="mathtype2mml" select="$mtef-source"/>
+    <p:with-option name="discard-alternate-choices" select="'no'"/>
+    <p:with-option name="create-svg" select="'true'"/>
     <p:with-option name="lang-variant" select="'yes'"/>
     <p:with-option name="srcpaths" select="'no'"/>
     <p:with-option name="debug" select="$debug"/>
