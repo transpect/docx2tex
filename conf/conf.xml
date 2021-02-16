@@ -906,22 +906,24 @@
   
   <!-- static index -->
   
-  <template context="dbk:index">
+  <template context="dbk:index[.//dbk:indexentry]">
     <xsl:variable name="index-path" select="concat($path, '/', $basename, '.ind')" as="xs:string"/>
     <xsl:if test="dbk:title">
       <xsl:value-of select="concat('\renewcommand{\indexname}{', dbk:title, '}&#xa;')"/>
     </xsl:if>
-    <rule name="printindex" type="cmd" break-after="1"/>
+    <rule name="printindex" type="cmd" break-after="1">
+      <option select="@type"/>
+    </rule>
     <file href="{$index-path}" encoding="utf-8"/>
   </template>
   
-  <template context="dbk:index/node()">
+  <template context="dbk:index[.//dbk:indexentry]/node()">
     <xsl:apply-templates mode="#current"/>
   </template>
   
-  <template context="dbk:index/dbk:title"/>
+  <template context="dbk:index[.//dbk:indexentry]/dbk:title"/>
 
-  <template context="dbk:indexdiv">
+  <template context="dbk:index[.//dbk:indexentry]//dbk:indexdiv">
     <xsl:if test="not(preceding-sibling::dbk:indexdiv)">
       <xsl:value-of select="string-join(('\begin{theindex}',
                                          '  \providecommand*\lettergroupDefault[1]{}',
