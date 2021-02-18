@@ -963,8 +963,8 @@
     </rule>
   </template>
   
-  <template context="dbk:primaryie/dbk:xref
-                    |dbk:seeie/dbk:xref">
+  <template context="dbk:primaryie//dbk:xref
+                    |dbk:seeie//dbk:xref">
     <rule>
       <text select="replace(@xlink:href, '^page-', '')"/>
     </rule>
