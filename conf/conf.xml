@@ -904,14 +904,24 @@
     </rule>
   </template>
   
+  <template context="dbk:index[not(.//dbk:indexentry)]">
+    <rule name="printindex" type="cmd" break-after="1">
+      <option select="@remap"/>
+      <text select="concat('%%%', @remap)"/>
+    </rule>
+  </template>
+  
   <!-- static index -->
   
   <template context="dbk:index[.//dbk:indexentry]">
-    <xsl:variable name="index-path" select="concat($path, '/', $basename, '.ind')" as="xs:string"/>
-    <xsl:if test="dbk:title">
+    <xsl:variable name="index-path" as="xs:string"
+                  select="concat($path, '/', $basename, '.', @remap/concat(., '_'), 'ind')"/>
+    <xsl:if test="dbk:title and not(@remap)">
       <xsl:value-of select="concat('\renewcommand{\indexname}{', dbk:title, '}&#xa;')"/>
     </xsl:if>
-    <rule name="printindex" type="cmd" break-after="1"/>
+    <rule name="printindex" type="cmd" break-after="1">
+      <option select="@remap"/>
+    </rule>
     <file href="{$index-path}" encoding="utf-8"/>
   </template>
   
