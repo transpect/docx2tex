@@ -559,7 +559,7 @@
                     |dbk:phrase[not(dbk:footnote)]
                                [key('style', @role)[@remap = ('superscript', 'subscript')]]//text()">
     <rule>
-      <text select="mml2tex:utf2tex(replace(normalize-space(.), '\$', ''), (), $texmap)"/>
+      <text select="mml2tex:utf2tex(replace(normalize-space(.), '\$', ''), (), (), ())"/>
     </rule>
   </template>
   
