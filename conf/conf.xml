@@ -388,16 +388,19 @@
 
   <!-- text styles -->
   
-  <template context="dbk:phrase[@css:color]
-                               [not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
-                                    or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
-                                    or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
-                                    or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
-                                    or ancestor-or-self::dbk:link)
-                                and (@css:color 
-                                or exists(('style', @role)[@css:color 
-                                                           and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
-                                                                   satisfies $i &lt; 35) ]))]/text()">
+  <xsl:variable name="text-style-elements" select="'phrase', 'superscript', 'subscript'" as="xs:string+"/>
+  
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:color]
+                      [not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
+                           or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
+                           or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
+                           or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
+                           or ancestor-or-self::dbk:link)
+                       and (@css:color 
+                       or exists(('style', @role)[@css:color 
+                                                  and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
+                                                          satisfies $i &lt; 35) ]))]/text()">
     <rule name="textcolor" type="cmd">
       <param select="for $i in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
                      return concat('color-', 
@@ -416,88 +419,99 @@
     </rule>
   </template>
   
-  <template context="dbk:phrase[@css:font-weight eq 'normal']">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:font-weight eq 'normal']">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[@css:font-style eq 'normal']">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:font-style eq 'normal']">
     <xsl:text>\textup{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
   
-  <template context="dbk:phrase[@css:font-style eq 'italic' 
-                                or exists(key('style', @role)[@css:font-style eq 'italic'])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [   @css:font-style eq 'italic' 
+                       or exists(key('style', @role)[@css:font-style eq 'italic'])]">
     <xsl:text>\textit{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
   
-  <template context="dbk:phrase[@css:font-weight eq 'bold'
-                                or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [   @css:font-weight eq 'bold'
+                       or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
     <xsl:text>\textbf{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
   
-  <template context="dbk:phrase[@css:font-style eq 'italic' or @css:font-weight eq 'bold']
-                               [matches(., '^[&#x393;&#x394;&#x398;&#x39b;&#x39e;&#x3a0;&#x3a3;&#x3a5;&#x3a6;&#x3a8;-&#x3be;&#x3c0;-&#x3f6;]$')]">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:font-style eq 'italic' or @css:font-weight eq 'bold']
+                      [matches(., '^[&#x393;&#x394;&#x398;&#x39b;&#x39e;&#x3a0;&#x3a3;&#x3a5;&#x3a6;&#x3a8;-&#x3be;&#x3c0;-&#x3f6;]$')]">
     <rule>
       <text/>
     </rule>
   </template>
   
-  <template context="dbk:phrase[@css:font-family = ('Consolas', 'Courier New', 'Courier')
-                                or exists(key('style', @role)[@css:font-family = ('Consolas', 'Courier New', 'Courier')])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [   @css:font-family = ('Consolas', 'Courier New', 'Courier')
+                       or exists(key('style', @role)[@css:font-family = ('Consolas', 'Courier New', 'Courier')])]">
     <xsl:text>\texttt{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[@css:text-decoration-line ne 'none']
-                               [(@css:text-decoration-line[. eq 'underline'] 
-                                or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
-                                [not(@role eq 'Hyperlink')] 
-                                [not(parent::dbk:link)]
-                                [not(.//dbk:link)]">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:text-decoration-line ne 'none']
+                      [   (@css:text-decoration-line[. eq 'underline'] 
+                       or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
+                      [not(@role eq 'Hyperlink')] 
+                      [not(parent::dbk:link)]
+                      [not(.//dbk:link)]">
     <xsl:text>\ul{</xsl:text>
       <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[@css:text-decoration-line eq 'line-through'
-                                or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [   @css:text-decoration-line eq 'line-through'
+                       or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
     <xsl:text>\st{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[(@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
-                                or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
+                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
     <xsl:text>\so{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[@css:text-transform eq 'uppercase'
-                                or exists(key('style', @role)[@css:text-transform eq 'uppercase'])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:text-transform eq 'uppercase'
+                       or exists(key('style', @role)[@css:text-transform eq 'uppercase'])]">
     <xsl:text>\uppercase{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="dbk:phrase[@css:font-variant eq 'small-caps'
-                                or exists(key('style', @role)[@css:font-variant eq 'small-caps'])]">
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:font-variant eq 'small-caps'
+                       or exists(key('style', @role)[@css:font-variant eq 'small-caps'])]">
     <xsl:text>\textsc{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-
-  <template context="dbk:phrase[not(@css:background-color eq '#FFFFFF')
+  <template context="*[local-name() = $text-style-elements]
+                      [not(@css:background-color eq '#FFFFFF')
                                 and (@css:background-color 
                                 or exists(key('style', @role)[@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]
                                [not(.//dbk:footnote)]">
@@ -510,87 +524,22 @@
     </rule>
   </template>
 
-  <!-- no formatting for phrases which contain math environments -->
-  <template context="dbk:phrase[@css:font-style eq 'italic' or @css:font-weight eq 'bold']
-                               [starts-with(., '$') and ends-with(., '$')]">
-    <rule>
-      <text/>
-    </rule>
-  </template>
-
   <!-- regular superscript and subscripts -->
   
-  <xsl:template match="dbk:superscript//text()
-                      |dbk:subscript//text()" mode="escape-bad-chars">
-    <xsl:copy-of select="."/>
-  </xsl:template>
+  <template context="dbk:subscript
+                    |dbk:phrase[not(dbk:footnote)]
+                               [key('style', @role)[@remap eq 'subscript']]">
+    <xsl:text>\textsubscript{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
   
   <template context="dbk:superscript[not(dbk:footnote)]
-                    |dbk:subscript
                     |dbk:phrase[not(dbk:footnote)]
-                               [key('style', @role)[@remap = ('superscript', 'subscript')]]">
-    <rule mathmode="true">
-      <text select="concat(if(local-name() eq 'subscript'
-                              or exists(key('style', @role)[@remap = ('subscript')]))
-                           then '_'
-                           else '^',
-                           '{',
-                           if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$'))
-                             then ''
-                           else if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold')) 
-                             then '\mathrm{'
-                           else if(@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')) 
-                             then '\mathbf{'
-                           else if(@css:font-weight eq 'bold') 
-                             then '\mathbfit{'
-                           else '')"/>
-      <text/>
-      <text select="concat('}', 
-                          if(not(@css:font-style eq 'italic') and not(@css:font-weight eq 'bold') and matches(., '^[-\+&#x2212;\d\s{}]+$')) 
-                            then ''
-                          else if(not(@css:font-style eq 'italic') or @css:font-weight eq 'bold') 
-                            then '}' 
-                          else   ''  )"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript[not(dbk:footnote)]//text()
-                    |dbk:subscript//text()
-                    |dbk:phrase[not(dbk:footnote)]
-                               [key('style', @role)[@remap = ('superscript', 'subscript')]]//text()">
-    <rule>
-      <text select="mml2tex:utf2tex(replace(normalize-space(.), '\$', ''), (), (), ())"/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-style eq 'italic' and not(@css:font-weight eq 'bold')]
-                    |dbk:subscript//dbk:phrase[@css:font-style eq 'italic' and not(@css:font-weight eq 'bold')]
-                    |dbk:phrase[not(dbk:footnote)]
-                               [key('style', @role)[@remap = ('superscript', 'subscript')]]//dbk:phrase[@css:font-style eq 'italic' 
-                                                                                                        and not(@css:font-weight eq 'bold')]">
-    <rule name="mathit" type="cmd">
-      <param/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')]
-                    |dbk:subscript//dbk:phrase[@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')]
-                    |dbk:phrase[not(dbk:footnote)]
-                               [key('style', @role)[@remap = ('superscript', 'subscript')]]//dbk:phrase[@css:font-style eq 'italic' 
-                                                                                                        and not(@css:font-weight eq 'bold')]">
-    <rule name="mathbf" type="cmd">
-      <param/>
-    </rule>
-  </template>
-  
-  <template context="dbk:superscript[not(dbk:footnote)]//dbk:phrase[@css:font-weight eq 'bold' and @css:font-style eq 'italic']
-                    |dbk:subscript//dbk:phrase[@css:font-weight eq 'bold' and @css:font-style eq 'italic']
-                    |dbk:phrase[not(dbk:footnote)]
-                               [key('style', @role)[@remap = ('superscript', 'subscript')]]//dbk:phrase[@css:font-style eq 'italic' 
-                                                                                                        and @css:font-weight eq 'bold']">
-    <rule name="mathbfit" type="cmd">
-      <param/>
-    </rule>
+                               [key('style', @role)[@remap eq 'superscript']]">
+    <xsl:text>\textsuperscript{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
 
   <!-- headlines -->
