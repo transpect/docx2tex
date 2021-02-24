@@ -420,14 +420,27 @@
   </template>
   
   <template context="*[local-name() = $text-style-elements]
-                      [@css:font-weight eq 'normal']">
+                      [@css:font-weight eq 'normal']
+                      [   ancestor-or-self::*[local-name() = $text-style-elements]/(some $style in (@css:font-style, 
+                                                                                                    @css:font-weight, 
+                                                                                                    @css:font-variant)
+                                                                                    satisfies not($style eq 'normal'))
+                       or (some $role in ancestor-or-self::*[@role]/@role
+                       satisfies exists(key('style', @role)[(@css:font-style, 
+                                                             @css:font-weight, 
+                                                             @css:font-variant) != 'normal']))]
+                      
+                      ">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
   <template context="*[local-name() = $text-style-elements]
-                      [@css:font-style eq 'normal']">
+                      [@css:font-style eq 'normal']
+                      [   ancestor-or-self::*[local-name() = $text-style-elements]/@css:font-style = 'italic'
+                       or (some $role in ancestor-or-self::*[@role]/@role
+                           satisfies exists(key('style', @role)[@css:font-style eq 'italic']))]">
     <xsl:text>\textup{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
