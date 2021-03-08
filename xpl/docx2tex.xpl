@@ -36,7 +36,7 @@
   <p:serialization port="result" method="text" media-type="text/plain" encoding="utf8"/>
   
   <p:option name="conf" select="'../conf/conf.csv'">
-    <p:documentation>The input port expects either a xml2tex-mapping file 
+    <p:documentation>OS path or URI of either an xml2tex mapping file 
       or a csv configuration file.</p:documentation>
   </p:option>
   
@@ -118,7 +118,7 @@
   
   <p:option name="custom-font-maps-dir" required="false">
     <p:documentation>
-      Path to a directory containing fontmaps for docx2hub and mathtype-extension.
+      Path (file URI) to a directory containing fontmaps for docx2hub and the mathtype-extension.
     </p:documentation>
   </p:option>
   

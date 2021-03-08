@@ -1,18 +1,25 @@
 @echo off 
+@setlocal ENABLEDELAYEDEXPANSION
+REM The percent sign needs to be escaped in the first place, therefore %%20
+REM But when the arguments are passed to Calabash, each percent sign that they
+REM contain needs to be escaped again. Therefore %%%%20.
+@set escapedspace=%%%%20
 
 REM command line parameters
 @set FILE=%~dpnx1
 @set CONF=%~dpnx2
 @set OUT_DIR=%~dpnx3
 
-IF [%FILE%] == [] GOTO usage
+IF ["%FILE%"] == [] GOTO usage
 
 REM get basename
 @set BASENAME=%~n1
+@set BASENAME_FOR_URI=%BASENAME: =!escapedspace!%
 
 REM script directory
 @set sd=%~dp0
 @set DIR=%sd:\=/%
+@set DIR_URI=file:///%DIR: =!escapedspace!%
 
 IF [%CONF%] == [] @set CONF=%DIR%/conf/conf.xml
 
@@ -26,19 +33,24 @@ REM script parameters
 
 REM convert backward slash to slash
 @set FILE=%FILE:\=/%
+@set FILE_URI=file:///%FILE: =!escapedspace!%
 @set CONF=%CONF:\=/%
+@set CONF_URI=file:///%CONF: =!escapedspace!%
 @set OUT_DIR=%OUT_DIR:\=/%
+@set OUT_DIR_URI=file:///%OUT_DIR: =!escapedspace!%
 
 REM path to fontmaps dir
-@set FONTMAPS=file://%DIR%/fontmaps/
+@set FONTMAPS=%DIR_URI%/fontmaps/
 
 REM debugging
-@set DEBUGDIR_URI=file:/%OUT_DIR%/%BASENAME%.debug
+@set DEBUGDIR_URI=%OUT_DIR_URI%/%BASENAME_FOR_URI%.debug
 @set LOG=%OUT_DIR%%BASENAME%.log
+
+echo %LOG%
 
 REM start 
 echo starting docx2tex
-call %CALABASH% -o result=%OUT_DIR%/%BASENAME%.tex -o hub=%OUT_DIR%/%BASENAME%.xml %DIR%/xpl/docx2tex.xpl docx=%FILE% conf=%CONF% custom-font-maps-dir=%FONTMAPS% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>>%LOG% || GOTO exitonerror
+call "%CALABASH%" -o result=%OUT_DIR_URI%/%BASENAME_FOR_URI%.tex -o hub=%OUT_DIR_URI%/%BASENAME_FOR_URI%.xml %DIR_URI%/xpl/docx2tex.xpl docx=%FILE_URI% conf=%CONF_URI% custom-font-maps-dir=%FONTMAPS% debug=yes debug-dir-uri=%DEBUGDIR_URI% 2>&1 2>"%LOG%" || GOTO exitonerror
 
 goto finish
 
