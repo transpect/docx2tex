@@ -5,12 +5,17 @@ REM But when the arguments are passed to Calabash, each percent sign that they
 REM contain needs to be escaped again. Therefore %%%%20.
 @set escapedspace=%%%%20
 
+REM A note for Cygwin users who, for whatever reason, prefer to invoke
+REM this batch file instead of the Bash script d2t: If d2t.bat is in a
+REM directory with spaces in its path, you need to invoke it as
+REM cmd /c d2t.bat 'path to.docx'
+
 REM command line parameters
 @set FILE=%~dpnx1
 @set CONF=%~dpnx2
 @set OUT_DIR=%~dpnx3
 
-IF ["%FILE%"] == [] GOTO usage
+IF ["%FILE%"] == [""] GOTO usage
 
 REM get basename
 @set BASENAME=%~n1
@@ -45,8 +50,6 @@ REM path to fontmaps dir
 REM debugging
 @set DEBUGDIR_URI=%OUT_DIR_URI%/%BASENAME_FOR_URI%.debug
 @set LOG=%OUT_DIR%%BASENAME%.log
-
-echo %LOG%
 
 REM start 
 echo starting docx2tex
