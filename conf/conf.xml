@@ -601,6 +601,13 @@
   </template>
 
   <template context="dbk:footnote">
+    <xsl:variable name="pos" as="xs:integer" 
+                  select="index-of($footnotes, .)"/>
+    <xsl:variable name="preceding-regular-fn-count" as="xs:integer" 
+                  select="count(
+                                for $i in (1 to $pos) 
+                                return $footnotes[$i][not(.//dbk:phrase[@role eq 'hub:identifier'][1][@xreflabel])]
+                                )"/>
     <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]
                             /@xreflabel/concat('\renewcommand*{\thefootnote}{',
                                                      if(matches(., '\*')) then '\fnsymbol'
@@ -614,7 +621,12 @@
     <rule name="footnote" type="cmd">
       <param/>
     </rule>
-    <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]/@xreflabel/'\renewcommand*{\thefootnote}{\arabic{footnote}}'"/>
+    <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]/@xreflabel/concat(
+                                                                                        '\renewcommand*{\thefootnote}{\arabic{footnote}}',
+                                                                                        '\setcounter{footnote}{',
+                                                                                        xs:string($preceding-regular-fn-count),
+                                                                                        '}'
+                                                                                        )"/>
   </template>
   
   <template context="dbk:informaltable//dbk:footnote
