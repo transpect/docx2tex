@@ -655,7 +655,7 @@
     </rule>
   </template>
   
-  <template context="dbk:footnote/dbk:para[not(following-sibling::dbk:para)]">
+  <template context="dbk:footnote[count(*) eq 1]/dbk:para">
     <rule>
       <text/>
     </rule>
