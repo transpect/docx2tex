@@ -600,9 +600,12 @@
     </rule>
   </template>
 
+  <xsl:variable name="footnote-ids" as="xs:string*" 
+                select="for $i in $footnotes return generate-id($i)"/>
+
   <template context="dbk:footnote">
     <xsl:variable name="pos" as="xs:integer" 
-                  select="index-of($footnotes, .)"/>
+                  select="index-of($footnote-ids, generate-id())"/>
     <xsl:variable name="preceding-regular-fn-count" as="xs:integer" 
                   select="count(
                                 for $i in (1 to $pos) 
@@ -610,13 +613,13 @@
                                 )"/>
     <xsl:value-of select=".//dbk:phrase[@role eq 'hub:identifier'][1]
                             /@xreflabel/concat('\renewcommand*{\thefootnote}{',
-                                                     if(matches(., '\*')) then '\fnsymbol'
+                                                    if(matches(., '\*'))      then '\fnsymbol'
                                                else if(matches(., 'ivxlcdm')) then '\roman'
                                                else if(matches(., 'IVXLCDM')) then '\Roman'
-                                               else if(matches(., '[a-z]')) then '\alph'
-                                               else if(matches(., '[A-Z]')) then '\Alph'
+                                               else if(matches(., '[a-z]'))   then '\alph'
+                                               else if(matches(., '[A-Z]'))   then '\Alph'
                                                else if(matches(., '[\*†‡§]')) then '\fnsymbol'
-                                               else '\arabic',
+                                               else                                '\arabic',
                                                '{footnote}}')"/>
     <rule name="footnote" type="cmd">
       <param/>
