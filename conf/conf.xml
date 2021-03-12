@@ -332,8 +332,24 @@
     </rule>
   </template>
   
-  <template context="dbk:listitem[not(parent::dbk:varlistentry)]">
+  <template context="dbk:listitem[not(parent::dbk:varlistentry)][empty(@override)]">
     <rule name="item" type="cmd">
+      <text select="' '"/>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:listitem[@override][not(parent::dbk:varlistentry)]">
+    <rule name="item" type="cmd">
+      <option select="@override "/>
+      <text select="' '"/>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:itemizedlist[@mark = 'bullet']/dbk:listitem[empty(@override)]">
+    <rule name="item" type="cmd">
+      <option>\textbullet</option>
       <text select="' '"/>
       <text/>
     </rule>
