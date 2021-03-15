@@ -66,6 +66,10 @@
     \usepackage{tensor}
     \usepackage{pifont}
     \usepackage{ulem}
+    <xsl:if test="//*[   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
+                      or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+      <xsl:text>\usepackage{soul}&#xa;</xsl:text>
+    </xsl:if>
     \usepackage{arydshln}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
@@ -407,6 +411,14 @@
   <xsl:variable name="text-style-elements" select="'phrase', 'superscript', 'subscript'" as="xs:string+"/>
   
   <template context="*[local-name() = $text-style-elements]
+                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
+                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+    <xsl:text>\so{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="*[local-name() = $text-style-elements]
                       [@css:color]
                       [not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
                            or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
@@ -417,22 +429,23 @@
                        or exists(('style', @role)[@css:color 
                                                   and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
                                                           satisfies $i &lt; 35) ]))]/text()">
-    <rule name="textcolor" type="cmd">
-      <param select="for $i in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
-                     return concat('color-', 
-                                   index-of(distinct-values((//@css:background-color,
-                                                             //@css:color[not(every $i in tr:hex-rgb-color-to-ints(.) 
-                                                                              satisfies $i &lt; 35
-                                                                              or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
-                                                                              or ancestor-or-self::dbk:link
-                                                                              or parent::*[@native-name eq 'Hyperlink']
-                                                                              )
-                                                                         ]
-                                                             )),
-                                            $i)
-                                   )"/>
-      <param/>
-    </rule>
+    <xsl:text>\textcolor{</xsl:text>
+    <xsl:value-of select="for $i in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
+                          return concat('color-', 
+                                        index-of(distinct-values((//@css:background-color,
+                                                                  //@css:color[not(every $i in tr:hex-rgb-color-to-ints(.) 
+                                                                                   satisfies $i &lt; 35
+                                                                                   or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
+                                                                                   or ancestor-or-self::dbk:link
+                                                                                   or parent::*[@native-name eq 'Hyperlink']
+                                                                                   )
+                                                                              ]
+                                                                  )),
+                                                 $i)
+                                        )"/>
+    <xsl:text>}{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="*[local-name() = $text-style-elements]
@@ -514,14 +527,6 @@
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
-
-  <!--<template context="*[local-name() = $text-style-elements]
-                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
-                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
-    <xsl:text>\so{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>-->
 
   <template context="*[local-name() = $text-style-elements]
                       [@css:text-transform eq 'uppercase'
