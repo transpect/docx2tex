@@ -65,7 +65,7 @@
     \usepackage{enumerate}
     \usepackage{tensor}
     \usepackage{pifont}
-    \usepackage{soul}
+    \usepackage{ulem}
     \usepackage{arydshln}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
@@ -502,7 +502,7 @@
                       [not(@role eq 'Hyperlink')] 
                       [not(parent::dbk:link)]
                       [not(.//dbk:link)]">
-    <xsl:text>\ul{</xsl:text>
+    <xsl:text>\uline{</xsl:text>
       <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
@@ -510,18 +510,18 @@
   <template context="*[local-name() = $text-style-elements]
                       [   @css:text-decoration-line eq 'line-through'
                        or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
-    <xsl:text>\st{</xsl:text>
+    <xsl:text>\sout{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
 
-  <template context="*[local-name() = $text-style-elements]
+  <!--<template context="*[local-name() = $text-style-elements]
                       [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
                        or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
     <xsl:text>\so{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
-  </template>
+  </template>-->
 
   <template context="*[local-name() = $text-style-elements]
                       [@css:text-transform eq 'uppercase'
