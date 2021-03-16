@@ -66,8 +66,7 @@
     \usepackage{tensor}
     \usepackage{pifont}
     \usepackage{ulem}
-    <xsl:if test="//*[   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
-                      or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+    <xsl:if test="//*[@css:letter-spacing or exists(key('style', @role))]">
       <xsl:text>\usepackage{soul}&#xa;</xsl:text>
     </xsl:if>
     \usepackage{arydshln}
