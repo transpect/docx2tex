@@ -230,7 +230,7 @@
       <text select="if(starts-with((parent::*/@css:top, key('style', parent::*/@role)/@css:top)[1], '-'))
                     then concat('\raisebox{', replace((parent::*/@css:top, key('style', parent::*/@role)/@css:top)[1], '^-', ''), '}')
                     else concat('\raisebox{-', (parent::*/@css:top, key('style', parent::*/@role)/@css:top)[1], '}')"/>
-      <param select="xml2tex:utf2tex(.., ., $charmap, (), $texregex)"/>
+      <param/>
     </rule>
   </template>
   
