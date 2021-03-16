@@ -350,14 +350,6 @@
     </rule>
   </template>
   
-  <template context="dbk:itemizedlist[@mark = 'bullet']/dbk:listitem[empty(@override)]">
-    <rule name="item" type="cmd">
-      <option>\textbullet</option>
-      <text select="' '"/>
-      <text/>
-    </rule>
-  </template>
-  
   <template context="dbk:orderedlist/dbk:listitem">
     <xsl:variable name="level" select="count(ancestor::*:orderedlist|ancestor::*:itemizedlist)" as="xs:integer"/>
     <xsl:variable name="level-roman" as="xs:string">
