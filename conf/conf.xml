@@ -996,7 +996,6 @@
   <!-- babel support -->
   
   <template context="dbk:phrase[@xml:lang]
-                               [@xml:lang ne $langs[1]]
                                [normalize-space(.)]
                                [xml2tex:lang-to-babel-lang(@xml:lang)]
                                [not(ancestor::dbk:entry or self::dbk:term or self::dbk:listitem)]
