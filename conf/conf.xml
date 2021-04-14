@@ -1045,15 +1045,15 @@
     </rule>  
   </template>
   
-  <template context="dbk:bibliography[@role eq 'Citavi']">
-    <xsl:variable name="bibtex-path" select="concat($path, '/', $basename, '-citavi.bib')" as="xs:string"/>
+  <template context="dbk:bibliography">
+    <xsl:variable name="bibtex-path" select="concat($path, '/', $basename, '-bibtex.bib')" as="xs:string"/>
     <rule name="bibliography" type="cmd" break-after="2" break-before="2">
-      <param select="concat($basename, '-citavi')"/>
+      <param select="concat($basename, '-bibtex')"/>
     </rule>
     <file href="{$bibtex-path}" encoding="utf-8"/>
   </template>
   
-  <template context="dbk:bibliography[@role eq 'Citavi']/dbk:biblioentry">
+  <template context="dbk:bibliography/dbk:biblioentry">
     <xsl:variable name="main-set" as="element(dbk:biblioset)"
                   select="(dbk:biblioset[@relation eq 'article'], dbk:biblioset[@relation eq 'inproceedings'], dbk:biblioset)[1]"/>
     <xsl:value-of select="concat('@', 
