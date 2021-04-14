@@ -2841,11 +2841,11 @@
     <!--WHITE LARGE SQUARE-->
     <char character="&#x2b1c;" string="${\square}$"/>
     <!-- BLACK VERY SMALL SQUARE -->
-    <char character="&#x2b1d;" string="${\blacksquare}"/>
+    <char character="&#x2b1d;" string="${\blacksquare}$"/>
     <!-- BLACK MEDIUM LOZENGE -->
-    <char character="&#x2b27;" string="${\blacklozenge}"/>
+    <char character="&#x2b27;" string="${\blacklozenge}$"/>
     <!-- WHITE MEDIUM LOZENGE -->
-    <char character="&#x2b28;" string="${\lozenge}"/>
+    <char character="&#x2b28;" string="${\lozenge}$"/>
 
     <!-- *
          * Symbols, Other
