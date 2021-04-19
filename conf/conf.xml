@@ -98,8 +98,7 @@
   
   <!-- regular paras -->
 
-  <template context="dbk:para[not(parent::dbk:entry)]
-                             [not(parent::*:td)]
+  <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td')])]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
@@ -114,7 +113,7 @@
 
   <template context="dbk:para[@css:text-align='center'
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
-                             [not(parent::dbk:entry)]">
+                             [not(parent::*[local-name() = ('entry', 'th', 'td')])]">
     <rule name="center" type="env" break-after="2">
       <text/>
     </rule>
@@ -122,7 +121,7 @@
   
   <template context="dbk:para[@css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
-                             [not(parent::dbk:entry)]">
+                             [not(parent::*[local-name() = ('entry', 'th', 'td')])]">
     <rule name="flushright" type="env" break-after="2">
       <text/>
     </rule>
@@ -205,7 +204,7 @@
     <rule name="textbf" type="cmd">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::dbk:entry">
+        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')]">
           <xsl:text>\par&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(parent::dbk:footnote)">
