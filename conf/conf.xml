@@ -182,6 +182,26 @@
     </rule>
   </template>
   
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:text-decoration-line ne 'none']
+                      [   (@css:text-decoration-line[. eq 'underline'] 
+                       or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
+    [not(@role eq 'Hyperlink')] 
+    [not(parent::dbk:link)]
+    [not(.//dbk:link)]">
+    <xsl:text>\uline{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="*[local-name() = $text-style-elements]
+                      [   @css:text-decoration-line eq 'line-through'
+                       or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
+    <xsl:text>\sout{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
   <template context="dbk:para[not(@css:font-style eq 'normal')]
                              [@css:font-style eq 'italic'
                               or exists(key('style', @role)[@css:font-style eq 'italic'])]">
@@ -495,26 +515,6 @@
                       [   @css:font-family = ('Consolas', 'Courier New', 'Courier')
                        or exists(key('style', @role)[@css:font-family = ('Consolas', 'Courier New', 'Courier')])]">
     <xsl:text>\texttt{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
-
-  <template context="*[local-name() = $text-style-elements]
-                      [@css:text-decoration-line ne 'none']
-                      [   (@css:text-decoration-line[. eq 'underline'] 
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
-                      [not(@role eq 'Hyperlink')] 
-                      [not(parent::dbk:link)]
-                      [not(.//dbk:link)]">
-    <xsl:text>\uline{</xsl:text>
-      <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
-
-  <template context="*[local-name() = $text-style-elements]
-                      [   @css:text-decoration-line eq 'line-through'
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
-    <xsl:text>\sout{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
