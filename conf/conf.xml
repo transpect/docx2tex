@@ -181,14 +181,24 @@
 </text>  
     </rule>
   </template>
+
+  <xsl:variable name="text-style-elements" select="'phrase', 'superscript', 'subscript'" as="xs:string+"/>
+
+  <template context="*[local-name() = $text-style-elements]
+                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
+                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+    <xsl:text>\so{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
   
   <template context="*[local-name() = $text-style-elements]
                       [@css:text-decoration-line ne 'none']
                       [   (@css:text-decoration-line[. eq 'underline'] 
                        or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
-    [not(@role eq 'Hyperlink')] 
-    [not(parent::dbk:link)]
-    [not(.//dbk:link)]">
+		      [not(@role eq 'Hyperlink')] 
+		      [not(parent::dbk:link)]
+		      [not(.//dbk:link)]">
     <xsl:text>\uline{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
@@ -418,36 +428,6 @@
   <template context="dbk:term/node()[1][self::dbk:tabs or self::dbk:tab]"/>
 
   <!-- text styles -->
-  
-  <xsl:variable name="text-style-elements" select="'phrase', 'superscript', 'subscript'" as="xs:string+"/>
-  
-  <template context="*[local-name() = $text-style-elements]
-                      [@css:text-decoration-line ne 'none']
-                      [   (@css:text-decoration-line[. eq 'underline'] 
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
-                      [not(@role eq 'Hyperlink')] 
-                      [not(parent::dbk:link)]
-                      [not(.//dbk:link)]">
-    <xsl:text>\uline{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
-  
-  <template context="*[local-name() = $text-style-elements]
-                      [   @css:text-decoration-line eq 'line-through'
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
-    <xsl:text>\sout{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
-  
-  <template context="*[local-name() = $text-style-elements]
-                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
-                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
-    <xsl:text>\so{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
   
   <template context="*[local-name() = $text-style-elements]
                       [@css:color]
