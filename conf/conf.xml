@@ -1064,7 +1064,7 @@
                                  else 'misc', 
                                  '{',
                                  @xml:id,
-                                 '&#xa;')"/>
+                                 ',&#xa;')"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:text>}&#xa;</xsl:text>
   </template>
