@@ -1062,8 +1062,9 @@
                                    then 'misc'
                                  else if($main-set/@relation) then $main-set/@relation
                                  else 'misc', 
-                                 '{')"/>
-    <xsl:value-of select="concat(@xml:id, ',&#xa;')"/>
+                                 '{',
+                                 @xml:id,
+                                 '&#xa;')"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:text>}&#xa;</xsl:text>
   </template>
