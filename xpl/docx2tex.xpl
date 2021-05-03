@@ -221,7 +221,7 @@
         * load xml2tex config or generate one from CSV plain text file
         * --> 
   
-  <docx2tex:load-config name="load-config">
+  <docx2tex:load-config name="load-config" collect-all-xsl="yes">
     <p:with-option name="conf" select="$conf"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
