@@ -997,6 +997,7 @@
   <template context="dbk:phrase[@xml:lang]
                                [normalize-space(.)]
                                [xml2tex:lang-to-babel-lang(@xml:lang)]
+                               [not(parent::dbk:link)]
                                [not(ancestor::dbk:entry or self::dbk:term or self::dbk:listitem)]
                                [not((*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
                                     and 
