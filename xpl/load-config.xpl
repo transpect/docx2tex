@@ -16,6 +16,7 @@
 
   <p:option name="conf" required="true"/>
   <p:option name="fail-on-error" select="'no'"/>
+  <p:option name="collect-all-xsl" select="'no'"/>
   <p:option name="debug" select="'no'"/>
   <p:option name="debug-dir-uri" select="'debug'"/>
   <p:option name="status-dir-uri" select="'status'"/>
@@ -33,6 +34,7 @@
         <p:input port="source">
           <p:empty/>
         </p:input>
+        <p:with-option name="collect-all-xsl" select="$collect-all-xsl"/>
         <p:with-option name="href" select="$conf"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
       </xml2tex:load-config>
