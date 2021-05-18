@@ -177,7 +177,7 @@
   <template context="dbk:entry//dbk:br[every $precedent in ancestor::dbk:para[1]//node()[. &lt;&lt; current()] 
                                        satisfies (not(normalize-space($precedent)))]">
     <rule>
-      <text>\leavemode\newline
+      <text>\leavevmode\newline
 </text>  
     </rule>
   </template>
