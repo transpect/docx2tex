@@ -220,25 +220,29 @@
     </para>
   </xsl:template>
     
-  <!-- move leading and trailing whitespace out of phrase #13913 -->
+  <!-- move leading and trailing whitespace out of phrase #13913 doesn't work well with nested phrases -->
   
-  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')] (: leading or trailing whitespace :)
+  <xsl:template match="text()[parent::phrase]
+                             [(matches(., '^(\s+).+') and ../node()[1][self::text()]) or (matches(., '.+(\s+)$') and ../node()[last()][self::text()])] (: leading or trailing whitespace :)
                              [string-length(normalize-space(.)) gt 0]
-                             [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
-                              not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
+                             [not(following-sibling::node()[1][not(matches(., '^\s'))]) and 
+                              not(preceding-sibling::node()[1][not(matches(., '\s$'))])]
                              [not(parent::phrase/@xml:space eq 'preserve')]
 			     [not(following-sibling::*[1][self::*:inlineequation])]" mode="docx2tex-preprocess">
-    <xsl:value-of select="normalize-space(.)"/>
+    <xsl:param name="spaced" as="xs:boolean?" tunnel="no"/>
+    <xsl:value-of select="if ($spaced) then normalize-space(.) else ."/>
   </xsl:template>
-  
-  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess">
-    <xsl:if test="matches(., '^\s+')">
+
+  <xsl:template match="phrase[matches(., '^(\s+).+|.+(\s+)$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess" priority="5">
+    <xsl:if test="matches(., '^\s+') and node()[1][self::text()]">
       <xsl:value-of select="replace(., '^(\s+).+', '$1')"/>
     </xsl:if>
     <xsl:copy>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:apply-templates select="@*, node()" mode="#current">
+        <xsl:with-param name="spaced" select="true()" tunnel="no" as="xs:boolean"/>
+      </xsl:apply-templates>
     </xsl:copy>
-    <xsl:if test="matches(., '\s+$')">
+    <xsl:if test="matches(., '\s+$') and node()[last()][self::text()]">
       <xsl:value-of select="replace(., '.+(\s+)$', '$1')"/>
     </xsl:if>
   </xsl:template>
