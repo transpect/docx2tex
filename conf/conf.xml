@@ -280,8 +280,9 @@
 
   <!-- tables and figures -->
 
-  <template context="dbk:table|dbk:informaltable">
-    <rule name="table" type="env" break-after="0">
+  <template context="dbk:table
+                    |dbk:informaltable">
+    <rule name="table" type="env">
       <text/>
     </rule>
   </template>
@@ -713,6 +714,7 @@
   <template context="dbk:equation[@condition eq 'numbered']
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation" type="env">
+      <text>&#xa;</text>
       <text/>
     </rule>
   </template>
@@ -720,6 +722,7 @@
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <rule name="equation*" type="env">
+      <text>&#xa;</text>
       <text/>
     </rule>
   </template>
@@ -728,6 +731,7 @@
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
     <rule name="align" type="env">
+      <text>&#xa;</text>
       <text/>
     </rule>
   </template>
@@ -737,6 +741,7 @@
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
     <rule name="align*" type="env">
+      <text>&#xa;</text>
       <text/>
     </rule>
   </template>
