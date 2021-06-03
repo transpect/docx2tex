@@ -99,6 +99,7 @@
   <!-- regular paras -->
 
   <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td')])]
+                             [not(parent::dbk:listitem and not(following-sibling::*[1]))]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
@@ -366,14 +367,14 @@
   </template>
   
   <template context="dbk:listitem[not(parent::dbk:varlistentry)][empty(@override)]">
-    <rule name="item" type="cmd">
+    <rule name="item" type="cmd" break-before="1">
       <text select="' '"/>
       <text/>
     </rule>
   </template>
   
   <template context="dbk:listitem[@override][not(parent::dbk:varlistentry)]">
-    <rule name="item" type="cmd">
+    <rule name="item" type="cmd" break-before="1">
       <option select="@override "/>
       <text select="' '"/>
       <text/>
@@ -398,7 +399,7 @@
                                      - 1), 
                                    '}&#xa;')"/>
     </xsl:if>
-    <rule name="item" type="cmd">
+    <rule name="item" type="cmd" break-before="1">
       <xsl:if test="matches(@override, '[a-z0-9]\.([a-z0-9])+')">
         <option select="@override"/>
       </xsl:if>
@@ -412,13 +413,13 @@
   <!-- variable list -->
   
   <template context="dbk:variablelist">
-    <rule name="description" type="env" break-after="2">
+    <rule name="description" type="env">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:term[parent::dbk:varlistentry]">
-    <rule name="item" type="cmd">
+    <rule name="item" type="cmd" break-before="1">
       <option/>
     </rule>
   </template>
@@ -1148,15 +1149,13 @@
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
     <xsl:value-of select="concat('\begin{enumerate}[{',
-                                 $list-type,'}]&#xa;',
+                                 $list-type,'}]',
                                  if($start gt 0) 
-                                 then concat('\setcounter{enum', $level-roman, '}{', $start, '}') 
+                                 then concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}') 
                                  else ''
                                  )"/>
-    <xsl:text>&#xa;&#xa;</xsl:text>
     <xsl:apply-templates mode="#current"/>
-    <xsl:value-of select="'\end{enumerate}'"/>
-    <xsl:text>&#xa;</xsl:text>
+    <xsl:value-of select="'&#xa;\end{enumerate}&#xa;'"/>
   </template>
 
   <xsl:function name="tr:enumerate-list-type" as="xs:string">
