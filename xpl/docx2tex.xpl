@@ -21,6 +21,8 @@
       Provide a custom evolve-hub driver stylesheet if you like. I would strongly advise to 
       import the standard evolve-hub-driver in ../xsl/evolve-hub-driver.xsl as it brings many 
       improvements for the subsequent processing.
+      There is a sample customization, xsl/custom-evolve-hub-driver-example.xsl, that treats
+      every empty paragraph as a Heading1, that is, a \chapter{} in the generated LaTeX file.
     </p:documentation>
   </p:input>
 
@@ -296,10 +298,13 @@
         * -->
   <p:choose name="custom-xsl">
     <p:when test="$custom-xsl ne ''">
+      <tr:file-uri name="custom-xsl-uri">
+        <p:with-option name="filename" select="$custom-xsl"/>
+      </tr:file-uri>
       <p:load name="load-custom-xsl">
-        <p:with-option name="href" select="$custom-xsl"/>
+        <p:with-option name="href" select="/*/@local-href"/>
       </p:load>
-      <p:xslt>
+      <p:xslt name="apply-custom-xsl">
         <p:input port="parameters">
           <p:empty/>
         </p:input>

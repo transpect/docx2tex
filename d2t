@@ -14,7 +14,8 @@ usage() {
     echo "   -r    omit page and cross-references and labels"
     echo "   -t    choose table model (tabularx|tabular|htmltabs)"
     echo "   -l    suppress table grid lines"
-    echo "   -x    custom XSLT stylesheet for Hub processing"
+    echo "   -x    custom XSLT stylesheet for Hub processing (after evolve-hub)"
+    echo "   -e    custom XSLT stylesheet for evolve-hub (should import xsl/evolve-hub-driver.xsl)"
     echo "   -d    debug mode"
     echo "   -h    heap (main memory) that Java is allowed to use (for ex., 4096m)"
     1>&2; exit 1;
@@ -56,7 +57,7 @@ REFS=yes
 DEBUG=no
 
 # specify options
-while getopts ":o:c:m:t:x:plrdh:" opt; do
+while getopts ":o:c:m:t:x:e:plrdh:" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -69,6 +70,9 @@ while getopts ":o:c:m:t:x:plrdh:" opt; do
             ;;
 	x)
 	    CUSTOMXSL=${OPTARG}
+	    ;;
+	e)
+	    CUSTOMDRIVER=${OPTARG}
 	    ;;
 	t)
 	    TABLEMODEL=${OPTARG}
@@ -102,6 +106,11 @@ shift $((OPTIND-1))
 # check if argument for file is set
 if [ -z "$1" ]; then
     usage
+fi
+
+# custom evolve-hub driver given (as URI, may also be relative to this directory)
+if ! [ -z "$CUSTOMDRIVER" ]; then
+    INPUTCUSTOMDRIVER="-i custom-evolve-hub-driver=$CUSTOMDRIVER"
 fi
 
 # file as 1st argument
@@ -193,6 +202,7 @@ if [ "$DEBUG" = "yes" ]; then
     echo "  refs and labels: $REFS"
     echo "  table model: $TABLEMODEL"
     echo "  draw table grid lines: $TABLEGRID"
+    echo "  custom evolve-hub: $INPUTCUSTOMDRIVER"
     echo "  custom xslt: $CUSTOMXSL"
     echo "  Java heap: $HEAP"
     echo ""
@@ -200,6 +210,7 @@ fi
 
 # docx2tex xproc pipeline
 HEAP=$HEAP $CALABASH \
+    $INPUTCUSTOMDRIVER \
     -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
     -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
     "$DIR/xpl/docx2tex.xpl" \
