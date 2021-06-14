@@ -1,7 +1,7 @@
 [![Current Release](https://img.shields.io/github/release/transpect/docx2tex.svg)](https://github.com/transpect/docx2tex/releases/latest) [![Github All Releases Downloads](https://img.shields.io/github/downloads/transpect/docx2tex/total.svg)](https://github.com/transpect/docx2tex/releases/)
 
 # docx2tex
-Converts Microsoft Word's DOCX to LaTeX. Developed by [le-tex](https://www.le-tex.de/en/company.html) and based on the [transpect framework](http://transpect.io).
+Converts Microsoft Word's DOCX to LaTeX. Developed by [le-tex](https://www.le-tex.de/en/company.html) and based on the [transpect framework](http://transpect.io). The main author of docx2tex and the underlying xml2tex is [@mkraetke](https://github.com/mkraetke).
 
 ## get docx2tex
 
@@ -14,11 +14,11 @@ git clone https://github.com/transpect/docx2tex --recursive
 ```
 
 ## requirements
-* Java 1.7 up to 1.14 (more recent versions not yet tested)
+* Java 1.7 up to 1.15 (more recent versions not yet tested). Java 11 has a bug with file URIs, it should be avoided. Java 13 is safe again.
 * works on Windows, Linux and Mac OS X
 
 ## run docx2tex
-You can run docx2tex with a bash script (Linux, Mac OSX, Cygwin) or the calabash shell (Windows) script
+You can run docx2tex with a Bash script (Linux, Mac OSX, Cygwin) or the Windows batch script whose options are somewhat limited, compared to the Bash script.
 
 ### Linux/MacOSX
 ```
@@ -33,7 +33,8 @@ Option  | Description
  -f     | path to custom fontmaps directory
  -p     | generate PDF with pdflatex
  -t     | draw table grid lines
- -x     | custom XSLT stylesheet for Hub processing
+ -e     | custom XSLT stylesheet for evolve-hub overrides
+ -x     | custom XSLT stylesheet for postprocessing the evolve-hub results
  -d     | debug mode
 
 
@@ -56,6 +57,16 @@ calabash\calabash.bat -o result=myfile.tex -o hub=myfile.xml xpl/docx2tex.xpl do
 ```
 
 ## configure
+
+The [docx2tex pipeline](https://github.com/transpect/docx2tex/blob/master/xpl/docx2tex.xpl) consists of 3 macroscopic steps:
+
+* [docx2hub](https://github.com/transpect/docx2hub). This step is hardly configurable. It transforms a docx file to a [Hub XML](https://github.com/le-tex/Hub) representation.
+* [evolve-hub](https://github.com/transpect/evolve-hub/). This is a bag of XSLT modes that, among other things, transform paragraphs with list markers and hanging indentation to proper nested lists, create a nested section hierarchy, group images with their figure titles, etc. Only some of the modes are used by docx2tex, orchestrated by [evolve-hub.xpl](https://github.com/transpect/docx2tex/blob/master/xpl/evolve-hub.xpl) and configured in detail by [evolve-hub-driver.xsl](https://github.com/transpect/docx2tex/blob/master/xsl/evolve-hub-driver.xsl).
+* [xml2tex](https://github.com/transpect/xml2tex)
+
+There are five  major hooks for adding your own processing: CSV or xml2tex configuration; XSLT that is applied between evolve-hub and xml2tex; XSLT that modifies what happens in evolve-hub; fontmaps.
+
+----
 
 You can specify a custom configuration file for docx2tex. There are two different formats to write a configuration.
 
@@ -88,6 +99,14 @@ docx2tex can also be configured by means of an xml2tex configuration file. docx2
 The configuration in conf/conf.xml is used by default and works with the styles defined in Microsoft Word's normal.dot. If you want to configure docx2tex for other styles, you can edit this file or pass a custom configuration file with the `conf` option.
 
 Learn how to edit this file [here](https://github.com/transpect/xml2tex).
+
+### XSLT between evolve-hub and xml2tex
+
+You can provide an XSLT that works on the result of evolve-hub (if debugging is enabled, on the file [basename].debug/evolve-hub/70.docx2tex-postprocess.xml). The location of this XSLT file (absolute URI or path relative to the main directory that `d2t` and `d2t.bat` reside in) may be provided to `d2t` via the `-x` option. `d2t.bat` does not have all the flags; if you are confined to Windows and don’t have Cygwin, WSL, or MinGW, you may invoke `calabash/calabash.bat` yourself, see above. The additional XSLT’s URI may be provided by the `custom-xsl` option. This processing is applied before the xml2tex configuration, so your XSLT should transform Hub (DocBook namespace) to Hub.
+
+### During evolve-hub
+
+In case you need to influence what evolve-hub does, you can provide a custom stylesheet for this. Contrary to `custom-xsl` which is passed as an option, this is passed to the pipeline on the input port `custom-evolve-hub-driver`, or using the `-e` option of `d2t`. There is an [example](https://github.com/transpect/docx2tex/blob/master/xsl/custom-evolve-hub-driver-example.xsl) for such an XSLT that retains empty paragraphs that will otherwise be removed by default, in one of the XSLT passes that comprise evolve-hub. This example was created in response to [a user request](https://github.com/transpect/docx2hub/issues/25). If you want to create `\chapter`, `\section`, etc. headings from arbitrary docx paragraphs, you should add a template that sets the paragraph’s `@role` attribute to `Heading1`, `Heading2`, etc. It is strongly advised to `xsl:import` the default evolve-hub customization (see example).
 
 ### fontmaps
 
