@@ -121,49 +121,5 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
-  <!-- include captions -->
-  
-  <xsl:variable name="caption-styles" as="xs:string+" 
-                select="'Caption', 'Beschriftung', 'figlegend', 'Figure_Legend'"/>
-    
-  
-  
-  <xsl:template match="para[count(*) eq 1]
-                           [mediaobject]
-                           [not(text())]" mode="hub:split-at-tab">
-    <xsl:apply-templates mode="#current"/>
-  </xsl:template>
-  
-  <xsl:template match="para[@role = $caption-styles]
-                           [following-sibling::*[1][self::informaltable]
-                           |preceding-sibling::*[1][self::mediaobject]]" mode="hub:identifiers"/>
-  
-  <xsl:template match="informaltable[preceding-sibling::*[1][self::para]
-                                                         [@role = $caption-styles]]" mode="hub:identifiers">
-    <xsl:variable name="caption" as="element(para)"
-                  select="preceding-sibling::*[1][self::para]
-                                              [@role = $caption-styles]"/>
-    <table>
-      <xsl:apply-templates select="@*" mode="#current"/>
-      <title>
-        <xsl:apply-templates select="$caption/node()" mode="#current"/>
-      </title>
-      <xsl:apply-templates mode="#current"/>
-    </table>
-  </xsl:template>
-  
-  <xsl:template match="mediaobject[following-sibling::*[1][self::para]
-                                                       [@role = $caption-styles]]" mode="hub:identifiers">
-    <xsl:variable name="caption" as="element(para)"
-                  select="following-sibling::*[1][self::para]
-                                              [@role = $caption-styles]"/>
-    <figure>
-      <title>
-        <xsl:apply-templates select="$caption/node()" mode="#current"/>
-      </title>
-      <xsl:sequence select="."/>
-    </figure>
-  </xsl:template>
 
 </xsl:stylesheet>

@@ -4,6 +4,7 @@
   xmlns:c="http://www.w3.org/ns/xproc-step"
   xmlns:tr="http://transpect.io"
   xmlns:hub="http://transpect.io/hub"
+  xmlns:dbk="http://docbook.org/ns/docbook"
   xmlns:docx2tex="http://transpect.io/docx2tex" 
   version="1.0" 
   name="docx2tex-evolve-hub"
@@ -159,6 +160,43 @@
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </tr:xslt-mode>
+
+  <p:choose>
+    <p:when test="//dbk:mediaobject
+                 |//dbk:inlinemediaobject">
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/60" mode="hub:figure-captions" name="figure-captions">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+    </p:when>
+    <p:otherwise>
+      <p:identity/>
+    </p:otherwise>
+  </p:choose>
+  
+  <p:choose>
+    <p:when test="//dbk:informaltable">
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/60" mode="hub:table-captions" name="table-captions">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+    </p:when>
+    <p:otherwise>
+      <p:identity/>
+    </p:otherwise>
+  </p:choose>
 
   <p:choose>
     <p:when test="$preprocessing eq 'yes'">
