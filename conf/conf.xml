@@ -305,7 +305,7 @@
 
   <template context="dbk:imagedata[@fileref]">
     <rule name="includegraphics" type="cmd">
-      <option select="concat('width=', 1 div count(ancestor::*[dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')]),'\textwidth')"/>
+      <option select="concat('width=', 1 div count(ancestor::dbk:figure[last()][dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')]),'\textwidth')"/>
       <param select="replace(@fileref, '([%#])', '\\$1')"/>
     </rule>
   </template>
