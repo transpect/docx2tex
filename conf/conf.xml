@@ -163,7 +163,7 @@
   <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
                                                                                [following-sibling::dbk:para]//dbk:br">
     <rule>
-      <text> \par </text>
+      <text> \newline </text>
     </rule>
   </template>
   
@@ -171,7 +171,7 @@
                                                                                [following-sibling::dbk:para]">
     <rule>
       <xsl:next-match/>
-      <text> \par </text>
+      <text> \newline </text>
     </rule>
   </template>
   
@@ -220,7 +220,7 @@
       <param/>
       <xsl:choose>
         <xsl:when test="parent::dbk:entry">
-          <xsl:text>\par&#xa;</xsl:text>
+          <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(parent::dbk:footnote)">
           <xsl:text>&#xa;&#xa;</xsl:text>
@@ -236,7 +236,7 @@
       <param/>
       <xsl:choose>
         <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')]">
-          <xsl:text>\par&#xa;</xsl:text>
+          <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(parent::dbk:footnote)">
           <xsl:text>&#xa;&#xa;</xsl:text>
