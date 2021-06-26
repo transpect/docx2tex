@@ -23,6 +23,8 @@
   <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
   <xsl:param name="refs"/>
   
+  <xsl:variable name="doc-lang" select="/hub/@xml:lang" as="attribute(xml:lang)?"/>
+  
   <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
   
   <xsl:template match="para[count(phrase) gt 1 or count(superscript) gt 1 or count(subscript) gt 1]" mode="hub:identifiers" priority="-10">
@@ -120,6 +122,36 @@
         <xsl:next-match/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+  
+  <!-- remove redundant language tagging from ms word -->
+  
+  <xsl:template match="para[@xml:lang]
+                           [*[@xml:lang eq $doc-lang]]
+                           [every $i in * 
+                            satisfies $i[@xml:lang eq $doc-lang]]
+                           [  string-length(normalize-space(.)) 
+                            = string-length(normalize-space(string-join(*[@xml:lang eq $doc-lang])))]" mode="hub:strip-space">
+    <xsl:copy>
+      <xsl:apply-templates select="@* except @xml:lang, node()" mode="#current">
+        <xsl:with-param name="remove-lang" select="true()" as="xs:boolean?" tunnel="yes"/>
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="phrase[@xml:lang eq $doc-lang]" mode="hub:strip-space">
+    <xsl:param name="remove-lang" as="xs:boolean?" tunnel="yes"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@* except @xml:lang,
+                                   if($remove-lang) then () else @xml:lang,
+                                   node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="para[@xml:lang ne $doc-lang][not(normalize-space())]" mode="hub:strip-space">
+    <xsl:copy>
+      <xsl:apply-templates select="@* except @xml:lang, node()" mode="#current"/>
+    </xsl:copy>
   </xsl:template>
 
 </xsl:stylesheet>
