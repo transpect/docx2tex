@@ -358,7 +358,7 @@
   </template>
 
   <template context="dbk:blockquote[count(dbk:para) gt 1]">
-    <rule name="quotation" type="env">
+    <rule name="quotation" type="env" break-before="2">
       <text/>
     </rule>
   </template>
