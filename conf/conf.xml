@@ -351,7 +351,7 @@
 
   <!-- quotes -->
 
-  <template context="dbk:blockquote">
+  <template context="dbk:blockquote" break-before="2">
     <rule name="quote" type="env">
       <text/>
     </rule>
@@ -366,7 +366,7 @@
   <!-- itemized lists -->
 
   <template context="dbk:itemizedlist">
-    <rule name="itemize" type="env">
+    <rule name="itemize" type="env" break-before="2">
       <text/>
     </rule>
   </template>
@@ -418,7 +418,7 @@
   <!-- variable list -->
   
   <template context="dbk:variablelist">
-    <rule name="description" type="env">
+    <rule name="description" type="env" break-before="2">
       <text/>
     </rule>
   </template>
@@ -717,7 +717,7 @@
 
   <template context="dbk:equation[@condition eq 'numbered']
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation" type="env">
+    <rule name="equation" type="env" break-before="2">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -725,7 +725,7 @@
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation*" type="env">
+    <rule name="equation*" type="env" break-before="2">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -734,7 +734,7 @@
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
-    <rule name="align" type="env">
+    <rule name="align" type="env" break-before="2">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -744,7 +744,7 @@
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
-    <rule name="align*" type="env">
+    <rule name="align*" type="env" break-before="2">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -1157,7 +1157,7 @@
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
-    <xsl:value-of select="concat('\begin{enumerate}[{',
+    <xsl:value-of select="concat('&#xa;&#xa;\begin{enumerate}[{',
                                  $list-type,'}]',
                                  if($start gt 0) 
                                  then concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}') 
