@@ -273,7 +273,7 @@
   </template>
 
   <template context="dbk:para[@role eq 'Zitat']">
-    <rule name="quote" type="env">
+    <rule name="quote" type="env" break-before="2">
       <text/>
     </rule>
   </template>
@@ -351,8 +351,8 @@
 
   <!-- quotes -->
 
-  <template context="dbk:blockquote" break-before="2">
-    <rule name="quote" type="env">
+  <template context="dbk:blockquote">
+    <rule name="quote" type="env" break-before="2">
       <text/>
     </rule>
   </template>
