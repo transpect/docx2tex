@@ -75,8 +75,8 @@
       <xsl:text>\usepackage{makeidx}&#xa;\makeindex&#xa;</xsl:text>
     </xsl:if>
     <xsl:sequence select="if(exists($langs)) 
-                          then xml2tex:langs-to-latex-pkg( $langs ) 
-                          else xml2tex:langs-to-latex-pkg( 'en' )"/>
+                          then string-join(xml2tex:langs-to-latex-pkg( $langs ), '&#xa;') 
+                          else string-join(xml2tex:langs-to-latex-pkg( 'en' ), '&#xa;')"/>
     <xsl:text>&#xa;</xsl:text>
     <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">        
       <xsl:value-of select="concat('\define', ., '&#xa;')"/>
