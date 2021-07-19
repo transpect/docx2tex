@@ -117,3 +117,7 @@ Please find further documentation on how to create a fontmap [here](https://gith
 After you created your fontmap, store it in a directory and pass the path of the directory to docx2tex with the `-f` option.
 
 If you invoke the docx2tex XProc pipeline (`xpl/docx2tex.xpl`), you can specify the fontmap directory with the option  `custom-font-maps-dir`.
+
+### language tagging
+
+You may have noticed some obscure `\foreignlanguage{}` or `\selectlanguage{}` code that doesn't match the acutal language used in your TeX document. We have no fancy AI™-based natural language algorithms at work but docx2tex evaluates the original document language which typically applies to your system settings and the language setting of the paragraph or character style which is used by word for auto-correction and hyphenation. docx2tex evaluates these settings and filters redundant markup, e.g. detecting the main language by evaluating the character count of each of the styles and their respective language setting. However, when you copy and paste from the World Wide Web, then Microsoft Word usually copies the language of the original Website as well. This causes most of the weird language markup, you may have noticed. So we recommend to copy and paste as plain text and to create new paragraph and character styles when you want to intentionally change the language of a text fragment.
