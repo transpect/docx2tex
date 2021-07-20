@@ -98,8 +98,9 @@
   
   <!-- regular paras -->
 
-  <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td', 'listitem')])]
+  <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td')])]
                              [following-sibling::*[1]]
+                             [not(parent::dbk:listitem and not(following-sibling::*[1]))]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
