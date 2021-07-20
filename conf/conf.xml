@@ -98,8 +98,8 @@
   
   <!-- regular paras -->
 
-  <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td')])]
-                             [not(parent::dbk:listitem and not(following-sibling::*[1]))]
+  <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td', 'listitem')])]
+                             [following-sibling::*[1]]
                              [not(following-sibling::*[1][self::dbk:orderedlist])]
                              [not(following-sibling::*[1][self::dbk:itemizedlist])]
                              [not(following-sibling::*[1][self::dbk:variablelist])]
@@ -272,12 +272,6 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@role eq 'Zitat']">
-    <rule name="quote" type="env" break-before="2">
-      <text/>
-    </rule>
-  </template>
-
   <!-- tables and figures -->
 
   <template context="dbk:table
@@ -352,6 +346,12 @@
   <!-- quotes -->
 
   <template context="dbk:blockquote">
+    <rule name="quote" type="env" break-before="2">
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:para[not(parent::dbk:blockquote)][@role = ('Zitat', 'Quote')]">
     <rule name="quote" type="env" break-before="2">
       <text/>
     </rule>
