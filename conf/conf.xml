@@ -302,7 +302,7 @@
     <rule name="includegraphics" type="cmd">
       <option select="concat('width=', 
                              if(ancestor::dbk:figure)
-                             then 1 div count(ancestor::dbk:figure[last()][dbk:mediaobject|dbk:inlinemediaobject]/*[local-name() = ('mediaobject', 'inlinemediaobject')])
+                             then 1 div count(ancestor::dbk:figure[last()]//*[local-name() = ('mediaobject', 'inlinemediaobject')])
                              else 1,
                              '\textwidth')"/>
       <param select="replace(@fileref, '([%#])', '\\$1')"/>
