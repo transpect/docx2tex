@@ -422,7 +422,7 @@
     <xsl:variable name="max-length" as="xs:integer"
                   select="max(dbk:varlistentry/dbk:term/string-length())"/>
     <xsl:variable name="longest-word" as="xs:string" 
-                  select="dbk:varlistentry/dbk:term[string-length() eq $max-length][1]"/>
+                  select="dbk:varlistentry[dbk:term[string-length() eq $max-length]][1]/dbk:term"/>
     <rule name="description" type="env" break-before="2">
       <option select="$longest-word"/>
       <text/>
