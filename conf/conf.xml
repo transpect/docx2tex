@@ -313,7 +313,7 @@
                 select="//svg:svg"/>
   
   <template context="svg:svg">
-    <xsl:variable name="svg-filename" select="concat($basename, '-svg-', index-of($svg-images, .), '.svg')" as="xs:string"/>
+    <xsl:variable name="svg-filename" select="concat($basename, '-svg-', index-of($svg-images, .)[1], '.svg')" as="xs:string"/>
     <xsl:variable name="svg-path" select="concat($path, '/', $svg-filename)" as="xs:string"/>
     <rule name="includegraphics" type="cmd">
       <param select="$svg-filename"/>
