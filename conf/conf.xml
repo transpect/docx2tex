@@ -723,7 +723,7 @@
 
   <template context="dbk:equation[@condition eq 'numbered']
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation" type="env" break-before="2">
+    <rule name="equation" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -731,7 +731,7 @@
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
-    <rule name="equation*" type="env" break-before="2">
+    <rule name="equation*" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -740,7 +740,7 @@
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
-    <rule name="align" type="env" break-before="2">
+    <rule name="align" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
@@ -750,7 +750,7 @@
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
                                  [not(some $i in processing-instruction() satisfies contains($i, '\begin{array}'))]
                                  [some $i in processing-instruction() satisfies contains($i, '\\')]">
-    <rule name="align*" type="env" break-before="2">
+    <rule name="align*" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
