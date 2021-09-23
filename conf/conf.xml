@@ -943,7 +943,7 @@
     <xsl:apply-templates mode="#current"/>
   </template>
   
-  <template context="dbk:index[.//dbk:indexentry]/dbk:title"/>
+  <template context="dbk:index[.//dbk:indexentry]/dbk:title | dbk:index/dbk:info"/>
 
   <template context="dbk:index[.//dbk:indexentry]//dbk:indexdiv">
     <xsl:if test="not(preceding-sibling::dbk:indexdiv)">
