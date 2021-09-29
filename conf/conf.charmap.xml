@@ -3223,7 +3223,7 @@
     <!--MATHEMATICAL SCRIPT SMALL K-->
     <char character="&#x1d4c0;" string="${\mathcal{k}}$"/>
     <!--MATHEMATICAL SCRIPT SMALL L-->
-    <char character="&#x1d4c1;" string="${\mathcal{l}}$"/>
+    <char character="&#x1d4c1;" string="${\ell}$"/>
     <!--MATHEMATICAL SCRIPT SMALL M-->
     <char character="&#x1d4c2;" string="${\mathcal{m}}$"/>
     <!--MATHEMATICAL SCRIPT SMALL N-->
