@@ -216,7 +216,8 @@
   
   <template context="dbk:para[not(@css:font-style eq 'normal')]
                              [@css:font-style eq 'italic'
-                              or exists(key('style', @role)[@css:font-style eq 'italic'])]">
+                              or exists(key('style', @role)[@css:font-style eq 'italic'])]
+                             [not(ancestor::dbk:info)]">
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
