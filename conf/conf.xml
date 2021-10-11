@@ -1151,8 +1151,8 @@
   </template>
   
   <template context="dbk:orderedlist">
-    <xsl:variable name="list-type" 
-                  select="tr:enumerate-list-type((@numeration, 'arabic')[1], *:listitem[1]/@override)" as="xs:string"/>
+    <xsl:variable name="list-type" as="xs:string?"
+                  select="tr:enumerate-list-type((@numeration, 'arabic')[1], *:listitem[1]/@override)"/>
     <!-- use 1st override or if empty 1st override of sublist -->
     <xsl:variable name="override" as="xs:string?"
                   select="(*:listitem[1], *:listitem[1]/*:orderedlist[1]/*:listitem[1])[string-length(@override) gt 0][1]/@override"/>
@@ -1164,11 +1164,9 @@
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
-    <xsl:value-of select="concat('&#xa;&#xa;\begin{enumerate}[{',
-                                 $list-type,'}]',
-                                 if($start gt 0) 
-                                 then concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}') 
-                                 else ''
+    <xsl:value-of select="concat('&#xa;&#xa;\begin{enumerate}',
+                                 $list-type[not(matches(., '^\[\{\d+\.\}\]$'))],
+                                 concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}')[$start gt 1]
                                  )"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:value-of select="'&#xa;\end{enumerate}&#xa;'"/>
@@ -1185,11 +1183,13 @@
                           else if($numeration eq 'lowerroman') then 'i'
                           else if($numeration eq 'upperroman') then 'I'
                           else                                      '1'"/>
-    <xsl:value-of select="string-join(for $i in (1 to max((count($indizes), count($separators))))
+    <xsl:value-of select="string-join(('[{',
+                                      for $i in (1 to max((count($indizes), count($separators))))
                                       return if(    count($separators) gt count($indizes))
                                              then ($separators[$i], $list-type[$indizes[$i]])
-                                             else ($list-type, $separators[$i])
-                                      ,'')"/>    
+                                             else ($list-type, $separators[$i]),
+                                      '}]'         
+                                      ), '')"/>
   </xsl:function>
   
   <xsl:function name="tr:list-number-to-integer" as="xs:integer">
