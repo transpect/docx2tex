@@ -348,19 +348,19 @@
   <!-- quotes -->
 
   <template context="dbk:blockquote">
-    <rule name="quote" type="env" break-before="2">
+    <rule name="quote" type="env" break-before="1">
       <text/>
     </rule>
   </template>
   
   <template context="dbk:para[not(parent::dbk:blockquote)][@role = ('Zitat', 'Quote')]">
-    <rule name="quote" type="env" break-before="2">
+    <rule name="quote" type="env" break-before="1">
       <text/>
     </rule>
   </template>
 
   <template context="dbk:blockquote[count(dbk:para) gt 1]">
-    <rule name="quotation" type="env" break-before="2">
+    <rule name="quotation" type="env" break-before="1">
       <text/>
     </rule>
   </template>
@@ -368,7 +368,7 @@
   <!-- itemized lists -->
 
   <template context="dbk:itemizedlist">
-    <rule name="itemize" type="env" break-before="2">
+    <rule name="itemize" type="env" break-before="1">
       <text/>
     </rule>
   </template>
@@ -424,7 +424,7 @@
                   select="max(dbk:varlistentry/dbk:term/string-length())"/>
     <xsl:variable name="longest-word" as="xs:string" 
                   select="dbk:varlistentry[dbk:term[string-length() eq $max-length]][1]/dbk:term"/>
-    <rule name="description" type="env" break-before="2">
+    <rule name="description" type="env" break-before="1">
       <option select="$longest-word"/>
       <text/>
     </rule>
@@ -1164,7 +1164,7 @@
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
-    <xsl:value-of select="concat('&#xa;&#xa;\begin{enumerate}',
+    <xsl:value-of select="concat('&#xa;\begin{enumerate}',
                                  $list-type[not(matches(., '^\[\{\d+\.\}\]$'))],
                                  concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}')[$start gt 1]
                                  )"/>
