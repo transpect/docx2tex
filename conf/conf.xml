@@ -187,8 +187,8 @@
   <xsl:variable name="text-style-elements" select="'phrase', 'superscript', 'subscript'" as="xs:string+"/>
 
   <template context="*[local-name() = $text-style-elements]
-                      [   (@css:letter-spacing and xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
-                       or exists(key('style', @role)[xs:integer(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5])]">
+                      [   (@css:letter-spacing and xs:double(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
+                       or exists(key('style', @role)[@css:letter-spacing[xs:double(replace(., '[a-z]+$', '')) gt 0.5]])]">
     <xsl:text>\so{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
