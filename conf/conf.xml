@@ -28,7 +28,7 @@
   <xsl:key name="style" match="css:rule" use="@name"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex 1.6 --- ``The last thing your Word file sees before the recycle bin.''
+  <preamble>% docx2tex 1.7 --- ``Just out of this Word.''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
