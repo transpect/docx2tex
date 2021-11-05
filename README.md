@@ -32,7 +32,7 @@ Option  | Description
  -m     | choose MathType source (ole\|wmf\|ole+wmf)
  -f     | path to custom fontmaps directory
  -p     | generate PDF with pdflatex
- -t     | draw table grid lines
+ -t     | choose table model (tabularx|tabular)
  -e     | custom XSLT stylesheet for evolve-hub overrides
  -x     | custom XSLT stylesheet for postprocessing the evolve-hub results
  -d     | debug mode
