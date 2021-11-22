@@ -284,7 +284,7 @@
   
   <!-- move anchors outside of block elements -->
   
-  <xsl:template match="para[anchor][not(.//footnote)]" mode="docx2tex-preprocess">
+  <xsl:template match="para[not(@docx2tex:config eq 'headline')][anchor][not(.//footnote)]" mode="docx2tex-preprocess">
     <xsl:copy>
       <xsl:apply-templates select="@*, node() except anchor" mode="#current"/>
       <xsl:apply-templates select="anchor" mode="#current"/>
