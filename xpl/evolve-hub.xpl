@@ -183,7 +183,7 @@
   <p:choose>
     <p:when test="//dbk:informaltable">
       
-      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/60" mode="hub:table-captions" name="table-captions">
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/65" mode="hub:table-captions" name="table-captions">
         <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
         <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
         <p:input port="models"><p:empty/></p:input>
@@ -210,7 +210,7 @@
         <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
         <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
-        <p:with-option name="prefix" select="'evolve-hub/65'"/>
+        <p:with-option name="prefix" select="'evolve-hub/70'"/>
         <p:with-param name="refs" select="$refs"/>
       </tr:xslt-mode>
       
@@ -223,7 +223,7 @@
         <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
         <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
-        <p:with-option name="prefix" select="'evolve-hub/70'"/>
+        <p:with-option name="prefix" select="'evolve-hub/75'"/>
         <p:with-param name="refs" select="$refs"/>
       </tr:xslt-mode>
       
