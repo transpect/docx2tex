@@ -421,9 +421,9 @@
   
   <template context="dbk:variablelist">
     <xsl:variable name="max-length" as="xs:integer"
-                  select="max(dbk:varlistentry/dbk:term/string-length())"/>
+                  select="max(dbk:varlistentry/dbk:term/string-length(replace(., '\{\\slash\}', '/')))"/>
     <xsl:variable name="longest-word" as="xs:string" 
-                  select="dbk:varlistentry[dbk:term[string-length() eq $max-length]][1]/dbk:term"/>
+                  select="dbk:varlistentry[dbk:term[string-length(replace(., '\{\\slash\}', '/')) eq $max-length]][1]/dbk:term"/>
     <rule name="description" type="env" break-before="1">
       <option select="$longest-word"/>
       <text/>
