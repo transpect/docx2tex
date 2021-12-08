@@ -393,11 +393,12 @@
     <xsl:variable name="level-roman" as="xs:string">
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
+    <xsl:variable name="pos" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
     <xsl:if test="@override
                   and not(  tr:list-number-to-integer(@override, parent::*/@numeration) 
                           - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
                           = 1 )
-                  and position() ne 1">
+                  and $pos ne 1">
       <xsl:value-of select="concat('&#xa;\setcounter{enum', $level-roman, '}{', 
                                    xs:string(
                                        preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
@@ -1155,7 +1156,8 @@
                   select="tr:enumerate-list-type((@numeration, 'arabic')[1], *:listitem[1]/@override)"/>
     <!-- use 1st override or if empty 1st override of sublist -->
     <xsl:variable name="override" as="xs:string?"
-                  select="(*:listitem[1], *:listitem[1]/*:orderedlist[1]/*:listitem[1])[string-length(@override) gt 0][1]/@override"/>
+                  select="(*:listitem[1], 
+                           *:listitem[1]/*:orderedlist[1]/*:listitem[1])[string-length(@override) gt 0][1]/@override"/>
     <xsl:variable name="start" as="xs:integer" 
                   select="if(string-length($override) gt 0 and @numeration) 
                           then tr:list-number-to-integer($override, @numeration) - 1
@@ -1166,7 +1168,11 @@
     </xsl:variable>
     <xsl:value-of select="concat('&#xa;\begin{enumerate}',
                                  $list-type[not(matches(., '^\[\{\d+\.\}\]$'))],
-                                 concat('&#xa;\setcounter{enum', $level-roman, '}{', $start, '}')[$start gt 1]
+                                 concat('&#xa;\setcounter{enum', 
+                                        $level-roman, 
+                                        '}{', 
+                                        $start, 
+                                        '}')[$start gt 0]
                                  )"/>
     <xsl:apply-templates mode="#current"/>
     <xsl:value-of select="'&#xa;\end{enumerate}&#xa;'"/>
