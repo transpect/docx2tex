@@ -15,14 +15,18 @@
   <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
   <xsl:variable name="basename" select="tr:basename(/dbk:hub/@xml:base)" as="xs:string"/>
   <xsl:variable name="colors" 
-                select="(//@css:background-color,
+                select="(
+                         //@css:background-color,
                          //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 35  
                                           or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                           or ancestor-or-self::dbk:link
                                           or parent::*[@native-name eq 'Hyperlink'])],
-                         for $i in //processing-instruction('mml2tex')/tokenize(., '\\textcolor')[contains(., '{color-')] 
-                         return upper-case(replace($i, '^\{color-([0-9A-F]+)\}.*$', '#$1', 'i'))
+                         for $mml2tex-color in (
+                                        for $mml2tex-snippet in //processing-instruction('mml2tex')/tokenize(., '\\textcolor') 
+                                        return replace($mml2tex-snippet, '\{([-a-z0-9]+?)\}.*$', '$1', 'i')
+                                        )[not(position() eq 1)]
+                         return if(starts-with($mml2tex-color, '#')) then $mml2tex-color else tr:color-keyword-to-hex-rgb($mml2tex-color)
                          )"/>
   <xsl:variable name="langs" select="distinct-values(//@xml:lang)" as="xs:string*"/>
   
@@ -459,9 +463,9 @@
                                                           satisfies $i &lt; 35) ]))]/text()">
     <xsl:text>\textcolor{</xsl:text>
     <xsl:value-of select="for $color-code in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
-                          return concat('color-', 
-                                        substring-after($color-code, '#')
-                                        )"/>
+                          return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
+                                 then tr:color-hex-rgb-to-keyword($color-code)
+                                 else concat('color-', upper-case(substring-after($color-code, '#')))"/>
     <xsl:text>}{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
@@ -550,7 +554,9 @@
                                [not(.//dbk:footnote)]">
     <rule name="colorbox" type="cmd">
       <param select="for $color-code in (@css:background-color, key('style', @role)/@css:background-color)[1] 
-                     return concat('color-', substring-after($color-code, '#'))"/>
+                     return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
+                            then tr:color-hex-rgb-to-keyword($color-code)
+                            else concat('color-', upper-case(substring-after($color-code, '#')))"/>
       <xsl:text>{</xsl:text>
       <xsl:next-match/>
       <xsl:text>}</xsl:text>
