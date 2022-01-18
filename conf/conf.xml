@@ -458,18 +458,9 @@
                                                   and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
                                                           satisfies $i &lt; 35) ]))]/text()">
     <xsl:text>\textcolor{</xsl:text>
-    <xsl:value-of select="for $i in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
+    <xsl:value-of select="for $color-code in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
                           return concat('color-', 
-                                        index-of(distinct-values((root()//@css:background-color,
-                                                                  root()//@css:color[not(every $i in tr:hex-rgb-color-to-ints(.) 
-                                                                                   satisfies $i &lt; 35
-                                                                                   or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
-                                                                                   or ancestor-or-self::dbk:link
-                                                                                   or parent::*[@native-name eq 'Hyperlink']
-                                                                                   )
-                                                                              ]
-                                                                  )),
-                                                 $i)
+                                        substring-after($color-code, '#')
                                         )"/>
     <xsl:text>}{</xsl:text>
     <xsl:next-match/>
@@ -558,8 +549,8 @@
                                 or exists(key('style', @role)[@css:background-color and not(@css:background-color eq '#FFFFFF') ]))]
                                [not(.//dbk:footnote)]">
     <rule name="colorbox" type="cmd">
-      <param select="for $i in (@css:background-color, key('style', @role)/@css:background-color)[1] 
-                     return concat('color-', index-of(distinct-values($colors), $i))"/>
+      <param select="for $color-code in (@css:background-color, key('style', @role)/@css:background-color)[1] 
+                     return concat('color-', substring-after($color-code, '#'))"/>
       <xsl:text>{</xsl:text>
       <xsl:next-match/>
       <xsl:text>}</xsl:text>
