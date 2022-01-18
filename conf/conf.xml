@@ -20,7 +20,10 @@
                                           or parent::*[(@role, @name) = ('ZFinlineequation', 'ZFequation')]
                                           or ancestor::dbk:para/dbk:phrase[@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')]
                                           or ancestor-or-self::dbk:link
-                                          or parent::*[@native-name eq 'Hyperlink'])])"/>
+                                          or parent::*[@native-name eq 'Hyperlink'])],
+                         for $i in //processing-instruction('mml2tex')/tokenize(., '\\textcolor')[contains(., '{color-')] 
+                         return upper-case(replace($i, '^\{color-([0-9A-F]+)\}.*$', '#$1', 'i'))
+                         )"/>
   <xsl:variable name="langs" select="distinct-values(//@xml:lang)" as="xs:string*"/>
   
   <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
