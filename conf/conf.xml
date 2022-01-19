@@ -464,7 +464,7 @@
     <xsl:text>\textcolor{</xsl:text>
     <xsl:value-of select="for $color-code in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
                           return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
-                                 then tr:color-hex-rgb-to-keyword($color-code)
+                                 then tr:color-hex-rgb-to-keyword($color-code)[1]
                                  else concat('color-', upper-case(substring-after($color-code, '#')))"/>
     <xsl:text>}{</xsl:text>
     <xsl:next-match/>
@@ -555,7 +555,7 @@
     <rule name="colorbox" type="cmd">
       <param select="for $color-code in (@css:background-color, key('style', @role)/@css:background-color)[1] 
                      return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
-                            then tr:color-hex-rgb-to-keyword($color-code)
+                            then tr:color-hex-rgb-to-keyword($color-code)[1]
                             else concat('color-', upper-case(substring-after($color-code, '#')))"/>
       <xsl:text>{</xsl:text>
       <xsl:next-match/>
