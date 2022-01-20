@@ -1207,8 +1207,11 @@
       <xsl:when test="$list-type = ('upperroman', 'lowerroman')">
         <xsl:value-of select="tr:roman-to-int($counter)"/>
       </xsl:when>
-      <xsl:when test="$list-type = ('upperalpha', 'loweralpha')">
+      <xsl:when test="$list-type = 'loweralpha'">
         <xsl:value-of select="string-length(substring-before('abcdefghijklmnopqrstuvwxyz', $counter)) + 1"/>
+      </xsl:when>
+      <xsl:when test="$list-type = 'upperalpha'">
+        <xsl:value-of select="string-length(substring-before('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $counter)) + 1"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="xs:integer(normalize-space($counter))"/>
