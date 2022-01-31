@@ -33,6 +33,7 @@
   <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
   
   <xsl:key name="style" match="css:rule" use="@name"/>
+  <xsl:key name="item-by-id" match="*[@xml:id]" use="@xml:id"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.7.1 --- ``Just out of this Word.''
@@ -822,18 +823,36 @@
 
   <template context="dbk:indexterm[not(@type)]">
     <rule name="index" type="cmd">
-      <param/>
+      <xsl:call-template name="index-content"/>
     </rule>
   </template>
 
   <template context="dbk:indexterm[@type]">
     <rule name="index" type="cmd">
       <option select="@type"/>
-      <param/>
+      <xsl:call-template name="index-content"/>
     </rule>
   </template>
   
-  <template context="dbk:indexterm[not(normalize-space())]"/>
+  <xsl:template name="index-content">
+    <xsl:choose>
+      <xsl:when test="@class eq 'startofrange'">
+        <text>{</text>
+        <text/>
+        <text>|(}</text>
+      </xsl:when>
+      <xsl:when test="@class eq 'endofrange'">
+        <text>{</text>
+        <text select="key('item-by-id', @startref)/node()"/>
+        <text>|)}</text>
+      </xsl:when>
+      <xsl:otherwise>
+        <param/>    
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+    
+  <template context="dbk:indexterm[not(normalize-space())][not(@class)]"/>
   
   <template context="dbk:primary">
     <rule>
