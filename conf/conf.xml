@@ -12,6 +12,8 @@
   <xsl:import href="http://transpect.io/xslt-util/paths/xsl/paths.xsl"/>
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
   
+  <xsl:param name="table-model" as="xs:string"/>
+  
   <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
   <xsl:variable name="basename" select="tr:basename(/dbk:hub/@xml:base)" as="xs:string"/>
   <xsl:variable name="colors" 
@@ -94,6 +96,7 @@
   <!-- xml namespace declaration -->
 
   <ns prefix="dbk" uri="http://docbook.org/ns/docbook"/>
+  <ns prefix="html" uri="http://www.w3.org/1999/xhtml"/>
   <ns prefix="css" uri="http://www.w3.org/1996/css"/>
   <ns prefix="svg" uri="http://www.w3.org/2000/svg"/>
   <ns prefix="docx2tex" uri="http://transpect.io/docx2tex"/>
@@ -166,6 +169,12 @@
   <template context="dbk:entry//dbk:br">
     <rule>
       <text> \newline </text>
+    </rule>
+  </template>
+  
+  <template context="html:td//dbk:br[$table-model eq 'htmltabs']">
+    <rule>
+      <text> \htCellBreak </text>
     </rule>
   </template>
   
