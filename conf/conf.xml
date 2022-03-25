@@ -1088,7 +1088,7 @@
   <template context="dbk:biblioref
                     |dbk:citation">
     <rule name="cite" type="cmd">
-      <param select="string-join(tokenize(@linkends, '\s'), ',')"/>
+      <param select="string-join(tokenize((@linkends, @linkend)[1], '\s'), ',')"/>
     </rule>  
   </template>
   
