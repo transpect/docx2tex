@@ -1233,19 +1233,22 @@
     <xsl:variable name="counter" as="xs:string"
                   select="replace($override, '.*?([A-Z0-9]+).*', '$1', 'i')"/>
     <xsl:choose>
-      <xsl:when test="$list-type = ('upperroman', 'lowerroman')">
+      <xsl:when test="$list-type = ('upperroman', 'lowerroman') and matches($counter, '[ivxlcdm]', 'i')">
         <xsl:value-of select="tr:roman-to-int($counter)"/>
       </xsl:when>
-      <xsl:when test="$list-type = 'loweralpha'">
+      <xsl:when test="$list-type = 'loweralpha' or matches($counter, '[a-z]')">
         <xsl:value-of select="string-length(substring-before('abcdefghijklmnopqrstuvwxyz', $counter)) + 1"/>
       </xsl:when>
-      <xsl:when test="$list-type = 'upperalpha'">
+      <xsl:when test="$list-type = 'upperalpha' or matches($counter, '[A-Z]')">
         <xsl:value-of select="string-length(substring-before('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $counter)) + 1"/>
       </xsl:when>
+      <xsl:when test="not($counter)">
+        <xsl:value-of select="1"/>
+      </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="xs:integer(normalize-space($counter))"/>
+        <xsl:value-of select="xs:integer((normalize-space($counter)))"/>
       </xsl:otherwise>
-    </xsl:choose> 
+    </xsl:choose>
   </xsl:function>
 
 </set>
