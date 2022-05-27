@@ -250,7 +250,8 @@
   
   <template context="dbk:para[not(@css:font-weight eq 'normal')]
                              [@css:font-weight eq 'bold'
-                              or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
+                              or (    exists(key('style', @role)[@css:font-weight eq 'bold'])
+                                  and not(@css:font-weight eq 'normal'))]">
     <rule name="textbf" type="cmd">
       <param/>
       <xsl:choose>
@@ -480,23 +481,6 @@
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
-  
-  <template context="*[local-name() = $text-style-elements]
-                      [@css:font-weight eq 'normal']
-                      [   ancestor-or-self::*[local-name() = $text-style-elements]/(some $style in (@css:font-style, 
-                                                                                                    @css:font-weight, 
-                                                                                                    @css:font-variant)
-                                                                                    satisfies not($style eq 'normal'))
-                       or (some $role in ancestor-or-self::*[@role]/@role
-                       satisfies exists(key('style', @role)[(@css:font-style, 
-                                                             @css:font-weight, 
-                                                             @css:font-variant) != 'normal']))]
-                      
-                      ">
-    <xsl:text>\textnormal{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
 
   <template context="*[local-name() = $text-style-elements]
                       [@css:font-style eq 'normal']
@@ -519,8 +503,25 @@
   
   <template context="*[local-name() = $text-style-elements]
                       [   @css:font-weight eq 'bold'
-                       or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
+                       or (    exists(key('style', @role)[@css:font-weight eq 'bold'])
+                           and not(@css:font-weight eq 'normal'))]">
     <xsl:text>\textbf{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
+  </template>
+  
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:font-weight eq 'normal']
+                      [(ancestor::*[local-name() = $text-style-elements]/((@css:font-style, 
+                                                                          @css:font-weight, 
+                                                                          @css:font-variant) != 'normal')
+                        or empty(ancestor::*[local-name() = $text-style-elements]
+                                           [@css:font-style|@css:font-weight]))
+                       or (some $role in ancestor::*[@role]/@role
+                           satisfies exists(key('style', @role)[(@css:font-style, 
+                                                                 @css:font-weight, 
+                                                                 @css:font-variant) != 'normal']))]    ">
+    <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
@@ -883,7 +884,8 @@
                                        'nonary', 
                                        'denary')]
                       [@css:font-weight eq 'bold'
-                       or exists(key('style', @role)[@css:font-weight eq 'bold'])]">
+                       or (    exists(key('style', @role)[@css:font-weight eq 'bold'])
+                           and not(@css:font-weight eq 'normal'))]">
     <xsl:text>\textbf{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
