@@ -241,7 +241,8 @@
         <xsl:when test="parent::dbk:entry">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
-        <xsl:when test="not(parent::dbk:footnote)">
+        <xsl:when test="not(   parent::dbk:footnote
+                            or (parent::dbk:listitem and not(following-sibling::*)))">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
@@ -258,7 +259,8 @@
         <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')]">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
-        <xsl:when test="not(parent::dbk:footnote)">
+        <xsl:when test="not(   parent::dbk:footnote
+                            or (parent::dbk:listitem and not(following-sibling::*)))">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
