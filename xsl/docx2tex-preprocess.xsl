@@ -337,6 +337,13 @@
     <xsl:processing-instruction name="latex" select="concat('\', replace(parent::*/@font-family, '\s', ''), '{', ., '}')"/>
   </xsl:template>
   
+  <!-- remove manual font-size overrides -->
+  
+  <xsl:template match="phrase[@css:font-size]
+                             [count(@*) eq 1]" mode="docx2tex-preprocess">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
   <xsl:template match="equation[mml:math//footnote]
                       |inlineequation[mml:math//footnote]" mode="docx2tex-preprocess">
     <xsl:next-match/>
