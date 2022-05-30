@@ -700,15 +700,20 @@
     </rule>
   </template>
   
-  <!-- remove whitespace at the beginning of footnotes -->
-  
-  <template context="dbk:footnote//text()[1][preceding-sibling::*[1][@role eq 'hub:identifier']][starts-with(., ' ')]
-                    |dbk:footnote/dbk:para[1]//dbk:phrase[not(@role eq 'hub:identifier')][1][preceding-sibling::node()[1][@role eq 'hub:identifier']][starts-with(., ' ')]/text()[normalize-space()]
-                    |dbk:footnote[not(.//dbk:phrase[@role eq 'hub:identifier'])]/dbk:para[1]/dbk:phrase[1]/text()[1][starts-with(., ' ')]">
+  <!-- remove leading whitespace in footnotes -->
+    
+  <template context="dbk:footnote/dbk:para[1]//text()[preceding-sibling::node()[1][@role eq 'hub:identifier']][starts-with(., ' ')]
+                    |dbk:footnote/dbk:para[1]//dbk:phrase[preceding-sibling::node()[1][@role eq 'hub:identifier']][starts-with(., ' ')]
+                    |dbk:footnote/dbk:para[1]/dbk:phrase[preceding-sibling::*[1][@role eq 'hub:identifier']]
+                                                        [preceding-sibling::node()[1][not(normalize-space())]]
+                                                        [starts-with(., ' ')]">
     <rule>
       <text select="replace(string-join(xml2tex:utf2tex(.., ., $charmap, (), $texregex), ''), '^\s', '')"/> 
     </rule>
   </template>
+    
+  <template context="dbk:footnote/dbk:para[1]//text()[preceding-sibling::node()[1][@role eq 'hub:identifier']]
+                                                     [not(normalize-space())]"/>  
   
   <!-- remove footnote numbers and whitespace -->
   
