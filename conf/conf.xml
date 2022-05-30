@@ -713,8 +713,6 @@
   <!-- remove footnote numbers and whitespace -->
   
   <template context="dbk:footnote//dbk:phrase[@role eq 'hub:separator']"/>
-  
-  <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
 
   <template context="dbk:footnote/dbk:para[1]/dbk:phrase[@role eq 'hub:identifier'][1]
                                                         [not(descendant-or-self::dbk:anchor 
@@ -797,6 +795,8 @@
       <text>{\quad}</text>
     </rule>
   </template>
+  
+  <template context="dbk:footnote//dbk:tab[@role eq 'hub:separator']"/>
   
   <!-- tagged private use area -->
   <template context="dbk:phrase[@role eq 'unicode-private-use']">
