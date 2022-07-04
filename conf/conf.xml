@@ -951,9 +951,11 @@
                                        'septenary', 
                                        'octonary', 
                                        'nonary', 
-                                       'denary')]//text()[contains(., '!')]">
+                                       'denary')]//text()[matches(., '[|!@&quot;]')]">
     <rule>
-      <text select="replace(., '!', '&quot;!')"/>
+      <text select="replace(replace(., '([!@&quot;])', '&quot;$1'),
+                            '\|',
+                            '\\textbar{}')"/>
     </rule>
   </template>
   
