@@ -1103,7 +1103,7 @@
     </rule>  
   </template>
   
-  <template context="dbk:bibliography[@role = ('Citavi', 'Zotero')]">
+  <template context="dbk:bibliography[@role = ('Citavi', 'CSL')]">
     <xsl:variable name="bibtex-path" select="concat($path, '/', $basename, '-bibtex.bib')" as="xs:string"/>
     <rule name="bibliography" type="cmd" break-after="2" break-before="2">
       <param select="concat($basename, '-bibtex')"/>
