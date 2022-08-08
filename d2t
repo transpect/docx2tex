@@ -50,9 +50,9 @@ CALABASH=$DIR/calabash/calabash.sh
 # invoke pdflatex
 PDFLATEX=pdflatex
 MTEFSOURCE="ole"
-TABLEMODEL="tabularx"
+TABLEMODEL=""
+TABLEGRID=""
 PDF=no
-TABLEGRID=yes
 REFS=yes
 DEBUG=no
 
