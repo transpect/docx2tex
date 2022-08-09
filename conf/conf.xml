@@ -140,7 +140,11 @@
     </rule>
   </template>
 
-  <template context="*[@css:page-break-before='always']" priority="100000">
+  <template context="*[@css:page-break-before='always']
+                      [not(local-name() = ('part',
+                                           'chapter',
+                                           'section',
+                                           'title'))]">
     <xsl:text>\pagebreak&#xa;</xsl:text>
     <xsl:next-match/>
   </template>
