@@ -140,9 +140,18 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@css:page-break-before='always']">
+  <template context="*[@css:page-break-before='always']
+                      [not(local-name() = ('part',
+                                           'chapter',
+                                           'section',
+                                           'title'))]">
     <xsl:text>\pagebreak&#xa;</xsl:text>
     <xsl:next-match/>
+  </template>
+  
+  <template context="dbk:para[@css:page-break-before='always']
+                             [not(normalize-space()) and not(node())]">
+    <xsl:text>\pagebreak&#xa;</xsl:text>
   </template>
     
   
