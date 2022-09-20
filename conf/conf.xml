@@ -124,20 +124,22 @@
     </rule>
   </template>
 
-  <template context="dbk:para[@css:text-align='center'
-                              or exists(key('style', @role)[@css:text-align eq 'center'])]
-                             [not(parent::*[local-name() = ('entry', 'th', 'td')])]">
-    <rule name="center" type="env" break-after="2">
-      <text/>
-    </rule>
+  <template context="dbk:para[   @css:text-align='center'
+                              or exists(key('style', @role)[@css:text-align eq 'center'])]">
+    <rule name="centering{}" type="cmd"/>
+    <xsl:next-match/>
   </template>
   
   <template context="dbk:para[@css:text-align='right'
-                              or exists(key('style', @role)[@css:text-align eq 'right'])]
-                             [not(parent::*[local-name() = ('entry', 'th', 'td')])]">
-    <rule name="flushright" type="env" break-after="2">
-      <text/>
-    </rule>
+                              or exists(key('style', @role)[@css:text-align eq 'right'])]">
+    <rule name="raggedleft{}" type="cmd"/>
+    <xsl:next-match/>
+  </template>
+  
+  <template context="dbk:para[   @css:text-align='left'
+                              and key('style', @role)/@css:text-align = ('center', 'right')]">
+    <rule name="raggedright{}" type="cmd"/>
+    <xsl:next-match/>
   </template>
 
   <template context="*[@css:page-break-before='always']
