@@ -88,7 +88,7 @@
                           then string-join(xml2tex:langs-to-latex-pkg( $langs ), '&#xa;') 
                           else string-join(xml2tex:langs-to-latex-pkg( 'en' ), '&#xa;')"/>
     <xsl:text>&#xa;</xsl:text>
-    <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">        
+    <xsl:for-each select="xml2tex:rgb-to-tex-color( $colors )">
       <xsl:value-of select="concat('\define', ., '&#xa;')"/>
     </xsl:for-each>
   </preamble>
@@ -478,16 +478,13 @@
   <!-- text styles -->
   
   <template context="*[local-name() = $text-style-elements]
-                      [@css:color]
-                      [not(every $i in  tr:hex-rgb-color-to-ints(@css:color) satisfies $i &lt; 35  
-                           or @role = ('ZFinlineequation', 'ZFequation', 'Hyperlink')
-                           or preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
-                           or following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')]
-                           or ancestor-or-self::dbk:link)
-                       and (@css:color 
-                       or exists(('style', @role)[@css:color 
-                                                  and not(every $i in  tr:hex-rgb-color-to-ints(@css:color) 
-                                                          satisfies $i &lt; 35) ]))]/text()">
+                      [@css:color or key('style', @role)/@css:color]
+                      [not(every $i in  tr:hex-rgb-color-to-ints((@css:color, key('style', @role)/@css:color)[1]) 
+                           satisfies $i &lt; 35)]
+                      [not(@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink'))]
+                      [not(preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
+                      [not(following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
+                      [not(ancestor-or-self::dbk:link)]/text()">
     <xsl:text>\textcolor{</xsl:text>
     <xsl:value-of select="for $color-code in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
                           return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
