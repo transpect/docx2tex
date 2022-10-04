@@ -943,14 +943,24 @@
       <text/>
     </rule>
   </template>
-
+  
   <template context="dbk:see|dbk:seealso">
     <rule>
-      <text select="concat('|', replace(replace(., '!', '&quot;!'), 
-                                        '^(see|voir|véase|vedi|ver|siehe|请参阅|ראה|انظر|참조)\s+(.+)$', 
-                                        'see{$2}', 
-                                        'i'))"/>
+      <text>|</text>
+      <text/>
     </rule>
+  </template>
+
+  <xsl:variable name="see-regex" as="xs:string" 
+                select="'^(see|voir|véase|vedi|ver|siehe|请参阅|ראה|انظر|참조)(.*?)$'"/>
+
+  <template context="*[local-name() = ('see', 'seealso')]/dbk:phrase[@css:font-style eq 'italic'][matches(., $see-regex)]
+                    |*[local-name() = ('see', 'seealso')]/text()[matches(., $see-regex)]">
+    <xsl:value-of select="replace(replace(., '!', '&quot;!'), 
+                                  $see-regex, 
+                                  'see{$2}', 
+                                  'i')"/>
+    
   </template>
   
   <template context="*[local-name() = ('primary', 
