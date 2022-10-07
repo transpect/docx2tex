@@ -944,23 +944,34 @@
     </rule>
   </template>
   
+  <xsl:variable name="see-regex" as="xs:string" 
+                select="'^(see\salso|see|voir|véase|vedi|ver|siehe\sauch|siehe|请参阅|ראה|انظر|참조)\p{Zs}*(.*?)$'"/>
+  
+  <xsl:variable name="see-also-regex" as="xs:string" 
+                select="'(see\salso|siehe\sauch)'"/>
+  
   <template context="dbk:see|dbk:seealso">
     <rule>
-      <text>|</text>
+      <text select="if(   matches(dbk:phrase[@css:font-style eq 'italic'], $see-also-regex)
+                       or self::dbk:seealso)
+                     then '|seealso{' 
+                     else '|see{'"/>
       <text/>
+      <text>}</text>
     </rule>
   </template>
-
-  <xsl:variable name="see-regex" as="xs:string" 
-                select="'^(see|voir|véase|vedi|ver|siehe|请参阅|ראה|انظر|참조)(.*?)$'"/>
 
   <template context="*[local-name() = ('see', 'seealso')]/dbk:phrase[@css:font-style eq 'italic'][matches(., $see-regex)]
                     |*[local-name() = ('see', 'seealso')]/text()[matches(., $see-regex)]">
     <xsl:value-of select="replace(replace(., '!', '&quot;!'), 
                                   $see-regex, 
-                                  'see{$2}', 
+                                  '$2', 
                                   'i')"/>
     
+  </template>
+  
+  <template context="*[local-name() = ('see', 'seealso')]/text()[preceding-sibling::*[1][self::dbk:phrase[@css:font-style eq 'italic'][matches(., $see-regex)]]]">
+    <xsl:value-of select="replace(replace(., '!', '&quot;!'), '^\p{Zs}+', '')"/>
   </template>
   
   <template context="*[local-name() = ('primary', 
