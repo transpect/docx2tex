@@ -38,7 +38,7 @@
   <xsl:key name="item-by-id" match="*[@xml:id]" use="@xml:id"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex 1.7.3 --- ``Just out of this Word.''
+  <preamble>% docx2tex 1.8 --- ``Who let the docx out?''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
