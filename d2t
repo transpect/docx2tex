@@ -12,7 +12,7 @@ usage() {
     echo "   -p    generate PDF with pdflatex"
     echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
-    echo "   -t    choose table model (tabularx|tabular)"
+    echo "   -t    choose table model (tabularx|tabular|htmltabs)"
     echo "   -l    suppress table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing (after evolve-hub)"
     echo "   -e    custom XSLT stylesheet for evolve-hub (should import xsl/evolve-hub-driver.xsl)"
