@@ -1093,9 +1093,10 @@
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
                                    )]
                                [not(matches(., '^[\p{P}\p{Z}\d&#x4e00;-&#x9fff;&#x530;-&#x58f;&#xfb13;-&#xfb17;]+$'))]">
-    <xsl:value-of select="concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
+    <xsl:param name="suppress-foreign-lang" as="xs:boolean?" tunnel="yes"/>
+    <xsl:value-of select="if ($suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))) then () else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
-    <xsl:text>}</xsl:text>
+    <xsl:if test="$suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))"><xsl:text>}</xsl:text></xsl:if>
   </template>
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
