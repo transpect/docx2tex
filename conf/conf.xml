@@ -1096,7 +1096,7 @@
     <xsl:param name="suppress-foreign-lang" as="xs:boolean?" tunnel="yes"/>
     <xsl:value-of select="if ($suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))) then () else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
-    <xsl:if test="$suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))"><xsl:text>}</xsl:text></xsl:if>
+    <xsl:value-of select="if ($suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))) then () else '}'"/>
   </template>
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
