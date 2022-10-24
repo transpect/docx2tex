@@ -129,6 +129,7 @@
                              [not(parent::*/@css:text-align='center')]">
     <rule name="centering{}" type="cmd"/>
     <xsl:next-match/>
+    <xsl:text>&#xa;\raggedright{}</xsl:text>
   </template>
   
   <template context="dbk:para[@css:text-align='right'
@@ -136,6 +137,7 @@
                              [not(parent::*/@css:text-align='right')]">
     <rule name="raggedleft{}" type="cmd"/>
     <xsl:next-match/>
+    <xsl:text>&#xa;\raggedright{}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='left'
