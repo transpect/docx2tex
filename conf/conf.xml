@@ -34,6 +34,13 @@
   
   <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
   
+  <!-- elements where page breaks are ignored -->
+  
+  <xsl:variable name="elements-where-pagebreaks-are-ignored" as="xs:string+" 
+                select="'part', 'chapter', 'section', 'index'"/>
+  <xsl:variable name="titles-where-pagebreaks-are-ignored" as="xs:string+" 
+                select="'part', 'chapter', 'section', 'index'"/>
+  
   <xsl:key name="style" match="css:rule" use="@name"/>
   <xsl:key name="item-by-id" match="*[@xml:id]" use="@xml:id"/>
   
@@ -132,7 +139,7 @@
     </rule>
   </template>
   
-  <template context="dbk:para[@css:text-align='right'
+  <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
                              [not(parent::*/@css:text-align='right')]">
     <rule name="flushright" type="env">
@@ -147,21 +154,13 @@
       <xsl:next-match/>
     </rule>
   </template>
-
-  <template context="*[@css:page-break-before='always']
-                      [not(local-name() = ('part',
-                                           'chapter',
-                                           'section',
-                                           'title'))]">
-    <xsl:text>\pagebreak&#xa;</xsl:text>
+  
+  <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
+                      [not(self::dbk:title and parent::dbk:info/parent::*/local-name() = $titles-where-pagebreaks-are-ignored)]
+                      [@css:page-break-before eq 'always' or key('style', @role)/@css:page-break-before eq 'always']">
+    <xsl:if test="$new-common"><xsl:text>\pagebreak&#xa;</xsl:text></xsl:if>
     <xsl:next-match/>
   </template>
-  
-  <template context="dbk:para[@css:page-break-before='always']
-                             [not(normalize-space()) and not(node())]">
-    <xsl:text>\pagebreak&#xa;</xsl:text>
-  </template>
-    
   
   <!-- carriage returns -->
   
