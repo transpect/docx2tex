@@ -234,7 +234,11 @@
 		      [not(@role eq 'Hyperlink')] 
 		      [not(parent::dbk:link)]
 		      [not(.//dbk:link)]">
-    <xsl:text>\uline{</xsl:text>
+    <xsl:value-of select="if (some $ a in (@css:text-decoration-style, 
+                                           key('style', @role)/@css:text-decoration-style)
+                              satisfies $a = 'double') 
+                          then '\uuline{' 
+                          else '\uline{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
