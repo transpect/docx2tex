@@ -232,7 +232,7 @@
                       [   (@css:text-decoration-line[. eq 'underline'] 
                        or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
 		      [not(@role eq 'Hyperlink')] 
-		      [not(parent::dbk:link)]
+		      [not(parent::dbk:link) and exists(..)(:if no root exists:)]
 		      [not(.//dbk:link)]">
     <xsl:value-of select="if (some $ a in (@css:text-decoration-style, 
                                            key('style', @role)/@css:text-decoration-style)
