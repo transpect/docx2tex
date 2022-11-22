@@ -134,24 +134,30 @@
   <template context="dbk:para[   @css:text-align='center'
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
                              [not(parent::*/@css:text-align='center')]">
-    <rule name="centering" type="env">
+    <rule name="centering" type="cmd">
+      <xsl:text>{</xsl:text>
       <xsl:next-match/>
+      <xsl:text>}</xsl:text>
     </rule>
   </template>
   
   <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
-                             [not(parent::*/@css:text-align='right')]">
-    <rule name="raggedleft" type="env">
+                              [not(parent::*/@css:text-align='right')]">
+    <rule name="raggedleft" type="cmd">
+      <xsl:text>{</xsl:text>
       <xsl:next-match/>
     </rule>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='left'
                               and key('style', @role)/@css:text-align = ('center', 'right')]
                              [not(parent::*/@css:text-align='left')]">
-    <rule name="raggedright" type="env">
+    <rule name="raggedright" type="cmd">
+      <xsl:text>{</xsl:text>
       <xsl:next-match/>
+      <xsl:text>}</xsl:text>
     </rule>
   </template>
   
