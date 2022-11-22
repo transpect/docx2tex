@@ -14,9 +14,10 @@
   
   <xsl:param name="table-model" as="xs:string"/>
   
-  <xsl:variable name="path" select="tr:path(base-uri())" as="xs:string"/>
-  <xsl:variable name="basename" select="tr:basename(/dbk:hub/@xml:base)" as="xs:string"/>
-  <xsl:variable name="colors" 
+  <xsl:variable name="new-common" as="xs:boolean" select="false()"/>
+  <xsl:variable name="path"       as="xs:string"  select="tr:path(base-uri())" />
+  <xsl:variable name="basename"   as="xs:string"  select="tr:basename(/dbk:hub/@xml:base)"/>
+  <xsl:variable name="colors"     as="xs:string*"
                 select="(
                          //@css:background-color,
                          //@css:color[not(every $i in  tr:hex-rgb-color-to-ints(.) satisfies $i &lt; 35  
