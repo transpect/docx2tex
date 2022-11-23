@@ -488,7 +488,7 @@
                       [@css:color or key('style', @role)/@css:color]
                       [not(every $i in  tr:hex-rgb-color-to-ints((@css:color, key('style', @role)/@css:color)[1]) 
                            satisfies $i &lt; 35)]
-                      [not(@role = ('ZFinlineequation', 'ZFequation', 'Hyperlink'))]
+                      [not(@role = ('ZFinlineequation', 'ZFequation', 'ZFVerweis', 'ZFCaption', 'NOTE-CE', 'NOTE-TS', 'Hyperlink'))]
                       [not(preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
                       [not(following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
                       [not(ancestor-or-self::dbk:link)]/text()">
