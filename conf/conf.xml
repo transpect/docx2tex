@@ -135,18 +135,18 @@
   <template context="dbk:para[   @css:text-align='center'
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
                              [not(parent::*/@css:text-align='center')]">
+    <xsl:text>{</xsl:text>    
     <rule name="centering" type="cmd">
-      <xsl:text>{</xsl:text>
       <xsl:next-match/>
-      <xsl:text>}</xsl:text>
     </rule>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
                               [not(parent::*/@css:text-align='right')]">
+    <xsl:text>{</xsl:text>
     <rule name="raggedleft" type="cmd">
-      <xsl:text>{</xsl:text>
       <xsl:next-match/>
     </rule>
     <xsl:text>}</xsl:text>
@@ -155,11 +155,11 @@
   <template context="dbk:para[   @css:text-align='left'
                               and key('style', @role)/@css:text-align = ('center', 'right')]
                              [not(parent::*/@css:text-align='left')]">
+    <xsl:text>{</xsl:text>
     <rule name="raggedright" type="cmd">
-      <xsl:text>{</xsl:text>
       <xsl:next-match/>
-      <xsl:text>}</xsl:text>
     </rule>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
