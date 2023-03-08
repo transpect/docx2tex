@@ -136,24 +136,26 @@
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
                              [not(parent::*/@css:text-align='center')]">
     <xsl:text>{\centering </xsl:text>    
-      <xsl:next-match/>
-    <xsl:text>}</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>\par}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
-                              [not(parent::*/@css:text-align='right')]">
+                             [not(parent::*/@css:text-align='right')]">
     <xsl:text>{\raggedleft </xsl:text>
-      <xsl:next-match/>
-    <xsl:text>}</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>\par}</xsl:text>
   </template>
   
-  <template context="dbk:para[   @css:text-align='left'
-                              and key('style', @role)/@css:text-align = ('center', 'right')]
+  <template context="dbk:para[(    @css:text-align='left'
+                               and key('style', @role)/@css:text-align = ('center', 'right'))
+                              or (not(@css:text-align) 
+                                  and following-sibling::*[1][@css:text-align[. ne 'left']])]
                              [not(parent::*/@css:text-align='left')]">
     <xsl:text>{\raggedright </xsl:text>
-      <xsl:next-match/>
-    <xsl:text>}</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>\par}</xsl:text>
   </template>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
