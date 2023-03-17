@@ -59,7 +59,7 @@ REFS=yes
 DEBUG=no
 
 # specify options
-while getopts ":o:c:m:t:x:e:plrdh:" opt; do
+while getopts ":o:c:m:t:i:x:e:plrdh:" opt; do
     case "${opt}" in
 	o)
 	    OUT_DIR=${OPTARG}
@@ -79,7 +79,7 @@ while getopts ":o:c:m:t:x:e:plrdh:" opt; do
 	t)
 	    TABLEMODEL=${OPTARG}
 	    ;;
-  t)
+  i)
 	    LISTMODE=${OPTARG}
 	    ;;
 	p)
