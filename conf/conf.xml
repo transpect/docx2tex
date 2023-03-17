@@ -438,16 +438,19 @@
       <xsl:number value="$level" format="i"/>
     </xsl:variable>
     <xsl:variable name="pos" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
-    <xsl:if test="@override
-                  and not(  tr:list-number-to-integer(@override, parent::*/@numeration) 
-                          - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+    <xsl:variable name="override" select="@override" as="attribute(override)?"/>
+    <xsl:variable name="numeration" select="parent::*/@numeration" as="attribute(numeration)?"/>
+    <xsl:if test="    $override
+                  and $numeration
+                  and not(  tr:list-number-to-integer($override, $numeration) 
+                          - preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
                           = 1 )
                   and $pos ne 1">
       <xsl:value-of select="concat('&#xa;\setcounter{enum', $level-roman, '}{', 
                                    xs:string(
-                                       preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
-                                     + tr:list-number-to-integer(@override, parent::*/@numeration)
-                                     - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                                       preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
+                                     + tr:list-number-to-integer($override, $numeration)
+                                     - preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
                                      - 1), 
                                    '}&#xa;')"/>
     </xsl:if>
