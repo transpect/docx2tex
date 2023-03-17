@@ -12,6 +12,7 @@ usage() {
     echo "   -p    generate PDF with pdflatex"
     echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
     echo "   -r    omit page and cross-references and labels"
+    echo "   -i    select lists detection mode (indent|role|none)"
     echo "   -t    choose table model (tabularx|tabular|htmltabs)"
     echo "   -l    suppress table grid lines"
     echo "   -x    custom XSLT stylesheet for Hub processing (after evolve-hub)"
@@ -52,6 +53,7 @@ PDFLATEX=pdflatex
 MTEFSOURCE="ole"
 TABLEMODEL=""
 TABLEGRID=""
+LISTMODE=""
 PDF=no
 REFS=yes
 DEBUG=no
@@ -65,9 +67,9 @@ while getopts ":o:c:m:t:x:e:plrdh:" opt; do
 	c)
 	    CONF=${OPTARG}
 	    ;;
-        m)
-            MTEFSOURCE=${OPTARG}
-            ;;
+  m)
+      MTEFSOURCE=${OPTARG}
+      ;;
 	x)
 	    CUSTOMXSL=${OPTARG}
 	    ;;
@@ -76,6 +78,9 @@ while getopts ":o:c:m:t:x:e:plrdh:" opt; do
 	    ;;
 	t)
 	    TABLEMODEL=${OPTARG}
+	    ;;
+  t)
+	    LISTMODE=${OPTARG}
 	    ;;
 	p)
 	    PDF=yes
@@ -221,6 +226,7 @@ HEAP=$HEAP $CALABASH \
     mtef-source="$MTEFSOURCE" \
     table-model=$TABLEMODEL \
     table-grid=$TABLEGRID \
+    list-mode=$LISTMODE \
     refs=$REFS \
     debug=$DEBUG \
     debug-dir-uri=$DEBUG_DIR_URI \

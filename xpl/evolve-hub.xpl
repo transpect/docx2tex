@@ -36,6 +36,7 @@
   <p:option name="fail-on-error" select="'yes'"/>
 
   <p:option name="refs" select="'yes'"/>
+  <p:option name="list-mode" select="''"/>
   <p:option name="preprocessing" select="'yes'"/>
   <p:option name="strip-lang-variant" select="'no'"/>
   
@@ -107,7 +108,7 @@
     <p:with-option name="fail-on-error" select="$fail-on-error"/>
   </tr:xslt-mode>
   
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/51" mode="hub:tabs-to-indent" name="tabs-to-indent">
+  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/31" mode="hub:tabs-to-indent" name="tabs-to-indent">
     <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="models"><p:empty/></p:input>
@@ -116,7 +117,7 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </tr:xslt-mode>
   
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/52" mode="hub:handle-indent" name="handle-indent">
+  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/32" mode="hub:handle-indent" name="handle-indent">
     <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="models"><p:empty/></p:input>
@@ -125,7 +126,7 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </tr:xslt-mode>
   
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/53" mode="hub:strip-space" name="strip-space">
+  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/33" mode="hub:strip-space" name="strip-space">
     <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
     <p:input port="models"><p:empty/></p:input>
@@ -134,32 +135,82 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </tr:xslt-mode>
   
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/54" mode="hub:prepare-lists" name="prepare-lists">
-    <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/55" mode="hub:lists" name="lists">
-    <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-  </tr:xslt-mode>
-  
-  <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/56" mode="hub:postprocess-lists" name="postprocess-lists">
-    <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
-    <p:input port="models"><p:empty/></p:input>
-    <p:with-option name="debug" select="$debug"/>
-    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
-  </tr:xslt-mode>
+  <p:choose>
+    <p:when test="$list-mode eq 'role'">
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/50" mode="hub:prepare-lists-by-role" name="prepare-lists-by-role">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/51" mode="hub:lists-by-role" name="lists-by-role">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/52" mode="hub:postprocess-lists-by-role" name="postprocess-lists-by-role">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/53" mode="hub:restore-roles" name="restore-roles">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+    </p:when>
+    <p:when test="$list-mode eq 'none'">
+      
+      <p:identity/>
+      
+    </p:when>
+    <p:otherwise>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/40" mode="hub:prepare-lists" name="prepare-lists">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/41" mode="hub:lists" name="lists">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+      <tr:xslt-mode msg="yes" hub-version="1.2" prefix="evolve-hub/42" mode="hub:postprocess-lists" name="postprocess-lists">
+        <p:input port="stylesheet"><p:pipe port="stylesheet" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+        <p:input port="models"><p:empty/></p:input>
+        <p:with-option name="debug" select="$debug"/>
+        <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+        <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
+      </tr:xslt-mode>
+      
+    </p:otherwise>
+  </p:choose>
 
   <p:choose>
     <p:when test="//dbk:mediaobject

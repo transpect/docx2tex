@@ -81,6 +81,12 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="list-mode" select="''" required="false">
+    <p:documentation>
+      Choose the mode to detect lists. Possible values are 'indent', 'role' and 'none'.
+    </p:documentation>
+  </p:option>
+  
   <p:option name="table-model" select="'tabularx'" required="false">
     <p:documentation>
       Used LaTeX package to draw tables. Possible values are 'tabular' and 'tabularx'.
@@ -274,6 +280,7 @@
       <p:empty/>
     </p:input>
     <p:with-option name="refs" select="$refs"/>
+    <p:with-option name="list-mode" select="($list-mode[normalize-space()], xml2tex:set/@list-mode, 'indent')[1]"/>
     <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="strip-lang-variant" select="'no'"/>
     <p:with-option name="debug" select="$debug"/>
