@@ -443,15 +443,15 @@
     <xsl:if test="    $override
                   and $numeration
                   and not(  tr:list-number-to-integer($override, $numeration) 
-                          - preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
+                          - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
                           = 1 )
                   and $pos ne 1">
       <xsl:value-of select="concat('&#xa;\setcounter{enum', $level-roman, '}{', 
                                    xs:string(
-                                       preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
-                                     + tr:list-number-to-integer($override, $numeration)
-                                     - preceding-sibling::*[1]/tr:list-number-to-integer($override, $numeration)
-                                     - 1), 
+                                               preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                                             + tr:list-number-to-integer($override, $numeration)
+                                             - preceding-sibling::*[1]/tr:list-number-to-integer(@override, parent::*/@numeration)
+                                             - 1), 
                                    '}&#xa;')"/>
     </xsl:if>
     <rule name="item" type="cmd" break-before="1">
