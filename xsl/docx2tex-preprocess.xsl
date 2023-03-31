@@ -33,7 +33,7 @@
   <xsl:variable name="equation-label-regex" as="xs:string" 
                 select="concat( '^(\s*',
                                 $parenthesis-regex,
-                                '((\d+)(\.\d+)*)',
+                                '((\d+)(\p{P}\d+)*)',
                                 $parenthesis-regex,
                                 '*\s*)+$' )"/>
   
