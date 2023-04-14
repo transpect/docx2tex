@@ -897,7 +897,7 @@
   
   <template context="dbk:primary">
     <rule>
-      <xsl:if test="@sortas">
+      <xsl:if test="@sortas[normalize-space()]">
         <text select="concat(@sortas, '@')"/>
       </xsl:if>
       <text/>
@@ -950,7 +950,7 @@
                     |dbk:denary">
     <rule>
       <text>!</text>
-      <xsl:if test="@sortas">
+      <xsl:if test="@sortas[normalize-space()]">
         <text select="concat(@sortas, '@')"/>
       </xsl:if>
       <text/>
