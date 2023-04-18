@@ -1115,9 +1115,27 @@
                                    )]
                                [not(matches(., '^[\p{P}\p{Z}\d&#x4e00;-&#x9fff;&#x530;-&#x58f;&#xfb13;-&#xfb17;]+$'))]">
     <xsl:param name="suppress-foreign-lang" as="xs:boolean?" tunnel="yes"/>
-    <xsl:value-of select="if ($suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))) then () else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
+    <xsl:value-of select="if(    $suppress-foreign-lang 
+                             and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 
+                                                                               'arabic', 
+                                                                               'hebrew', 
+                                                                               'japanese', 
+                                                                               'chinese', 
+                                                                               'syriac', 
+                                                                               'armenian'))) 
+                          then () 
+                          else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
-    <xsl:value-of select="if ($suppress-foreign-lang and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 'arabic', 'hebrew', 'japanese', 'chinese', 'armenian'))) then () else '}'"/>
+    <xsl:value-of select="if(    $suppress-foreign-lang 
+                             and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek',
+                                                                              'arabic', 
+                                                                              'hebrew', 
+                                                                              'japanese', 
+                                                                              'chinese', 
+                                                                              'syriac', 
+                                                                              'armenian'))) 
+                          then ()
+                          else '}'"/>
   </template>
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
