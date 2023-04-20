@@ -569,14 +569,6 @@
   </template>
 
   <template context="*[local-name() = $text-style-elements]
-                      [@css:text-transform eq 'uppercase'
-                       or exists(key('style', @role)[@css:text-transform eq 'uppercase'])]">
-    <xsl:text>\uppercase{</xsl:text>
-    <xsl:next-match/>
-    <xsl:text>}</xsl:text>
-  </template>
-
-  <template context="*[local-name() = $text-style-elements]
                       [    (@css:font-variant eq 'small-caps'
                             or exists(key('style', @role)[@css:font-variant eq 'small-caps']))
                        and not(@css:text-transform eq 'uppercase'
@@ -1140,6 +1132,14 @@
                                                                               'armenian'))) 
                           then ()
                           else '}'"/>
+  </template>
+  
+  <template context="*[local-name() = $text-style-elements]
+                      [@css:text-transform eq 'uppercase'
+                       or exists(key('style', @role)[@css:text-transform eq 'uppercase'])]">
+    <xsl:text>\uppercase{</xsl:text>
+    <xsl:next-match/>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
