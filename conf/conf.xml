@@ -577,8 +577,10 @@
   </template>
 
   <template context="*[local-name() = $text-style-elements]
-                      [@css:font-variant eq 'small-caps'
-                       or exists(key('style', @role)[@css:font-variant eq 'small-caps'])]">
+                      [    (@css:font-variant eq 'small-caps'
+                            or exists(key('style', @role)[@css:font-variant eq 'small-caps']))
+                       and not(@css:text-transform eq 'uppercase'
+                               or exists(key('style', @role)[@css:text-transform eq 'uppercase']))]">
     <xsl:text>\textsc{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
@@ -1108,6 +1110,8 @@
                                [normalize-space(.)]
                                [xml2tex:lang-to-babel-lang(@xml:lang)]
                                [not(parent::dbk:link)]
+                               [every $lang in @xml:lang
+                                satisfies not(ancestor::*[@xml:lang][1]/@xml:lang = $lang)]
                                [not(ancestor::dbk:entry or self::dbk:term or self::dbk:listitem)]
                                [not((*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
                                     and 
@@ -1117,12 +1121,12 @@
     <xsl:param name="suppress-foreign-lang" as="xs:boolean?" tunnel="yes"/>
     <xsl:value-of select="if(    $suppress-foreign-lang 
                              and not(xml2tex:lang-to-babel-lang(@xml:lang) = ('greek', 
-                                                                               'arabic', 
-                                                                               'hebrew', 
-                                                                               'japanese', 
-                                                                               'chinese', 
-                                                                               'syriac', 
-                                                                               'armenian'))) 
+                                                                              'arabic', 
+                                                                              'hebrew', 
+                                                                              'japanese', 
+                                                                              'chinese', 
+                                                                              'syriac', 
+                                                                              'armenian'))) 
                           then () 
                           else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
