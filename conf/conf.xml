@@ -135,7 +135,7 @@
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
                       [not(self::dbk:title and parent::dbk:info/parent::*/local-name() = $titles-where-pagebreaks-are-ignored)]
                       [@css:page-break-before eq 'always' or key('style', @role)/@css:page-break-before eq 'always']">
-    <xsl:if test="$new-common"><xsl:text>\pagebreak&#xa;</xsl:text></xsl:if>
+    <xsl:if test="$xerif"><xsl:text>\pagebreak&#xa;</xsl:text></xsl:if>
     <xsl:next-match/>
   </template>
   
