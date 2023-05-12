@@ -235,7 +235,7 @@
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::dbk:entry">
+        <xsl:when test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
@@ -277,7 +277,10 @@
                              [not(parent::*/@css:text-align='center')]">
     <xsl:text>{\centering </xsl:text>    
     <xsl:next-match/>
-    <xsl:text>\par}</xsl:text>
+    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
+      <xsl:text>\par</xsl:text>
+    </xsl:if>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='right'
@@ -285,7 +288,10 @@
                              [not(parent::*/@css:text-align='right')]">
     <xsl:text>{\raggedleft </xsl:text>
     <xsl:next-match/>
-    <xsl:text>\par}</xsl:text>
+    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
+      <xsl:text>\par</xsl:text>
+    </xsl:if>
+    <xsl:text>}</xsl:text>
   </template>
   
   <template context="dbk:para[(    @css:text-align='left'
@@ -296,7 +302,10 @@
                              [not(parent::*/@css:text-align='left')]">
     <xsl:text>{\raggedright </xsl:text>
     <xsl:next-match/>
-    <xsl:text>\par}</xsl:text>
+    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
+      <xsl:text>\par</xsl:text>
+    </xsl:if>
+    <xsl:text>}</xsl:text>
   </template>
   
   <!-- manually lowered or raised position -->
