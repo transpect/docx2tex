@@ -235,7 +235,7 @@
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
-        <xsl:when test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
+        <xsl:when test="not(parent::dbk:entry) or not(parent::*:th) or not(parent::*:td)">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
@@ -274,24 +274,20 @@
   
   <template context="dbk:para[   @css:text-align='center'
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
-                             [not(parent::*/@css:text-align='center')]">
+                             [not(parent::*/@css:text-align='center')]
+                             [not(parent::dbk:entry or parent::*:th or parent::*:td)]">
     <xsl:text>{\centering </xsl:text>    
     <xsl:next-match/>
-    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
-      <xsl:text>\par</xsl:text>
-    </xsl:if>
-    <xsl:text>}</xsl:text>
+    <xsl:text>\par}</xsl:text>
   </template>
   
   <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
-                             [not(parent::*/@css:text-align='right')]">
+                             [not(parent::*/@css:text-align='right')]
+                             [not(parent::dbk:entry or parent::*:th or parent::*:td)]">
     <xsl:text>{\raggedleft </xsl:text>
     <xsl:next-match/>
-    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
-      <xsl:text>\par</xsl:text>
-    </xsl:if>
-    <xsl:text>}</xsl:text>
+    <xsl:text>\par}</xsl:text>
   </template>
   
   <template context="dbk:para[(    @css:text-align='left'
@@ -299,13 +295,11 @@
                               or (not(@css:text-align)
                                   and parent::*[local-name() = ('td', 'th', 'entry')]
                                   and following-sibling::*[1][@css:text-align[. ne 'left']])]
-                             [not(parent::*/@css:text-align='left')]">
+                             [not(parent::*/@css:text-align='left')]
+                             [not(parent::dbk:entry or parent::*:th or parent::*:td)]">
     <xsl:text>{\raggedright </xsl:text>
     <xsl:next-match/>
-    <xsl:if test="not(parent::dbk:entry or parent::*:th or parent::*:td)">
-      <xsl:text>\par</xsl:text>
-    </xsl:if>
-    <xsl:text>}</xsl:text>
+    <xsl:text>\par}</xsl:text>
   </template>
   
   <!-- manually lowered or raised position -->
