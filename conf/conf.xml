@@ -235,7 +235,7 @@
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
-        <xsl:when test="not(parent::dbk:entry) or not(parent::*:th) or not(parent::*:td)">
+        <xsl:when test="parent::dbk:entry or parent::*:th or parent::*:td">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
