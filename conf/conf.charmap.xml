@@ -317,6 +317,15 @@
     <!--<char character="&#x2ae;" string=""/>-->
     <!-- LATIN SMALL LETTER TURNED H WITH FISHHOOK AND TAIL  -->
     <!--<char character="&#x2af;" string=""/>-->
+
+    <!-- *
+         * Spacing Modifier Letters
+         * -->
+
+    <!--SMALL TILDE -->
+    <char character="&#x2DC;˜∼" string="${\sim}$"/>
+    <!-- SMALL TILDE -->
+    <char character="&#x2DC;˜∼" string="\textasciitilde"/>
     
     <!-- *
          * Greek and Coptic
