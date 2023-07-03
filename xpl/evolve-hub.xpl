@@ -39,6 +39,7 @@
   <p:option name="list-mode" select="''"/>
   <p:option name="preprocessing" select="'yes'"/>
   <p:option name="strip-lang-variant" select="'no'"/>
+  <p:option name="table-model" select="'tabularx'"/>
   
   <p:import href="remove-indents.xpl"/>
   
@@ -263,6 +264,7 @@
         <p:with-option name="fail-on-error" select="$fail-on-error"/>
         <p:with-option name="prefix" select="'evolve-hub/70'"/>
         <p:with-param name="refs" select="$refs"/>
+        <p:with-param name="table-model" select="$table-model"/>
       </tr:xslt-mode>
       
       <tr:xslt-mode msg="yes" hub-version="1.2" mode="docx2tex-postprocess" name="docx2tex-postprocess">

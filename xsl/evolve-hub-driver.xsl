@@ -22,6 +22,7 @@
   
   <xsl:param name="map-phrase-with-css-vertical-pos-to-super-or-subscript" select="'yes'"/>
   <xsl:param name="refs"/>
+  <xsl:param name="table-model"/>
   
   <xsl:variable name="doc-lang" select="/hub/@xml:lang" as="attribute(xml:lang)?"/>
   

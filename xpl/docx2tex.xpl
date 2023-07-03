@@ -283,6 +283,7 @@
     <p:with-option name="list-mode" select="($list-mode[normalize-space()], xml2tex:set/@list-mode, 'indent')[1]"/>
     <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="strip-lang-variant" select="'no'"/>
+    <p:with-option name="table-model" select="$table-model"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
