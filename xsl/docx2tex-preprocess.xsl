@@ -358,4 +358,25 @@
     <xsl:processing-instruction name="latex">\footnotemark</xsl:processing-instruction>
   </xsl:template>
   
+  <!-- copy css:text-align to cell -->
+  
+  <xsl:template match="dbk:entry[$table-model eq 'htmltabs']
+                                [not(@css:text-align)]
+                                [    every $para in dbk:para[normalize-space()] satisfies $para/@css:text-align[not(. eq 'left')]
+                                 and count(distinct-values(dbk:para[normalize-space()]/@css:text-align)) eq 1]" mode="hub:clean-hub">
+    <xsl:copy>
+      <xsl:apply-templates select="@*, dbk:para[1]/@css:text-align, node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="dbk:entry[$table-model eq 'htmltabs']
+                                [not(@css:text-align)]
+                                [    every $para in dbk:para[normalize-space()] satisfies $para/@css:text-align[not(. eq 'left')]
+                                 and count(distinct-values(dbk:para[normalize-space()]/@css:text-align)) eq 1]/dbk:para[normalize-space()]" mode="hub:clean-hub">
+    <xsl:copy>
+      <xsl:apply-templates select="@* except @css:text-align, node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  
 </xsl:stylesheet>
