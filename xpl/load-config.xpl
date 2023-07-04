@@ -24,6 +24,7 @@
   <p:import href="http://transpect.io/xml2tex/xpl/load-config.xpl"/>
   <p:import href="http://transpect.io/xproc-util/load/xpl/load.xpl"/>
   <p:import href="http://transpect.io/xproc-util/load/xpl/load-data.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/file-uri/xpl/file-uri.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
   <p:import href="http://transpect.io/xproc-util/simple-progress-msg/xpl/simple-progress-msg.xpl"/>
   
