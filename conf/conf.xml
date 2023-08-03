@@ -85,7 +85,7 @@
     \usepackage{pifont}
     \usepackage{ulem}
     \usepackage{xfrac}
-    <xsl:if test="//*[@css:letter-spacing or exists(key('style', @role))]">
+    <xsl:if test="//*[@css:letter-spacing or exists(key('style', @role)/@css:letter-spacing)]">
       <xsl:text>\usepackage{soul}&#xa;</xsl:text>
     </xsl:if>
     \usepackage{arydshln}
