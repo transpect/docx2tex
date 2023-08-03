@@ -35,6 +35,13 @@
   
   <xsl:variable name="footnotes" select="//dbk:footnote" as="element(dbk:footnote)*"/>
   
+  <xsl:variable name="letter-spacing-def" select="'soul'" as="xs:string?">
+    <!-- define which makro is used for letter spacing. allowed values: 
+    - 'soul' creates \so and includes package soul 
+    - 'microtype' creates \textls and includes package microtype 
+    - '' creates \textls and includes no package (for overriding) -->
+  </xsl:variable>
+
   <!-- elements where page breaks are ignored -->
   
   <xsl:variable name="elements-where-pagebreaks-are-ignored" as="xs:string+" 
@@ -85,8 +92,8 @@
     \usepackage{pifont}
     \usepackage{ulem}
     \usepackage{xfrac}
-    <xsl:if test="//*[@css:letter-spacing or exists(key('style', @role)/@css:letter-spacing)]">
-      <xsl:text>\usepackage{soul}&#xa;</xsl:text>
+    <xsl:if test="//*[@css:letter-spacing or exists(key('style', @role)/@css:letter-spacing)] and $letter-spacing-def[normalize-space()]">
+      <xsl:value-of select="concat('\usepackage{', $letter-spacing-def,'}&#xa;')"/>
     </xsl:if>
     \usepackage{arydshln}
     <xsl:if test="//dbk:div[@role eq 'hub:index'][1]">
@@ -199,7 +206,7 @@
   <template context="*[local-name() = $text-style-elements]
                       [   (@css:letter-spacing and xs:double(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
                        or exists(key('style', @role)[@css:letter-spacing[xs:double(replace(., '[a-z]+$', '')) gt 0.5]])]">
-    <xsl:text>\so{</xsl:text>
+    <xsl:value-of select="if ($letter-spacing-def = 'soul') then '\so{' else 'textls{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
