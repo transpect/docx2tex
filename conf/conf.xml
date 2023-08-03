@@ -206,7 +206,7 @@
   <template context="*[local-name() = $text-style-elements]
                       [   (@css:letter-spacing and xs:double(replace(@css:letter-spacing, '[a-z]+$', '')) gt 0.5)
                        or exists(key('style', @role)[@css:letter-spacing[xs:double(replace(., '[a-z]+$', '')) gt 0.5]])]">
-    <xsl:value-of select="if ($letter-spacing-def = 'soul') then '\so{' else 'textls{'"/>
+    <xsl:value-of select="if ($letter-spacing-def = 'soul') then '\so{' else '\textls{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
