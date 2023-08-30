@@ -242,11 +242,12 @@
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::dbk:entry or parent::*:th or parent::*:td">
+        <xsl:when test="parent::dbk:entry or parent::*:th or parent::*:td and following-sibling::*[1]">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
-                            or (parent::dbk:listitem and not(following-sibling::*)))">
+                            or (parent::dbk:listitem and not(following-sibling::*)))
+                        and following-sibling::*[1]">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
@@ -260,11 +261,12 @@
     <rule name="textbf" type="cmd">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')]">
+        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')] and following-sibling::*[1]">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
-                            or (parent::dbk:listitem and not(following-sibling::*)))">
+                            or (parent::dbk:listitem and not(following-sibling::*))) 
+                        and following-sibling::*[1]">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
