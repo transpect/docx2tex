@@ -166,7 +166,7 @@
     <rule name="protect\newline" type="cmd" break-after="1"/>
   </template>
   
-  <template context="dbk:entry//dbk:br">
+  <template context="dbk:entry//dbk:br[not($xerif)]">
     <rule>
       <text> \newline </text>
     </rule>
@@ -179,14 +179,14 @@
   </template>
   
   <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
-                                                                               [following-sibling::dbk:para]//dbk:br">
+                                                                               [following-sibling::dbk:para]//dbk:br[not($xerif)]">
     <rule>
       <text> \newline </text>
     </rule>
   </template>
   
   <template context="dbk:entry[not(@*:morerows) or @*:morerows eq '0']/dbk:para[not(parent::dbk:footnote)]
-                                                                               [following-sibling::dbk:para]">
+                                                                               [following-sibling::dbk:para][not($xerif)]">
     <rule>
       <xsl:next-match/>
       <text> \newline </text>
@@ -242,12 +242,12 @@
     <rule name="textit" type="cmd" break-after="2">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::dbk:entry or parent::*:th or parent::*:td and following-sibling::*[1]">
+        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')][not($xerif)]
+			and following-sibling::*[1]">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
-                            or (parent::dbk:listitem and not(following-sibling::*)))
-                        and following-sibling::*[1]">
+                            or (parent::dbk:listitem and not(following-sibling::*)))">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
@@ -261,12 +261,12 @@
     <rule name="textbf" type="cmd">
       <param/>
       <xsl:choose>
-        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')] and following-sibling::*[1]">
+        <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')][not($xerif)]
+			and following-sibling::*[1]">
           <xsl:text>\newline&#xa;</xsl:text>
         </xsl:when>
         <xsl:when test="not(   parent::dbk:footnote
-                            or (parent::dbk:listitem and not(following-sibling::*))) 
-                        and following-sibling::*[1]">
+                            or (parent::dbk:listitem and not(following-sibling::*)))">
           <xsl:text>&#xa;&#xa;</xsl:text>
         </xsl:when>
       </xsl:choose>
