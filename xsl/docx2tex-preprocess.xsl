@@ -203,7 +203,8 @@
   
   <xsl:template match="para[@docx2tex:config eq 'headline']" mode="docx2tex-preprocess">
     <xsl:copy>
-      <xsl:apply-templates select="@*, node() except phrase[@role eq 'docx2tex:identifier']" mode="docx2tex-preprocess"/>
+      <xsl:apply-templates select="@*, node() except (phrase[@role eq 'docx2tex:identifier']
+                                                     |phrase[@role eq 'tab'][preceding-sibling::*[1][self::phrase[@role eq 'docx2tex:identifier']]])" mode="docx2tex-preprocess"/>
       <!-- add label -->
       <xsl:for-each select="phrase[@role = ('docx2tex:identifier', 'hub:identifier')][1]">
         <xsl:processing-instruction name="latex" select="concat('\label{mark-', (.[string-length() gt 0], 
@@ -245,7 +246,8 @@
   
   <!-- remove phrase tags which contains only whitespace -->
   
-  <xsl:template match="phrase[string-length(normalize-space(.)) eq 0][not(@role eq 'cr')]" 
+  <xsl:template match="phrase[string-length(normalize-space(.)) eq 0]
+                             [not(@role = ('cr', 'tab'))]" 
                 mode="docx2tex-preprocess" priority="1">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
