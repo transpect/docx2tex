@@ -25,6 +25,7 @@
   <xsl:param name="table-model"/>
   
   <xsl:variable name="doc-lang" select="/hub/@xml:lang" as="attribute(xml:lang)?"/>
+  <xsl:variable name="hub:list-by-indent-exception-role-regex" select="'^(TOC|[Hh]eading|berschrift)'" as="xs:string"/>
   
   <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
   
@@ -153,6 +154,14 @@
     <xsl:copy>
       <xsl:apply-templates select="@* except @xml:lang, node()" mode="#current"/>
     </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="para[@docx2tex:config eq 'headline']" mode="hub:prepare-lists-by-role 
+                                                                   hub:prepare-lists 
+                                                                   hub:lists 
+                                                                   hub:postprocess-lists 
+                                                                   hub:postprocess-lists-by-role">
+    <xsl:copy-of select="."/>
   </xsl:template>
 
 </xsl:stylesheet>
