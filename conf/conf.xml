@@ -323,14 +323,6 @@
       <param/>
     </rule>
   </template>
-  
-  <!-- tabs -->
-  
-  <template context="dbk:tab|dbk:phrase[@role eq 'tab']">
-    <rule>
-      <text>&#x9;</text>
-    </rule>
-  </template>
 
   <!-- tables and figures -->
 
@@ -496,12 +488,7 @@
     <rule name="item" type="cmd" break-before="1">
       <option/>
     </rule>
-  </template>
-  
-  <!-- resolve tab when it's the begin of a term or a tab definition -->
-  
-  <template context="dbk:term/node()[1][self::dbk:tabs or self::dbk:tab]
-                    |dbk:tabs"/>
+  </template>  
 
   <!-- text styles -->
   
@@ -821,9 +808,16 @@
   
   <!-- replace tabs -->
   
-  <template context="dbk:tab[@xml:space eq 'preserve']">
+  <!-- resolve tab when it's the begin of a term or a tab definition -->
+  
+  <template context="dbk:term/node()[1][self::dbk:tab]
+                    |dbk:tabs"/>
+  
+  
+  <template context="dbk:tab
+                    |dbk:phrase[@role eq 'tab']">
     <rule>
-      <text>&#x20;</text>
+      <text>&#x9;</text>
     </rule>
   </template>
   
