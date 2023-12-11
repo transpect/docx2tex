@@ -872,10 +872,14 @@
   </template>
 
   <template context="dbk:indexterm[@type]">
+    <xsl:param name="as-option" as="xs:boolean?" tunnel="yes"/>
+    <!-- param as option is automatically set in xml2tey if an option was triggered -->
+    <xsl:if test="$as-option"><xsl:text>{</xsl:text></xsl:if>
     <rule name="index" type="cmd">
       <option select="@type"/>
       <xsl:call-template name="index-content"/>
     </rule>
+    <xsl:if test="$as-option"><xsl:text>}</xsl:text></xsl:if>
   </template>
   
   <xsl:template name="index-content">
