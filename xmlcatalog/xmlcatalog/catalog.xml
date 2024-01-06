@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  
+  <nextCatalog catalog="../schema/hub/xmlcatalog/catalog.xml"/>
+
+  <rewriteURI uriStartString="http://transpect.io/docx2tex/" rewritePrefix="../"/>
+  <rewriteURI uriStartString="http://this.transpect.io/" rewritePrefix="../"/>
+
+  <nextCatalog catalog="../cascade/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../docx2hub/xmlcatalog/catalog.xml"/>
+
+  <nextCatalog catalog="../fontmaps/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xproc-util/xmlcatalog/catalog.xml"/>
+
+  <nextCatalog catalog="../htmlreports/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xslt-util/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../evolve-hub/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../mml2tex/xmlcatalog/catalog.xml"/>
+
+  <nextCatalog catalog="../mml-normalize/xmlcatalog/catalog.xml"/>
+  
+  <nextCatalog catalog="../xml2tex/xmlcatalog/catalog.xml"/>
+
+
+</catalog>
