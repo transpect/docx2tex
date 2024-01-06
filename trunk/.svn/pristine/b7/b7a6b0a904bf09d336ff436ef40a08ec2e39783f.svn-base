@@ -1,0 +1,247 @@
+#!/bin/bash
+
+usage() {
+    echo ""
+    echo "docx2tex"
+    echo ""
+    echo "Usage: d2t [options ...] <docx file>"
+    echo ""
+    echo "Options:"
+    echo "   -o    path to custom output directory"
+    echo "   -c    path to custom word2tex configuration file"
+    echo "   -p    generate PDF with pdflatex"
+    echo "   -m    choose MathType source (ole|wmf|ole+wmf)"
+    echo "   -r    omit page and cross-references and labels"
+    echo "   -i    select lists detection mode (indent|role|none)"
+    echo "   -t    choose table model (tabularx|tabular|htmltabs)"
+    echo "   -l    suppress table grid lines"
+    echo "   -x    custom XSLT stylesheet for Hub processing (after evolve-hub)"
+    echo "   -e    custom XSLT stylesheet for evolve-hub (should import xsl/evolve-hub-driver.xsl)"
+    echo "   -d    debug mode"
+    echo "   -h    heap (main memory) that Java is allowed to use (for ex., 4096m)"
+    1>&2; exit 1;
+}
+# print out error step and exit code
+function exitonerror {
+    echo "Errors encountered while running $2. Please see $LOG for details."
+    exit 1
+}
+# readlink -f is unavailable on Mac OS X
+function real_dir() {
+    SOURCE="$1"
+    while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+	SOURCE="$(readlink "$SOURCE")"
+	[[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    echo "$( cd -P "$( dirname "$SOURCE" )" && pwd  )"
+}
+
+# cygwin check
+cygwin=false;
+case "`uname`" in
+    CYGWIN*) cygwin=true;
+esac
+
+# script directory
+PWD="$( pwd)"
+DIR="$( real_dir "${BASH_SOURCE[0]}" )"
+CALABASH=$DIR/calabash/calabash.sh
+
+# invoke pdflatex
+PDFLATEX=pdflatex
+MTEFSOURCE="ole"
+TABLEMODEL=""
+TABLEGRID=""
+LISTMODE=""
+PDF=no
+REFS=yes
+DEBUG=no
+
+# specify options
+while getopts ":o:c:m:t:i:x:e:plrdh:" opt; do
+    case "${opt}" in
+	o)
+	    OUT_DIR=${OPTARG}
+	    ;;
+	c)
+	    CONF=${OPTARG}
+	    ;;
+  m)
+      MTEFSOURCE=${OPTARG}
+      ;;
+	x)
+	    CUSTOMXSL=${OPTARG}
+	    ;;
+	e)
+	    CUSTOMDRIVER=${OPTARG}
+	    ;;
+	t)
+	    TABLEMODEL=${OPTARG}
+	    ;;
+  i)
+	    LISTMODE=${OPTARG}
+	    ;;
+	p)
+	    PDF=yes
+	    ;;
+	l)
+	    TABLEGRID=no
+	    ;;
+	r)
+	    REFS=no
+	    ;;
+	d)
+	    DEBUG=yes
+	    ;;
+	h)
+	    HEAP=${OPTARG}
+	    ;;
+	\?)
+	    echo "Invalid option: -$OPTARG" >&2
+	    usage
+	    ;;
+	:)
+	    echo "Option -$OPTARG requires an argument." >&2
+	    usage
+	    ;;
+    esac
+done
+shift $((OPTIND-1))
+# check if argument for file is set
+if [ -z "$1" ]; then
+    usage
+fi
+
+# custom evolve-hub driver given (as URI, may also be relative to this directory)
+if ! [ -z "$CUSTOMDRIVER" ]; then
+    INPUTCUSTOMDRIVER="-i custom-evolve-hub-driver=$CUSTOMDRIVER"
+fi
+
+# file as 1st argument
+FILE="$1"
+if ! [[ $FILE =~ \.docx$ ]]; then
+    echo "Only docx files are supported."
+    exit 1
+fi
+
+# set basename
+BASENAME="$(basename "$(basename "$FILE" .docx)" .docm)"
+BASENAME="${BASENAME// /_}"
+
+# output directory path
+if [[ -z "$OUT_DIR" ]]; then
+    OUT_DIR="$(real_dir "$FILE")"
+else
+    if [[ "$OUT_DIR" != /* ]]; then	
+	OUT_DIR="$PWD/$OUT_DIR"
+    fi
+fi
+
+mkdir -p "$OUT_DIR"
+
+# path to configuration file
+if [[ -z "$CONF" ]]; then
+    CONF="$DIR/conf/conf.csv"
+else
+    if [[ "$CONF" != /* ]]; then	
+	CONF="$PWD/$CONF"
+    fi
+fi
+
+# logging
+LOG="$OUT_DIR/$BASENAME.d2t.log"
+
+# remove log from previous runs
+if [ -e "$LOG" ]; then
+    rm "$LOG"
+fi
+
+# Java max. amount of main memory
+if [ -z $HEAP ]; then
+    HEAP=1400m
+fi
+
+
+# debugging
+DEBUG_DIR="$OUT_DIR/$BASENAME.debug"
+
+# pdflatex outdir path
+PDFLATEX_OUT="$OUT_DIR"
+
+# make absolute paths
+if $cygwin; then
+    FILE="$(cygpath -ma "$FILE")"
+    OUT_DIR="$(cygpath -ma "$OUT_DIR")"
+    DIR="$(cygpath -ma "$DIR")"
+    CONF="$(cygpath -ma "$CONF")"
+    DEBUG_DIR_URI=file:/$(cygpath -ma "$DEBUG_DIR" )
+else
+    DEBUG_DIR_URI="file:$DEBUG_DIR"
+fi
+
+DEBUG_DIR_URI="${DEBUG_DIR_URI// /%20}"
+OUT_DIR_PSEUDOURI="${OUT_DIR// /%20}"
+
+FILE_CP="$OUT_DIR/$BASENAME.docx"
+cp "$FILE" "$FILE_CP" 2>&1 2>>"$LOG"
+
+# check if file exists
+if [ ! -f "$FILE" ]; then
+    echo "Error: input file not found: $FILE"
+    usage
+fi
+
+echo "starting docx2tex"
+
+if [ "$DEBUG" = "yes" ]; then
+    echo "debug mode: $DEBUG"
+    echo "storing debug files to $DEBUG_DIR"
+    echo ""
+    echo "Parameters"
+    echo "  workdir: $DIR"
+    echo "  outdir: $OUT_DIR"
+    echo "  file: $FILE"
+    echo "  config: $CONF"
+    echo "  MathType source: $MTEFSOURCE"
+    echo "  refs and labels: $REFS"
+    echo "  table model: $TABLEMODEL"
+    echo "  draw table grid lines: $TABLEGRID"
+    echo "  custom evolve-hub: $INPUTCUSTOMDRIVER"
+    echo "  custom xslt: $CUSTOMXSL"
+    echo "  Java heap: $HEAP"
+    echo ""
+fi
+
+# docx2tex xproc pipeline
+HEAP=$HEAP $CALABASH \
+    $INPUTCUSTOMDRIVER \
+    -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
+    -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
+    "$DIR/xpl/docx2tex.xpl" \
+    docx="$FILE_CP" \
+    conf="$CONF" \
+    custom-xsl="$CUSTOMXSL" \
+    conf-template="$OUT_DIR/$BASENAME.csv" \
+    mtef-source="$MTEFSOURCE" \
+    table-model=$TABLEMODEL \
+    table-grid=$TABLEGRID \
+    list-mode=$LISTMODE \
+    refs=$REFS \
+    debug=$DEBUG \
+    debug-dir-uri=$DEBUG_DIR_URI \
+    status-dir-uri=$DEBUG_DIR_URI/status \
+    2>&1 2>>"$LOG" || exitonerror $? docx2tex
+echo "writing texfile => $OUT_DIR/$BASENAME.tex"
+
+# run pdflatex with "-p"
+if [ "$PDF" = "yes" ]; then
+    cd "$OUT_DIR" && "$PDFLATEX" \
+    -interaction=nonstopmode \
+    -output-directory="$OUT_DIR" \
+    "$PDFLATEX_OUT/$BASENAME.tex" \
+    1>>"$LOG" || exitonerror $? pdflatex
+    echo "writing pdf => $OUT_DIR/$BASENAME.pdf"
+fi
+echo ""
+echo "docx2tex finished."

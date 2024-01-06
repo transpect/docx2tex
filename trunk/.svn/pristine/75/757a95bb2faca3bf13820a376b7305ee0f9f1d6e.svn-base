@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="19.1">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options>
+            <serialized version="19.1" xml:space="preserve">
+                <serializableOrderedMap>
+                    <entry>
+                        <String>catalogs.v5</String>
+                        <String-array>
+                            <String>${pdu}/calabash-frontend/xmlcatalog/catalog.xml</String>
+                            <String>${pdu}/xmlcatalog/catalog.xml</String>
+                        </String-array>
+                    </entry>
+                    <entry>
+                        <String>enable.project.master.files.support</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>key.xml.catalog.option.pane</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                </serializableOrderedMap>
+            </serialized>
+        </options>
+    </meta>
+    <projectTree name="docx2tex.xpr">
+        <folder masterFiles="true" name="Master Files">
+            <file name="xpl/docx2tex.xpl"/>
+            <file name="evolve-hub/xsl/evolve-hub.xsl"/>
+            <file name="docx2hub/xsl/main.xsl"/>
+        </folder>
+    </projectTree>
+</project>

@@ -1,0 +1,4 @@
+Überschrift 1	; \chapter{	; }
+Zitat	    	; \begin{quote}	; end{quote}
+Überschrift 2	; \section{	; }
+Überschrift 3	; \subsection{	; }
