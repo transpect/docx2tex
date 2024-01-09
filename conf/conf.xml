@@ -53,7 +53,7 @@
   <xsl:key name="item-by-id" match="*[@xml:id]" use="@xml:id"/>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
-  <preamble>% docx2tex 1.8 --- ``Who let the docx out?''
+  <preamble>% docx2tex 1.9 --- ``How I learned to stop worrying and love DOCX''
     %
     % docx2tex is Open Source and 
     % you can download it on GitHub:
