@@ -1160,7 +1160,9 @@
     <xsl:if test="not($suppress-select-lang)">
       <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}%&#xa;')"/>
       <xsl:next-match/>
-      <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}')"/>
+      <xsl:if test="not(parent::dbk:footnote and not(following-sibling::*))">
+        <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}')"/>
+      </xsl:if>
     </xsl:if>
   </template>
   
