@@ -521,10 +521,11 @@
   </template>
   
   <template context="*[local-name() = $text-style-elements]
-                      [@css:font-weight eq 'normal' or @css:font-style eq 'normal']
+                      [    @css:font-weight eq 'normal' or @css:font-style eq 'normal']
+                      [not(@css:font-weight eq 'bold'   or @css:font-style eq 'italic')]
                       [(ancestor::*[local-name() = $text-style-elements]/((@css:font-style, 
-                                                                          @css:font-weight, 
-                                                                          @css:font-variant) != 'normal')
+                                                                           @css:font-weight, 
+                                                                           @css:font-variant) != 'normal')
                         or empty(ancestor::*[local-name() = $text-style-elements]
                                            [@css:font-style|@css:font-weight]))
                        or (some $role in ancestor::*[@role]/@role
