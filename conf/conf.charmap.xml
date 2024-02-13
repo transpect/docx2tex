@@ -1252,7 +1252,7 @@
     <!--circle, equals-->
     <char character="&#x2257;" string="${\circeq}$"/>
     <!--= \sdef (oz), t \Corresponds (marvosym), corresponds to (wedge over equals)-->
-    <char character="&#x2259;" string="${\corresponds}$"/>
+    <char character="&#x2259;" string="$\hat{=}$"/>
     <!--= \varsdef (oz), triangle, equals-->
     <char character="&#x225c;" string="${\triangleq}$"/>
     <!--= \ne, r: not equal-->
