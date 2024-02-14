@@ -1252,39 +1252,40 @@
     </xsl:if>
   </template>
   
-  <template context="dbk:personname"><!-- for above bibtex generating template -->
+  <template context="dbk:biblioentry//dbk:personname">
     <xsl:value-of select="string-join((dbk:firstname, dbk:othername[starts-with(@role, 'middle')], dbk:surname), ' ')"/>
   </template>
   
-  <template context="dbk:author|dbk:editor"><!-- probably for authors in the article header? -->
+  <template context="dbk:biblioentry//dbk:author
+                    |dbk:biblioentry//dbk:editor">
     <xsl:value-of select="concat(dbk:personname/dbk:firstname, ' ', dbk:personname/dbk:surname)"/>
   </template>
   
-  <template context="dbk:pubdate">
+  <template context="dbk:biblioentry//dbk:pubdate">
     <xsl:value-of select="concat('date={', ., '},&#xa;')"/>
   </template>
   
-  <template context="dbk:publisher">
+  <template context="dbk:biblioentry//dbk:publisher">
     <xsl:value-of select="concat('publisher={', dbk:publishername[1], '},&#xa;')"/>
   </template>
   
-  <template context="dbk:pagenums">
+  <template context="dbk:biblioentry//dbk:pagenums">
     <xsl:value-of select="concat('pages={', ., '},&#xa;')"/>
   </template>
   
-  <template context="dbk:volumenum">
+  <template context="dbk:biblioentry//dbk:volumenum">
     <xsl:value-of select="concat('number={', ., '},&#xa;')"/>
   </template>
   
-  <template context="dbk:biblioset[not(following-sibling::dbk:biblioset[@relation = 'inproceedings'])]/dbk:title">
+  <template context="dbk:biblioentry//dbk:biblioset[not(following-sibling::dbk:biblioset[@relation = 'inproceedings'])]/dbk:title">
     <xsl:value-of select="concat('title={', ., '},&#xa;')"/>
   </template>
 
-  <template context="dbk:biblioset[following-sibling::dbk:biblioset[@relation = 'inproceedings']]/dbk:title">
+  <template context="dbk:biblioentry/dbk:biblioset[following-sibling::dbk:biblioset[@relation = 'inproceedings']]/dbk:title">
     <xsl:value-of select="concat('booktitle={', ., '},&#xa;')"/>
   </template>
 
-  <template context="dbk:biblioid">
+  <template context="dbk:biblioentry//dbk:biblioid">
     <xsl:value-of select="concat(@class, '={', ., '},&#xa;')"/>
   </template>
   
