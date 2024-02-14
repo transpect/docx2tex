@@ -286,6 +286,7 @@
   <template context="dbk:para[   @css:text-align='center'
                               or exists(key('style', @role)[@css:text-align eq 'center'])]
                              [not(parent::*/@css:text-align='center')]
+                             [not(@css:text-align = ('left', 'right', 'justify'))(:if centering is in style but overwritten:)]
                              [not(parent::dbk:entry or parent::*:th or parent::*:td)]">
     <xsl:text>{\centering </xsl:text>    
     <xsl:next-match/>
@@ -295,6 +296,7 @@
   <template context="dbk:para[   @css:text-align='right'
                               or exists(key('style', @role)[@css:text-align eq 'right'])]
                              [not(parent::*/@css:text-align='right')]
+                             [not(@css:text-align = ('left', 'center', 'justify'))]
                              [not(parent::dbk:entry or parent::*:th or parent::*:td)]">
     <xsl:text>{\raggedleft </xsl:text>
     <xsl:next-match/>
