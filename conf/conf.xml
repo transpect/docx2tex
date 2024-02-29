@@ -514,7 +514,7 @@
 
   <template context="*[local-name() = $text-style-elements]
                       [@css:font-style eq 'normal']
-                      [   ancestor-or-self::*[local-name() = $text-style-elements]/@css:font-style = 'italic'
+                      [   exists(ancestor-or-self::*[@css:font-style = 'italic'][1])
                        or (some $role in ancestor-or-self::*[@role]/@role
                            satisfies exists(key('style', @role)[@css:font-style eq 'italic']))]">
     <xsl:text>\textup{</xsl:text>
@@ -523,17 +523,10 @@
   </template>
   
   <template context="*[local-name() = $text-style-elements]
-                      [    @css:font-weight eq 'normal' or @css:font-style eq 'normal']
-                      [not(@css:font-weight eq 'bold'   or @css:font-style eq 'italic')]
-                      [(ancestor::*[local-name() = $text-style-elements]/((@css:font-style, 
-                                                                           @css:font-weight, 
-                                                                           @css:font-variant) != 'normal')
-                        or empty(ancestor::*[local-name() = $text-style-elements]
-                                           [@css:font-style|@css:font-weight]))
-                       or (some $role in ancestor::*[@role]/@role
-                           satisfies exists(key('style', @role)[(@css:font-style, 
-                                                                 @css:font-weight, 
-                                                                 @css:font-variant) != 'normal']))]    ">
+                      [@css:font-weight eq 'normal']
+                      [   exists(ancestor-or-self::*[@css:font-weight = 'bold'][1])
+                       or (some $role in ancestor-or-self::*[@role]/@role
+                           satisfies exists(key('style', @role)[@css:font-weight eq 'bold']))]">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
