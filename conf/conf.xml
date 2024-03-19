@@ -516,7 +516,7 @@
                       [@css:font-style eq 'normal']
                       [   exists(ancestor-or-self::*[@css:font-style = 'italic'][1])
                        or (some $role in ancestor-or-self::*[@role]/@role
-                           satisfies exists(key('style', @role)[@css:font-style eq 'italic']))]">
+                           satisfies exists(key('style', $role)[@css:font-style eq 'italic']))]">
     <xsl:text>\textup{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
@@ -526,7 +526,7 @@
                       [@css:font-weight eq 'normal']
                       [   exists(ancestor-or-self::*[@css:font-weight = 'bold'][1])
                        or (some $role in ancestor-or-self::*[@role]/@role
-                           satisfies exists(key('style', @role)[@css:font-weight eq 'bold']))]">
+                           satisfies exists(key('style', $role)[@css:font-weight eq 'bold']))]">
     <xsl:text>\textnormal{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
