@@ -1059,9 +1059,32 @@
     </xsl:if>
   </template>
   
-  <template context="dbk:indexentry">
+  <template context="dbk:indexentry/dbk:primaryie">
     <xsl:text>&#x20;&#x20;</xsl:text>
     <rule name="item" type="cmd" break-after="1">
+      <text>&#x20;</text>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:indexentry/dbk:secondaryie">
+    <xsl:text>&#x20;&#x20;</xsl:text>
+    <rule name="subitem" type="cmd" break-after="1">
+      <text>&#x20;</text>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:indexentry/dbk:tertiaryie
+                    |dbk:indexentry/dbk:quaternaryie
+                    |dbk:indexentry/dbk:quinaryie
+                    |dbk:indexentry/dbk:senaryie
+                    |dbk:indexentry/dbk:septenaryie
+                    |dbk:indexentry/dbk:octonaryie
+                    |dbk:indexentry/dbk:nonaryie
+                    |dbk:indexentry/dbk:denaryie">
+    <xsl:text>&#x20;&#x20;</xsl:text>
+    <rule name="subsubitem" type="cmd" break-after="1">
       <text>&#x20;</text>
       <text/>
     </rule>
@@ -1074,7 +1097,7 @@
     </rule>
   </template>
   
-  <template context="dbk:primaryie//dbk:xref
+  <template context="dbk:indexentry//dbk:xref
                     |dbk:seeie//dbk:xref">
     <rule>
       <text select="replace(@xlink:href, '^page-', '')"/>
