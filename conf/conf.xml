@@ -501,9 +501,9 @@
                       [not(@role = ('ZFinlineequation', 'ZFequation', 'ZFVerweis', 'ZFCaption', 'NOTE-CE', 'NOTE-TS', 'Hyperlink'))]
                       [not(preceding-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
                       [not(following-sibling::*[@role = ('ZFinlineequation', 'ZFequation')])]
-                      [not(ancestor-or-self::dbk:link)]/text()">
+                      [not(ancestor-or-self::dbk:link)]">
     <xsl:text>\textcolor{</xsl:text>
-    <xsl:value-of select="for $color-code in (parent::*/@css:color, key('style', parent::*/@role)/@css:color)[1] 
+    <xsl:value-of select="for $color-code in (@css:color, key('style', parent::*/@role)/@css:color)[1] 
                           return if(exists(tr:color-hex-rgb-to-keyword($color-code)))
                                  then tr:color-hex-rgb-to-keyword($color-code)[1]
                                  else concat('color-', upper-case(substring-after($color-code, '#')))"/>
