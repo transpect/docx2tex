@@ -869,7 +869,7 @@
 
   <template context="dbk:indexterm[@type]">
     <xsl:param name="as-option" as="xs:boolean?" tunnel="yes"/>
-    <!-- param as option is automatically set in xml2tey if an option was triggered -->
+    <!-- param as option is automatically set in xml2tex if an option was triggered -->
     <xsl:if test="$as-option"><xsl:text>{</xsl:text></xsl:if>
     <rule name="index" type="cmd">
       <option select="@type"/>
@@ -879,19 +879,36 @@
   </template>
   
   <xsl:template name="index-content">
+    <xsl:variable name="page-number-style" as="xs:string*">
+      <xsl:choose>
+        <xsl:when test="matches(@role, 'hub:pagenum-bold')">
+          <xsl:text>|textbf</xsl:text>
+        </xsl:when>
+        <xsl:when test="matches(@role, 'hub:pagenum-italic')">
+          <xsl:text>|textit</xsl:text>
+        </xsl:when>  
+      </xsl:choose>
+    </xsl:variable>
     <xsl:choose>
       <xsl:when test="@class eq 'startofrange'">
         <text>{</text>
         <text/>
-        <text>|(}</text>
+        <text>|(</text>
+        <xsl:sequence select="$page-number-style"/>
+        <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="@class eq 'endofrange'">
         <text>{</text>
         <text select="key('item-by-id', @startref)/node()"/>
-        <text>|)}</text>
+        <text>|)</text>
+        <xsl:sequence select="$page-number-style"/>
+        <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <param/>    
+        <text>{</text>
+        <xsl:apply-templates mode="xml2tex"/>
+        <xsl:sequence select="$page-number-style"/>
+        <xsl:text>}</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
