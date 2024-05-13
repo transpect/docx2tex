@@ -536,7 +536,7 @@
                       [   @css:font-style eq 'italic' 
                        or (    exists(key('style', @role)[@css:font-style eq 'italic'])
                            and not(@css:font-style eq 'normal'))]">
-    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '\itshape{' else '\textit{'"/>
+    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\itshape ' else '\textit{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
@@ -545,7 +545,7 @@
                       [   @css:font-weight eq 'bold'
                        or (    exists(key('style', @role)[@css:font-weight eq 'bold'])
                            and not(@css:font-weight eq 'normal'))]">
-    <xsl:text>\textbf{</xsl:text>
+    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\bfseries ' else '\textbf{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
@@ -571,7 +571,8 @@
                             or exists(key('style', @role)[@css:font-variant eq 'small-caps']))
                        and not(@css:text-transform eq 'uppercase'
                                or exists(key('style', @role)[@css:text-transform eq 'uppercase']))]">
-    <xsl:text>\textsc{</xsl:text>
+    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\scshape ' else '\textit{'"/>
+    <!-- https://mattermost.le-tex.de/letexml/pl/oky434bc6bnqfmzs3zk8nf8e4o-->
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
