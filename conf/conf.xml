@@ -536,7 +536,7 @@
                       [   @css:font-style eq 'italic' 
                        or (    exists(key('style', @role)[@css:font-style eq 'italic'])
                            and not(@css:font-style eq 'normal'))]">
-    <xsl:text>\textit{</xsl:text>
+    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '\itshape{' else '\textit{'"/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
