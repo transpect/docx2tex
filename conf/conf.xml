@@ -571,7 +571,7 @@
                             or exists(key('style', @role)[@css:font-variant eq 'small-caps']))
                        and not(@css:text-transform eq 'uppercase'
                                or exists(key('style', @role)[@css:text-transform eq 'uppercase']))]">
-    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\scshape ' else '\textit{'"/>
+    <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\scshape ' else '\textsc{'"/>
     <!-- https://mattermost.le-tex.de/letexml/pl/oky434bc6bnqfmzs3zk8nf8e4o-->
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
