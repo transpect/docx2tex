@@ -218,11 +218,14 @@
 		 [not(@role eq 'Hyperlink')] 
 		 [not(parent::dbk:link) and exists(..)(:if no root exists:)]
 		 [not(.//dbk:link)]">
-    <xsl:value-of select="if (some $ a in (@css:text-decoration-style, 
-                                           key('style', @role)/@css:text-decoration-style)
-                              satisfies $a = 'double') 
-                          then '\uuline{' 
-                          else '\uline{'"/>
+    <xsl:variable name="line-style" select="(@css:text-decoration-style, key('style', @role)/@css:text-decoration-style)[1]"></xsl:variable>
+    <xsl:value-of select="if (matches($line-style,'dotted'))
+                          then '\dotuline{'
+                          else if (matches($line-style,'dashed'))
+                               then '\dashuline{'
+                               else if (matches($line-style,'double'))
+                                     then  '\uuline{'
+                                     else  '\uline{' "/>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
   </template>
