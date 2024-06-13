@@ -1118,8 +1118,16 @@
     </rule>
   </template>
   
+  <template context="dbk:seealsoie">
+    <rule name="seealso" type="cmd" break-after="1">
+      <param/>
+      <param select="()"/>
+    </rule>
+  </template>
+  
   <template context="dbk:indexentry//dbk:xref
-                    |dbk:seeie//dbk:xref">
+                    |dbk:seeie//dbk:xref
+                    |dbk:seealsoie//dbk:xref">
     <rule>
       <text select="replace(@xlink:href, '^page-', '')"/>
     </rule>
