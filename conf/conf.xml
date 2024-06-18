@@ -575,6 +575,7 @@
                        and not(@css:text-transform eq 'uppercase'
                                or exists(key('style', @role)[@css:text-transform eq 'uppercase']))]">
     <xsl:value-of select="if (count(descendant::dbk:para) gt 1) then '{\scshape ' else '\textsc{'"/>
+
     <!-- https://mattermost.le-tex.de/letexml/pl/oky434bc6bnqfmzs3zk8nf8e4o-->
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
@@ -1171,9 +1172,10 @@
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
                                    )]">
     <xsl:param name="suppress-foreign-lang" as="xs:boolean?" tunnel="yes"/>
+    <xsl:param name="protect-lang" as="xs:boolean?" tunnel="yes" select="false()"/>
     <xsl:value-of select="if ($suppress-foreign-lang) 
                           then () 
-                          else concat('\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
+                          else concat('\protect'[$protect-lang], '\foreignlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}{')"/>
     <xsl:next-match/>
     <xsl:value-of select="if ($suppress-foreign-lang) 
                           then ()
