@@ -31,7 +31,7 @@
       <xsl:for-each select="$split-per-line[string-length(.) gt 0]">
         <xsl:variable name="delimiter" select="';'" as="xs:string"/>
         <xsl:variable name="style-name" select="tokenize(., $delimiter)[1]" as="xs:string"/>
-        <xsl:variable name="css-style-name" select="replace(docx2hub:normalize-to-css-name($style-name), '_', '')" as="xs:string"/>
+        <xsl:variable name="css-style-name" select="docx2hub:normalize-to-css-name($style-name)" as="xs:string"/>
         <xsl:variable name="tag-start" select="normalize-space(tokenize(., $delimiter)[2])" as="xs:string"/>
         <xsl:variable name="tag-end" select="normalize-space(tokenize(., $delimiter)[3])" as="xs:string*"/>
         <xsl:variable name="target-inline-elements" select="('anchor', 'emphasis', 'footnote', 'link', 'olink', 'phrase', 'sup', 'sub', 'xref')" as="xs:string+"/>
