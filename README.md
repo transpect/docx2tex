@@ -75,7 +75,7 @@ You can specify a custom configuration file for docx2tex. There are two differen
 
 ### CSV
 
-For each MS Word style name, create a line with three semicolon separated values.
+For each MS Word style name, create a line with three semicolon separated values. Please note that CSS-compliant normalized style names are used. You can look them up in the generated XML file. They must apply to the `role` attribute of the corresponding XML element.
 
 * MS Word style name
 * LaTeX start statement 
