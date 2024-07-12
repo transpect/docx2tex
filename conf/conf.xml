@@ -662,11 +662,11 @@
   </template>
 
   <xsl:variable name="footnote-ids" as="xs:string*" 
-                select="for $i in $footnotes return generate-id($i)"/>
+                select="for $i in $footnotes return (if ($i/@xml:id) then $i/@xml:id else generate-id($i))"/>
 
   <template context="dbk:footnote">
     <xsl:variable name="pos" as="xs:integer" 
-                  select="index-of($footnote-ids, generate-id())"/>
+                  select="index-of($footnote-ids, (if (@xml:id) then @xml:id else generate-id()))"/>
     <xsl:variable name="preceding-regular-fn-count" as="xs:integer" 
                   select="count(
                                 for $i in (1 to $pos) 
