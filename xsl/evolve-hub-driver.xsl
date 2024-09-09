@@ -29,7 +29,9 @@
   
   <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
   
-  <xsl:template match="para[count(phrase) gt 1 or count(superscript) gt 1 or count(subscript) gt 1]" mode="hub:identifiers" priority="-10">
+  <xsl:template match="para[   phrase[preceding-sibling::node()[1][self::phrase]]
+                            or superscript[preceding-sibling::node()[1][self::superscript]]
+                            or subscript[preceding-sibling::node()[1][self::subscript]]]" mode="hub:identifiers" priority="-10">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>        
       <xsl:for-each-group select="node()" 
