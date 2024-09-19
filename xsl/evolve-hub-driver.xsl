@@ -36,7 +36,7 @@
       <xsl:apply-templates select="@*"/>        
       <xsl:for-each-group select="node()" 
                           group-adjacent="concat(local-name(), 
-                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch)
+                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch, @srcpath)
                                                              return concat($i/local-name(), '=', $i),
                                                              '--'),
                                                              (if(replace(@css:letter-spacing, '[a-z]+$', '') castable as xs:decimal) 
