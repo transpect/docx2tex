@@ -25,20 +25,12 @@
   <xsl:param name="table-model"/>
   
   <xsl:variable name="doc-lang" select="/hub/@xml:lang" as="attribute(xml:lang)?"/>
-  <xsl:variable name="hub:list-by-indent-exception-role-regex" select="'^(TOC|[Hh]eading|berschrift)'" as="xs:string"/>
-  
-  
+  <xsl:variable name="hub:list-by-indent-exception-role-regex" select="'^(TOC|[Hh]eading|berschrift)'" as="xs:string"/>  
   
   <xsl:template match="phrase[key('hub:style-by-role', @role)/@remap eq 'superscript']" mode="hub:split-at-tab">
-    <superscript>
+    <xsl:element name="{@remap}">
       <xsl:apply-templates select="@*, node()" mode="#current"/>
-    </superscript>
-  </xsl:template>
-  
-  <xsl:template match="phrase[key('hub:style-by-role', @role)/@remap eq 'subscript']" mode="hub:split-at-tab">
-    <subscript>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
-    </subscript>
+    </xsl:element>
   </xsl:template>
   
   <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
