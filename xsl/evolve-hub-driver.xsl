@@ -27,8 +27,8 @@
   <xsl:variable name="doc-lang" select="/hub/@xml:lang" as="attribute(xml:lang)?"/>
   <xsl:variable name="hub:list-by-indent-exception-role-regex" select="'^(TOC|[Hh]eading|berschrift)'" as="xs:string"/>  
   
-  <xsl:template match="phrase[key('hub:style-by-role', @role)/@remap eq 'superscript']" mode="hub:split-at-tab">
-    <xsl:element name="{@remap}">
+  <xsl:template match="phrase[key('hub:style-by-role', @role)/@remap = ('subscript', 'superscript')]" mode="hub:split-at-tab">
+    <xsl:element name="{key('hub:style-by-role', @role)/@remap}">
       <xsl:apply-templates select="@*, node()" mode="#current"/>
     </xsl:element>
   </xsl:template>
