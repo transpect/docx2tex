@@ -33,7 +33,7 @@
     </xsl:element>
   </xsl:template>
   
-  <!-- group phrases, superscript and subscript, #13898, #17982, #17983 -->
+  <!-- group phrases, superscript and subscript, #13898, #17982, #17983,  -->
   
   <xsl:template match="para[   phrase[preceding-sibling::node()[1][self::phrase]]
                             or superscript[preceding-sibling::node()[1][self::superscript]]
@@ -42,20 +42,32 @@
       <xsl:apply-templates select="@*"/>        
       <xsl:for-each-group select="node()" 
                           group-adjacent="concat(local-name(), 
-                                                 string-join(for $i in @* except (@css:letter-spacing, @css:font-stretch, @srcpath)
+                                                 string-join(for $i in @* except (@role, @css:letter-spacing, @css:font-stretch, @srcpath)
                                                              return concat($i/local-name(), '=', $i),
                                                              '--'),
                                                              (if(replace(@css:letter-spacing, '[a-z]+$', '') castable as xs:decimal) 
                                                               then xs:decimal(replace(@css:letter-spacing, '[a-z]+$', '')) 
                                                               else 0) gt 2 (: visual perceivable letter-spacing :) 
                                                              )">
-        <xsl:message select="'### key: ', current-grouping-key(), '/// group: ', current-group()"></xsl:message>
+        
         <xsl:choose>
+          <xsl:when test="   (every $member in current-group() satisfies $member/local-name() eq 'superscript') 
+                          or (every $member in current-group() satisfies $member/local-name() eq 'subscript')">
+            <xsl:element name="{current-group()[1]/local-name()}">
+              <xsl:for-each select="current-group()">
+                <phrase>
+                  <xsl:apply-templates select="@role, node()" mode="#current"/>
+                </phrase>
+              </xsl:for-each>
+            </xsl:element>
+          </xsl:when>
           <xsl:when test="self::phrase or self::superscript or self::subscript">
-            <xsl:copy>
-              <xsl:apply-templates select="current-group()/@*" mode="#current"/>
-              <xsl:apply-templates select="current-group()/node()" mode="#current"/>
-            </xsl:copy>
+            <xsl:for-each-group select="current-group()" group-adjacent="concat(@role, '--', exists(@role))">
+              <xsl:copy>
+                <xsl:apply-templates select="current-group()/@*" mode="#current"/>
+                <xsl:apply-templates select="current-group()/node()" mode="#current"/>
+              </xsl:copy>
+            </xsl:for-each-group>
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="current-group()" mode="#current"/>
