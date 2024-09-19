@@ -54,11 +54,19 @@
           <xsl:when test="   (every $member in current-group() satisfies $member/local-name() eq 'superscript') 
                           or (every $member in current-group() satisfies $member/local-name() eq 'subscript')">
             <xsl:element name="{current-group()[1]/local-name()}">
-              <xsl:for-each select="current-group()">
-                <phrase>
-                  <xsl:apply-templates select="@role, node()" mode="#current"/>
-                </phrase>
-              </xsl:for-each>
+              <xsl:variable name="phrases-created" as="element(phrase)*">
+                <xsl:for-each select="current-group()">
+                  <phrase>
+                    <xsl:apply-templates select="@role, node()" mode="#current"/>
+                  </phrase>
+                </xsl:for-each>
+              </xsl:variable>
+              <xsl:for-each-group select="$phrases-created" group-adjacent="concat(@role, '--', exists(@role))">
+                <xsl:copy>
+                  <xsl:apply-templates select="current-group()/@*" mode="#current"/>
+                  <xsl:apply-templates select="current-group()/node()" mode="#current"/>
+                </xsl:copy>
+              </xsl:for-each-group>
             </xsl:element>
           </xsl:when>
           <xsl:when test="self::phrase or self::superscript or self::subscript">
