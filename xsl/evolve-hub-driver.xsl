@@ -54,11 +54,11 @@
           <xsl:when test="   (every $member in current-group() satisfies $member/local-name() eq 'superscript') 
                           or (every $member in current-group() satisfies $member/local-name() eq 'subscript')">
             <xsl:element name="{current-group()[1]/local-name()}">
-              <xsl:apply-templates select="@* except @role" mode="#current"/>
+              <xsl:apply-templates select="@xml:lang" mode="#current"/>
               <xsl:variable name="phrases-created" as="element(phrase)*">
                 <xsl:for-each select="current-group()">
                   <phrase>
-                    <xsl:apply-templates select="@role, node()" mode="#current"/>
+                    <xsl:apply-templates select="@* except @xml:lang, node()" mode="#current"/>
                   </phrase>
                 </xsl:for-each>
               </xsl:variable>
