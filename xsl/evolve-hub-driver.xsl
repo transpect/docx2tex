@@ -64,8 +64,8 @@
               </xsl:variable>
               <xsl:for-each-group select="$phrases-created" group-adjacent="concat(@role, '--', exists(@role))">
                 <xsl:copy>
-                  <xsl:apply-templates select="current-group()/@*" mode="#current"/>
-                  <xsl:apply-templates select="current-group()/node()" mode="#current"/>
+                  <xsl:apply-templates select="current-group()/@*, 
+                                               current-group()/node()" mode="#current"/>
                 </xsl:copy>
               </xsl:for-each-group>
             </xsl:element>
@@ -73,8 +73,8 @@
           <xsl:when test="self::phrase or self::superscript or self::subscript">
             <xsl:for-each-group select="current-group()" group-adjacent="concat(@role, '--', exists(@role))">
               <xsl:copy>
-                <xsl:apply-templates select="current-group()/@*" mode="#current"/>
-                <xsl:apply-templates select="current-group()/node()" mode="#current"/>
+                <xsl:apply-templates select="current-group()/@*, 
+                                             current-group()/node()" mode="#current"/>
               </xsl:copy>
             </xsl:for-each-group>
           </xsl:when>
