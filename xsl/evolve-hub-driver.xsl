@@ -33,7 +33,7 @@
     </xsl:element>
   </xsl:template>
   
-  <!-- group phrases, superscript and subscript, #13898, #17982, #17983,  -->
+  <!-- group phrases, superscript and subscript, #13898, #17982, #17983, #37641 -->
   
   <xsl:template match="para[   phrase[preceding-sibling::node()[1][self::phrase]]
                             or superscript[preceding-sibling::node()[1][self::superscript]]
@@ -54,6 +54,7 @@
           <xsl:when test="   (every $member in current-group() satisfies $member/local-name() eq 'superscript') 
                           or (every $member in current-group() satisfies $member/local-name() eq 'subscript')">
             <xsl:element name="{current-group()[1]/local-name()}">
+              <xsl:apply-templates select="@* except @role" mode="#current"/>
               <xsl:variable name="phrases-created" as="element(phrase)*">
                 <xsl:for-each select="current-group()">
                   <phrase>
@@ -170,7 +171,9 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="phrase[@xml:lang eq $doc-lang]" mode="hub:strip-space">
+  <xsl:template match="phrase[@xml:lang eq $doc-lang]
+                      |subscript[@xml:lang eq $doc-lang]
+                      |superscript[@xml:lang eq $doc-lang]" mode="hub:strip-space">
     <xsl:param name="remove-lang" as="xs:boolean?" tunnel="yes"/>
     <xsl:copy>
       <xsl:apply-templates select="@* except @xml:lang,
