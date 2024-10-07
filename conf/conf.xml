@@ -13,6 +13,9 @@
   <xsl:import href="http://transpect.io/xslt-util/roman-numerals/xsl/roman2int.xsl"/>
   
   <xsl:param name="table-model" as="xs:string"/>
+  <xsl:param name="a11y" as="xs:boolean" select="false()">
+    <!-- if true() add paragraph structures -->
+  </xsl:param>
   
   <xsl:variable name="xerif" as="xs:boolean" select="false()"/>
   <xsl:variable name="path"       as="xs:string"  select="tr:path(base-uri())" />
@@ -134,9 +137,18 @@
                              [not(following-sibling::*[1][self::dbk:equation])]
                              [not(following-sibling::*[1][self::dbk:dialogue])]
                              [not(following-sibling::*[1][self::dbk:blockquote])]">
-    <rule break-after="2">
-      <text/>
-    </rule>
+    <xsl:param name="suppress-cca" select="exists(parent::*[self::legalnotice])" tunnel="yes" as="xs:boolean?"/>
+    <xsl:if test="not($suppress-cca)">  
+      <rule name="ccaStructStart" type="cmd" break-after="2">
+        <param select="'P'"/>
+        <text/>
+      </rule>
+    </xsl:if>
+    <xsl:if test="not($suppress-cca)">  
+      <rule name="ccaStructEnd" type="cmd" break-after="0" break-before="0">
+        <param select="'P'"/>
+      </rule>
+    </xsl:if>
   </template>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
@@ -1191,7 +1203,7 @@
     <xsl:text>}</xsl:text>
   </template>
   
-  <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]">
+  <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]" priority="1000">
     <xsl:param name="suppress-select-lang" as="xs:boolean" select="false()"/>
     <xsl:if test="not($suppress-select-lang)">
       <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}%&#xa;')"/>
