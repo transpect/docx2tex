@@ -137,7 +137,7 @@
                              [not(following-sibling::*[1][self::dbk:equation])]
                              [not(following-sibling::*[1][self::dbk:dialogue])]
                              [not(following-sibling::*[1][self::dbk:blockquote])]">
-    <xsl:param name="suppress-cca" select="exists(parent::*[self::legalnotice])" tunnel="yes" as="xs:boolean?"/>
+    <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:if test="not($suppress-cca)">  
       <rule name="ccaStructStart" type="cmd" break-after="2">
         <param select="'P'"/>
@@ -150,6 +150,12 @@
       </rule>
     </xsl:if>
   </template>
+  
+  <xsl:function name="tr:suppress-structure" as="xs:boolean">
+    <xsl:param name="elt" as="element()"/>
+    <!-- add conditions to not generate structure. if outcome is true: no structure will be added.  -->
+    <xsl:sequence select="if ($a11y) then exists($elt[parent::*[self::legalnotice]]) else true()"/>
+  </xsl:function>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
                       [not(self::dbk:title and parent::dbk:info/parent::*/local-name() = $titles-where-pagebreaks-are-ignored)]
