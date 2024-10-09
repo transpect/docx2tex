@@ -144,7 +144,7 @@
          <param select="'P'"/>
          <text/>
        </rule>
-      <rule name="ccaStructEnd" type="cmd" break-after="2" break-before="0">
+      <rule name="ccaStructEnd" type="cmd" break-after="1" break-before="0">
         <param select="'P'"/>
       </rule>
     </xsl:when>
@@ -159,7 +159,7 @@
   <xsl:function name="tr:suppress-structure" as="xs:boolean">
     <xsl:param name="elt" as="element()"/>
     <!-- add conditions to not generate structure. if outcome is true: no structure will be added.  -->
-    <xsl:sequence select="if ($a11y) then exists($elt[parent::*[self::legalnotice]]) else true()"/>
+    <xsl:sequence select="if ($a11y) then exists($elt[parent::*[self::*:legalnotice]]) else true()"/>
   </xsl:function>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
@@ -454,7 +454,7 @@
   
   <template context="dbk:listitem[not(parent::dbk:varlistentry)][empty(@override)]">
     <rule name="item" type="cmd" break-before="1">
-      <text select="' '"/>
+      <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
     </rule>
   </template>
@@ -462,7 +462,7 @@
   <template context="dbk:listitem[@override][not(parent::dbk:varlistentry)]">
     <rule name="item" type="cmd" break-before="1">
       <option select="@override "/>
-      <text select="' '"/>
+      <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
     </rule>
   </template>
@@ -493,7 +493,7 @@
       <xsl:if test="matches(@override, '[a-z0-9]\.([a-z0-9])+')">
         <option select="@override"/>
       </xsl:if>
-      <text select="' '"/>
+      <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
     </rule>
   </template>
