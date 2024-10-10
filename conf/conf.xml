@@ -138,14 +138,20 @@
                              [not(following-sibling::*[1][self::dbk:dialogue])]
                              [not(following-sibling::*[1][self::dbk:blockquote])]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+    <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <xsl:choose>
-      <xsl:when test="not($suppress-cca)">
+      <xsl:when test="not($suppress-cca) and not($already-structured)">
        <rule name="ccaStructStart" type="cmd" break-after="0">
          <param select="'P'"/>
          <text/>
        </rule>
       <rule name="ccaStructEnd" type="cmd" break-after="1" break-before="0">
         <param select="'P'"/>
+      </rule>
+    </xsl:when>
+      <xsl:when test="$already-structured"><!-- avoid space between end structure end tag. -->
+      <rule break-after="0">
+        <text/>
       </rule>
     </xsl:when>
     <xsl:otherwise>
