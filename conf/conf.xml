@@ -44,6 +44,8 @@
     - 'microtype' creates \textls and includes package microtype 
     - '' creates \textls and includes no package (for overriding) -->
   </xsl:variable>
+  <xsl:variable name="cca-start" select="if ($a11y) then '\ccaStructStart{P}' else ()" as="xs:string?"/>
+  <xsl:variable name="cca-end" select="if ($a11y) then '\ccaStructEnd{P}' else ()" as="xs:string?"/>
 
   <!-- elements where page breaks are ignored -->
   
@@ -139,17 +141,17 @@
                              [not(following-sibling::*[1][self::dbk:blockquote])]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
-    <xsl:choose>
+<!--    <xsl:choose>
       <xsl:when test="not($suppress-cca) and not($already-structured)">
        <rule name="ccaStructStart" type="cmd" break-after="0">
          <param select="'P'"/>
          <text/>
        </rule>
-      <rule name="ccaStructEnd" type="cmd" break-after="1" break-before="0">
+      <rule name="ccaStructEnd" type="cmd" break-after="2" break-before="0">
         <param select="'P'"/>
       </rule>
     </xsl:when>
-      <xsl:when test="$already-structured"><!-- avoid space between end structure end tag. -->
+      <xsl:when test="$already-structured"><!-\- avoid space between end structure end tag. -\->
       <rule break-after="0">
         <text/>
       </rule>
@@ -159,7 +161,10 @@
         <text/>
       </rule>
     </xsl:otherwise>
-    </xsl:choose>
+    </xsl:choose>-->
+    <rule break-after="2">
+      <text select="$cca-start[not($suppress-cca) and not($already-structured)], node(), $cca-end[not($suppress-cca) and not($already-structured)]"/>
+    </rule>
   </template>
   
   <xsl:function name="tr:suppress-structure" as="xs:boolean">
@@ -1222,12 +1227,12 @@
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]" priority="1000">
     <xsl:param name="suppress-select-lang" as="xs:boolean" select="false()"/>
-    <xsl:if test="not($suppress-select-lang)">
+    <xsl:if test="not($suppress-select-lang) and not(preceding-sibling::*[1]/@xml:lang = current()/@xml:lang)">
       <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}%&#xa;')"/>
     </xsl:if>
     <xsl:next-match/>
     <xsl:if test="not($suppress-select-lang)">
-      <xsl:if test="not(parent::dbk:footnote and not(following-sibling::*))">
+      <xsl:if test="not(parent::dbk:footnote) and not(following-sibling::*[1][1]/@xml:lang = current()/@xml:lang)">
         <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang($langs[1]), '}')"/>
       </xsl:if>
     </xsl:if>
