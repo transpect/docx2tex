@@ -44,9 +44,7 @@
     - 'microtype' creates \textls and includes package microtype 
     - '' creates \textls and includes no package (for overriding) -->
   </xsl:variable>
-  <xsl:variable name="cca-start" select="if ($a11y) then '\ccaStructStart{P}' else ()" as="xs:string?"/>
-  <xsl:variable name="cca-end" select="if ($a11y) then '\ccaStructEnd{P}' else ()" as="xs:string?"/>
-
+  
   <!-- elements where page breaks are ignored -->
   
   <xsl:variable name="elements-where-pagebreaks-are-ignored" as="xs:string+" 
@@ -56,6 +54,12 @@
   
   <xsl:key name="style" match="css:rule" use="@name"/>
   <xsl:key name="item-by-id" match="*[@xml:id]" use="@xml:id"/>
+  
+  <xsl:function name="tr:add-cca" as="xs:string?">
+    <xsl:param name="pos" as="xs:string"><!-- 'Start' or 'End'--></xsl:param>
+    <xsl:param name="type" as="xs:string"/><!-- P or Artifact-->
+    <xsl:sequence select="if ($a11y) then concat('\ccaStruct', $pos, '{', $type, '}') else ()"/>
+  </xsl:function>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
   <preamble>% docx2tex 1.9 --- ``How I learned to stop worrying and love DOCX''
@@ -163,7 +167,7 @@
     </xsl:otherwise>
     </xsl:choose>-->
     <rule break-after="2">
-      <text select="$cca-start[not($suppress-cca) and not($already-structured)], node(), $cca-end[not($suppress-cca) and not($already-structured)]"/>
+      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)], node(), tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
   
