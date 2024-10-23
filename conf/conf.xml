@@ -58,7 +58,7 @@
   <xsl:function name="tr:add-cca" as="xs:string?">
     <xsl:param name="pos" as="xs:string"><!-- 'Start' or 'End'--></xsl:param>
     <xsl:param name="type" as="xs:string"/><!-- P or Artifact-->
-    <xsl:sequence select="if ($a11y) then concat('\ccaStruct', $pos, '{', $type, '}') else ()"/>
+    <xsl:sequence select="if ($a11y) then  concat('\ccaStruct', $pos, '{', $type, '}')  else ()"/>
   </xsl:function>
   
   <!-- tex document header, set declarations such as documentclass and usepackage -->
@@ -145,36 +145,23 @@
                              [not(following-sibling::*[1][self::dbk:blockquote])]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
-<!--    <xsl:choose>
-      <xsl:when test="not($suppress-cca) and not($already-structured)">
-       <rule name="ccaStructStart" type="cmd" break-after="0">
-         <param select="'P'"/>
-         <text/>
-       </rule>
-      <rule name="ccaStructEnd" type="cmd" break-after="2" break-before="0">
-        <param select="'P'"/>
-      </rule>
-    </xsl:when>
-      <xsl:when test="$already-structured"><!-\- avoid space between end structure end tag. -\->
-      <rule break-after="0">
-        <text/>
-      </rule>
-    </xsl:when>
-    <xsl:otherwise>
-      <rule break-after="2">
-        <text/>
-      </rule>
-    </xsl:otherwise>
-    </xsl:choose>-->
     <rule break-after="2">
-      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)], node(), tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
+      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
+      <text select="node()"/>
+      <text select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
   
   <xsl:function name="tr:suppress-structure" as="xs:boolean">
     <xsl:param name="elt" as="element()"/>
     <!-- add conditions to not generate structure. if outcome is true: no structure will be added.  -->
-    <xsl:sequence select="if ($a11y) then exists($elt[parent::*[self::*:legalnotice]]) else true()"/>
+    <xsl:sequence select="if ($a11y) 
+                          then exists($elt[parent::*[self::*:legalnotice] 
+                                           or 
+                                           (every $node in node() satisfies $node[self::processing-instruction()])
+                                          ]
+                                     ) 
+                          else true()"/>
   </xsl:function>
   
   <template context="*[not(local-name() = $elements-where-pagebreaks-are-ignored)]
