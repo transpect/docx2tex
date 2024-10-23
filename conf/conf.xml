@@ -147,7 +147,7 @@
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule break-after="2">
       <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
-      <text select="node()"/>
+      <text/>
       <text select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
