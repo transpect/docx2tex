@@ -2859,6 +2859,41 @@
     <!-- *
          * Symbols, Other
          * -->
+    
+    <!--  *
+          * Halfwidth and Fullwidth Forms 
+          * -->
+    
+    <!-- FULLWIDTH EXCLAMATION MARK -->
+    <char character="&#xff01;" string="\!"/>
+    <!-- FULLWIDTH QUOTATION MARK -->
+    <char character="&#xff02;" string="&quot;"/>
+    <!-- FULLWIDTH NUMBER SIGN -->
+    <char character="&#xff03;" string="\#"/>
+    <!-- FULLWIDTH DOLLAR SIGN -->
+    <char character="&#xff04;" string="\$"/>
+    <!-- FULLWIDTH PERCENT SIGN -->
+    <char character="&#xff05;" string="\%"/>
+    <!-- FULLWIDTH AMPERSAND -->
+    <char character="&#xff06;" string="\&amp;"/>
+    <!-- FULLWIDTH APOSTROPHE -->
+    <char character="&#xff07;" string="'"/>
+    <!-- FULLWIDTH LEFT PARENTHESIS -->
+    <char character="&#xff08;" string="("/>
+    <!-- FULLWIDTH RIGHT PARENTHESIS -->
+    <char character="&#xff09;" string=")"/>
+    <!-- FULLWIDTH ASTERISK -->
+    <char character="&#xff0a;" string="*"/>
+    <!-- FULLWIDTH PLUS SIGN -->
+    <char character="&#xff0b;" string="+"/>
+    <!-- FULLWIDTH COMMA -->
+    <char character="&#xff0c;" string=","/>
+    <!-- FULLWIDTH HYPHEN-MINUS -->
+    <char character="&#xff0d;" string="-"/>
+    <!-- FULLWIDTH FULL STOP -->
+    <char character="&#xff0e;" string="."/>
+    <!-- FULLWIDTH SOLIDUS -->
+    <char character="&#xff0f;" string="/"/>
 
     <!-- REPLACEMENT CHARACTER -->
     <char character="&#xfffd;" string="${\blacksquare}$"/>
@@ -4491,7 +4526,7 @@
     <char character="&#x1f86a;" string="${\rightarrow}$"/>
     <!-- WIDE-HEADED DOWNWARDS BARB ARROW (U+1F86B) -->
     <char character="&#x1f86b;" string="${\downarrow}$"/>
-    
+        
   </charmap>
 
 </set>
