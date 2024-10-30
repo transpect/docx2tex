@@ -627,6 +627,7 @@
   
   <template context="dbk:subscript
                     |dbk:phrase[not(dbk:footnote)]
+                               [not(parent::dbk:subscript)]
                                [key('style', @role)[@remap eq 'subscript']]">
     <xsl:text>\textsubscript{</xsl:text>
     <xsl:next-match/>
@@ -635,6 +636,7 @@
   
   <template context="dbk:superscript[not(dbk:footnote)]
                     |dbk:phrase[not(dbk:footnote)]
+                               [not(parent::dbk:superscript)]
                                [key('style', @role)[@remap eq 'superscript']]">
     <xsl:text>\textsuperscript{</xsl:text>
     <xsl:next-match/>
