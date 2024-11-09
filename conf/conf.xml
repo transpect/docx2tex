@@ -134,15 +134,14 @@
   <!-- regular paras -->
 
   <template context="dbk:para[not(parent::*[local-name() = ('entry', 'th', 'td')])]
-                             [following-sibling::*[1]]
-                             [not(parent::dbk:listitem and not(following-sibling::*[1]))]
-                             [not(following-sibling::*[1][self::dbk:orderedlist])]
-                             [not(following-sibling::*[1][self::dbk:itemizedlist])]
-                             [not(following-sibling::*[1][self::dbk:variablelist])]
-                             [not(following-sibling::*[1][self::dbk:figure])]
-                             [not(following-sibling::*[1][self::dbk:equation])]
-                             [not(following-sibling::*[1][self::dbk:dialogue])]
-                             [not(following-sibling::*[1][self::dbk:blockquote])]">
+                             [following-sibling::*[1][not(local-name() = ('orderedlist', 
+                                                                          'itemizedlist', 
+                                                                          'variablelist', 
+                                                                          'figure', 
+                                                                          'equation', 
+                                                                          'dialogue', 
+                                                                          'blockquote'))]]
+                             [not(parent::dbk:listitem)]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule break-after="2">
