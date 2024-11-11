@@ -141,7 +141,7 @@
                                                                           'equation', 
                                                                           'dialogue', 
                                                                           'blockquote'))]]
-                             [not(parent::dbk:listitem)]">
+                             [not(parent::dbk:listitem) or (parent::dbk:listitem and following-sibling::*[1][self::dbk:para])]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule break-after="2">
