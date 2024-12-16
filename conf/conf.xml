@@ -18,6 +18,7 @@
   </xsl:param>
   
   <xsl:variable name="xerif" as="xs:boolean" select="false()"/>
+  <xsl:variable name="root" as="document-node()" select="root()"/>
   <xsl:variable name="path"       as="xs:string"  select="tr:path(base-uri())" />
   <xsl:variable name="basename"   as="xs:string"  select="tr:basename(/dbk:hub/@xml:base)"/>
   <xsl:variable name="colors"     as="xs:string*"
@@ -737,14 +738,22 @@
   </template>
 
   <template context="dbk:footnote/dbk:para[following-sibling::dbk:para]">
+    <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+    <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule break-after="1">
+      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
       <text/>
+      <text select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
   
   <template context="dbk:footnote[count(*) eq 1]/dbk:para">
-    <rule>
+   <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+   <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
+   <rule>
+      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
       <text/>
+      <text select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
   
@@ -1249,10 +1258,14 @@
   </template>
   
   <template context="dbk:bibliomixed">
+    <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+    <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule name="bibitem" type="cmd" break-before="1">
       <option>aaa(000)</option>
       <param select="@xreflabel"/>
+      <text select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
       <text/>
+      <text select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
     </rule>
   </template>
   
