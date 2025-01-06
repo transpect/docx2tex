@@ -17,6 +17,9 @@
   <xsl:include href="http://transpect.io/mml2tex/xsl/mml2tex.xsl"/>
   <xsl:include href="http://transpect.io/xslt-util/uri-to-relative-path/xsl/uri-to-relative-path.xsl"/>
   
+  <xsl:param name="table-model"/>
+  <xsl:param name="refs"/>
+  
   <!--  *
         * MODE docx2tex-preprocess
         * -->
@@ -247,6 +250,7 @@
   <!-- remove phrase tags which contains only whitespace -->
   
   <xsl:template match="phrase[string-length(normalize-space(.)) eq 0]
+                             [not(processing-instruction())]
                              [not(@role = ('cr', 'tab'))]" 
                 mode="docx2tex-preprocess" priority="1">
     <xsl:apply-templates mode="#current"/>
@@ -379,6 +383,5 @@
       <xsl:apply-templates select="@* except @css:text-align, node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
   
 </xsl:stylesheet>
