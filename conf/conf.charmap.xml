@@ -1142,6 +1142,8 @@
     <char character="&#x2205;" string="${\varnothing}$"/>
     <!-- INCREMENT, laplace operator -->
     <char character="&#x2206;" string="${\Updelta}$"/>
+    <char character="&#x2206;" string="$\boldsymbol{\Updelta}$" context="*[@css:font-weight eq 'bold' and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x2206;" string="$\boldsymbol{\Delta}$" context="*[@css:font-weight eq 'bold' and @css:font-style eq 'italic']"/>
     <!--NABLA, del, hamilton operator-->
     <char character="&#x2207;" string="${\nabla}$"/>
     <!--set membership, variant-->
