@@ -1133,8 +1133,15 @@
     </rule>
   </template>
   
-  <template context="dbk:indexentry/dbk:tertiaryie
-                    |dbk:indexentry/dbk:quaternaryie
+  <template context="dbk:indexentry/dbk:tertiaryie">
+    <xsl:text>&#x20;&#x20;</xsl:text>
+    <rule name="subsubitem" type="cmd" break-after="1">
+      <text>&#x20;</text>
+      <text/>
+    </rule>
+  </template>
+  
+  <template context="dbk:indexentry/dbk:quaternaryie
                     |dbk:indexentry/dbk:quinaryie
                     |dbk:indexentry/dbk:senaryie
                     |dbk:indexentry/dbk:septenaryie
@@ -1142,7 +1149,7 @@
                     |dbk:indexentry/dbk:nonaryie
                     |dbk:indexentry/dbk:denaryie">
     <xsl:text>&#x20;&#x20;</xsl:text>
-    <rule name="subsubitem" type="cmd" break-after="1">
+    <rule name="subsubsubitem" type="cmd" break-after="1">
       <text>&#x20;</text>
       <text/>
     </rule>
