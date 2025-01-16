@@ -914,7 +914,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="dbk:indexterm[preceding-sibling::node()[1][self::dbk:phrase[   @css:font-style   eq 'italic'     or exists(key('style', @role)[@css:font-weight  eq 'italic'])
+  <xsl:template match="dbk:indexterm[preceding-sibling::node()[1][self::dbk:phrase[   @css:font-style   eq 'italic'     or exists(key('style', @role)[@css:font-style   eq 'italic'])
                                                                                    or @css:font-weight  eq 'bold'       or exists(key('style', @role)[@css:font-weight  eq 'bold'])
                                                                                    or @css:font-variant eq 'small-caps' or exists(key('style', @role)[@css:font-variant eq 'small-caps'])
                                                                                    or @css:font-style   eq 'normal'
