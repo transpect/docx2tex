@@ -169,7 +169,7 @@
                       [@css:page-break-before eq 'always' or key('style', @role)/@css:page-break-before eq 'always']">
     <xsl:if test="$xerif"><xsl:text>\pagebreak&#xa;</xsl:text></xsl:if>
     <xsl:next-match/>
-  </template>
+  </template>  
   
   <!-- carriage returns -->
   
@@ -902,6 +902,24 @@
 
   <!-- indexterms -->
 
+  <xsl:template match="dbk:phrase[   @css:font-style   eq 'italic'     or exists(key('style', @role)[@css:font-weight  eq 'italic'])
+                                  or @css:font-weight  eq 'bold'       or exists(key('style', @role)[@css:font-weight  eq 'bold'])
+                                  or @css:font-variant eq 'small-caps' or exists(key('style', @role)[@css:font-variant eq 'small-caps'])
+                                  or @css:font-style   eq 'normal'
+                                  or @css:font-weight  eq 'normal']
+                                 [following-sibling::node()[1][self::dbk:indexterm]]" mode="escape-bad-chars">
+    <xsl:copy>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:copy-of select="following-sibling::dbk:indexterm[1]"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="dbk:indexterm[preceding-sibling::node()[1][self::dbk:phrase[   @css:font-style   eq 'italic'     or exists(key('style', @role)[@css:font-weight  eq 'italic'])
+                                                                                   or @css:font-weight  eq 'bold'       or exists(key('style', @role)[@css:font-weight  eq 'bold'])
+                                                                                   or @css:font-variant eq 'small-caps' or exists(key('style', @role)[@css:font-variant eq 'small-caps'])
+                                                                                   or @css:font-style   eq 'normal'
+                                                                                   or @css:font-weight  eq 'normal']]]" mode="escape-bad-chars"/>
+  
   <template context="dbk:indexterm[not(@type)]">
     <rule name="index" type="cmd">
       <xsl:call-template name="index-content"/>
