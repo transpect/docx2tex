@@ -1253,8 +1253,9 @@
   
   <template context="dbk:para[@xml:lang][not(@xml:lang = $langs[1])]" priority="1000">
     <xsl:param name="suppress-select-lang" as="xs:boolean" select="false()"/>
+    <xsl:variable name="protect-lang" as="xs:boolean" select="ancestor::dbk:title or ancestor::dbk:caption or ancestor::dbk:legalnotice"/>
     <xsl:if test="not($suppress-select-lang) and not(preceding-sibling::*[1]/@xml:lang = current()/@xml:lang)">
-      <xsl:value-of select="concat('\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}%&#xa;')"/>
+      <xsl:value-of select="concat('\protect'[$protect-lang],'\selectlanguage{', xml2tex:lang-to-babel-lang(@xml:lang), '}%&#xa;')"/>
     </xsl:if>
     <xsl:next-match/>
     <xsl:if test="not($suppress-select-lang)">
