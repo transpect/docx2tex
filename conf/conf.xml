@@ -268,7 +268,10 @@
                              [@css:font-style eq 'italic'
                               or exists(key('style', @role)[@css:font-style eq 'italic'])]
                              [not(ancestor::dbk:info)]">
-    <rule name="textit" type="cmd" break-after="2">
+   <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+   <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
+   <xsl:sequence select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
+   <rule name="textit" type="cmd" break-after="0">
       <param/>
       <xsl:choose>
         <xsl:when test="parent::*[local-name() = ('entry', 'th', 'td')][not($xerif)]
@@ -282,12 +285,17 @@
         </xsl:when>
       </xsl:choose>
     </rule>
+    <xsl:sequence select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
+    <xsl:text>&#xa;&#xa;</xsl:text>
   </template>
   
   <template context="dbk:para[not(@css:font-weight eq 'normal')]
                              [@css:font-weight eq 'bold'
                               or (    exists(key('style', @role)[@css:font-weight eq 'bold'])
                                   and not(@css:font-weight eq 'normal'))]">
+    <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
+    <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
+    <xsl:sequence select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
     <rule name="textbf" type="cmd">
       <param/>
       <xsl:choose>
@@ -302,6 +310,7 @@
         </xsl:when>
       </xsl:choose>
     </rule>
+    <xsl:sequence select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
   </template>
 
   <template context="dbk:*[@css:display eq 'none']">
