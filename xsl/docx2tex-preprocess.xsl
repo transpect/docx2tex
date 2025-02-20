@@ -40,6 +40,17 @@
                                 $parenthesis-regex,
                                 '*\s*)+$' )"/>
   
+  <xsl:template match="para[(equation or inlineequation) and tab]
+                           [.//text()[last()][matches(., $equation-label-regex)]]" mode="docx2tex-preprocess">
+    
+    <equation condition="numbered">
+      <xsl:processing-instruction name="latex" 
+                                  select="docx2tex:equation-label(.//text()[last()][matches(., $equation-label-regex)])"/>   
+      <xsl:apply-templates select="equation/* | inlineequation/*" mode="#current"/>
+    </equation>
+
+  </xsl:template>
+  
   <xsl:template match="informaltable[every $i in .//row 
                                      satisfies count($i/entry) = (2,3) 
                                                and $i/entry[matches(normalize-space(.), $equation-label-regex)
