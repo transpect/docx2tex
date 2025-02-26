@@ -234,29 +234,6 @@
       <xsl:apply-templates select="varlistentry/listitem/node()" mode="#current"/>
     </para>
   </xsl:template>
-    
-  <!-- move leading and trailing whitespace out of phrase #13913 -->
-  
-  <xsl:template match="text()[parent::phrase][matches(., '^(\s+)?.+(\s+)?$')] (: leading or trailing whitespace :)
-                             [string-length(normalize-space(.)) gt 0]
-                             [not(following-sibling::text()[1][not(matches(., '^\s'))]) and 
-                              not(preceding-sibling::text()[1][not(matches(., '\s$'))])]
-                             [not(parent::phrase/@xml:space eq 'preserve')]
-			     [not(following-sibling::*[1][self::*:inlineequation])]" mode="docx2tex-preprocess">
-    <xsl:value-of select="normalize-space(.)"/>
-  </xsl:template>
-  
-  <xsl:template match="phrase[matches(., '^(\s+)?.+(\s+)?$')][string-length(normalize-space(.)) gt 0]" mode="docx2tex-preprocess">
-    <xsl:if test="matches(., '^\s+')">
-      <xsl:value-of select="replace(., '^(\s+).+', '$1')"/>
-    </xsl:if>
-    <xsl:copy>
-      <xsl:apply-templates select="@*, node()" mode="#current"/>
-    </xsl:copy>
-    <xsl:if test="matches(., '\s+$')">
-      <xsl:value-of select="replace(., '.+(\s+)$', '$1')"/>
-    </xsl:if>
-  </xsl:template>
   
   <!-- remove phrase tags which contains only whitespace -->
   
