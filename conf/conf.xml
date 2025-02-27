@@ -239,8 +239,8 @@
   
   <template context="*[local-name() = $text-style-elements]
                       [@css:text-decoration-line ne 'none' or not(@css:text-decoration-line)]
-                      [   (@css:text-decoration-line[. eq 'underline'] 
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'underline']))]
+                      [   (matches(@css:text-decoration-line, 'underline') 
+                       or  exists(key('style', @role)[matches(@css:text-decoration-line, 'underline')]))]
 		 [not(@role eq 'Hyperlink')] 
 		 [not(parent::dbk:link) and exists(..)(:if no root exists:)]
 		 [not(.//dbk:link)]">
@@ -257,8 +257,8 @@
   </template>
   
   <template context="*[local-name() = $text-style-elements]
-                      [   @css:text-decoration-line eq 'line-through'
-                       or exists(key('style', @role)[@css:text-decoration-line eq 'line-through'])]">
+                      [   matches(@css:text-decoration-line, 'line-through')
+                       or exists(key('style', @role)[matches(@css:text-decoration-line, 'line-through')])]">
     <xsl:text>\sout{</xsl:text>
     <xsl:next-match/>
     <xsl:text>}</xsl:text>
