@@ -1236,7 +1236,7 @@
                                [not(parent::dbk:link)]
                                [every $lang in @xml:lang
                                 satisfies not(ancestor::*[@xml:lang][1]/@xml:lang = $lang)]
-                               [not(ancestor::dbk:entry or self::dbk:term or self::dbk:listitem)]
+                               [not(ancestor::*[self::dbk:entry|self::dbk:term|self::dbk:listitem|self::dbk:div[@role = 'transcription']])]
                                [not((*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))
                                     and 
                                     not(normalize-space(string-join(.//text()[not(ancestor::*/local-name() = ('link', 'mediaobject', 'inlinemediaobject'))], '')))
