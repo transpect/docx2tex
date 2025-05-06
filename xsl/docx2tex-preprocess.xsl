@@ -185,7 +185,9 @@
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
-  <xsl:template match="*[local-name() = ('orderedlist', 'itemizedlist')]
+  <!-- https://mantis.le-tex.de/mantis/view.php?id=37481#c120844
+    
+    <xsl:template match="*[local-name() = ('orderedlist', 'itemizedlist')]
                         [count(*) eq 1]
                         [not(ancestor::orderedlist or ancestor::itemizedlist)]
                         [not(listitem/orderedlist or listitem/itemizedlist)]" mode="docx2tex-preprocess">
@@ -199,7 +201,7 @@
                        else                                concat(@mark, '&#xa0;')"/>
     </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
-  </xsl:template>
+  </xsl:template>-->
   
   <xsl:template match="listitem/para[1]" mode="move-list-item">
     <xsl:copy>
