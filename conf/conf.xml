@@ -464,15 +464,18 @@
   </template>
   
   <template context="dbk:listitem[not(parent::dbk:varlistentry)][empty(@override)]">
-    <rule name="item" type="cmd" break-before="1">
+    <rule name="item" type="cmd" break-before="1">        
+      <xsl:if test="parent::dbk:itemizedlist/@mark != 'bullet'">
+        <option select="parent::dbk:itemizedlist/@mark"/>
+      </xsl:if>
       <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
     </rule>
   </template>
   
-  <template context="dbk:listitem[@override][not(parent::dbk:varlistentry)]">
+  <template context="dbk:listitem[not(parent::dbk:varlistentry)][@override]">
     <rule name="item" type="cmd" break-before="1">
-      <option select="@override "/>
+      <option select="@override"/>
       <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
     </rule>
