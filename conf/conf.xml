@@ -468,7 +468,7 @@
       <xsl:if test="    parent::dbk:itemizedlist/@mark 
                     and parent::dbk:itemizedlist/@mark != 'bullet'
                     and not($xerif)">
-        <option select="xml2tex:utf2tex(parent::dbk:itemizedlist/@mark, ., $charmap, (), $texregex)"/>
+        <option select="xml2tex:utf2tex((), parent::dbk:itemizedlist/@mark, $charmap, (), $texregex)"/>
       </xsl:if>
       <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
       <text/>
