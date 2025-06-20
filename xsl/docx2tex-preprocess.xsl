@@ -8,7 +8,7 @@
   xmlns:docx2tex="http://transpect.io/docx2tex"
   xmlns:xml2tex="http://transpect.io/xml2tex"
   xmlns:mml2tex="http://transpect.io/mml2tex"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"   
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns="http://docbook.org/ns/docbook"
   version="2.0" 
   exclude-result-prefixes="#all"
@@ -36,7 +36,7 @@
   <xsl:variable name="equation-label-regex" as="xs:string" 
                 select="concat( '^(\s*',
                                 $parenthesis-regex,
-                                '((\d+)(\p{P}\d+)*)',
+                                '((\d+)(\p{P}\d+)([a-z]?)*)',
                                 $parenthesis-regex,
                                 '*\s*)+$' )"/>
   
