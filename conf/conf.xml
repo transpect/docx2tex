@@ -814,24 +814,20 @@
     [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
-    <xsl:sequence select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
     <rule name="equation" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
-    <xsl:sequence select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
   </template>
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
                                  [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
-    <xsl:sequence select="tr:add-cca('Start', 'P')[not($suppress-cca) and not($already-structured)]"/>
     <rule name="equation*" type="env" break-before="1">
       <text>&#xa;</text>
       <text/>
     </rule>
-    <xsl:sequence select="tr:add-cca('End', 'P')[not($suppress-cca) and not($already-structured)]"/>
   </template>
   
   <template context="dbk:equation[@condition eq 'numbered'][not(ancestor::dbk:table or ancestor::dbk:informaltable)]
