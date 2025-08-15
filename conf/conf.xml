@@ -506,7 +506,7 @@
                                    '}&#xa;')"/>
     </xsl:if>
     <rule name="item" type="cmd" break-before="1">
-      <xsl:if test="matches(@override, '^[(\[{]?[a-z0-9]+(([a-z])*|(\.([a-z0-9])+))[)\]}]?$')">
+      <xsl:if test="matches(@override, '^[(\[{]?[a-z0-9]+(([a-z])*|(\.([a-z0-9])*))[)\]}]?$')">
         <option select="@override"/>
       </xsl:if>
       <xsl:if test="not($a11y)"><text select="' '"/></xsl:if>
