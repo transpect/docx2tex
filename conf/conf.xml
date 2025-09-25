@@ -802,7 +802,8 @@
   <!-- equations -->
 
   <template context="dbk:inlineequation[not(ancestor::dbk:superscript or ancestor::dbk:subscript )]
-                    |dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]">
+                   | dbk:equation[ancestor::dbk:table or ancestor::dbk:informaltable]
+                   | dbk:informalequation[ancestor::dbk:table or ancestor::dbk:informaltable]">
     <rule>
       <text select="'$'"/>
       <text select="node() except dbk:alt, dbk:alt"/>
@@ -811,7 +812,7 @@
   </template>
 
   <template context="dbk:equation[@condition eq 'numbered']
-    [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule name="equation" type="env" break-before="1">
@@ -821,7 +822,8 @@
   </template>
   
   <template context="dbk:equation[not(@condition eq 'numbered')]
-                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
+                                 [not(ancestor::dbk:table or ancestor::dbk:informaltable)]
+                    | dbk:informalequation[not(ancestor::dbk:table or ancestor::dbk:informaltable)]">
     <xsl:param name="suppress-cca" select="tr:suppress-structure(.)" tunnel="yes" as="xs:boolean?"/>
     <xsl:param name="already-structured" tunnel="yes" as="xs:boolean?"/>
     <rule name="equation*" type="env" break-before="1">
