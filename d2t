@@ -46,7 +46,7 @@ esac
 # script directory
 PWD="$( pwd)"
 DIR="$( real_dir "${BASH_SOURCE[0]}" )"
-CALABASH=$DIR/calabash/calabash.sh
+CALABASH="$DIR/calabash/calabash.sh"
 
 # invoke pdflatex
 PDFLATEX=pdflatex
@@ -214,7 +214,7 @@ if [ "$DEBUG" = "yes" ]; then
 fi
 
 # docx2tex xproc pipeline
-HEAP=$HEAP $CALABASH \
+HEAP=$HEAP "$CALABASH" \
     $INPUTCUSTOMDRIVER \
     -o result="$OUT_DIR_PSEUDOURI/$BASENAME.tex" \
     -o hub="$OUT_DIR_PSEUDOURI/$BASENAME.xml" \
