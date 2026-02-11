@@ -524,7 +524,11 @@
     <xsl:variable name="longest-word" as="xs:string" 
                   select="dbk:varlistentry[dbk:term[string-length(replace(., '\{\\slash\}', '/')) eq $max-length]][1]/dbk:term"/>
     <rule name="description" type="env" break-before="1">
-      <option select="$longest-word"/>
+      <!-- https://github.com/transpect/docx2tex/issues/111
+           optional argument only valid in xerif -->
+      <xsl:if test="$xerif">
+        <option select="$longest-word"/>
+      </xsl:if>
       <text/>
     </rule>
   </template>
