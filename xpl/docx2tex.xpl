@@ -99,6 +99,12 @@
     </p:documentation>
   </p:option>
   
+  <p:option name="nested-tables" select="'yes'" required="false">
+    <p:documentation>
+      'yes' to keep nested tables. 'no' to resolve nested tables (experimental).
+    </p:documentation>
+  </p:option>
+  
   <p:option name="fail-on-error" select="'yes'">
     <p:documentation>
       Whether the pipeline should fail on some errors.
@@ -345,6 +351,7 @@
     <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="table-model" select="$table-model"/>
     <p:with-option name="table-grid" select="$table-grid"/>
+    <p:with-option name="nested-tables" select="$nested-tables"/>
     <p:with-option name="debug" select="$debug"/>
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>

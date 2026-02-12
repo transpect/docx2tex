@@ -366,8 +366,8 @@
 
   <!-- tables and figures -->
 
-  <template context="dbk:table
-                    |dbk:informaltable">
+  <template context="dbk:table[not(parent::dbk:entry)]
+                    |dbk:informaltable[not(parent::dbk:entry)]">
     <rule name="table" type="env">
       <text/>
     </rule>
