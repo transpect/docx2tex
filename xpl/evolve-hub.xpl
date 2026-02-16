@@ -249,6 +249,28 @@
       <p:identity/>
     </p:otherwise>
   </p:choose>
+  
+  <tr:xslt-mode msg="yes" mode="mml2tex-grouping" name="grouping" prefix="mml2tex/01">
+    <p:input port="stylesheet">
+      <p:document href="http://transpect.io/mml-normalize/xsl/mml-normalize.xsl"/>
+    </p:input>
+    <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+    <p:input port="models"><p:empty/></p:input>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
+  </tr:xslt-mode>
+  
+  <tr:xslt-mode msg="yes" mode="mml2tex-preprocess" name="preprocess" prefix="mml2tex/05">
+    <p:input port="stylesheet">
+      <p:document href="http://transpect.io/mml-normalize/xsl/mml-normalize.xsl"/>
+    </p:input>
+    <p:input port="parameters"><p:pipe port="parameters" step="docx2tex-evolve-hub"/></p:input>
+    <p:input port="models"><p:empty/></p:input>
+    <p:with-option name="debug" select="$debug"/>
+    <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    <p:with-option name="fail-on-error" select="$fail-on-error"/>
+  </tr:xslt-mode>
 
   <p:choose>
     <p:when test="$preprocessing eq 'yes'">
