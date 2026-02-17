@@ -31,7 +31,7 @@
   </p:output>
   
   <p:output port="hub" primary="false">
-    <p:pipe port="result" step="identity-input"/>
+    <p:pipe port="xml-with-normalized-equations" step="xml2tex"/>
     <p:documentation>The intermediate Hub XML format.</p:documentation>
   </p:output>
   
@@ -348,7 +348,7 @@
     <p:input port="conf">
       <p:pipe port="result" step="load-config"/>
     </p:input>
-    <p:with-option name="preprocessing" select="'no'"/>
+    <p:with-option name="preprocessing" select="$preprocessing"/>
     <p:with-option name="table-model" select="$table-model"/>
     <p:with-option name="table-grid" select="$table-grid"/>
     <p:with-option name="nested-tables" select="$nested-tables"/>
