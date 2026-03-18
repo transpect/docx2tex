@@ -332,9 +332,13 @@
          * -->
     
     <!-- GREEK CAPITAL LETTER ALPHA -->
-    <char character="&#x391;" string="A"/>
+    <char character="&#x391;" string="${\Upalpha}$"/>
+    <char character="&#x391;" string="$\boldsymbol{\Upalpha}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x391;" string="$\boldsymbol{A}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!-- GREEK CAPITAL LETTER BETA -->
-    <char character="&#x392;" string="B"/>
+    <char character="&#x392;" string="${\Upbeta}$"/>
+    <char character="&#x392;" string="$\boldsymbol{\Upbeta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x392;" string="$\boldsymbol{B}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Gamma (-slantedGreek), = \mathrm{\Gamma}, capital gamma, greek-->   
     <char character="&#x393;" string="${\Upgamma}$"/>
     <char character="&#x393;" string="$\boldsymbol{\Upgamma}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
@@ -346,50 +350,70 @@
     <char character="&#x394;" string="$\boldsymbol{\Delta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x394;" string="${\Delta}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER EPSILON -->
-    <char character="&#x395;" string="E"/>
+    <char character="&#x395;" string="${\Upepsilon}$"/>
+    <char character="&#x395;" string="$\boldsymbol{\Upepsilon}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x395;" string="$\boldsymbol{E}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!-- GREEK CAPITAL LETTER ZETA -->
-    <char character="&#x396;" string="Z"/>
+    <char character="&#x396;" string="${\Upzeta}$"/>
+    <char character="&#x396;" string="$\boldsymbol{\Upzeta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x396;" string="$\boldsymbol{Z}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!-- GREEK CAPITAL LETTER ETA -->
-    <char character="&#x397;" string="H"/>
+    <char character="&#x397;" string="${\Upeta}$"/>
+    <char character="&#x397;" string="$\boldsymbol{\Upeta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x397;" string="$\boldsymbol{H}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Theta (-slantedGreek), = \mathrm{\Theta}, capital theta, greek-->
     <char character="&#x398;" string="${\Uptheta}$"/> 
     <char character="&#x398;" string="$\boldsymbol{\Uptheta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
     <char character="&#x398;" string="$\boldsymbol{\Theta}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x398;" string="${\Theta}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER IOTA -->
-    <char character="&#x399;" string="I"/>
+    <char character="&#x399;" string="${\Upiota}$"/>
+    <char character="&#x399;" string="$\boldsymbol{\Upiota}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x399;" string="$\boldsymbol{I}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!-- GREEK CAPITAL LETTER KAPPA -->
-    <char character="&#x39a;" string="K"/>
+    <char character="&#x39a;" string="${\Upkappa}$"/>
+    <char character="&#x39a;" string="$\boldsymbol{\Upkappa}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x39a;" string="$\boldsymbol{K}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Lambda (-slantedGreek), = \mathrm{\Lambda}, capital lambda, greek-->
     <char character="&#x39b;" string="${\Uplambda}$"/>
     <char character="&#x39b;" string="$\boldsymbol{\Uplambda}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
     <char character="&#x39b;" string="$\boldsymbol{\Lambda}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x39b;" string="${\Lambda}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER MU -->
-    <char character="&#x39c;" string="M"/>
+    <char character="&#x39c;" string="${\Upmu}$"/>
+    <char character="&#x39c;" string="$\boldsymbol{\Upmu}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x39c;" string="$\boldsymbol{M}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!-- GREEK CAPITAL LETTER NU -->
-    <char character="&#x39d;" string="N"/>
+    <char character="&#x39d;" string="${\Upnu}$"/>
+    <char character="&#x39d;" string="$\boldsymbol{\Upnu}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x39d;" string="$\boldsymbol{N}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Xi (-slantedGreek), = \mathrm{\Xi}, capital xi, greek-->
     <char character="&#x39e;" string="${\Upxi}$"/>
     <char character="&#x39e;" string="$\boldsymbol{\Upxi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>    
     <char character="&#x39e;" string="$\boldsymbol{\Xi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x39e;" string="${\Xi}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER OMICRON -->
-    <char character="&#x39f;" string="O"/>
+    <char character="&#x39f;" string="${\Upomicron}$"/>
+    <char character="&#x39f;" string="$\boldsymbol{\Upomicron}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x39f;" string="$\boldsymbol{O}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Pi (-slantedGreek), = \mathrm{\Pi}, capital pi, greek-->
     <char character="&#x3a0;" string="${\Uppi}$"/>
     <char character="&#x3a0;" string="$\boldsymbol{\Uppi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>    
     <char character="&#x3a0;" string="$\boldsymbol{\Pi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x3a0;" string="${\Pi}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER RHO -->
-    <char character="&#x3a1;" string="P"/>
+    <char character="&#x3a1;" string="${\Uprho}$"/>
+    <char character="&#x3a1;" string="$\boldsymbol{\Uprho}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x3a1;" string="$\boldsymbol{P}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Sigma (-slantedGreek), = \mathrm{\Sigma}, capital sigma, greek-->
     <char character="&#x3a3;" string="${\Upsigma}$"/>
     <char character="&#x3a3;" string="$\boldsymbol{\Upsigma}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
     <char character="&#x3a3;" string="$\boldsymbol{\Sigma}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x3a3;" string="${\Sigma}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER TAU -->
-    <char character="&#x3a4;" string="T"/>
+    <char character="&#x3a4;" string="${\Uptau}$"/>
+    <char character="&#x3a4;" string="$\boldsymbol{\Uptau}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x3a4;" string="$\boldsymbol{T}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Upsilon (-slantedGreek), = \mathrm{\Upsilon}, capital upsilon, greek-->
     <char character="&#x3a5;" string="${\Upupsilon}$"/>
     <char character="&#x3a5;" string="$\boldsymbol{\Upupsilon}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
@@ -401,7 +425,9 @@
     <char character="&#x3a6;" string="$\boldsymbol{\Phi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x3a6;" string="${\Phi}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- GREEK CAPITAL LETTER CHI -->
-    <char character="&#x3a7;" string="X"/>
+    <char character="&#x3a7;" string="${\Upchi}$"/>
+    <char character="&#x3a7;" string="$\boldsymbol{\Upchi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/> 
+    <char character="&#x3a7;" string="$\boldsymbol{X}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \Psi (-slantedGreek), = \mathrm{\Psi}, capital psi, greek-->
     <char character="&#x3a8;" string="${\Uppsi}$"/>
     <char character="&#x3a8;" string="$\boldsymbol{\Uppsi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
@@ -483,7 +509,9 @@
     <char character="&#x3be;" string="$\boldsymbol{\xi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <char character="&#x3be;" string="${\xi}$" context="*[(@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic'])) and not(@css:font-weight eq 'bold')]"/>
     <!-- omicron, greek -->
-    <char character="&#x3bf;" string="o"/>
+    <char character="&#x3bf;" string="${\upomicron}$"/>
+    <char character="&#x3c0;" string="$\boldsymbol{\upomicron}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
+    <char character="&#x3c0;" string="$\boldsymbol{o}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and (@css:font-style eq 'italic' or exists(key('style', @role)[@css:font-style eq 'italic']))]"/>
     <!--= \mathrm{\pi} (omlmathrm), = \piup (kpfonts mathdesign), = \uppi (upgreek),  pi, greek-->
     <char character="&#x3c0;" string="${\uppi}$"/>
     <char character="&#x3c0;" string="$\boldsymbol{\uppi}$" context="*[(@css:font-weight eq 'bold' or exists(key('style', @role)[@css:font-weight eq 'bold'])) and not(@css:font-style eq 'italic')]"/>
