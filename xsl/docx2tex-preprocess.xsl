@@ -201,19 +201,19 @@
                        else                                concat(@mark, '&#xa0;')"/>
     </xsl:if>
     <xsl:apply-templates select="listitem/node()" mode="move-list-item"/>
-  </xsl:template>-->
+  </xsl:template>
   
   <xsl:template match="listitem/para[1]" mode="move-list-item">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="docx2tex-preprocess"/>
       <xsl:value-of select="if(parent::listitem/@override) then concat(parent::listitem/@override, '&#xa0;') else ''"/>  
       <xsl:apply-templates mode="docx2tex-preprocess"/>
-      <!-- add label -->
+      <!-\- add label -\->
       <xsl:if test="parent::listitem/@override">
         <xsl:processing-instruction name="latex" select="concat('\label{mark-', parent::listitem/@override,'}')"/>
       </xsl:if>
     </xsl:copy>
-  </xsl:template>
+    </xsl:template>-->
   
   <xsl:variable name="headline-paras" select="for $i in //para[@docx2tex:config eq 'headline'] return generate-id($i)" as="xs:string*"/>
   
@@ -229,13 +229,17 @@
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
+  <!-- commented: prior decision to remove one-entry-lists is now canceled:
+       https://mantis.le-tex.de/mantis/view.php?id=14447
+       https://mantis.le-tex.de/mantis/view.php?id=40393#c130247 -->
+  
+  <!--<xsl:template match="variablelist[count(*) eq 1]" mode="docx2tex-preprocess">
     <para>
       <xsl:apply-templates select="varlistentry/term/node()" mode="#current"/>
       <tab role="docx2tex-preprocess"/>        
       <xsl:apply-templates select="varlistentry/listitem/node()" mode="#current"/>
     </para>
-  </xsl:template>
+  </xsl:template>-->
   
   <!-- remove phrase tags which contains only whitespace -->
   
