@@ -215,6 +215,10 @@
     </xsl:copy>
     </xsl:template>-->
   
+  <!-- https://mantis.le-tex.de/mantis/view.php?id=42280 -->
+  
+  <xsl:template match="itemizedlist/@mark[. eq '&#x2022;']" mode="docx2tex-preprocess"/>
+  
   <xsl:variable name="headline-paras" select="for $i in //para[@docx2tex:config eq 'headline'] return generate-id($i)" as="xs:string*"/>
   
   <xsl:template match="para[@docx2tex:config eq 'headline']" mode="docx2tex-preprocess">
