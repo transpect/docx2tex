@@ -858,7 +858,8 @@
   <template context="dbk:equation[$a11y]/dbk:alt|dbk:inlineequation[$a11y]/dbk:alt">
     <!-- https://redmine.le-tex.de/projects/transpect-typesetter/wiki/Accessibiliy_Features#Math-->
     <rule name="ccaAddAltText" type="cmd" break-before="0"  break-after="0">
-      <param/>
+      <!-- escaping comments and curly brackets is vital, leave other characters untouched (exlude alt texts from escaping bad chars!)-->
+      <param select="replace(., '(^|[^\\])([\{\}%])', '$1\\$2')"/>
     </rule>
     <xsl:if test="..[self::dbk:equation]"><xsl:text>%&#xa;</xsl:text></xsl:if>
   </template>
