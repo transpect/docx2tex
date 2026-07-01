@@ -61,9 +61,24 @@
     <p:with-option name="status-dir-uri" select="$status-dir-uri"/>
   </tr:simple-progress-msg>
   
+  <p:sink/>
+  
+  <tr:store-debug name="debug-stylesheet" pipeline-step="evolve-hub/00.stylesheet" extension="xsl">
+    <p:input port="source">
+      <p:pipe port="stylesheet" step="docx2tex-evolve-hub"/>
+    </p:input>
+    <p:with-option name="active" select="$debug"/>
+    <p:with-option name="base-uri" select="$debug-dir-uri"/>
+  </tr:store-debug>
+  
+  <p:sink/>
+  
   <docx2tex:remove-indents>
     <p:documentation>Remove indent and margin-left attributes from 
       headline styles in order to avoid applying of list styles later.</p:documentation>
+    <p:input port="source">
+      <p:pipe port="source" step="docx2tex-evolve-hub"/>
+    </p:input>
     <p:input port="config">
       <p:pipe port="config" step="docx2tex-evolve-hub"/>
     </p:input>
@@ -71,7 +86,7 @@
     <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
   </docx2tex:remove-indents>
   
-  <tr:store-debug pipeline-step="evolve-hub/00.remove-indents">
+  <tr:store-debug pipeline-step="evolve-hub/05.remove-indents">
     <p:with-option name="active" select="$debug"/>
     <p:with-option name="base-uri" select="$debug-dir-uri"/>
   </tr:store-debug>
